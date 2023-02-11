@@ -64,4 +64,16 @@ public class products {
     public void setProduct_price(int product_price) {
         this.product_price = product_price;
     }
+
+    @Override
+    public String toString() {
+        return "products{" +
+                "product_ID=" + product_ID +
+                ", product_title='" + product_title + '\'' +
+                ", product_imgs='" + product_imgs + '\'' +
+                ", product_description='" + product_description + '\'' +
+                ", product_cat='" + product_cat + '\'' +
+                ", product_price=" + product_price +
+                '}';
+    }
 }
