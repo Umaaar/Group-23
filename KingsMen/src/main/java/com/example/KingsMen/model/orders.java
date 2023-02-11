@@ -64,4 +64,16 @@ public class orders {
     public void setOrder_total(int order_total) {
         this.order_total = order_total;
     }
+
+    @Override
+    public String toString() {
+        return "orders{" +
+                "order_id=" + order_id +
+                ", order_name='" + order_name + '\'' +
+                ", order_email='" + order_email + '\'' +
+                ", order_product_id=" + order_product_id +
+                ", order_status='" + order_status + '\'' +
+                ", order_total=" + order_total +
+                '}';
+    }
 }
