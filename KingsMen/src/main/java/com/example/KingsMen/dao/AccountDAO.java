@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAO {
-    public List<accounts> getAllAccounts() throws SQLException {
-        List<accounts> accounts = new ArrayList<>();
+    public static List<accounts> getAllAccounts() throws SQLException {
+        List<accounts> accountsList = new ArrayList<>();
         Connection conn = MyConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement("select * from accounts");
 
@@ -27,8 +27,10 @@ public class AccountDAO {
             String account_address = rs.getNString(6);
             String account_type = rs.getNString(7);
 
+            accounts acc = new accounts(account_id,account_fname,account_lname,account_email,account_password,account_address,account_type);
+            accountsList.add(acc);
         }
-        return accounts;
+        return accountsList;
     }
 
 }
