@@ -74,5 +74,16 @@ public class accounts {
         this.account_type = account_type;
     }
 
-
+    @Override
+    public String toString() {
+        return "accounts{" +
+                "account_id=" + account_id +
+                ", account_fname='" + account_fname + '\'' +
+                ", account_lname='" + account_lname + '\'' +
+                ", account_email='" + account_email + '\'' +
+                ", account_password='" + account_password + '\'' +
+                ", account_address='" + account_address + '\'' +
+                ", account_type='" + account_type + '\'' +
+                '}';
+    }
 }
