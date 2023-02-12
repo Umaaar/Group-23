@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AccountController {
-    public static void main(String[] args) {
-        try {
-            List<accounts> accounts = AccountDAO.getAllAccounts();
-            System.out.println(accounts);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            List<accounts> accounts = AccountDAO.getAllAccounts();
+//            System.out.println(accounts);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
