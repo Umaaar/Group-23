@@ -3,7 +3,7 @@ package com.example.KingsMen.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
 import lombok.Data;
-
+@Entity
 @Data
 public class Product {
     @Id
