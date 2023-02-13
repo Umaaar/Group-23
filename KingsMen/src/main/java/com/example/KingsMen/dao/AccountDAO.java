@@ -27,8 +27,8 @@ public class AccountDAO {
             String account_address = rs.getNString(6);
             String account_type = rs.getNString(7);
 
-            Account acc = new Account(account_id,account_fname,account_lname,account_email,account_password,account_address,account_type);
-            accountList.add(acc);
+//            Account acc = new Account(account_id,account_fname,account_lname,account_email,account_password,account_address,account_type);
+//            accountList.add(acc);
         }
         return accountList;
     }

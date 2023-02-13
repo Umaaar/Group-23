@@ -14,7 +14,8 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
     private double price;
-    private double weight;
+    private int stock;
+    private String size;
     private String description;
     private String imageName;
 
@@ -42,6 +43,14 @@ public class Product {
         this.category = category;
     }
 
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
     public double getPrice() {
         return price;
     }
@@ -50,12 +59,12 @@ public class Product {
         this.price = price;
     }
 
-    public double getWeight() {
-        return weight;
+    public String getSize() {
+        return size;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setSize(String size) {
+        this.size = String.valueOf(size);
     }
 
     public String getDescription() {
