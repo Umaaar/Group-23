@@ -1,7 +1,7 @@
 package com.example.KingsMen.dao;
 
 import com.example.KingsMen.db.MyConnection;
-import com.example.KingsMen.model.accounts;
+import com.example.KingsMen.model.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDAO {
-    public static List<accounts> getAllAccounts() throws SQLException {
-        List<accounts> accountsList = new ArrayList<>();
+    public static List<Account> getAllAccounts() throws SQLException {
+        List<Account> accountList = new ArrayList<>();
         Connection conn = MyConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement("select * from accounts");
 
@@ -27,10 +27,10 @@ public class AccountDAO {
             String account_address = rs.getNString(6);
             String account_type = rs.getNString(7);
 
-            accounts acc = new accounts(account_id,account_fname,account_lname,account_email,account_password,account_address,account_type);
-            accountsList.add(acc);
+            Account acc = new Account(account_id,account_fname,account_lname,account_email,account_password,account_address,account_type);
+            accountList.add(acc);
         }
-        return accountsList;
+        return accountList;
     }
 
 }

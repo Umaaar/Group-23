@@ -1,6 +1,6 @@
 package com.example.KingsMen.model;
 
-public class orders {
+public class Order {
     private int order_id;
     private String order_name;
     private String order_email;
@@ -8,7 +8,7 @@ public class orders {
     private String order_status;
     private int order_total;
 
-    public orders(int order_id, String order_name, String order_email, int order_product_id, String order_status, int order_total) {
+    public Order(int order_id, String order_name, String order_email, int order_product_id, String order_status, int order_total) {
         this.order_id = order_id;
         this.order_name = order_name;
         this.order_email = order_email;

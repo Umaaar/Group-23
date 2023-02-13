@@ -1,6 +1,6 @@
 package com.example.KingsMen.model;
 
-public class accounts {
+public class Account {
     private int account_id;
     private String account_fname;
     private String account_lname;
@@ -9,7 +9,7 @@ public class accounts {
     private String account_address;
     private String account_type;
 
-    public accounts(int account_id, String account_fname, String account_lname, String account_email, String account_password, String account_address, String account_type) {
+    public Account(int account_id, String account_fname, String account_lname, String account_email, String account_password, String account_address, String account_type) {
         this.account_id = account_id;
         this.account_fname = account_fname;
         this.account_lname = account_lname;

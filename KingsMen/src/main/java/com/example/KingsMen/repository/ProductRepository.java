@@ -1,4 +1,4 @@
 package com.example.KingsMen.repository;
 
-public interface ProductService {
+public interface ProductRepository {
 }

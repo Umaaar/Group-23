@@ -1,4 +1,4 @@
 package com.example.KingsMen.controller;
 
-public class OrdersController {
+public class CartController {
 }

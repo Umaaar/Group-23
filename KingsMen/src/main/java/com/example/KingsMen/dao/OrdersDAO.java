@@ -1,7 +1,7 @@
 package com.example.KingsMen.dao;
 
 import com.example.KingsMen.db.MyConnection;
-import com.example.KingsMen.model.orders;
+import com.example.KingsMen.model.Order;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersDAO {
-    public static List<orders> getAllorders() throws SQLException {
-        List<orders> ordersList = new ArrayList<>();
+    public static List<Order> getAllorders() throws SQLException {
+        List<Order> orderList = new ArrayList<>();
         Connection conn = MyConnection.getConnection();
         PreparedStatement ps = conn.prepareStatement("select * from orders");
 
@@ -26,10 +26,10 @@ public class OrdersDAO {
              String order_status = rp.getString(5);
              int order_total  = rp.getInt(6);
 
-             orders newOrder = new orders(order_id,order_name,order_email,order_product_id,order_status,order_total);
-             ordersList.add(newOrder);
+             Order newOrder = new Order(order_id,order_name,order_email,order_product_id,order_status,order_total);
+             orderList.add(newOrder);
         }
-        return ordersList;
+        return orderList;
     }
 
 

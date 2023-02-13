@@ -19,7 +19,7 @@ public class AdminController {
     @GetMapping("/admin/accounts")
     public String adminAccounts(){ return "/backend-views/admin-accounts";}
 
-    @GetMapping("/admin/accounts")
+    @GetMapping("/admin/accounts/add")
     public String adminAddProduct(){ return "/backend-views/admin-addProduct";}
 
     @GetMapping("/admin/categories")
