@@ -1,26 +1,16 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
     <head>
         <link rel="stylesheet" href="../../static/css/style.css">
-        <link rel="stylesheet" th:href="@{/css/index.css}"/>
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 <body class="index">
 <div >
-    <div class="navbar">
-        <div class="logo">
-            <a href=""><img src="../../static/Images/randomLogo.jpg" alt=""></a>
-        </div>
-        <div class="inside-nav">
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Products</a></li>
-                <li><a href="">About Us</a></li>
-                <li><a href="">Contact Us</a></li>
-                <li><a href="">Profile</a></li>
-                <li><a href="">Basket</a></li>
-            </ul>
-        </div>
-    </div>
 
     <div class="work">
         <div class = "header">
@@ -28,12 +18,20 @@
             <a href="" class="btn">Find your look!</a>
         </div>
     </div>
-    <!-- <div class="background-img">
-        <img src="suit.jpgs" alt="">
-    </div> -->
 </div>
 </body>
 
 </html>
 
-<!-- home products logo about contact us profile basket -->
+<script id="replace_with_navbar" src="../../static/js/navbar.js"></script>
+
+<script>
+    fetch('navbar.html')
+.then(res => res.text())
+.then(text => {
+    let oldelem = document.querySelector("script#replace_with_navbar");
+    let newelem = document.createElement("div");
+    newelem.innerHTML = text;
+    oldelem.parentNode.replaceChild(newelem,oldelem);
+}) 
+</script>
