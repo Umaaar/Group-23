@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script>
+    <!-- <script>
         fetch('navbar.html')
     .then(res => res.text())
     .then(text => {
@@ -16,8 +16,10 @@
         newelem.innerHTML = text;
         oldelem.parentNode.replaceChild(newelem,oldelem);
     }) 
-    </script>
+    </script> -->
     <script id="replace_with_navbar" src="../../static/js/navbar.js"></script>
-    
+    <script  id="replace_with_navbar" th:href="@{/js/navbar.js}"></script>
 </body>
 </html>
+
+
