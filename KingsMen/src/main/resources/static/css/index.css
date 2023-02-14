@@ -1,17 +1,14 @@
-
+/* 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
-*{
-    margin: 0%;
-    padding: 0%;
-}
-body{
+.index{
     background-image: url(../Images/suit.jpg);
     background-size: cover;
     height:fit-content;
-    /* background: radial-gradient(black, white); */
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
+    margin: 0%;
+    padding: 0%;
 }
 
 
@@ -71,8 +68,6 @@ body{
     position: absolute;
     left: 46%;
     padding-top: -5px;
-    /* top: -10;
-    content: ""; */
 }
 
 
@@ -98,8 +93,7 @@ body{
     color: white;
     padding: 8px 30px;
     margin: 30px 0;
-    /* margin-top: 100px; */
     border-radius: 30px;
     font-size: 15px;
     text-decoration: none;
-    }
+    } */

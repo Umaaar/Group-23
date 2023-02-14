@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
     <head>
-        <link rel="stylesheet" href="../../static/css/index.css">
+        <link rel="stylesheet" href="../../static/css/style.css">
         <link rel="stylesheet" th:href="@{/css/index.css}"/>
     </head>
 <body>
-<div class="navbar">
-    <div class="logo">
-        <a href=""><img src="../../static/Images/randomLogo.jpg" alt=""></a>
+<div class="index">
+    <div class="navbar">
+        <div class="logo">
+            <a href=""><img src="../../static/Images/randomLogo.jpg" alt=""></a>
+        </div>
+        <div class="inside-nav">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Products</a></li>
+                <li><a href="">About Us</a></li>
+                <li><a href="">Contact Us</a></li>
+                <li><a href="">Profile</a></li>
+                <li><a href="">Basket</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="inside-nav">
-        <ul>
-            <li><a href="">Home</a></li>
-            <li><a href="">Products</a></li>
-            <li><a href="">About Us</a></li>
-            <li><a href="">Contact Us</a></li>
-            <li><a href="">Profile</a></li>
-            <li><a href="">Basket</a></li>
-        </ul>
-    </div>
-</div>
 
     <div class="work">
         <div class = "header">
@@ -30,6 +31,7 @@
     <!-- <div class="background-img">
         <img src="suit.jpgs" alt="">
     </div> -->
+</div>
 </body>
 
 </html>
