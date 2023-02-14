@@ -70,7 +70,10 @@ td{
 /* Index page */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
-
+*{
+    margin: 0%;
+    padding: 0%;
+}
 .index{
     background-image: url(../Images/suit.jpg);
     background-size: cover;
@@ -78,8 +81,7 @@ td{
     /* background: radial-gradient(black, white); */
     color: white;
     font-family: 'Roboto Condensed', sans-serif;
-    margin: 0%;
-    padding: 0%;
+  
 }
 
 
