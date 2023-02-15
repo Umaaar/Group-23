@@ -1,5 +1,5 @@
 /* Navbar and Sidebar */
-fetch('../../../templates/backend-views/duwa-admin/navbar.html')
+fetch('/templates/backend-views/navbar.html')
 .then(res => res.text())
 .then(text => {
     let oldelem = document.querySelector("script#replace_with_navbar");
@@ -8,7 +8,7 @@ fetch('../../../templates/backend-views/duwa-admin/navbar.html')
     oldelem.parentNode.replaceChild(newelem,oldelem);
 })
 
-fetch('../../../templates/backend-views/duwa-admin/sidebar.html')
+fetch('/templates/backend-views/sidebar.html')
 .then(res => res.text())
 .then(text => {
     let oldelem = document.querySelector("script#replace_with_sidebar");
@@ -19,8 +19,8 @@ fetch('../../../templates/backend-views/duwa-admin/sidebar.html')
 
 /*End of Navbar and Sidebar*/
 
-/* Content */
-fetch('../../../templates/backend-views/duwa-admin/content.html')
+/* Content 
+fetch('../../../templates/backend-views/content.html')
 .then(res => res.text())
 .then(text => {
     let oldelem = document.querySelector("script#replace_with_content");
@@ -28,7 +28,7 @@ fetch('../../../templates/backend-views/duwa-admin/content.html')
     newelem.innerHTML = text;
     oldelem.parentNode.replaceChild(newelem,oldelem);
 })
-/* End of Content */
+ End of Content */
 
 
  
