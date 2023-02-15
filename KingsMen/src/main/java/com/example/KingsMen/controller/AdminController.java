@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AdminController {
+
     @Autowired
     ProductService productService;
+
    @GetMapping("/admin")
    public String adminDashboard(){
-       return "/backend-views/admin-dashboard";
+       return "/backend-views/admin-index";
    }
 
    @GetMapping("/admin/products")
