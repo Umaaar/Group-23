@@ -10957,21 +10957,21 @@ input:focus {
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/coolvetica.otf") format("opentype"); 
+  src: url("../fonts/Cartis.otf") format("truetype"); 
   font-weight: 300;
   font-style:normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/coolvetica.otf") format("opentype"); 
+  src: url("../fonts/Cartis.otf") format("truetype"); 
   font-weight: 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Roboto';
-  src: url("../fonts/coolvetica.otf") format("opentype"); 
+  src: url("../fonts/Cartis.otf") format("truetype"); 
   font-weight: normal;
   font-style: normal;
 }
