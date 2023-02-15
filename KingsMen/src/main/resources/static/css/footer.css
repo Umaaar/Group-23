@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Raleway:ital,wght@1,200&display=swap');
+
+body {
+    height: 100%;
+    line-height: 1.5;
+    font-family: 'Raleway', sans-serif;
+    display:flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-bottom: auto;
+}
+
+*{
+    margin:0;
+    padding-left: 30px;
+    padding:0;
+    box-sizing: border-box;
+}
+
+
+.footercontainer{
+    min-height: 100%;
+    max-width: 500px;
+    background-color: black;
+    margin: auto;
+   
+}
+
+.main {
+overflow: auto;
+padding-bottom: 5px;
+}
+
+.row{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+ul{
+    list-style: none;
+}
+
+.footer{
+    background: black;
+    margin-top: 20px;
+}
+
+.footer-col{
+width: 25%;
+padding: 0.15px;
+text-align: center;
+}
+
+.footer-col p{
+    color: #bbbbbb;
+    font-size: 10px;
+
+}
+
+.footer-col h4{
+    font-size: 16px;
+    color: white;
+    margin-bottom:20px;
+    padding-top: 10px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 5px;
+
+}
+
+.footer-col ul li a{
+    font-size: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.4s ease;
+    padding-bottom: 2px;
+}
+
+.footer-col ul li a:hover {
+   color: #ffffff;
+   padding-left: 8px ; 
+}
+
+.footer-col .social-media a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: rgba(255,255,255,0.2);
+    margin-right: 0 10px 10px 0;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    color: white;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-media a:hover{
+    color: black;
+    background-color: white;
+}
