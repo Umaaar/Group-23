@@ -10,18 +10,18 @@ import java.util.Objects;
 
     @Data
     @Entity
-    @Table(name = "category")
-    public class Category {
+    @Table(name = "catagory")
+    public class Catagory {
 
-        @Column(name = "id")
+        @Column(name = "catagory_id")
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private long id;
         
-        @Column(name = "category_name")
+        @Column(name = "catagory_name")
         private String categoryName;
 
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
         private Set<Product> product = new HashSet<>();
 
         @Override
@@ -33,7 +33,7 @@ import java.util.Objects;
         public boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
-            Category category = (Category) o;
+            Catagory category = (Catagory) o;
             return id == category.getId();
         }
 

@@ -34,8 +34,8 @@ import java.util.Objects;
     private String size;
 
     @ManyToOne(fetch =  FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = true)
-    private Category category;
+    @JoinColumn(name = "catagory_id", nullable = true)
+    private Catagory catagory;
 
     @Override
     public boolean equals(Object o) {

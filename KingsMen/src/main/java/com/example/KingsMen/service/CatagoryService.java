@@ -1,6 +1,6 @@
 package com.example.KingsMen.service;
 
-import com.example.KingsMen.model.Category;
+import com.example.KingsMen.model.Catagory;
 import com.example.KingsMen.repository.CatagoryRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -14,11 +14,11 @@ public class CatagoryService {
     public CatagoryService(CatagoryRepository catagoryRepository) {
         this.catagoryRepository = catagoryRepository;
     }
-    public void save(Category category) {
-        catagoryRepository.save(category);
+    public void save(Catagory catagory) {
+        catagoryRepository.save(catagory);
     }
 
-    public List<Category> findAll() {
+    public List<Catagory> findAll() {
         return catagoryRepository.findAll();
     }
 

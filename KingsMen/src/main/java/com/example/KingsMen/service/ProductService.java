@@ -4,7 +4,6 @@ import com.example.KingsMen.model.Product;
 import com.example.KingsMen.repository.ProductRepository;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    @Autowired
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
