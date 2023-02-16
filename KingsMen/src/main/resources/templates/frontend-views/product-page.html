@@ -39,82 +39,22 @@
     <div class="container-fluid">
 
       <div class="row no-gutters justify-content-center">
-  
-          <div class="col-md-2 col-sm-6 col-12">
+
+        <!-- Product loop -->
+          <div class="col-md-2 col-sm-6 col-12" th:each="product : ${products}">
             <div class="card mb-4" style="border: 0;">
                 <div class="card-body text-center border-0">
                   <a href="/product/product-detail">  
-                      <img class="card-img-top mx-auto d-block" src="/Images/6-2-blazer-png-clipart.png" alt="Product image">
-                    </a>
+                    <img class="card-img-top mx-auto d-block" th:src="@{/Images/6-2-blazer-png-clipart.png}" alt="Product image">
+                  </a>
                 <p class="mt-3">
-                  <b>Blazer</b><br>
-                  <span class="small text-muted">£99.99</span>
+                  <b th:text="${product.name}"></b><br>
+                  <span class="small text-muted" th:text="${product.price}"></span>
                 </p>
                 <button type="button" class="btn btn-sm btn-outline-secondary mx-auto d-block mt-3">Add to basket</button>
               </div>
             </div>
           </div>
-
-          <div class="col-md-2 col-sm-6 col-12">
-            <div class="card mb-4" style="border: 0;">
-                <div class="card-body text-center border-0">
-                  <a href="/product/product-detail">  
-                      <img class="card-img-top mx-auto d-block" src="/Images/6-2-blazer-png-clipart.png"  alt="Product image">
-                    </a>
-                <p class="mt-3">
-                  <b>Blazer</b><br>
-                  <span class="small text-muted">£99.99</span>
-                </p>
-                <button type="button" class="btn btn-sm btn-outline-secondary mx-auto d-block mt-3">Add to basket</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2 col-sm-6 col-12">
-            <div class="card mb-4" style="border: 0;">
-                <div class="card-body text-center border-0">
-                  <a href="/product/product-detail">  
-                      <img class="card-img-top mx-auto d-block" src="/Images/6-2-blazer-png-clipart.png"  alt="Product image">
-                    </a>
-                <p class="mt-3">
-                  <b>Blazer</b><br>
-                  <span class="small text-muted">£99.99</span>
-                </p>
-                <button type="button" class="btn btn-sm btn-outline-secondary mx-auto d-block mt-3">Add to basket</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2 col-sm-6 col-12">
-            <div class="card mb-4" style="border: 0;">
-                <div class="card-body text-center border-0">
-                  <a href="/product/product-detail">  
-                      <img class="card-img-top mx-auto d-block" src="/Images/6-2-blazer-png-clipart.png"  alt="Product image">
-                    </a>
-                <p class="mt-3">
-                  <b>Blazer</b><br>
-                  <span class="small text-muted">£99.99</span>
-                </p>
-                <button type="button" class="btn btn-sm btn-outline-secondary mx-auto d-block mt-3">Add to basket</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-2 col-sm-6 col-12">
-            <div class="card mb-4" style="border: 0;">
-                <div class="card-body text-center border-0">
-                  <a href="/product/product-detail">  
-                      <img class="card-img-top mx-auto d-block" src="/Images/6-2-blazer-png-clipart.png"  alt="Product image">
-                    </a>
-                <p class="mt-3">
-                  <b>Blazer</b><br>
-                  <span class="small text-muted">£99.99</span>
-                </p>
-                <button type="button" class="btn btn-sm btn-outline-secondary mx-auto d-block mt-3">Add to basket</button>
-              </div>
-            </div>
-          </div>
-
 
 
 
