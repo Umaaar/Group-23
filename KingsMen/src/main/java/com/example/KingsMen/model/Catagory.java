@@ -8,15 +8,15 @@ import java.util.Set;
 import java.util.Objects;
 
 
-    @Data
-    @Entity
+@Entity
+@Data
     @Table(name = "catagory")
     public class Catagory {
 
         @Column(name = "catagory_id")
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        private long id;
+        private int id;
         
         @Column(name = "catagory_name")
         private String categoryName;
