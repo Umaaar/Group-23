@@ -21,6 +21,12 @@ import java.util.Objects;
         @Column(name = "catagory_name")
         private String categoryName;
 
+        @Column(name = "catagory_description")
+        private String categoryDesc;
+
+        @Column(name = "status")
+        private int categoryStatus;
+
         @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
         private Set<Product> product = new HashSet<>();
 

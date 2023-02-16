@@ -1,12 +1,14 @@
 package com.example.KingsMen.controller;
 
 import com.example.KingsMen.model.Catagory;
+import com.example.KingsMen.service.CatagoryService;
 import com.example.KingsMen.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AdminController {
@@ -14,13 +16,17 @@ public class AdminController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    CatagoryService catagoryService;
+
    @GetMapping("/admin")
    public String adminDashboard(){
        return "/backend-views/admin-index";
    }
    
    @GetMapping("/admin/categories")
-   public String adminCat(){ 
+   public String adminCat(Model model){ 
+    model.addAttribute("categories", catagoryService.getAllCategory());
     return "/backend-views/categories";
    }
 
@@ -32,8 +38,8 @@ public class AdminController {
 
     @PostMapping("/admin/categories/create")
     public String adminCreateCat(@ModelAttribute("category") Catagory category, Model model){ 
-        model.addAttribute("category", new Catagory());
-     return "/backend-views/category-create";
+        catagoryService.addCategory(category);
+     return "redirect:/admin/categories";
     }
 
 

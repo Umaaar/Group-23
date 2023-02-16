@@ -191,15 +191,15 @@
                     <table class="table table-boarderd table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>SN</th>
                                 <th>Category Name</th>
-                                <th>Action</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                            
                                 <tr th:each="category, iStat : ${categories}">
-                                    <td th:text="${category.id}">category->id</td>
+                                    <th scope="row" th:text="${iStat.index + 1}">1</th>
                                     <td th:text="${category.name}">category->name</td>
                                     
                                     <td>
