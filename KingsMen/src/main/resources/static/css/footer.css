@@ -64,6 +64,8 @@ text-align: center;
     padding-top: 10px;
     font-weight: 500;
     position: relative;
+    text-align: center;
+    padding-left: 10%;
 }
 
 .footer-col ul li:not(:last-child) {
