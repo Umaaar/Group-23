@@ -44,7 +44,7 @@
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <ul class="navbar-nav mr-lg-4 w-100">
-              <a href="#" th:href="@{/frontend-view/index}" class="btn btn-sm btn-dark">Visit Website</a>
+              <a href="#" th:href="@{/index}" class="btn btn-sm btn-dark">Visit Website</a>
           </ul>
           <ul class="navbar-nav navbar-nav-right">
   
@@ -77,7 +77,7 @@
     <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
           <li class="nav-item">
-              <a class="nav-link" href="admin/dashboard">
+              <a class="nav-link" href="#" th:href="@{/admin}">
                   <i class="mdi mdi-home menu-icon"></i>
                   <span class="menu-title">Dashboard</span>
               </a>
@@ -85,7 +85,7 @@
           <!-- Customers -->
   
           <li class="nav-item">
-              <a class="nav-link" href="admin/customer">
+              <a class="nav-link" href="#" th:href="@{/admin/customers}">
                   <i class="mdi mdi-account-multiple menu-icon"></i>
                   <span class="menu-title">Customers</span>
               </a>
@@ -93,7 +93,7 @@
   
           <!-- Customer Queries -->
           <li class="nav-item">
-              <a class="nav-link" href="admin/queries">
+              <a class="nav-link" href="#" th:href="@{/admin/queries}">
                   <i class="mdi mdi-account menu-icon"></i>
                   <span class="menu-title">Customer Queries</span>
               </a>
@@ -101,7 +101,7 @@
   
           <!-- Orders -->
           <li class="nav-item">
-              <a class="nav-link" href="admin/orders">
+              <a class="nav-link" href="#" th:href="@{/admin/orders}">
                   <i class="mdi mdi-credit-card-multiple menu-icon"></i>
                   <span class="menu-title">Orders</span>
               </a>
@@ -118,9 +118,9 @@
               </a>
               <div class="collapse" id="categories">
                   <ul class="nav flex-column ">
-                      <li class="nav-item"> <a class="nav-link" href="admin/category/create">Add Category</a>
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/categories/create}">Add Category</a>
                       </li>
-                      <li class="nav-item"> <a class="nav-link" href="'admin/category">View Category</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/categories}">View Categories</a></li>
                   </ul>
               </div>
           </li>
@@ -136,9 +136,9 @@
               </a>
               <div class="collapse" id="products">
                   <ul class="nav flex-column ">
-                      <li class="nav-item"> <a class="nav-link" href="admin/products/create">Add Product</a>
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/products/create}">Add Product</a>
                       </li>
-                      <li class="nav-item"> <a class="nav-link" href="admin/products">View Products</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/products}">View Products</a></li>
                   </ul>
               </div>
           </li>
