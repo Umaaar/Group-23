@@ -57,6 +57,7 @@ import com.example.KingsMen.model.Product;
         Product product3 = new Product();
         Product product4 = new Product();
         Product product5 = new Product();
+        Product product6 = new Product();
 
         product1.setName("Blue Blazer");
         product1.setCatagory(catagoryRepository.findByCategoryName("Blazer"));
@@ -96,11 +97,19 @@ import com.example.KingsMen.model.Product;
         product5.setStock(10);
         product5.setSize("M");
 
+        product6.setName("Blue-brown Blazer");
+        product6.setCatagory(catagoryRepository.findByCategoryName("Blazer"));
+        product6.setPrice(99.9);
+        product6.setImageName("Navy-brownblazer.jpeg");
+        product6.setStock(10);
+        product6.setSize("M");
+
         productService.save(product1);
         productService.save(product2);
         productService.save(product3);
         productService.save(product4);
         productService.save(product5);
+        productService.save(product6);
 
     }   
 }

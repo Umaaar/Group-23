@@ -31,10 +31,13 @@ public class ProductsController {
         return "/frontend-views/product-page";
     }
 
-    @GetMapping("/product/product-detail")
-    public String productDetail() {
-    return "/frontend-views/product-detail-page";
-  }
+
+//   @GetMapping("/product/product-detail")
+//   public String productDetail(@RequestParam Long id, Model model) {
+//     Product product = productService.findById(id);
+//     model.addAttribute("product", getAllProducts());
+//     return "/frontend-views/product-detail-page";
+// }
 
   private List<Product> getAllProducts(){
     return productService.findAllByOrderByIdAsc();
