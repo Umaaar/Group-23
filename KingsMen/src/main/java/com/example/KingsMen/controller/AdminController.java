@@ -20,6 +20,10 @@ public class AdminController {
    @GetMapping("/admin/categories")
    public String adminCat(){ 
     return "/backend-views/admin-categories";
+
+    @GetMapping("/admin/categories/create")
+    public String adminCreateCat(){ 
+     return "/backend-views/category-create";
 }
 
    @GetMapping("/admin/products")

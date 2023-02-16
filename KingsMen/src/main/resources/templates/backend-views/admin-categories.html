@@ -181,7 +181,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3> Category
-                        <a href="{{ url('admin/category/create') }}"
+                        <a href="#" th:href="@{/admin/categories/create}"
                             class="btn btn-primary btn-sm text-white float-end">
                             Add Category
                         </a>
@@ -192,22 +192,20 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                               
+                                <th>Category Name</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
                            
-                                <tr>
-                                    <td>category->id</td>
-                                    <td>category->name</td>
+                                <tr th:each="category, iStat : ${categories}">
+                                    <td th:text="${category.id}">category->id</td>
+                                    <td th:text="${category.name}">category->name</td>
                                     
                                     <td>
                                         <a
-                                            href="{{ url('admin/category/' . $category->id . '/edit') }}" class="btn btn-success">Edit</a>
-                                        <a href="#" wire:click="deleteCategory({{ $category->id }})"
+                                            href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-success">Update</a>
+                                        <a href="#"  th:href="@{/admin/categories/delete/{id}(id=${category.id})}" wire:click="deleteCategory({{ $category->id }})"
                                             class="btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#deleteModal">Delete</a>
                                     </td>
@@ -228,8 +226,7 @@
             $('#deleteModal').modal('hide');
         });
     </script>
-
-        <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
+    <!-- content-wrapper ends -->
       </div>
     </div>
   </div>
