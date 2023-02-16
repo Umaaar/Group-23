@@ -18,8 +18,10 @@ public class AdminController {
    }
    
    @GetMapping("/admin/categories")
-   public String adminCat(){ return "/backend-views/admin-categories";}
-   
+   public String adminCat(){ 
+    return "/backend-views/admin-categories";
+}
+
    @GetMapping("/admin/products")
     public String adminProducts(Model model){
        model.addAttribute("products", productService.findAllByOrderByIdAsc());
@@ -27,13 +29,16 @@ public class AdminController {
    }
 
     @GetMapping("/admin/orders")
-    public String adminOrders(){ return "/backend-views/admin-orders";}
+    public String adminOrders(){ return "/backend-views/admin-orders";
+}
 
     @GetMapping("/admin/accounts")
-    public String adminAccounts(){ return "/backend-views/admin-accounts";}
+    public String adminAccounts(){ return "/backend-views/admin-accounts";
+}
 
     @GetMapping("/admin/accounts/add")
-    public String adminAddProduct(){ return "/backend-views/admin-addProduct";}
+    public String adminAddProduct(){ return "/backend-views/admin-addProduct";
+}
 
 
 
