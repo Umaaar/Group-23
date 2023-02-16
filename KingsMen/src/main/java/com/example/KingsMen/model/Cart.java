@@ -1,7 +1,8 @@
+/*
 package com.example.KingsMen.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name='cart')
@@ -12,11 +13,11 @@ public class Cart{
     @Column(name='cart_id')
     private int id;
 
-    @ManytoOne
+    @ManyToOne
     @JoinColumn(name='product_id')
     private Product product;
 
-    @ManytoOne
+    @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
 
@@ -53,4 +54,4 @@ public class Cart{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-}
+}*/
