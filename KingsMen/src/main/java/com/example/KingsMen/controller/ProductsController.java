@@ -27,7 +27,7 @@ public class ProductsController {
     @GetMapping("/product")
     public String getProductsPage(Model model) {
         model.addAttribute("products", getAllProducts());
-        model.addAttribute("categories", catagoryService.findAll());
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/product-page";
     }
 
