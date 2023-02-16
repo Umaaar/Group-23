@@ -5,5 +5,7 @@ import com.example.KingsMen.model.Cart;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Integer> {
+    public List<Cart> findByCustomer(Customer customer){
 
+    }
 }
