@@ -5,10 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.KingsMen.service.ProductService;
-import com.example.KingsMen.model.Product;
 import com.example.KingsMen.service.CatagoryService;
 
-import java.util.List;
 
 
 @Controller
@@ -20,13 +18,10 @@ public class ProductsController {
     @Autowired
     ProductService productService;
 
-    public ProductsController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping("/product")
     public String getProductsPage(Model model) {
-        model.addAttribute("products", getAllProducts());
+        model.addAttribute("products", productService.getAllProduct());
         model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/product-page";
     }
@@ -39,10 +34,10 @@ public class ProductsController {
 //     return "/frontend-views/product-detail-page";
 // }
 
-  private List<Product> getAllProducts(){
+  /*private List<Product> getAllProducts(){
     return productService.findAllByOrderByIdAsc();
 
 
-  }
+  }*/
 }
 

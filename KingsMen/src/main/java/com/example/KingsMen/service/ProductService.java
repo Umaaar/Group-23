@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
-    private final ProductRepository productRepository;
-
+    
     @Autowired
+    ProductRepository productRepository;
     public List<Product> getAllProduct() {
         return productRepository.findAll();
     }

@@ -3,10 +3,6 @@ package com.example.KingsMen.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
-
 
 @Entity
 @Data
