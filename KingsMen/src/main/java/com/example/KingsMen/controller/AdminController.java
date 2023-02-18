@@ -28,6 +28,7 @@ public class AdminController {
        return "/backend-views/admin-index";
    }
    
+/* ---------------------------------------------------Category CRUD Mapping ------------------------------------------------- */
    @GetMapping("/admin/categories")
    public String getCat(Model model){ 
     model.addAttribute("categories", catagoryService.getAllCategory());
@@ -64,6 +65,17 @@ public class AdminController {
             return "404";
         }
     }
+/* --------------------------------------------------- End of Category CRUD Mapping ----------------------------------------------- */
+
+/* --------------------------------------------------- Product  CRUD Mapping --------------------------------------------------------*/
+
+
+
+
+
+
+
+/* --------------------------------------------------- End of Product CRUD Mapping ------------------------------------------------- */
 
 
 
