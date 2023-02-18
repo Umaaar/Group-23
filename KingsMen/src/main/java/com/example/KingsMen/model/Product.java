@@ -10,13 +10,17 @@ import java.util.Objects;
     @Table(name = "product")
     public class Product {
     
-    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "id")
+    private Long id;
     
     @Column(name = "name")
     private String name;
+    
+    @ManyToOne(fetch =  FetchType.LAZY)
+    @JoinColumn(name = "catagory_id", referencedColumnName = "category_id")
+    private Catagory category;
 
     @Column(name = "description", length = 100)
     private String description;
@@ -33,9 +37,6 @@ import java.util.Objects;
     @Column(name = "size")
     private String size;
 
-    @ManyToOne(fetch =  FetchType.LAZY)
-    @JoinColumn(name = "catagory_id", nullable = true)
-    private Catagory catagory;
 
     @Override
     public boolean equals(Object o) {
