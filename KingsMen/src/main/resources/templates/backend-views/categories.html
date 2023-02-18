@@ -203,10 +203,8 @@
                                     <td th:text="${category.name}">category->name</td>
                                     
                                     <td>
-                                        <a href="" th:href="@{/admin/categories/update/{id}(id=${category_id})}" class="btn btn-success">Update</a>
-                                        <a href=""  th:href="@{/admin/categories/delete/{id}(id=${category_id})}" wire:click="deleteCategory({{ $category->id }})"
-                                            class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">Delete</a>
+                                        <a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}" class="btn btn-success">Update</a>
+                                        <a href=""  th:href="@{/admin/categories/delete/{id}(id=${category.id})}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
                                     </td>
                                 </tr>
                            

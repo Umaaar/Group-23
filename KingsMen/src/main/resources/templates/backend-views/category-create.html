@@ -143,7 +143,6 @@
               </div>
           </li>
   
-
       </ul>
     </nav>
 
@@ -159,27 +158,39 @@
                             <a href="#" th:href="@{/admin/categories}" class="btn btn-primary btn-sm text-white float-end">BACK</a>
                         </h3>
                     </div>
-                    <form th:action="@{/admin/categories/create}" method="post" th:object="${category}">
-                        <div class="form-group row">
-                            <input type="hidden" name="id" th:field="*{id}">
-                            <div class="col-md-6 mb-3">
-                                <label>Name</label>
-                                <input type="text" class="form-control" required th:field="*{name}" name="name" />
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label>Description</label>
-                                <textarea class="form-control"  required th:field="*{description}" name="description" rows="3"></textarea>
-                            </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/categories/create}" method="post" th:object="${category}">
+                            <div class="form-group row">
+                                <input type="hidden" name="id"  th:field="*{id}">
+                                <div class="col-md-6 mb-3">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" required th:field="*{name}" name="name" />
 
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <button type="submit" class="btn btn-primary float-end">Save</button>
-                        </div>
-                    </form>
+
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label>Description</label>
+                                    <textarea required th:field="*{description}" class="form-control" rows="3"></textarea>
+
+                                </div>
+
+
+
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <button type="submit" class="btn btn-primary float-end">Save</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
+
+
         <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
       </div>
     </div>
