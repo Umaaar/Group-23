@@ -1,5 +1,6 @@
 package com.example.KingsMen.controller;
 
+import com.example.KingsMen.dto.ProductDTO;
 import com.example.KingsMen.model.Catagory;
 import com.example.KingsMen.service.CatagoryService;
 import com.example.KingsMen.service.ProductService;
@@ -69,7 +70,18 @@ public class AdminController {
 
 /* --------------------------------------------------- Product  CRUD Mapping --------------------------------------------------------*/
 
+@GetMapping("/admin/products")
+public String products(Model model){
+   model.addAttribute("products", productService.getAllProduct());
+   return "/backend-views/products";
+}
 
+@GetMapping("/admin/products/create")
+public String createProducts(Model model){
+   model.addAttribute("productDTO", new ProductDTO());
+   model.addAttribute("categories", catagoryService.getAllCategory());
+   return "/backend-views/products-create";
+}
 
 
 
@@ -83,16 +95,8 @@ public class AdminController {
 
 
 
-   @GetMapping("/admin/products")
-    public String adminProducts(Model model){
-       model.addAttribute("products", productService.findAllByOrderByIdAsc());
-       return "/backend-views/products";
-   }
+   
 
-   @GetMapping("/admin/products/create")
-   public String adminCreateProduct(){ 
-    return "/backend-views/products-create";
-   }
 
    
 

@@ -25,9 +25,12 @@ import java.util.Objects;
     @Column(name = "description", length = 100)
     private String description;
 
-    @Column(name = "Stock")
+    @Column(name = "Quantity")
+    private int quantity;
+
+    @Column(name = "stock_availablility")
     private int stock;
-    
+
     @Column(name = "image")
     private String imageName;
 

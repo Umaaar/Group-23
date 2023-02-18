@@ -4,6 +4,7 @@ import com.example.KingsMen.model.Product;
 import com.example.KingsMen.repository.ProductRepository;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -11,7 +12,12 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    @Autowired
+    public List<Product> getAllProduct() {
+        return productRepository.findAll();
+    }
+
+    /*public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
@@ -26,6 +32,6 @@ public class ProductService {
 
     public List<Product> findAllByOrderByIdAsc() {
         return productRepository.findAllByOrderByIdAsc();
-    }
+    }*/
 
 }
