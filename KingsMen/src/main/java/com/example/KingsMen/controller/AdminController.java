@@ -3,11 +3,15 @@ package com.example.KingsMen.controller;
 import com.example.KingsMen.model.Catagory;
 import com.example.KingsMen.service.CatagoryService;
 import com.example.KingsMen.service.ProductService;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -41,6 +45,24 @@ public class AdminController {
         catagoryService.addCategory(category);
         System.out.println("it works");
      return "redirect:/admin/categories";
+    }
+
+    @GetMapping("/admin/categories/delete/{id}")
+    public String deleteCategory(@PathVariable int id){
+        catagoryService.removeCategoryById(id);
+        return "redirect:/admin/categories";
+
+    }
+
+    @GetMapping("/admin/categories/update/{id}")
+    public String editCategory(@PathVariable int id, Model model){
+        Optional<Catagory> category = catagoryService.getCategoryById(id);
+        if(category.isPresent()){
+            model.addAttribute("category", category.get());
+            return "/backend-views/category-create";
+        }else{
+            return "404";
+        }
     }
 
 
