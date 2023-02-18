@@ -17,14 +17,14 @@ import java.util.Objects;
         @Column(name = "catagory_id")
         @GeneratedValue(strategy = GenerationType.AUTO)
         private int id;
-        
+
         @Column(name = "catagory_name")
         private String name;
 
         @Column(name = "catagory_description")
-        private String categoryDesc;
+        private String description;
 
-        @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
+       /* @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
         private Set<Product> product = new HashSet<>();
 
         @Override
@@ -38,7 +38,7 @@ import java.util.Objects;
             if (o == null || getClass() != o.getClass()) return false;
             Catagory category = (Catagory) o;
             return id == category.getId();
-        }
+        }*/
 
     }
 
