@@ -20,13 +20,13 @@ public class AdminController {
     CatagoryService catagoryService;
 
    @GetMapping("/admin")
-   public String adminDashboard(){
+   public String adminHome(){
        return "/backend-views/admin-index";
    }
    
    @GetMapping("/admin/categories")
-   public String adminCat(Model model){ 
-    model.addAttribute("category", catagoryService.getAllCategory());
+   public String getCat(Model model){ 
+    model.addAttribute("categories", catagoryService.getAllCategory());
     return "/backend-views/categories";
    }
 
@@ -42,6 +42,12 @@ public class AdminController {
         System.out.println("it works");
      return "redirect:/admin/categories";
     }
+
+
+
+
+
+
 
    @GetMapping("/admin/products")
     public String adminProducts(Model model){

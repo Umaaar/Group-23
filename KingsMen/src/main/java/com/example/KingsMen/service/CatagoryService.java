@@ -21,9 +21,9 @@ public class CatagoryService {
         catagoryRepository.save(catagory);
     }
 
-    public CatagoryService(CatagoryRepository catagoryRepository) {
-        this.catagoryRepository = catagoryRepository;
-    }
+   /* public CatagoryService(CatagoryRepository catagoryRepository) {
+     this.catagoryRepository = catagoryRepository;
+    }*/ 
 
 
 
