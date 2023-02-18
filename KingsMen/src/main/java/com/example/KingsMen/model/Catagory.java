@@ -13,17 +13,16 @@ import java.util.Objects;
     @Table(name = "catagory")
     public class Catagory {
 
-        @Column(name = "catagory_id")
         @Id
+        @Column(name = "catagory_id")
         @GeneratedValue(strategy = GenerationType.AUTO)
         private int id;
         
         @Column(name = "catagory_name")
-        private String categoryName;
+        private String name;
 
         @Column(name = "catagory_description")
         private String categoryDesc;
-
 
         @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
         private Set<Product> product = new HashSet<>();

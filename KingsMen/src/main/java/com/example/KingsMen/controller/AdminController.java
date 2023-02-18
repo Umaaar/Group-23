@@ -26,7 +26,7 @@ public class AdminController {
    
    @GetMapping("/admin/categories")
    public String adminCat(Model model){ 
-    model.addAttribute("categories", catagoryService.getAllCategory());
+    model.addAttribute("category", catagoryService.getAllCategory());
     return "/backend-views/categories";
    }
 
@@ -37,18 +37,11 @@ public class AdminController {
     }
 
     @PostMapping("/admin/categories/create")
-    public String adminCreateCat(@ModelAttribute("category") Catagory category, Model model){ 
+    public String adminCreateCat(@ModelAttribute("category") Catagory category){ 
         catagoryService.addCategory(category);
+        System.out.println("it works");
      return "redirect:/admin/categories";
     }
-
-
-
-
-
-
-
-
 
    @GetMapping("/admin/products")
     public String adminProducts(Model model){
