@@ -19,7 +19,7 @@ import java.util.Objects;
     private String name;
     
     @ManyToOne(fetch =  FetchType.LAZY)
-    @JoinColumn(name = "catagory_id", referencedColumnName = "category_id")
+    @JoinColumn(name = "catagory_id", nullable = false, referencedColumnName = "catagory_id")
     private Catagory category;
 
     @Column(name = "description", length = 100)

@@ -1,5 +1,6 @@
 package com.example.KingsMen.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,8 +11,8 @@ import lombok.Data;
     public class Catagory {
 
         @Id
-        @Column(name = "catagory_id")
         @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name = "catagory_id")
         private int id;
 
         @Column(name = "catagory_name")
@@ -20,9 +21,10 @@ import lombok.Data;
         @Column(name = "catagory_description")
         private String description;
 
-       /* @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
+        /* @OneToMany(fetch = FetchType.LAZY, mappedBy = "catagory", cascade = CascadeType.ALL)
         private Set<Product> product = new HashSet<>();
 
+       
         @Override
         public int hashCode() {
             return Objects.hash(id);
