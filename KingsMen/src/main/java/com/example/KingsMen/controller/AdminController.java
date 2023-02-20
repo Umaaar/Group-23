@@ -1,7 +1,8 @@
 package com.example.KingsMen.controller;
 
 import com.example.KingsMen.dto.ProductDTO;
-import com.example.KingsMen.model.Catagory;
+
+import com.example.KingsMen.model.Category;
 import com.example.KingsMen.service.CatagoryService;
 import com.example.KingsMen.service.ProductService;
 
@@ -33,17 +34,18 @@ public class AdminController {
    @GetMapping("/admin/categories")
    public String getCat(Model model){ 
     model.addAttribute("categories", catagoryService.getAllCategory());
+       System.out.println(catagoryService.getAllCategory());
     return "/backend-views/categories";
    }
 
     @GetMapping("/admin/categories/create")
-    public String postCreateCat(Model model){ 
-        model.addAttribute("category", new Catagory());
+    public String postCreateCat(Model model){
+        model.addAttribute("category", new Category());
      return "/backend-views/category-create";
     }
 
     @PostMapping("/admin/categories/create")
-    public String adminCreateCat(@ModelAttribute("category") Catagory category){ 
+    public String adminCreateCat(@ModelAttribute("category") Category category){
         catagoryService.addCategory(category);
         System.out.println("it works");
      return "redirect:/admin/categories";
@@ -58,7 +60,7 @@ public class AdminController {
 
     @GetMapping("/admin/categories/update/{id}")
     public String editCategory(@PathVariable int id, Model model){
-        Optional<Catagory> category = catagoryService.getCategoryById(id);
+        Optional<Category> category = catagoryService.getCategoryById(id);
         if(category.isPresent()){
             model.addAttribute("category", category.get());
             return "/backend-views/category-create";

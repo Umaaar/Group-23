@@ -173,7 +173,7 @@
                              </tr>
                             </thead>
                             <tbody>
-                             <tr th:each="category, iStat : ${categories}">
+                             <tr th:each="category,iStat:${categories}">
                                   <th scope="row" th:text="${iStat.index + 1}">1</th>
                                   <td th:text="${category.name}">Category Name</td>
                                   <td th:text="${category.description}">Category Description</td>

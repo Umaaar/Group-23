@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.example.KingsMen.service.ProductService;
 import com.example.KingsMen.repository.CatagoryRepository;
-import com.example.KingsMen.model.Catagory;
+import com.example.KingsMen.model.Category;
 import com.example.KingsMen.model.Product;
 
 import java.util.Collection;
