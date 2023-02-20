@@ -1,10 +1,11 @@
 package com.example.KingsMen.controller;
 
 import com.example.KingsMen.dto.ProductDTO;
-
+import com.example.KingsMen.dto.SizeDTO;
 import com.example.KingsMen.model.Category;
 import com.example.KingsMen.service.CatagoryService;
 import com.example.KingsMen.service.ProductService;
+import com.example.KingsMen.service.SizeService;
 
 import java.util.Optional;
 
@@ -24,6 +25,9 @@ public class AdminController {
 
     @Autowired
     CatagoryService catagoryService;
+
+    @Autowired
+    SizeService sizeService;
 
    @GetMapping("/admin")
    public String adminHome(){
@@ -70,7 +74,7 @@ public class AdminController {
     }
 /* --------------------------------------------------- End of Category CRUD Mapping ----------------------------------------------- */
 
-/* --------------------------------------------------- Product  CRUD Mapping --------------------------------------------------------*/
+/* --------------------------------------------------- Product CRUD Mapping --------------------------------------------------------*/
 
 @GetMapping("/admin/products")
 public String products(Model model){
@@ -90,6 +94,26 @@ public String createProducts(Model model){
 
 
 /* --------------------------------------------------- End of Product CRUD Mapping ------------------------------------------------- */
+
+/* --------------------------------------------------- Size CRUD Mapping --------------------------------------------------------*/
+
+@GetMapping("/admin/size")
+public String size(Model model){
+   model.addAttribute("size", sizeService.getAllSizes());
+   return "/backend-views/size";
+}
+
+@GetMapping("/admin/size/create")
+public String createSize(Model model){
+   model.addAttribute("sizeDTO", new SizeDTO());
+   model.addAttribute("categories", catagoryService.getAllCategory());
+   return "/backend-views/size-create";
+}
+
+
+
+
+/* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
 
 
 

@@ -3,7 +3,6 @@ package com.example.KingsMen.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.Objects;
 
 @Entity
 @Data
