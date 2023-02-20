@@ -27,9 +27,7 @@ public class CatagoryService {
         return catagoryRepository.findById(id);
     }
 
-   //public CatagoryService(CatagoryRepository catagoryRepository) {
-      // this.catagoryRepository = catagoryRepository;
-   //}
+ 
 
 
 

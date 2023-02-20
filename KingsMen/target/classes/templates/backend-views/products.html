@@ -164,8 +164,9 @@
                             <thead>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Category</th>
                                     <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Preview</th>
                                     <th>Size</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
@@ -176,11 +177,12 @@
 
                                     <tr th:each="product, iStat : ${products}">
                                         <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="${product.category.name}">Larry</td>
-                                        <td th:text="${product.name}">Larry</td>
-                                        <td th:text="${product.size}">Larry</td>
-                                        <td th:text="${product.price}">Larry</td>
-                                        <td th:text="${product.quantity}">Larry</td>
+                                        <td th:text="${product.name}">name</td>
+                                        <td th:text="${product.category.name}">category</td>
+                                        <td><img src="" height="100px" width="100px"  th:src="@{${'/productImages/' + product.imageName}}"></td>
+                                        <td th:text="${product.size}">size</td>
+                                        <td th:text="${product.price}">price</td>
+                                        <td th:text="${product.quantity}">quantity</td>
                                         <td th:if="${product.quantity > 1}">
                                             <label class="label-stock bg-success">In Stock</label>
                                         </td>

@@ -179,7 +179,7 @@
                             <button class="nav-link" id="inventory-tab" data-bs-toggle="tab"
                                 data-bs-target="#inventory-tab-pane" type="button" role="tab"
                                 aria-controls="inventory-tab-pane" aria-selected="false">
-                                Product Inventory
+                               Inventory Management System (IMS)
                             </button>
                         </li>
 
@@ -195,7 +195,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>Category</label>
+                               
                                 <label for="category">Select Category</label>
                                 <select class="form-control" th:field="*{categoryId}" id="category" name="category">
                                     <option th:each="category :${categories}"
@@ -222,7 +222,7 @@
                             aria-labelledby="image-tab" tabindex="0">
 
                             <div class="mb-3">
-                                <label>Product Image</label>
+                                <h5>Product Image</h5>
             
                                 <div class="custom-file">
                                     <input type="file"  class="custom-file-input" name="productImage" accept="image/jpeg, image/png"  id="productImage"/>
@@ -237,7 +237,7 @@
 
                         <div class="tab-pane fade border p-3" id="inventory-tab-pane" role="tabpanel"
                             aria-labelledby="inventory-tab" tabindex="0">
-                            <label>Inventory Management System</label>
+                            
 
                             <div class="mb-3">
                                 <label>Quantity</label>
