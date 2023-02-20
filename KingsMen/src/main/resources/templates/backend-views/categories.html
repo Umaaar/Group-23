@@ -178,6 +178,9 @@
                                   <td th:text="${category.name}">Category Name</td>
                                   <td th:text="${category.description}">Category Description</td>
                                   <td>
+
+
+
                                         <a href="#" th:href="@{/admin/categories/update/{id}(id=${category.id})}"
                                          class="btn btn-sm btn-primary">Update</a>
                                         <a href="#" th:href="@{/admin/categories/delete/{id}(id=${category.id})}"
