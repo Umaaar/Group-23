@@ -13,12 +13,21 @@ public class ProductService {
     
     @Autowired
     ProductRepository productRepository;
+
     public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
 
+    public Product getProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
+}
+
+
     /*public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+    public Product findById(long id) {
+        return productRepository.findById(id);
     }
 
  
@@ -26,9 +35,6 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public Product findById(long id) {
-        return productRepository.findById(id);
-    }
 
     public List<Product> findAllByOrderByIdAsc() {
         return productRepository.findAllByOrderByIdAsc();
