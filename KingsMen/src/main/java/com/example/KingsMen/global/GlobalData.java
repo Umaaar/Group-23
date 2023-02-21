@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.example.KingsMen.service.ProductService;
-import com.example.KingsMen.repository.CatagoryRepository;
+import com.example.KingsMen.repository.CategoryRepository;
 import com.example.KingsMen.model.Category;
 import com.example.KingsMen.model.Product;
 
