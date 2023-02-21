@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.KingsMen.service.ProductService;
-import com.example.KingsMen.service.CatagoryService;
+import com.example.KingsMen.service.CategoryService;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.KingsMen.model.Product;
 
@@ -16,7 +16,7 @@ import com.example.KingsMen.model.Product;
 public class ProductsController {
 
     @Autowired
-    CatagoryService catagoryService;
+    CategoryService catagoryService;
 
     @Autowired
     ProductService productService;

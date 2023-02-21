@@ -2,7 +2,7 @@ package com.example.KingsMen.service;
 
 
 import com.example.KingsMen.model.Category;
-import com.example.KingsMen.repository.CatagoryRepository;
+import com.example.KingsMen.repository.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ import java.util.Optional;
 
 
 @Service
-public class CatagoryService {
+public class CategoryService {
     @Autowired
-    CatagoryRepository catagoryRepository;
+    CategoryRepository catagoryRepository;
     public List<Category> getAllCategory(){
 
         return catagoryRepository.findAll();

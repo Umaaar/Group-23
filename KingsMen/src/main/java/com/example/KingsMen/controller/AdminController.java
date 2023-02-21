@@ -3,7 +3,7 @@ package com.example.KingsMen.controller;
 import com.example.KingsMen.dto.ProductDTO;
 import com.example.KingsMen.dto.SizeDTO;
 import com.example.KingsMen.model.Category;
-import com.example.KingsMen.service.CatagoryService;
+import com.example.KingsMen.service.CategoryService;
 import com.example.KingsMen.service.ProductService;
 import com.example.KingsMen.service.SizeService;
 
@@ -24,7 +24,7 @@ public class AdminController {
     ProductService productService;
 
     @Autowired
-    CatagoryService catagoryService;
+    CategoryService categoryService;
 
     @Autowired
     SizeService sizeService;
@@ -37,8 +37,8 @@ public class AdminController {
 /* ---------------------------------------------------Category CRUD Mapping ------------------------------------------------- */
    @GetMapping("/admin/categories")
    public String getCat(Model model){ 
-    model.addAttribute("categories", catagoryService.getAllCategory());
-       System.out.println(catagoryService.getAllCategory());
+    model.addAttribute("categories", categoryService.getAllCategory());
+       System.out.println(categoryService.getAllCategory());
     return "/backend-views/categories";
    }
 
@@ -50,21 +50,21 @@ public class AdminController {
 
     @PostMapping("/admin/categories/create")
     public String adminCreateCat(@ModelAttribute("category") Category category){
-        catagoryService.addCategory(category);
+        categoryService.addCategory(category);
         System.out.println("it works");
      return "redirect:/admin/categories";
     }
 
     @GetMapping("/admin/categories/delete/{id}")
     public String deleteCategory(@PathVariable int id){
-        catagoryService.removeCategoryById(id);
+        categoryService.removeCategoryById(id);
         return "redirect:/admin/categories";
 
     }
 
     @GetMapping("/admin/categories/update/{id}")
     public String editCategory(@PathVariable int id, Model model){
-        Optional<Category> category = catagoryService.getCategoryById(id);
+        Optional<Category> category = categoryService.getCategoryById(id);
         if(category.isPresent()){
             model.addAttribute("category", category.get());
             return "/backend-views/category-create";
@@ -85,7 +85,7 @@ public String products(Model model){
 @GetMapping("/admin/products/create")
 public String createProducts(Model model){
    model.addAttribute("productDTO", new ProductDTO());
-   model.addAttribute("categories", catagoryService.getAllCategory());
+   model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/products-create";
 }
 
@@ -106,7 +106,7 @@ public String size(Model model){
 @GetMapping("/admin/size/create")
 public String createSize(Model model){
    model.addAttribute("sizeDTO", new SizeDTO());
-   model.addAttribute("categories", catagoryService.getAllCategory());
+   model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/size-create";
 }
 
