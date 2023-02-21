@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <!-- <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}"/> -->
   
   <title>Product Page</title>
 </head>
@@ -43,7 +43,7 @@
       <div class="col-lg-3 col-md-6 col-12 mb-4" th:each="product : ${products}">
         <div class="card" style="border: 0;">
           <div class="card-body text-center border-0">
-            <a href="/product/product-detail">  
+              <a th:href="@{'/product/product-detail/' + ${product.id}}">  
 
               <img class="card-img-top mx-auto d-block img-fluid" th:src="@{/images/productImage/{imageName}(imageName=${product.imageName})}" alt="Product Image" style="width: 300px; height: 400px">
 
