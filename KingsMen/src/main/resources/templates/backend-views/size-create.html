@@ -151,29 +151,28 @@
       <div class="content-wrapper">
         <div class="row">
             <div class="col-md-12 ">
-               
                 <div class="card">
                     <div class="card-header">
-                        <h3> Add Sizing
+                        <h3> View Sizing
                             <a href="#" th:href="@{/admin/size}" class="btn btn-primary btn-sm text-white float-end">BACK</a>
                         </h3>
                     </div>
                     <div class="card-body">
                         <form th:action="@{/admin/size/create}" method="post" th:object="${sizeDTO}" enctype="multipart/form-data">
+                            <input type="hidden" name="id"  th:field="*{id}">
                             <div class="form-group row">
-                                <input type="hidden" name="id"  th:field="*{id}">
-                                
-                                <div class="col-md-12 mb-3">
-                                    <label for="category">Select Category</label>
-                                <select class="form-control" th:field="*{categoryId}" id="category" name="category">
-                                    <option th:each="category :${categories}"
-                                            th:value="${category.id}"
-                                            th:text="${category.name}"
-                                    >
-                                </select>
-                                </div>
                                 <div class="col-md-6 mb-3">
-                                    <label>Size</label>
+                                    <label for="category">Select Category</label>
+                                    <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+                                        <option th:each="category :${categories}"
+                                                th:value="${category.id}"
+                                                th:text="${category.name}"
+                                        >
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12 mb-3">
+                                    <label for="size">Size</label>
                                     <input type="text" class="form-control" required th:field="*{size}" name="size" />
 
                                 </div>
@@ -187,9 +186,8 @@
                             </div>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
+          </div>
+     </div>
 
 
         <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>

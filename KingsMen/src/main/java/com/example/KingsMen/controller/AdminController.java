@@ -3,10 +3,16 @@ package com.example.KingsMen.controller;
 import com.example.KingsMen.dto.ProductDTO;
 import com.example.KingsMen.dto.SizeDTO;
 import com.example.KingsMen.model.Category;
+import com.example.KingsMen.model.Product;
+import com.example.KingsMen.model.Size;
 import com.example.KingsMen.service.CategoryService;
 import com.example.KingsMen.service.ProductService;
 import com.example.KingsMen.service.SizeService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +22,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class AdminController {
+
+    //public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/productImage";
 
     @Autowired
     ProductService productService;
@@ -88,6 +98,34 @@ public String createProducts(Model model){
    model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/products-create";
 }
+/*@PostMapping("/admin/products/create")
+public String createProductsPost(@ModelAttribute("productDTO") ProductDTO productDTO,
+                                @RequestParam("productImage") MultipartFile file,
+                                @RequestParam("imgName") String imgName) throws IOException{
+ Product product = new Product();
+  product.setId(productDTO.getId());
+  product.setName(productDTO.getName());
+  product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
+  product.setDescription(productDTO.getDescription());
+  product.setPrice(productDTO.getPrice());
+  product.setStock(productDTO.getStock());
+  String imageUUID;
+    if(!file.isEmpty()){
+        imageUUID = file.getOriginalFilename();
+        Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
+        Files.write(fileNameAndPath, file.getBytes());
+    }else{
+        imageUUID = imgName;
+    }
+    product.setImageName(imageUUID);
+    productService.addProduct(product);
+    
+    return "redirect:/admin/products";
+                                 
+}  */                      
+
+
+
 
 
 
@@ -105,10 +143,45 @@ public String sizes(Model model){
 }
 
 @GetMapping("/admin/size/create")
-public String createSize(Model model){
+public String createSizeGet(Model model){
    model.addAttribute("sizeDTO", new SizeDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/size-create";
+}
+@PostMapping("/admin/size/create")
+public String createSizePost(@ModelAttribute("sizeDTO") SizeDTO sizeDTO){
+   Size size = new Size();
+    size.setCategory(categoryService.getCategoryById(sizeDTO.getCategoryId()).get());
+    size.setSize(sizeDTO.getSize());
+    sizeService.addSize(size);
+    return "redirect:/admin/size";
+}
+
+@GetMapping("/admin/size/delete/{id}")
+public String deleteSize(@PathVariable int id){
+    sizeService.removeSizeById(id);
+    return "redirect:/admin/size";
+
+}
+
+
+
+@GetMapping("/admin/size/update/{id}")
+public String updateSize(@PathVariable int id, Model model) {
+    Optional<Size> sizeOptional = sizeService.getSizeById(id);
+    if (sizeOptional.isPresent()) {
+        Size size = sizeOptional.get();
+        SizeDTO sizeDTO = new SizeDTO();
+        sizeDTO.setId(size.getId());
+        sizeDTO.setCategoryId(size.getCategory().getId());
+        sizeDTO.setSize(size.getSize());
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("sizeDTO", sizeDTO);
+        model.addAttribute("size", size); // add the existing size to the model
+        return "/backend-views/size-create"; // return the size view
+    } else {
+        return "404";
+    }
 }
 
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
