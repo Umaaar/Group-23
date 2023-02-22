@@ -8,7 +8,7 @@ import com.example.KingsMen.service.ProductService;
 import com.example.KingsMen.service.CategoryService;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.KingsMen.model.Product;
-
+import java.util.List;
 
 
 
@@ -24,10 +24,21 @@ public class ProductsController {
 
     @GetMapping("/product")
     public String getProductsPage(Model model) {
-        model.addAttribute("products", productService.getAllProduct());
-        model.addAttribute("categories", catagoryService.getAllCategory());
-        return "/frontend-views/product-page";
-    }
+      List<Product> products = productService.getAllProduct();
+      model.addAttribute("products", products);
+      model.addAttribute("categories", catagoryService.getAllCategory());
+      return "/frontend-views/product-page";
+  }
+
+      @GetMapping("/product/{categoryId}")
+      public String getProductsByCategory(Model model, @PathVariable("categoryId") int categoryId) {
+          List<Product> products = productService.getProductsByCategoryId(categoryId);
+          model.addAttribute("products", products);
+          model.addAttribute("categories", catagoryService.getAllCategory());
+          return "/frontend-views/product-page";
+      }
+
+
 
     @GetMapping("/product/product-detail/{id}")
     public String getProductDetailPage(Model model, @PathVariable("id") Long id) {
