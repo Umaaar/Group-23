@@ -89,6 +89,7 @@ public String products(Model model){
 public String createProducts(Model model){
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
+   model.addAttribute("sizes", sizeService.getAllSizes());
    return "/backend-views/products-create";
 }
 /*@PostMapping("/admin/products/create")

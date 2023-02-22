@@ -213,7 +213,6 @@
                             </div>
 
                             <div class="mb-3">
-                               
                                 <label for="category">Select Category</label>
                                 <select class="form-control" th:field="*{categoryId}" id="category" name="category">
                                     <option th:each="category :${categories}"
@@ -274,6 +273,17 @@
                                     <option value="XXL">XXL</option>
                                 </select>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="category">Select Size</label>
+                                <select class="form-control" th:field="*{sizeId}" id="size" name="size">
+                                    <option th:each="size :${size}"
+                                            th:value="${size.id}"
+                                            th:text="${size.size}"
+                                    >
+                                </select>
+                            </div>
+
 
                         <div>
                             <button type="submit" class="btn btn-primary">Submit</button>

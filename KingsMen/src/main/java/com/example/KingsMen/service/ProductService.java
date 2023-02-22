@@ -33,6 +33,10 @@ public class ProductService {
             return productRepository.findAllByCategory_Id(categoryId);
     }
 
+    public List<Product> getProductsBySizeId(long sizeId) {
+        return productRepository.findAllBySize_Id(sizeId);
+    }
+
     public void addProduct(Product product) {
         productRepository.save(product);
     }

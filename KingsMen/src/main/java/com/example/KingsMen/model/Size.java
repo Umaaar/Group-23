@@ -9,6 +9,7 @@ import lombok.Data;
 public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "size_id")
     private Long id;
     private String size;
     @ManyToOne(fetch =  FetchType.LAZY)
