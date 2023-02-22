@@ -9,6 +9,7 @@
   <link rel="stylesheet" th:href="@{/css/style.css}"/> -->
   
   <title>Product Detail Page</title>
+</head>
   
   <!-- Bread crumb-->
   <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
@@ -22,27 +23,18 @@
   
 
 
-      <div class="container-fluid" style="min-height: 100%;">
-          <div class="row">
-            <div class="col">
-
-              </head>
-              <body>
-
-          <!--Product Image -->
+  <!--Product Image -->
+  <section class="container">
+    <div class="row mt-5">
+        <div class="col-lg-5 col-md-10 col-12">
           <img th:src="@{/images/productImage/{imageName}(imageName=${product.imageName})}" class="img-fluid" alt="Product Image">
         </div>
-          
-        
-        
-        <!--Product Details --> 
-          <div class="col-md-6 bg-light" style="padding-top: 10%;">
-            <h2 class="pt-10 font-weight-bold" th:text="${product.name}"></h2>
-            <p class="pb-4 text-muted" th:text="'£' + ${product.price}"></p>
-            <p class="my-4" th:text="${product.description}"></p>
-           
-            <form class="form">
-              <select class="custom-select mb-3 mt-3">
+        <div class ="col-lg-6 col-md-12 col-12 bg-light">
+              <h2 class="pt-3 font-weight-bold" th:text="${product.name}"></h2>
+              <p class="pb-4 text-muted" th:text="'£' + ${product.price}"></p>
+  
+                <form class="form">
+                    <select class="custom-select mb-3">
                       <option selected>Sizes:</option>
                       <option value="1">XL</option>
                       <option value="2">L</option>
@@ -50,9 +42,9 @@
                       <option value="4">S</option>
                       <option value="5">XS</option>
                     </select>
-                    
+  
                     <select class="custom-select mb-3">
-                      <option selected>Quantity:</option>
+                        <option selected>Quantity:</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -63,18 +55,28 @@
                         <option value="7">8</option>
                         <option value="7">9</option>
                       </select>
-                      
-                      
-                    </form>
-                    
-                    <form action="" method="post"><input type="hidden"
-                      value="" name="id"><button type="submit"
-                      class="btn btn-dark btn-block text-center font-weight-light">ADD TO BASKET</button>
-                    </form>
-          </div>
+  
+  
+                </form>
+  
+                <form action="" method="post"><input type="hidden"
+                  value="" name="id"><button type="submit"
+                  class="btn btn-block btn-dark font-weight-light">Add to basket</button>
+            <h3 class="mt-5 mb-3">Details</h4>
+            <span>
+              <p class="my-4 font-weight-light" th:text="${product.description}"></p>
+            </span>
         </div>
-      </div>    
-      
+  
+  
+  
+  
+    </div>
+  </section>
+  
 
 </body>
+
+
+
 </html>
