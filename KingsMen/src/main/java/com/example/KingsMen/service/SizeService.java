@@ -1,7 +1,7 @@
 package com.example.KingsMen.service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +24,12 @@ public class SizeService {
         sizeRepository.save(size);
     }
 
-    public void removeSizeById(int id) {
+    public void removeSizeById(long id) {
         sizeRepository.deleteById(id);
     }
 
-    public Optional<Size> getSizeById(int id) {
-        return sizeRepository.findById(id);
+    public Size getSizeById(Long id) {
+        return sizeRepository.findById(id).get();
     }
 
     public List<Size> getSizesByCategoryId(int categoryId) {
