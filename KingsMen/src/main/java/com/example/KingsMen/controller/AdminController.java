@@ -89,6 +89,7 @@ public String products(Model model){
 public String createProducts(Model model){
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
+   model.addAttribute("sizes", sizeService.getAllSizes());
    return "/backend-views/products-create";
 }
 /*@PostMapping("/admin/products/create")
@@ -157,22 +158,23 @@ public String deleteSize(@PathVariable int id){
 
 }
 
-
-
 @GetMapping("/admin/size/update/{id}")
-public String updateSize(@PathVariable int id, Model model) {
-        // get the size from the database
-        Size size = sizeService.getSizeById(id).get();
-        SizeDTO sizeDTO = new SizeDTO();
-        sizeDTO.setId(size.getId());
-        sizeDTO.setCategoryId(size.getCategory().getId());
-        sizeDTO.setSize(size.getSize());
-        model.addAttribute("categories", categoryService.getAllCategory());
-        model.addAttribute("sizeDTO", sizeDTO); 
-        model.addAttribute("size", size); 
-        return "/backend-views/size-create"; 
+public String updateSizeGet(@PathVariable Long id, Model model){
+Size size = sizeService.getSizeById(id);
+SizeDTO sizeDTO = new SizeDTO();
+sizeDTO.setId(size.getId());
+sizeDTO.setCategoryId(size.getCategory().getId());
+sizeDTO.setSize(size.getSize());
+model.addAttribute("categories", categoryService.getAllCategory());
+model.addAttribute("sizeDTO", sizeDTO);
+return "/backend-views/size-create";
 
+    
 }
+
+
+
+
 
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
 

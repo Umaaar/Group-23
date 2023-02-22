@@ -124,6 +124,24 @@
                   </ul>
               </div>
           </li>
+
+           <!-- Sizing -->
+           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#sizes" aria-expanded="false"
+                aria-controls="sizes">
+                <i class="mdi mdi-android-studio menu-icon"></i>
+            
+                <span class="menu-title">Sizing</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="sizes">
+                <ul class="nav flex-column ">
+                    <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/size/create}">Add Sizing</a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/size}">View Sizing</a></li>
+                </ul>
+            </div>
+        </li>
   
   
           <!-- Products -->
@@ -195,7 +213,6 @@
                             </div>
 
                             <div class="mb-3">
-                               
                                 <label for="category">Select Category</label>
                                 <select class="form-control" th:field="*{categoryId}" id="category" name="category">
                                     <option th:each="category :${categories}"
@@ -256,6 +273,17 @@
                                     <option value="XXL">XXL</option>
                                 </select>
                             </div>
+
+                            <div class="mb-3">
+                                <label for="category">Select Size</label>
+                                <select class="form-control" th:field="*{sizeId}" id="size" name="size">
+                                    <option th:each="size :${size}"
+                                            th:value="${size.id}"
+                                            th:text="${size.size}"
+                                    >
+                                </select>
+                            </div>
+
 
                         <div>
                             <button type="submit" class="btn btn-primary">Submit</button>

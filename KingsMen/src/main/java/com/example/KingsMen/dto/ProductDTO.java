@@ -12,7 +12,7 @@ public class ProductDTO {
     private int quantity;
     private int stock;
     private String imageName;
-    private String size;
+    private long sizeId;
     
 
 }

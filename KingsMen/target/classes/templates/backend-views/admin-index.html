@@ -124,6 +124,25 @@
                   </ul>
               </div>
           </li>
+
+           <!-- Sizing -->
+           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#sizes" aria-expanded="false"
+                aria-controls="sizes">
+                <i class="mdi mdi-android-studio menu-icon"></i>
+            
+                <span class="menu-title">Sizing</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="sizes">
+                <ul class="nav flex-column ">
+                    <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/size/create}">Add Sizing</a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/size}">View Sizing</a></li>
+                </ul>
+            </div>
+        </li>
+
   
   
           <!-- Products -->
@@ -148,8 +167,41 @@
     <!-- End Sidebar -->
     <div class="main-panel">
       <div class="content-wrapper">
-       <!--@yield('content') --> 
-        <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
+        <div class="me-md-3 me-xl-5">
+            <h2>Dashboard, </h2>
+            <p class="mb-md-0">Your analytics dashboard.</p>
+            <hr>
+           </div>
+           <div class="row">
+        <div class="col-md-3">
+            <div class="card card-body bg-primary text-white mb-3">
+                <label>View Orders</label>
+                <a href="/admin/orders" class="text-white">manage</a>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card card-body bg-success text-white mb-3">
+                <label>View Categories</label>
+                <a href="/admin/categories" class="text-white">manage</a>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card card-body bg-warning text-white mb-3">
+                <label>View Products</label>
+                <a href="/admin/products" class="text-white">manage</a>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card card-body bg-info text-white mb-3">
+                <label>View Customers</label>
+             
+                <a href="/admin/categories" class="text-white">manage</a>
+            </div>
+        </div>
+         </div>
       </div>
     </div>
   </div>
