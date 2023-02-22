@@ -3,6 +3,7 @@ package com.example.KingsMen.service;
 import com.example.KingsMen.model.Product;
 import com.example.KingsMen.repository.ProductRepository;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,31 +19,25 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Product getProductById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    public void removeProductById(Long id) {
+        productRepository.deleteById(id);
+    }
+
+
+    public Optional<Product> getProductById(Long id) {
+        return productRepository.findById(id);
     }
     
 
-        public List<Product> getProductsByCategoryId(int categoryId) {
+    public List<Product> getProductsByCategoryId(int categoryId) {
             return productRepository.findAllByCategory_Id(categoryId);
-        }
-        
-
-    /*public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-    public Product findById(long id) {
-        return productRepository.findById(id);
     }
 
- 
-    public void save(Product product) {
+    public void addProduct(Product product) {
         productRepository.save(product);
     }
 
+        
 
-    public List<Product> findAllByOrderByIdAsc() {
-        return productRepository.findAllByOrderByIdAsc();
-    }*/
 
 }

@@ -159,8 +159,8 @@
                     </div>
                     <div class="card-body">
                         <form th:action="@{/admin/size/create}" method="post" th:object="${sizeDTO}" enctype="multipart/form-data">
+                            <input type="hidden" name="id"  th:field="*{id}">
                             <div class="form-group row">
-                                <input type="hidden" name="id"  th:field="*{id}">
                                 <div class="col-md-6 mb-3">
                                     <label for="category">Select Category</label>
                                     <select class="form-control" th:field="*{categoryId}" id="category" name="category">
@@ -172,7 +172,7 @@
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label>Size</label>
+                                    <label for="size">Size</label>
                                     <input type="text" class="form-control" required th:field="*{size}" name="size" />
 
                                 </div>
