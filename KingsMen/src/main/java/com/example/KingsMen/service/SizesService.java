@@ -6,21 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.KingsMen.repository.SizeRepository;
-import com.example.KingsMen.model.Size;
-
+import com.example.KingsMen.model.Sizes;
+import com.example.KingsMen.repository.SizesRepository;
 @Service
-public class SizeService {
-
+public class SizesService {
+    
     @Autowired
-  
-    private SizeRepository sizeRepository;
+    private SizesRepository sizeRepository;
 
-    public List<Size> getAllSizes() {
+    public List<Sizes> getAllSizes() {
         return sizeRepository.findAll();
     }
 
-    public void addSize(Size size) {
+    public void addSize(Sizes size) {
         sizeRepository.save(size);
     }
 
@@ -28,11 +26,11 @@ public class SizeService {
         sizeRepository.deleteById(id);
     }
 
-    public Size getSizeById(Long id) {
+    public Sizes getSizeById(long id) {
         return sizeRepository.findById(id).get();
     }
 
-    public List<Size> getSizesByCategoryId(int categoryId) {
+    public List<Sizes> getSizesByCategoryId(int categoryId) {
         return sizeRepository.findAllByCategory_Id(categoryId);
     }
     

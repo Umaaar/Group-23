@@ -1,12 +1,15 @@
 package com.example.KingsMen.controller;
 
 import com.example.KingsMen.dto.ProductDTO;
-import com.example.KingsMen.dto.SizeDTO;
+import com.example.KingsMen.dto.SizesDTO;
+//import com.example.KingsMen.dto.SizeDTO;
 import com.example.KingsMen.model.Category;
-import com.example.KingsMen.model.Size;
+import com.example.KingsMen.model.Sizes;
+//import com.example.KingsMen.model.Size;
 import com.example.KingsMen.service.CategoryService;
 import com.example.KingsMen.service.ProductService;
-import com.example.KingsMen.service.SizeService;
+//import com.example.KingsMen.service.SizeService;
+import com.example.KingsMen.service.SizesService;
 
 import java.util.Optional;
 
@@ -29,8 +32,8 @@ public class AdminController {
     @Autowired
     CategoryService categoryService;
 
-    @Autowired
-    SizeService sizeService;
+   @Autowired
+    SizesService sizeService;
 
    @GetMapping("/admin")
    public String adminHome(){
@@ -138,13 +141,13 @@ public String sizes(Model model){
 
 @GetMapping("/admin/size/create")
 public String createSizeGet(Model model){
-   model.addAttribute("sizeDTO", new SizeDTO());
+   model.addAttribute("sizeDTO", new SizesDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/size-create";
 }
 @PostMapping("/admin/size/create")
-public String createSizePost(@ModelAttribute("sizeDTO") SizeDTO sizeDTO){
-   Size size = new Size();
+public String createSizePost(@ModelAttribute("sizeDTO") SizesDTO sizeDTO){
+   Sizes size = new Sizes();
     size.setCategory(categoryService.getCategoryById(sizeDTO.getCategoryId()).get());
     size.setSize(sizeDTO.getSize());
     sizeService.addSize(size);
@@ -160,8 +163,8 @@ public String deleteSize(@PathVariable int id){
 
 @GetMapping("/admin/size/update/{id}")
 public String updateSizeGet(@PathVariable Long id, Model model){
-Size size = sizeService.getSizeById(id);
-SizeDTO sizeDTO = new SizeDTO();
+Sizes size = sizeService.getSizeById(id);
+SizesDTO sizeDTO = new SizesDTO();
 sizeDTO.setId(size.getId());
 sizeDTO.setCategoryId(size.getCategory().getId());
 sizeDTO.setSize(size.getSize());
