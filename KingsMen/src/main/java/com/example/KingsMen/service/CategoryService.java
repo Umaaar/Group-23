@@ -13,18 +13,18 @@ import java.util.Optional;
 @Service
 public class CategoryService {
     @Autowired
-    CategoryRepository catagoryRepository;
+    CategoryRepository categoryRepository;
     public List<Category> getAllCategory(){
 
-        return catagoryRepository.findAll();
+        return categoryRepository.findAll();
     }
     public void addCategory(Category category){
-        catagoryRepository.save(category);
+        categoryRepository.save(category);
     }
 
-    public void removeCategoryById(int id){ catagoryRepository.deleteById(id);}
+    public void removeCategoryById(int id){ categoryRepository.deleteById(id);}
     public Optional<Category> getCategoryById(int id){
-        return catagoryRepository.findById(id);
+        return categoryRepository.findById(id);
     }
 
  

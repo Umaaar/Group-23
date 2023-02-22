@@ -9,6 +9,7 @@ import com.example.KingsMen.service.CategoryService;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.KingsMen.model.Product;
 import java.util.List;
+import java.util.Optional;
 
 
 
@@ -42,7 +43,7 @@ public class ProductsController {
 
     @GetMapping("/product/product-detail/{id}")
     public String getProductDetailPage(Model model, @PathVariable("id") Long id) {
-        Product product = productService.getProductById(id);
+        Optional<Product> product = productService.getProductById(id);
         model.addAttribute("product", product);
         return "/frontend-views/product-detail-page";
     }
