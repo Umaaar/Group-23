@@ -41,12 +41,12 @@ public class ProductsController {
 
 
 
-    @GetMapping("/product/product-detail/{id}")
-    public String getProductDetailPage(Model model, @PathVariable("id") Long id) {
-        Optional<Product> product = productService.getProductById(id);
-        model.addAttribute("product", product);
-        return "/frontend-views/product-detail-page";
-    }
+      @GetMapping("/product/product-detail/{id}")
+      public String getProductDetailPage(Model model, @PathVariable("id") Long id) {
+          Optional<Product> product = productService.getProductById(id);
+          model.addAttribute("product", product.orElse(null));
+          return "frontend-views/product-detail-page";
+      }
 }
 
 
