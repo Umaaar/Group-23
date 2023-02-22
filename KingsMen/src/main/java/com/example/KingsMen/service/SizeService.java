@@ -12,10 +12,19 @@ import com.example.KingsMen.model.Size;
 public class SizeService {
 
     @Autowired
-    static
-    SizeRepository sizeRepository;
+  
+    private SizeRepository sizeRepository;
+
     public List<Size> getAllSizes() {
         return sizeRepository.findAll();
     }
+
+    public void addSize(Size size) {
+        sizeRepository.save(size);
+    }
+
+    public Size getSizesById(int id) {
+        return sizeRepository.findById(id).orElse(null);
+}
     
 }

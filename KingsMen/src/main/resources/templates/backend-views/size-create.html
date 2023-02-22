@@ -159,7 +159,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/admin/size/create}" method="post" th:object="${sizeDTO}">
+                        <form th:action="@{/admin/size/create}" method="post" th:object="${sizeDTO}" enctype="multipart/form-data">
                             <div class="form-group row">
                                 <input type="hidden" name="id"  th:field="*{id}">
                                 
@@ -172,16 +172,12 @@
                                     >
                                 </select>
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Size</label>
+                                    <input type="text" class="form-control" required th:field="*{size}" name="size" />
 
-                                <label>Sizes</label>
-                                <label for="size">Select Size</label>
-                                <select class="form-control" id="size" name="size">
-                                    <option value="S"></option>
-                                    <option value="M"></option>
-                                    <option value="L"></option>
-                                    <option value="XL"></option>
-                                    <option value="XXL"></option>
-                                </select>
+                                </div>
+
                                 </div>
 
                                 <div class="col-md-12 mb-3">

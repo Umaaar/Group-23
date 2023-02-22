@@ -97,8 +97,9 @@ public String createProducts(Model model){
 
 /* --------------------------------------------------- Size CRUD Mapping --------------------------------------------------------*/
 
+
 @GetMapping("/admin/size")
-public String size(Model model){
+public String sizes(Model model){
    model.addAttribute("size", sizeService.getAllSizes());
    return "/backend-views/size";
 }
@@ -109,9 +110,6 @@ public String createSize(Model model){
    model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/size-create";
 }
-
-
-
 
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
 
