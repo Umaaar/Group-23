@@ -22,7 +22,7 @@ public class CartController {
         return "redirect:/shop";
     }
     @GetMapping("/cart")
-    public String adminHome(){
+    public String cartPage(){
         return "/frontend-views/cart-page";
     }
     @GetMapping("/cart")
