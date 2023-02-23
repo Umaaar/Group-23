@@ -25,7 +25,7 @@ public class CartController {
     public String cartPage(){
         return "/frontend-views/cart-page";
     }
-    @GetMapping("/cart")
+    @GetMapping("/cart/view")
     public String cartGet(Model model) {
         model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
