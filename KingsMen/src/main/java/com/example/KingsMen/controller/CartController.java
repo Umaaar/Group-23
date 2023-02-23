@@ -21,7 +21,10 @@ public class CartController {
         GlobalData.cart.add(productService.getProductById(id).get());
         return "redirect:/shop";
     }
-
+    @GetMapping("/cart")
+    public String adminHome(){
+        return "/frontend-views/cart-page";
+    }
     @GetMapping("/cart")
     public String cartGet(Model model) {
         model.addAttribute("cartCount", GlobalData.cart.size());
