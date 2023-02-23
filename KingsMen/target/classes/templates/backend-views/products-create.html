@@ -265,11 +265,11 @@
                         
 
                             <div class="mb-3">
-                                <label for="category">Select Size</label>
+                                <label for="size">Select Size</label>
                                 <select class="form-control" th:field="*{sizeId}" id="size" name="size">
-                                    <option th:each="size :${size}"
-                                            th:value="${size.id}"
-                                            th:text="${size.size}"
+                                    <option th:each="size :${sizes}"
+                                            th:value="${sizes.size_id}"
+                                            th:text="${sizes.size}"
                                     >
                                 </select>
                             </div>

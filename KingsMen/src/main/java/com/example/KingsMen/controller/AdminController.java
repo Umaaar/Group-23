@@ -2,13 +2,13 @@ package com.example.KingsMen.controller;
 
 import com.example.KingsMen.dto.ProductDTO;
 import com.example.KingsMen.dto.SizesDTO;
-//import com.example.KingsMen.dto.SizeDTO;
+
 import com.example.KingsMen.model.Category;
 import com.example.KingsMen.model.Sizes;
-//import com.example.KingsMen.model.Size;
+
 import com.example.KingsMen.service.CategoryService;
 import com.example.KingsMen.service.ProductService;
-//import com.example.KingsMen.service.SizeService;
+
 import com.example.KingsMen.service.SizesService;
 
 import java.util.Optional;
