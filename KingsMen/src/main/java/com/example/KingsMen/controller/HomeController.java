@@ -16,7 +16,7 @@ public class HomeController {
         return "/frontend-views/customer-dashboard.html";
     }
 
-    @GetMapping("/")
+    @GetMapping("/Contact-us")
     public String ContactPage() {
         return "/frontend-views/contact-details";
     }
