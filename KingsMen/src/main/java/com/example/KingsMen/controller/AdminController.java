@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class AdminController {
 
-    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images";
+    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/productImage";
     @Autowired
     ProductService productService;
 
