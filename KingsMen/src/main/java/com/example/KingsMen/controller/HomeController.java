@@ -8,7 +8,11 @@ public class HomeController {
 
     @GetMapping("")
     public String homePage() {
+<<<<<<< Updated upstream
         return "frontend-views/index";
+=======
+        return "/frontend-views/index";
+>>>>>>> Stashed changes
     }
 
     @GetMapping("/CustomerDashboard")
