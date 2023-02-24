@@ -271,5 +271,27 @@ p.about-us-content {
 /* end of about us css */
 
 /* Customer Dashboard css */
+.custdash-OuterDiv {
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+    margin-top: 5%;
+}
 
+.custdash-InnerDiv {
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.custdash-button {
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    background-color: red;
+    transition: background 0.5s ease-in-out;
+}
+
+.custdash-button:hover {
+    background: blue;
+}
 /* End of Customer Dashboard css */
