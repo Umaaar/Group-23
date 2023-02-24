@@ -33,8 +33,6 @@ public class ProductService {
             return productRepository.findAllByCategory_Id(categoryId);
     }
 
-
-
     public void addProduct(Product product) {
         productRepository.save(product);
     }
