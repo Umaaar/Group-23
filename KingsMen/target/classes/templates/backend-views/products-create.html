@@ -266,11 +266,21 @@
 
                             <div class="mb-3">
                                 <label for="size">Select Size</label>
-                                <select class="form-control" th:field="*{sizeId}" id="size" name="size">
-                                    <option th:each="size :${sizes}"
-                                            th:value="${sizes.size_id}"
-                                            th:text="${sizes.size}"
-                                    >
+                                <select class="form-control" required th:field="*{size}" id="size" name="size">
+                                    <option>--select a size--</option>
+                                    <option value="">S</option>
+                                    <option value="">M</option>
+                                    <option value="">L</option>
+                                    <option value="">XL</option>
+                                    <option value="">XXL</option>
+                                    <option value="">7UK</option>
+                                    <option value="">8UK</option>
+                                    <option value="">9UK</option>
+                                    <option value="">10UK</option>
+                                    <option value="">11UK</option>
+                                    <option value="">12UK</option>
+                                    <option value="">13UK</option>
+                                    <option value="">Onesize</option>
                                 </select>
                             </div>
 

@@ -196,7 +196,7 @@
                                         <td th:text="${iStat.index + 1}">1</td>
                                         <td th:text="${product.name}">name</td>
                                         <td th:text="${product.category.name}">category</td>
-                                        <td><img src="" height="100px" width="100px"  th:src="@{${'/productImages/' + product.imageName}}"></td>
+                                        <td><img src="" height="100px" width="100px"  th:src="@{${'static/images/productImages/' + product.imageName}}"></td>
                                         <td th:text="${product.size}">size</td>
                                         <td th:text="${product.price}">price</td>
                                         <td th:text="${product.stock}">quantity</td>
@@ -252,7 +252,9 @@
 <script src="/static/admin-assets/js/dataTables.bootstrap4.js"></script>-->
 <script th:src="@{/admin-assets/js/jquery.dataTables.js}" src="/static/admin-assets/js/jquery.dataTables.js"></script>
 
+<script>
 
+</script>
 
 
 </body>
