@@ -271,5 +271,14 @@ p.about-us-content {
 /* end of about us css */
 
 /* Customer Dashboard css */
+.custdash-OuterDiv {
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+    margin-top: 5%;
+}
 
+.custdash-InnerDiv {
+
+}
 /* End of Customer Dashboard css */
