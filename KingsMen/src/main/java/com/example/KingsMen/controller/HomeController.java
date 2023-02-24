@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("")
+    @GetMapping("/")
     public String homePage() {
         return "/frontend-views/index";
     }
@@ -20,4 +20,21 @@ public class HomeController {
     public String ContactPage() {
         return "/frontend-views/contact-details";
     }
+
+    @GetMapping("/About-us")
+    public String AboutPage() {
+        return "/frontend-views/about-us";
+    }
+
+    @GetMapping("/Login")
+    public String LoginPage() {
+        return "/frontend-views/login";
+    }
+
+    @GetMapping("/Register")
+    public String RegisterPage() {
+        return "/frontend-views/register";
+    }
+
+
 }
