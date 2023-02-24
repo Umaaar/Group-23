@@ -1,16 +1,15 @@
 package com.example.KingsMen.controller;
 
 import com.example.KingsMen.dto.ProductDTO;
-import com.example.KingsMen.dto.SizesDTO;
-
 import com.example.KingsMen.model.Category;
-import com.example.KingsMen.model.Sizes;
-
+import com.example.KingsMen.model.Product;
 import com.example.KingsMen.service.CategoryService;
 import com.example.KingsMen.service.ProductService;
 
-import com.example.KingsMen.service.SizesService;
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +19,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class AdminController {
 
-    //public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/productImage";
-
+    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images";
     @Autowired
     ProductService productService;
 
     @Autowired
     CategoryService categoryService;
 
-   @Autowired
-    SizesService sizeService;
 
    @GetMapping("/admin")
    public String adminHome(){
@@ -92,10 +90,10 @@ public String products(Model model){
 public String createProducts(Model model){
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
-   model.addAttribute("sizes", sizeService.getAllSizes());
    return "/backend-views/products-create";
+
 }
-/*@PostMapping("/admin/products/create")
+@PostMapping("/admin/products/create")
 public String createProductsPost(@ModelAttribute("productDTO") ProductDTO productDTO,
                                 @RequestParam("productImage") MultipartFile file,
                                 @RequestParam("imgName") String imgName) throws IOException{
@@ -119,7 +117,25 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
     
     return "redirect:/admin/products";
                                  
-}  */                      
+} 
+
+@GetMapping("/admin/products/delete/{id}")
+public String deleteProduct(@PathVariable long id){
+    productService.removeProductById(id);
+    return "redirect:/admin/products";
+}
+
+@GetMapping("/admin/products/update/{id}")
+public String editProduct(@PathVariable long id, Model model){
+    Optional<Product> product = productService.getProductById(id);
+    if(product.isPresent()){
+        model.addAttribute("productDTO", product.get());
+        model.addAttribute("categories", categoryService.getAllCategory());
+        return "/backend-views/products-create";
+    }else{
+        return "404";
+    }
+}
 
 
 
@@ -133,7 +149,7 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
 /* --------------------------------------------------- Size CRUD Mapping --------------------------------------------------------*/
 
 
-@GetMapping("/admin/size")
+/*@GetMapping("/admin/size")
 public String sizes(Model model){
    model.addAttribute("size", sizeService.getAllSizes());
    return "/backend-views/size";
@@ -174,9 +190,7 @@ return "/backend-views/size-create";
 
     
 }
-
-
-
+*/
 
 
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
