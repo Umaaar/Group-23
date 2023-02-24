@@ -10,4 +10,14 @@ public class HomeController {
     public String homePage() {
         return "index";
     }
+
+    @GetMapping("/CustomerDashboard")
+    public String dashboard() {
+        return "/frontend-views/customer-dashboard.html";
+    }
+
+    @GetMapping("/Contact-us")
+    public String ContactPage() {
+        return "/frontend-views/contact-details";
+    }
 }

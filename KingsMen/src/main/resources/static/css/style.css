@@ -294,4 +294,11 @@ p.about-us-content {
 .custdash-button:hover {
     background: blue;
 }
+
+/*.custdash-p {
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    margin: 5px;
+}*/
 /* End of Customer Dashboard css */

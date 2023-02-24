@@ -15,6 +15,7 @@
 #order-table th {
     width: 20%;
     font-size: 140%;
+    text-align: center;
 }
 th{
     text-align: center;
@@ -268,3 +269,36 @@ p.about-us-content {
 }
 
 /* end of about us css */
+
+/* Customer Dashboard css */
+.custdash-OuterDiv {
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.custdash-InnerDiv {
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.custdash-button {
+    border-radius: 10px;
+    padding: 5px;
+    color: white;
+    background-color: red;
+    transition: background 0.5s ease-in-out;
+}
+
+.custdash-button:hover {
+    background: blue;
+}
+
+/*.custdash-p {
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    margin: 5px;
+}*/
+/* End of Customer Dashboard css */
