@@ -82,4 +82,11 @@ public class Product {
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
+
+    public int getQuantity() {
+        return 0;
+    }
+
+    public void setQuantity(int quantity) {
+    }
 }

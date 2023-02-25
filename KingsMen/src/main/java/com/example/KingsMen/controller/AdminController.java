@@ -120,6 +120,31 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
                                  
 } 
 
+@GetMapping("/admin/products/update/{id}")
+public String updateProductGet(@PathVariable long id, Model model) {
+Product product = productService.getProductById(id).get();
+ProductDTO productDTO = new ProductDTO();
+productDTO.setId(product.getId());
+productDTO.setName(product.getName());
+productDTO.setCategoryId(product.getCategory().getId());
+productDTO.setDescription(product.getDescription());
+productDTO.setPrice(product.getPrice());
+productDTO.setStock(product.getStock());
+productDTO.setSize(product.getSize());
+productDTO.setImageName(product.getImageName());
+
+model.addAttribute("productDTO", productDTO);
+model.addAttribute("categories", categoryService.getAllCategory());
+
+    return "/backend-views/products-create";
+}
+
+@GetMapping("/admin/products/delete/{id}")
+public String deleteProduct(@PathVariable long id){
+    productService.removeProductById(id);
+    return "redirect:/admin/products";
+}
+
 
 
 
