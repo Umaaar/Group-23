@@ -17,7 +17,7 @@
       <li class="breadcrumb-item font-weight-light"><a href="/" class="text-secondary text-decoration-none">Home</a></li>
       <li class="breadcrumb-item font-weight-light"><a href="/product" class="text-secondary text-decoration-none">Product</a></li>
       <li th:if="${product}" class="breadcrumb-item font-weight-light"><a th:href="@{'/product/' + ${product.category.id}}" th:text="${product.category.name}" class="text-secondary text-decoration-none"></a></li>
-      <li th:if="${product}" class="breadcrumb-item active font-weight-bold" aria-current="page" th:text="${product.name}" ></li>
+      <li th:if="                                 " class="breadcrumb-item active font-weight-bold" aria-current="page" th:text="${product.name}" ></li>
     </ol>
   </nav>
   
