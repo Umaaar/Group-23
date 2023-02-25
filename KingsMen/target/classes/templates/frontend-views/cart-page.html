@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+</head>
+    <body>
+    <script id="replace_with_navbar" src="../../static/js/navbar.js"></script>
+    <script  id="replace_with_navbar" th:href="@{/js/navbar.js}">
+    </script>
+        <div class="cart-padding">
+            <h1>My Cart</h1>
+            <hr>
+            <br>
+            <br>
+            <div class = "row">
+                <div class="col-md-9">
+                    <table class="table table-hover" id="order-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="cart-item">
+                            <td><img src="https://www.slaters.co.uk/media/catalog/product/cache/069f36cb500929f7239f8512ba884055/l/o/look_33_-_002036285011-bi-02.jpg"><label class="item-name">Slim Fit Blue Textured Jersey Blazer</label></td>
+                            <td>£79</td>
+                            <td><input type="button" value="-" class="quantity-btn" field="quantity"/>
+                                <input type="text" name="quantity" value='0' class="item-quantity"/>
+                                <input type="button" value="+" class="quantity-btn" field="quantity"/>
+                            </td>
+                            <td>£79</td>
+                            <td class="remove-btn"><strong>X</strong></td>
+                        </tr>
+                        <tr class="cart-item">
+                            <td><img src="https://www.slaters.co.uk/media/catalog/product/cache/069f36cb500929f7239f8512ba884055/l/o/look_33_-_002036285011-bi-02.jpg"><label class="item-name">Slim Fit Blue Textured Jersey Blazer</label></td>
+                            <td>£79</td>
+                            <td><input type="button" value="-" class="quantity-btn" field="quantity"/>
+                                <input type="text" name="quantity" value='0' class="item-quantity"/>
+                                <input type="button" value="+" class="quantity-btn" field="quantity"/>
+                            </td>
+                            <td>£79</td>
+                            <td class="remove-btn"><strong>X</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3 col-md-shadow-sm bg-white p-3" id="total-box">
+                    <h3 class="cart-total">Total: £_.__</h3>
+                    <div class = "center">
+                        <button class="pay-button ">Pay & Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class ="footer">
+            <div class = "container">
+                
+                <div class = "row">
+                    <div class="footer-col col-3">
+
+                        <h4>CONTACT US:</h4>
+                        <ul>
+                        <p>PHONE: 0121 245 3487</p>
+                        <p>EMAIL: INFO@KINGSMAN.CO.UK</p>
+                        <p>ADDRESS: UNIT 12, HOLT STREET, B45 6GF</p>
+                    </ul>
+                        
+
+
+                    </div>
+                    <div class="footer-col col-3">
+                        <h4>OUR SERVICES:</h4>
+                            <ul>
+                            <li><a href="#">HOME PAGE</a></li>
+                            <li><a href="http://127.0.0.1:5500/KingsMen/src/main/resources/templates/frontend-views/product-page.html">PRODUCTS</a></li>
+                            <li><a href="http://127.0.0.1:5500/KingsMen/src/main/resources/templates/frontend-views/contact-details.html">CONTACT US</a></li>
+                            <li><a href="file:///C:/Users/Haffy/OneDrive/CS%20year%202/Term%202/Team%20Project%202/about%20us.html">About Us</a></li>
+                            <li><a href="http://127.0.0.1:5500/KingsMen/src/main/resources/templates/frontend-views/login.html">LOG IN</a></li>
+                            </ul>
+                        </div>
+                     
+                    <div class="footer-col col-3">
+                        <h4>GET HELP:</h4>
+                        <ul>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">SHIPPING</a></li>
+                        <li><a href="#">PAYMENT OPTIONS</a></li>
+                        <li><a href="#">RETURNS</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col col-3">
+                        <h4>FOLLOW US:</h4>
+                        <div class="social-media">
+                            <ul>
+                                <li><a href="https://en-gb.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.linkedin.com/home"><i class="fab fa-linkedin"></i></a></li>
+                            </ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+
