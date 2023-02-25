@@ -1,65 +1,88 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Kingsmen Login</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" th:src="@{/login-assets/css/style.css}" href="/static/login-assets/css/style.css">
-
-</head>
-<body class="img js-fullheight" style="background-image: url(images/wp5208827.jpg);">
-<section class="ftco-section">
-    <div class="container">
-
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="login-wrap p-0">
-                    <h3 class="mb-4 text-center">Have an account?</h3>
-                    <form action="#" class="signin-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Username" required>
-                        </div>
-                        <div class="form-group">
-                            <input id="password-field" type="password" class="form-control" placeholder="Password" required>
-                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>
-                        </div>
-                        <!-- <div class="form-group d-md-flex">
-                            <div class="w-50">
-                                <label class="checkbox-wrap checkbox-primary">Remember Me
-                                              <input type="checkbox" checked>
-                                              <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                        <div class="w-50 text-md-right">
-                                            <a href="#" style="color: #fff">Forgot Password</a>
-                                        </div>
-                        </div> -->
-                    </form>
-                    <p class="w-100 text-center">&mdash; Don't have an account Register<a href=""> Here</a> ! &mdash;</p>
-
-                    <!-- <div class="social d-flex text-center">
-                        <a href="#" class="px-2 py-2 mr-md-1 rounded"><span class="ion-logo-facebook mr-2"></span> Facebook</a>
-                        <a href="#" class="px-2 py-2 ml-md-1 rounded"><span class="ion-logo-twitter mr-2"></span> Twitter</a>
-                    </div> - -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        </head>
+    <border>
+    <body>
+    
+        <div class="login-box">
+            <img src="Kingsman.png" alt="Kingsman" width="200" height="150">
+            <form>
+                <div class ="user-box">
+                    <input type="text" name="" required="" />
+                    <label>Email</label>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<script th:src="@{/login-assets/js/jquery.min.js}" src="/static/login-assets/js/jquery.min.js"></script>
-<script th:src="@{/login-assets/js/popper.js}" src="/static/login-assets/js/popper.js"></script>
-<script th:src="@{/login-assets/js/bootstrap.min.js}" src="/static/login-assets/js/bootstrap.min.js"></script>
-<script th:src="@{/login-assets/js/main.js}" src="/static/login-assets/js/main.js"></script>
-
-</body>
-</html>
-
+                <div class ="user-box">
+                    <input type="text" name="" required="" />
+                    <label>Password</label>
+                </div>
+    
+                <a href="#">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Submit
+                    </a>
+            
+                    <h2>Don't have an account? <a href="signup.html">Sign Up</a> </h2> 
+                    <h2>Are you Admin? <a href="admin.html">Admin Sign In</a> </h2> 
+                    </div>
+            </form>
+            <footer class ="footer">
+                <div class = "container">
+                    
+                    <div class = "row">
+                        <div class="footer-col col-3">
+    
+                            <h4>CONTACT US:</h4>
+                            <ul>
+                            <p>PHONE: 0121 245 3487</p>
+                            <p>EMAIL: INFO@KINGSMAN.CO.UK</p>
+                            <p>ADDRESS: UNIT 12, HOLT STREET, B45 6GF</p>
+                        </ul>
+                            
+    
+    
+                        </div>
+                        <div class="footer-col col-3">
+                            <h4>OUR SERVICES:</h4>
+                                <ul>
+                                <li><a href="#">HOME PAGE</a></li>
+                                <li><a href="http://127.0.0.1:5500/KingsMen/src/main/resources/templates/frontend-views/product-page.html">PRODUCTS</a></li>
+                                <li><a href="http://127.0.0.1:5500/KingsMen/src/main/resources/templates/frontend-views/contact-details.html">CONTACT US</a></li>
+                                <li><a href="file:///C:/Users/Haffy/OneDrive/CS%20year%202/Term%202/Team%20Project%202/about%20us.html">About Us</a></li>
+                                <li><a href="http://127.0.0.1:5500/KingsMen/src/main/resources/templates/frontend-views/login.html">LOG IN</a></li>
+                                </ul>
+                            </div>
+                         
+                        <div class="footer-col col-3">
+                            <h4>GET HELP:</h4>
+                            <ul>
+                            <li><a href="#">FAQs</a></li>
+                            <li><a href="#">SHIPPING</a></li>
+                            <li><a href="#">PAYMENT OPTIONS</a></li>
+                            <li><a href="#">RETURNS</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-col col-3">
+                            <h4>FOLLOW US:</h4>
+                            <div class="social-media">
+                                <ul>
+                                    <li><a href="https://en-gb.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/home"><i class="fab fa-linkedin"></i></a></li>
+                                </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </body>
