@@ -1,3 +1,7 @@
+*{
+    font-family: 'Raleway', sans-serif;
+}
+
 /* Cart Page CSS */
 .cart-padding{
     padding: 20px;
@@ -212,7 +216,7 @@ td{
 
     /* end of index page */
 
-    /* Abous us css*/
+    /* About us css*/
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,500&family=Oswald:wght@600&family=Raleway:ital,wght@1,200&display=swap');
 
 
@@ -339,3 +343,98 @@ p.about-us-content {
     margin: 5px;
 }*/
 /* End of Customer Dashboard css */
+
+/* Footer css 
+
+
+
+footer {
+    margin:0;
+    padding-left: 30px;
+    padding:0;
+    box-sizing: border-box;
+    background: black;
+    
+}
+
+
+.footercontainer{
+    min-height: 100%;
+    max-width: 500px;
+    background-color: black;
+    margin: auto;
+   
+}
+
+.footercontainer .row{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.footercontainer .row ul{
+    list-style: none;
+}
+
+.footercontainer .row .footer-col{
+width: 25%;
+padding: 0.15px;
+text-align: center;
+}
+
+.footercontainer .row .footer-col p{
+    color: #bbbbbb;
+    font-size: 10px;
+
+}
+
+.footercontainer .row .footer-col h4{
+    font-size: 16px;
+    color: white;
+    margin-bottom:20px;
+    padding-top: 10px;
+    font-weight: 500;
+    position: relative;
+    text-align: center;
+    padding-left: 10%;
+}
+
+.footercontainer .row .footer-col ul li:not(:last-child) {
+    margin-bottom: 5px;
+
+}
+
+.footercontainer .row .footer-col ul li a{
+    font-size: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: 300;
+    color: white;
+    display: block;
+    transition: all 0.4s ease;
+    padding-bottom: 2px;
+}
+
+.footercontainer .row .footer-col ul li a:hover {
+   color: #ffffff;
+   padding-left: 8px ; 
+}
+
+.footercontainer .row .footer-col .social-media a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: rgba(255,255,255,0.2);
+    margin-right: 0 10px 10px 0;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    color: white;
+    transition: all 0.5s ease;
+}
+
+.footercontainer .row .footer-col .social-media a:hover{
+    color: black;
+    background-color: white;
+}
+
+*/
