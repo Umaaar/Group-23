@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,10 @@ public class LoginController {
     public String register(){
         return "/frontend-views/register";
     }
-
+    @GetMapping(path = "/foo")
+    public void foo(HttpSession session) {
+        String sessionId = session.getId();
+    }
     @PostMapping("/register")
     public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException {
         String password = user.getPassword();
