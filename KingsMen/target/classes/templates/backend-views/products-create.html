@@ -44,7 +44,7 @@
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <ul class="navbar-nav mr-lg-4 w-100">
-              <a href="#" th:href="@{/index}" class="btn btn-sm btn-dark">Visit Website</a>
+              <a href="#" th:href="@{/}" class="btn btn-sm btn-light">Visit Website</a>
           </ul>
           <ul class="navbar-nav navbar-nav-right">
   
@@ -246,7 +246,7 @@
                                     
                                 </div>
                                 <div class="form-group">
-                                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'images/productImages/' + productDTO.imageName}}" style="margin-top: 20px" alt=" ">
+                                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/images/productImage/' + productDTO.imageName}}" style="margin-top: 20px" alt=" ">
                                 </div>
                                 <input type="hidden" name="imgName" th:value="${productDTO.imageName}">
                             </div>
@@ -258,19 +258,29 @@
 
                             <div class="mb-3">
                                 <label>Quantity</label>
-                                <input type="number" class="form-control" required th:field="*{quantity}" name="quantity" id="quantity" placeholder="Enter quantity">
+                                <input type="number" class="form-control" required th:field="*{stock}" name="stock" id="stock" placeholder="Enter quantity">
                             </div>
                             
                            
                         
 
                             <div class="mb-3">
-                                <label for="category">Select Size</label>
-                                <select class="form-control" th:field="*{sizeId}" id="size" name="size">
-                                    <option th:each="size :${size}"
-                                            th:value="${size.id}"
-                                            th:text="${size.size}"
-                                    >
+                                <label for="size">Select Size</label>
+                                <select class="form-control" required th:field="*{size}" id="size" name="size">
+                                    <option value="sizes">--select a size--</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="7UK">7UK</option>
+                                    <option value="8UK">8UK</option>
+                                    <option value="9UK">9UK</option>
+                                    <option value="10UK">10UK</option>
+                                    <option value="11UK">11UK</option>
+                                    <option value="12UK">12UK</option>
+                                    <option value="13UK">13UK</option>
+                                    <option value="O/S">Onesize</option>
                                 </select>
                             </div>
 
