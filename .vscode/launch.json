@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch KingsMenApplication",
+            "request": "launch",
+            "mainClass": "org.example.KingsMenApplication",
+            "projectName": "KingsMen"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-KingsMenApplication<KingsMen>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
