@@ -26,7 +26,7 @@ SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/**", "/product/**", "/h2-console/**" ,"/login-assets/**","/register").permitAll()
+                .antMatchers("/", "/product/**", "/h2-console/**" ,"/login-assets/**","/register").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
