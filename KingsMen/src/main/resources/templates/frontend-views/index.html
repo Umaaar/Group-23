@@ -10,6 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 <body class="index">
+<div th:insert="/frontend-views/fragments :: navigation" ></div>
 <div >
 
     <div class="work">
@@ -23,16 +24,5 @@
 
 </html>
 
-<script id="replace_with_navbar" src="../../static/js/navbar.js"></script>
-<script  id="replace_with_navbar" th:href="@{/js/navbar.js}"></script>
 
-<!-- <script >
-    fetch('navbar.html')
-.then(res => res.text())
-.then(text => {
-    let oldelem = document.querySelector("script#replace_with_navbar");
-    let newelem = document.createElement("div");
-    newelem.innerHTML = text;
-    oldelem.parentNode.replaceChild(newelem,oldelem);
-}) 
-</script> -->
+
