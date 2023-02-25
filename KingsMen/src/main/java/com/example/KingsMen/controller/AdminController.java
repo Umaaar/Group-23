@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class AdminController {
 
-    public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/productImage";
+    public static String uploadDirectory = System.getProperty("user.dir") + "/KingsMen/src/main/resources/static/images/productImage";
     @Autowired
     ProductService productService;
 
@@ -95,8 +95,8 @@ public String createProducts(Model model){
 }
 @PostMapping("/admin/products/create")
 public String createProductsPost(@ModelAttribute("productDTO") ProductDTO productDTO,
-                                @RequestParam("productImage") MultipartFile file,
-                                @RequestParam("imgName") String imgName) throws IOException{
+                                 @RequestParam("productImage") MultipartFile file,
+                                 @RequestParam("imgName") String imgName) throws IOException{
  Product product = new Product();
   product.setId(productDTO.getId());
   product.setName(productDTO.getName());
@@ -104,6 +104,7 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
   product.setDescription(productDTO.getDescription());
   product.setPrice(productDTO.getPrice());
   product.setStock(productDTO.getStock());
+  product.setSize(productDTO.getSize());
   String imageUUID;
     if(!file.isEmpty()){
         imageUUID = file.getOriginalFilename();
@@ -119,23 +120,7 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
                                  
 } 
 
-@GetMapping("/admin/products/delete/{id}")
-public String deleteProduct(@PathVariable long id){
-    productService.removeProductById(id);
-    return "redirect:/admin/products";
-}
 
-@GetMapping("/admin/products/update/{id}")
-public String editProduct(@PathVariable long id, Model model){
-    Optional<Product> product = productService.getProductById(id);
-    if(product.isPresent()){
-        model.addAttribute("productDTO", product.get());
-        model.addAttribute("categories", categoryService.getAllCategory());
-        return "/backend-views/products-create";
-    }else{
-        return "404";
-    }
-}
 
 
 
