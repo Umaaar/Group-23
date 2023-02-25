@@ -17,7 +17,7 @@
       <li class="breadcrumb-item font-weight-light"><a href="/" class="text-secondary text-decoration-none">Home</a></li>
       <li class="breadcrumb-item font-weight-light"><a href="/product" class="text-secondary text-decoration-none">Product</a></li>
       <li th:if="${product}" class="breadcrumb-item font-weight-light"><a th:href="@{'/product/' + ${product.category.id}}" th:text="${product.category.name}" class="text-secondary text-decoration-none"></a></li>
-      <li th:if="                                 " class="breadcrumb-item active font-weight-bold" aria-current="page" th:text="${product.name}" ></li>
+      <li th:if="${product}" class="breadcrumb-item active font-weight-bold" aria-current="page" th:text="${product.name}" ></li>
     </ol>
   </nav>
   
@@ -27,7 +27,7 @@
   <section class="container">
     <div class="row mt-5">
         <div class="col-lg-5 col-md-10 col-12">
-          <img th:src="@{/images/productImage/{imageName}(imageName=${product.imageName})}" class="img-fluid" alt="Product Image">
+          <img th:src="@{/Images/productImage/{imageName}(imageName=${product.imageName})}" class="img-fluid" alt="Product Image">
         </div>
         <div class ="col-lg-6 col-md-12 col-12 bg-light">
               <h2 class="pt-3 font-weight-bold" th:text="${product.name}"></h2>
