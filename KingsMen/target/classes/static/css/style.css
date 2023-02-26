@@ -407,3 +407,32 @@ p.about-us-content {
 
   
   /* End of Product page */
+
+  /* Footer CSS */
+  footer{
+    padding: 1%;
+    background-color: black;
+    list-style-type: none;
+    font-size: 90%;
+
+}
+
+.footer h6{
+    margin-left: 9%;
+    color: white;
+}
+
+.footer ul{
+    list-style-type: none;
+    color: white;
+}
+
+.footer a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+
+ /*End of Footer CSS */
