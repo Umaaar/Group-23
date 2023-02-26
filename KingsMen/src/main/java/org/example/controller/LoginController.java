@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.model.CustomUserDetail;
 import org.example.model.Role;
 import org.example.model.User;
 import org.example.repository.UserRepository;
@@ -51,13 +52,13 @@ public class LoginController {
     }
     @GetMapping("/loginSuccess")
     public void getLoginInfo(
-            @AuthenticationPrincipal UserDetails authentication,
+            @AuthenticationPrincipal CustomUserDetail authentication,
             HttpServletResponse response) throws IOException {
         if (authentication.getAuthorities()
                 .contains(new SimpleGrantedAuthority("ADMIN"))) {
-            response.sendRedirect("/adminhome");
+            response.sendRedirect("/admin");
         } else {
-            response.sendRedirect("/userhome");
+            response.sendRedirect("/customer-dashboard");
         }
     }
     @PostMapping("/register")
