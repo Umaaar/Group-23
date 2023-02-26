@@ -5,26 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- <link rel="stylesheet" href="/static/css/style.css">-->
-  <link rel="stylesheet" th:href="@{/css/style.css}"/> 
-  
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
   <title>Product Detail Page</title>
 </head>
   
+
+<!--Nav bar-->
+<div th:insert="/frontend-views/fragments :: navigation" ></div>
+
+
   <body>
     <div th:insert="/frontend-views/fragments :: navigation" ></div>
   <!-- Bread crumb-->
-  <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-    <ol class="breadcrumb bg-white my-5">
-      <li class="breadcrumb-item font-weight-light"><a href="/" class="text-secondary text-decoration-none">Home</a></li>
-      <li class="breadcrumb-item font-weight-light"><a href="/product" class="text-secondary text-decoration-none">Product</a></li>
+  <nav class="breadcrumb-container" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item font-weight-light">
+        <a href="/" class="text-dark text-decoration-none">Home</a>
+      </li>
+      <li class="breadcrumb-item font-weight-light">
+        <a href="/Products" class="text-dark text-decoration-none">Product</a>
+      </li>
       <li th:if="${product}" class="breadcrumb-item font-weight-light"><a th:href="@{'/product/' + ${product.category.id}}" th:text="${product.category.name}" class="text-secondary text-decoration-none"></a></li>
       <li th:if="${product}" class="breadcrumb-item active font-weight-bold" aria-current="page" th:text="${product.name}" ></li>
+      </li>
     </ol>
   </nav>
   
-
-
   <!--Product Image -->
   <section class="container">
     <div class="row mt-5">
@@ -37,16 +44,24 @@
   
                 <form class="form">
                     <select class="custom-select mb-3">
-                      <option selected>Sizes:</option>
-                      <option value="1">XL</option>
-                      <option value="2">L</option>
-                      <option value="3">M</option>
-                      <option value="4">S</option>
-                      <option value="5">XS</option>
+                      <option value="sizes">--select a size--</option>
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="XL">XL</option>
+                      <option value="XXL">XXL</option>
+                      <option value="7UK">7UK</option>
+                      <option value="8UK">8UK</option>
+                      <option value="9UK">9UK</option>
+                      <option value="10UK">10UK</option>
+                      <option value="11UK">11UK</option>
+                      <option value="12UK">12UK</option>
+                      <option value="13UK">13UK</option>
+                      <option value="O/S">Onesize</option>
                     </select>
   
                     <select class="custom-select mb-3">
-                        <option selected>Quantity:</option>
+                        <option selected>--select a quantity--</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
