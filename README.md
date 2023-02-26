@@ -1,6 +1,8 @@
-# Kingsmen E-commerce Website
+![Logo](https://github.com/Umaaar/Group-23/blob/main/KingsMen/src/main/resources/static/Images/logo.png)
 
-(https://github.com/Umaaar/Group-23/blob/main/KingsMen/src/main/resources/static/Images/logo.png)
+---
+
+# Kingsmen E-commerce Website
 
 This project is about creating an eCommerce website for our menswear company KingsMen. The simple interface allows users to click through the pages with ease. The pages it consists of include the home page, product page, category page, cart page, about us page, contact details page, and a sign-up/login page. In this project, we have considered the different groups of users of this website - the customer, the employee, and the admin. Therefore, we have built different views for each group that presents suitable information to them, including a dashboard to organise the data. This project aims for not registered customers to be able to browse the website and view the products, for logged-in customers to add items to the cart, place the order, and view orders on the customer dashboard, for employees to be able to manage stock and orders, and for admin to be able to add products to the inventory management system.
 
