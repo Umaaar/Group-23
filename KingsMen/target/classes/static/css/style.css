@@ -344,97 +344,72 @@ p.about-us-content {
 }*/
 /* End of Customer Dashboard css */
 
-/* Footer css 
-
-
-
-footer {
-    margin:0;
-    padding-left: 30px;
-    padding:0;
-    box-sizing: border-box;
-    background: black;
-    
-}
-
-
-.footercontainer{
-    min-height: 100%;
-    max-width: 500px;
+/* Product page / Product detail page */
+.btn-product {
     background-color: black;
-    margin: auto;
-   
-}
+    color: #ffffff;
+    padding: 10px 20px;
+  }
+  
 
-.footercontainer .row{
-    display:flex;
-    flex-wrap: wrap;
-}
+  .btn-product:hover {
+    background-color: black;
+    
+  }
 
-.footercontainer .row ul{
-    list-style: none;
-}
-
-.footercontainer .row .footer-col{
-width: 25%;
-padding: 0.15px;
-text-align: center;
-}
-
-.footercontainer .row .footer-col p{
-    color: #bbbbbb;
-    font-size: 10px;
-
-}
-
-.footercontainer .row .footer-col h4{
-    font-size: 16px;
+  .btn-product-custom {
+    background-color: black;
     color: white;
-    margin-bottom:20px;
-    padding-top: 10px;
-    font-weight: 500;
-    position: relative;
-    text-align: center;
-    padding-left: 10%;
-}
-
-.footercontainer .row .footer-col ul li:not(:last-child) {
-    margin-bottom: 5px;
-
-}
-
-.footercontainer .row .footer-col ul li a{
-    font-size: 10px;
+  }
+  
+  .btn-product-custom:hover {
+    background-color: black;
     color: white;
-    text-decoration: none;
-    font-weight: 300;
-    color: white;
-    display: block;
-    transition: all 0.4s ease;
-    padding-bottom: 2px;
-}
-
-.footercontainer .row .footer-col ul li a:hover {
-   color: #ffffff;
-   padding-left: 8px ; 
-}
-
-.footercontainer .row .footer-col .social-media a{
-    display: inline-block;
-    height: 30px;
-    width: 30px;
-    background-color: rgba(255,255,255,0.2);
-    margin-right: 0 10px 10px 0;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 50%;
-    color: white;
-    transition: all 0.5s ease;
-}
-
-.footercontainer .row .footer-col .social-media a:hover{
-    color: black;
+  }
+  
+  .btn-submit-p {
     background-color: white;
-}
+    color: black;
+    padding: 10px 20px;
+    border-color: black;
+  }
+  
+  .btn-submit-p:hover {
+    background-color: white;
+    color: gray;
+    border-color: grey;
+  }
+    
+  .btn-submit-d {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: black;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-submit-d:hover {
+    background-color: black;
+  }
 
-*/
+  .breadcrumb-container .breadcrumb {
+    background-color: #ffffff;
+    padding-left: 3rem;
+    margin-bottom: 0;
+    list-style: none;
+  }
+  
+  
+  .breadcrumb-container .breadcrumb-item + .breadcrumb-item::before {
+    content: "/";
+    padding: 0 0.4rem;
+    color: black;
+  }
+  
+  .breadcrumb-container .breadcrumb-item.active {
+    font-weight: bold;
+    color: black;
+  }
+
+  
+  /* End of Product page */
