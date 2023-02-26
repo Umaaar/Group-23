@@ -127,6 +127,7 @@ td{
 .logo img {
     width: 10vmax;
     /* filter: invert(100%); */
+       margin-left: 2vmax;
     
 }
 
