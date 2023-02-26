@@ -325,3 +325,73 @@ p.about-us-content {
     margin: 5px;
 }*/
 /* End of Customer Dashboard css */
+
+/* Product page / Product detail page */
+.btn-product {
+    background-color: black;
+    color: #ffffff;
+    padding: 10px 20px;
+  }
+  
+
+  .btn-product:hover {
+    background-color: black;
+    
+  }
+
+  .btn-product-custom {
+    background-color: black;
+    color: white;
+  }
+  
+  .btn-product-custom:hover {
+    background-color: black;
+    color: white;
+  }
+  
+  .btn-submit-p {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border-color: black;
+  }
+  
+  .btn-submit-p:hover {
+    background-color: white;
+    color: gray;
+    border-color: grey;
+  }
+    
+  .btn-submit-d {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: black;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-submit-d:hover {
+    background-color: black;
+  }
+
+  .breadcrumb-container .breadcrumb {
+    background-color: #ffffff;
+    padding-left: 3rem;
+    margin-bottom: 0;
+    list-style: none;
+  }
+  
+  
+  .breadcrumb-container .breadcrumb-item + .breadcrumb-item::before {
+    content: "/";
+    padding: 0 0.4rem;
+    color: black;
+  }
+  
+  .breadcrumb-container .breadcrumb-item.active {
+    font-weight: bold;
+    color: black;
+  }
+
+  
+  /* End of Product page */
