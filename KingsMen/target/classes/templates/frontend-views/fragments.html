@@ -21,7 +21,7 @@
       </ul>
     </div>
     <div class="logo">
-      <a href="" th:href="@{/Images/logo.png}"><img src="https://trello.com/1/cards/63ee2fa5acd6021cd85c58d0/attachments/63ee2fdeb616e98fa90e2cb9/previews/63ee2fe2b616e98fa90e2e36/download/4A96E4A4-FCC3-4BF3-892E-82C46F273B98.png" alt="kingsmen" border="0"></a>
+      <a href="../static/Images/logo.png" th:href="@{/}"><img src="https://trello.com/1/cards/63ee2fa5acd6021cd85c58d0/attachments/63ee2fdeb616e98fa90e2cb9/previews/63ee2fe2b616e98fa90e2e36/download/4A96E4A4-FCC3-4BF3-892E-82C46F273B98.png" alt="kingsmen" border="0"></a>
     </div>
     <div class="sub-container-nav">
       <ul>
@@ -32,27 +32,22 @@
   </div>
   <div class="shopping-items">
     <div class="sub-container-nav side-container" >
-     
+
       <ul>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa-regular fa-user"></i>
-          </a>
-          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" th:href="@{/login}">Login</a>
-            <a class="dropdown-item" th:href="@{/register}">Register</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" th:href="@{/customer-dashboard}">My Account</a>
-            <a class="dropdown-item" th:href="@{/logout}">Logout</a>
-          </div>
-          </li>
-          <li>
+        <li>
+          <a th:href="@{/login}"><i class="fa-solid fa-user"></i></a>
+        </li>
+        <li>
           <a th:href="@{/cart}"><i class="fa-solid fa-bag-shopping"></i></a>
         </li>
-       
+        <li>
+          <a th:href="@{/logout}"><i class="fa-solid fa-sign-out"></i></a>
+        </li>
       </ul>
+    <!--
+      </ul>-->
+     
     </div>
-
   </div>
 
 </div>
