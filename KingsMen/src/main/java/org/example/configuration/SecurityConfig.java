@@ -28,6 +28,7 @@ SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/product/**", "/h2-console/**" ,"/login-assets/**","/register").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/customer-dashboard/**").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -42,6 +43,7 @@ SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
+
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .and()

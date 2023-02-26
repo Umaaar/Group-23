@@ -34,6 +34,8 @@ public class LoginController {
         return "/frontend-views/login";
     }
 
+   
+
     @GetMapping("/register")
     public String register(){
         return "/frontend-views/register";
