@@ -16,7 +16,6 @@
 
 
   <body>
-    <div th:insert="/frontend-views/fragments :: navigation" ></div>
   <!-- Bread crumb-->
   <nav class="breadcrumb-container" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -78,8 +77,8 @@
   
                 <form action="" method="post"><input type="hidden"
                   value="" name="id"><button type="submit"
-                  class="btn btn-block btn-dark font-weight-light">Add to basket</button>
-            <h3 class="mt-5 mb-3">Details</h4>
+                  class="btn btn-submit-d btn-block btn-dark font-weight-light">Add to basket</button>            
+                  <h3 class="mt-5 mb-3">Details</h4>
             <span>
               <p class="my-4 font-weight-light" th:text="${product.description}"></p>
             </span>
