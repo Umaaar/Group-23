@@ -5,6 +5,13 @@
             "name": "Launch KingsMenApplication",
             "request": "launch",
             "mainClass": "org.example.KingsMenApplication",
+            "projectName": "Kingsmen"
+        },
+        {
+            "type": "java",
+            "name": "Launch KingsMenApplication",
+            "request": "launch",
+            "mainClass": "org.example.KingsMenApplication",
             "projectName": "KingsMen"
         },
         {
