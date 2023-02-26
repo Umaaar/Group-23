@@ -6,6 +6,9 @@ import org.example.repository.UserRepository;
 import org.example.repository.ProductRepository;
 import org.example.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +48,17 @@ public class LoginController {
     @GetMapping(path = "/foo")
     public void foo(HttpSession session) {
         String sessionId = session.getId();
+    }
+    @GetMapping("/loginSuccess")
+    public void getLoginInfo(
+            @AuthenticationPrincipal UserDetails authentication,
+            HttpServletResponse response) throws IOException {
+        if (authentication.getAuthorities()
+                .contains(new SimpleGrantedAuthority("ADMIN"))) {
+            response.sendRedirect("/adminhome");
+        } else {
+            response.sendRedirect("/userhome");
+        }
     }
     @PostMapping("/register")
     public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException {
