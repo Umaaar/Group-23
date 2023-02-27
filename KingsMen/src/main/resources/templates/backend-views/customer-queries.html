@@ -56,9 +56,9 @@
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
   
   
-                      <a class="dropdown-item" href="LOGOUT">
-                          <i class="mdi mdi-logout text-primary"></i> LOG OUT 
-                      </a>
+                    <a class="dropdown-item" th:href="@{/logout}">
+                        <i class="mdi mdi-logout text-primary"></i> LOG OUT 
+                    </a>
                       <form id="logout-form" action="LOGOUT" method="POST" class="d-none">
                         
                       </form>
@@ -167,7 +167,44 @@
     <!-- End Sidebar -->
     <div class="main-panel">
       <div class="content-wrapper">
-       <!--@yield('content') --> 
+        <div class="row">
+            <div class="col-md-12 ">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3> Customer Queries
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordererd table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Enquiry Type</th>
+                                    <th>Email</th>
+                                    <th>Order ID (if applicable)</th>
+                                    <th>Message</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                    <tr th:each="enquiry, iStat : ${enquiries}">
+                                        <td th:text="${iStat.index + 1}">1</td>
+                                        <td th:text="${enquiries.type}">enquiry type</td>
+                                        <td th:text="${enquiries.email}">email</td>
+                                        <td th:text="${enquiries.orderId}">order id</td>
+                                        <td th:text="${enquiries.message}">message</td>
+                                    </tr>
+                                    
+                            </tbody>
+                        </table>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
       </div>
     </div>
