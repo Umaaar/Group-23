@@ -38,10 +38,8 @@ public class AdminController {
        System.out.println(customUserDetailService.getUserCount());
        model.addAttribute("total_customers",String.valueOf(customUserDetailService.getUserCount()));
        model.addAttribute("total_products",String.valueOf(productService.getProductCount()));
-      model.addAttribute("total_categories",String.valueOf(categoryService.getCategoryCount()));
-      //  model.addAttribute("total_inStock",String.valueOf(productService.getInStockProductCount()));
-    //    model.addAttribute("total_outOfStock",String.valueOf(productService.getOutOfStockProductCount()));
-
+       model.addAttribute("total_categories",String.valueOf(categoryService.getCategoryCount()));
+       
        return "/backend-views/admin-index";
    }
    
@@ -213,16 +211,6 @@ return "/backend-views/size-create";
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
 
 
-
-
-
-
-
-   
-
-
-   
-
     @GetMapping("/admin/orders")
     public String adminOrders(){ return "/backend-views/admin-orders";
 }
@@ -235,7 +223,11 @@ return "/backend-views/size-create";
     public String adminAddProduct(){ return "/backend-views/admin-addProduct";
 }
 
+@GetMapping("/admin/customers")
+public String adminCustomers(){ return "/backend-views/customers";
+}
 
-
-
+@GetMapping("/admin/queries")
+public String adminQueries(){ return "/backend-views/customer-queries";
+}
 }
