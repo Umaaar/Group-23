@@ -39,7 +39,7 @@
     <br><br><br>
             <div class="image1">
                 <div>
-                    <img src="../../static/Images/image1.png" style="width:550px; height: 550px;">
+                    <img src="../../static/Images/image1.png" th:src="@{/Images/image1.png}" style="width:550px; height: 550px;">
              </div>
         </div>
         <br><br>
@@ -53,7 +53,7 @@
             <br><br><br><br><br><br><br><br><br><br><br>
             <div class="image2">
                 <div>
-                    <img src="../../static/Images/image2.png" style="width: 570px; height: 550px;">
+                    <img src="../../static/Images/image2.png"  th:src="@{/Images/image2.png}"style="width: 570px; height: 550px;">
                 </div>
             </div>
             <br><br><br><br>
@@ -83,8 +83,6 @@
     </div>
         </div>
                 </body>
-                <script id="replace_with_footer" src="../../static/js/footer.js"></script>
-                <script  id="replace_with_footer" th:href="@{/js/footer.js}">
                 </script>
      <footer>
         <div th:insert="/frontend-views/fragments :: footer" ></div>
