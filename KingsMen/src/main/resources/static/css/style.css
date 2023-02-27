@@ -101,6 +101,8 @@ td{
     justify-content: space-between;
     justify-items: center;
     background-color: white;
+    border: 2px solid black;
+
 }
 .logo {
     display: flex;
@@ -123,6 +125,7 @@ td{
     align-content: center;
     justify-content: center;
     justify-items: center;
+
     /* background-color: white; */
 }
 
@@ -183,7 +186,7 @@ td{
 }
 
 
-.header {
+.index .header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -200,7 +203,7 @@ td{
    letter-spacing: 0.2vmax;
 }
 
-.btn{
+.index .btn{
     display: inline-block;
     background: rgba(19, 19, 19, 0);
     color: white;

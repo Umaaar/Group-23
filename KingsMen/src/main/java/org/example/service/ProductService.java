@@ -37,6 +37,20 @@ public class ProductService {
             return productRepository.findAllByCategory_Id(categoryId);
     }
 
+    public int getProductCount() {
+        return (int) productRepository.count();
+    }
+
+
+    /*public int getInStockProductCount() {
+        return (int) productRepository.countByInStock(true);
+    }
+
+    public int getOutOfStockProductCount() {
+        return (int) productRepository.countByInStock(false);
+    }
+    */
+
  
 
         

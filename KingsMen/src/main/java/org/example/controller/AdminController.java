@@ -19,6 +19,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+import javax.websocket.Session;
+
 @Controller
 public class AdminController {
 
@@ -35,6 +37,11 @@ public class AdminController {
    public String adminHome(Model model){
        System.out.println(customUserDetailService.getUserCount());
        model.addAttribute("total_customers",String.valueOf(customUserDetailService.getUserCount()));
+       model.addAttribute("total_products",String.valueOf(productService.getProductCount()));
+      model.addAttribute("total_categories",String.valueOf(categoryService.getCategoryCount()));
+      //  model.addAttribute("total_inStock",String.valueOf(productService.getInStockProductCount()));
+    //    model.addAttribute("total_outOfStock",String.valueOf(productService.getOutOfStockProductCount()));
+
        return "/backend-views/admin-index";
    }
    

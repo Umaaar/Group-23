@@ -28,6 +28,9 @@ public class CategoryService {
     public Optional<Category> getCategoryById(int id){
         return categoryRepository.findById(id);
     }
+    public int getCategoryCount(){
+        return (int) categoryRepository.count();
+    }
 
  
 
