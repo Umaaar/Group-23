@@ -9,8 +9,8 @@
 
 /* Cart Page CSS */
 .cart-padding{
-    padding: 20px;
-    font-family: Sans serif roman;
+    padding: 2%;
+    text-align: center;
 }
 #order-table{
     border-collapse: separate;
@@ -48,7 +48,7 @@ td{
     margin: 0 auto;
     width: 90%;
     padding: 5px;
-    background-color: #000080;
+    background-color: #01014d;
     border: transparent;
     border-radius: 8px;
     color: white;
