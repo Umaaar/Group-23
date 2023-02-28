@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3%22%3E" >
+<head>
+    <title> About </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+
+     <link th:src="@{/css/style.css}" href="../../static/css/style.css" rel="stylesheet">
+     <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+
+
+<body>
+    <div th:insert="/frontend-views/fragments :: navigation" ></div>
+     <div class="About-us-content">
+    <div class="textonhomepage">
+        <div class="container">
+            
+        </div>
+
+        <h1>About us</h1>
+        <br>
+        <blockquote>
+            Kingsman designer is a high quality fashion-leading brand who proudly was voted top smartwear franchise in 2023! 
+        </blockquote>
+    <br>
+    <br><br><br>
+            <div class="image1">
+                <div>
+                    <img src="../../static/Images/image1.png" th:src="@{/Images/image1.png}">
+             </div>
+        </div>
+        <br><br>
+        <br>
+        <br><br>
+            
+            <div class="top-right"> <h2> Who are we? </h2></div>
+            <p>
+                Kingsman smart wear is a luxury designer brand who takes pride in delivering top quality smart wear globally. We have over 200 physical stores in over 25 different stores worldwide making Kingsman accessible wherever you are! Our clothing is hand-stitched by dedicated tailors in Italy who work very hard to satisfy your needs. We are passionate about suits, and we are passionate about people. This ethos has been ingrained in our company since our founder Ian Bowstock opened up our doors earlier this year. The fondness he has for his customers is what powered us as a business to gain customer satisfaction.
+            </p>
+            <br><br><br><br><br><br><br><br><br><br><br>
+            <div class="image2">
+                <div>
+                    <img src="../../static/Images/image2.png"  th:src="@{/Images/image2.png}">
+                </div>
+            </div>
+            <br><br><br><br>
+            <div class="bottom-left"> <h2>Hear our story:</h2></div>
+            <p>
+                Our story began with a simple goal in mind - to bring the best quality smartwear to market. With a passion for technology and a desire to improve people's lives, we set out to create smartwear that would seamlessly integrate into people's daily routines and make a positive impact on their health and wellbeing. Over the years, we have continued to innovate and refine our products, using only the finest materials and the latest technology. Our commitment to quality is reflected in every product we make, and we take great pride in knowing that our smartwear is helping people lead healthier, more active lives
+            </p>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br> <br> 
+          
+       <br> <br> <br> <br> <br> <br>  <div class="mission"> <h2>Our Mission:</h2></div>
+            
+            <p>
+                Our mission here at Kingsman smart wear is to become 100% eco-friendly by 2030. We recognizes the impact that the fashion industry has on the environment and we are determined to lead the way in creating a more sustainable future. Our goal is to not only reduce the carbon footprint of our products but to create a positive impact on the planet. To achieve this, we are focusing on sourcing our materials from environmentally responsible suppliers and incorporating eco-friendly production processes. We are also dedicated to reducing waste and conserving resources, and aim to use only certified organic and recycled materials in their suits. By 2030, we hope to become a leader in sustainable fashion, inspiring others in the industry to follow our example and work towards a greener future. We believe that by making eco-friendliness a top priority, we can not only protect the environment but create a better world for future generations. 
+            </p>
+            </div>
+    </div>
+            <div id="footercontainer">
+                <div id="main">
+        
+</div>
+    </div>
+        </div>
+                </body>
+                <script id="replace_with_footer" src="../../static/js/footer.js"></script>
+                <script  id="replace_with_footer" th:href="@{/js/footer.js}">
+                </script>
+     <footer>
+        <div th:insert="/frontend-views/fragments :: footer" ></div>
+     </footer>
+               
+    </body>
+</html>
