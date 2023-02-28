@@ -10,9 +10,9 @@
         <title>Customer Dashboard</title>
     </head>
     <body>
-        <script id="replace_with_navbar" src="../../static/js/navbar.js"></script>
-        <script  id="replace_with_navbar" th:href="@{/js/navbar.js}"></script>
-        <div class="custdash-OuterDiv">
+    <div th:insert="/frontend-views/fragments :: navigation" ></div>
+
+    <div class="custdash-OuterDiv">
             <h1>Welcome back </h1>
             <h3>You are logged in!</h3>
             <div class="custdash-InnerDiv">
@@ -21,12 +21,14 @@
             </div>
             <div class="custdash-InnerDiv">
                 <p class="custdash-p">Personal Infomation</p>
-                <p>Name: </p>
-                <p>Email: </p>
+                <p>Name: <span th:text="${firstname}"></span></p>
+                <p>Email: <span th:text="${email}"></span></p>
             </div>
         </div>
+
         <footer>
-            <div th:insert="/frontend-views/fragments :: footer" ></div>
+                <div th:insert="/frontend-views/fragments :: footer" ></div>
+
         </footer>
     </body>
 </html>

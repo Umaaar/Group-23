@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,12 +52,10 @@ public class LoginController {
         String sessionId = session.getId();
     }
     @GetMapping("/loginSuccess")
-    public void getLoginInfo(
-            @AuthenticationPrincipal CustomUserDetail authentication,
-            HttpServletResponse response) throws IOException {
-        if (authentication.getAuthorities()
-                .contains(new SimpleGrantedAuthority("ADMIN"))) {
+    public void getLoginInfo(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response) throws IOException {
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             response.sendRedirect("/admin");
+
         } else {
             response.sendRedirect("/customer-dashboard");
         }
