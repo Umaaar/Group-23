@@ -61,7 +61,6 @@ public class Order {
                 "order_id=" + order_id +
                 ", order_name='" + title + '\'' +
                 ", order_email='" + cus_email + '\'' +
-                ", order_product_id=" + order_product_id +
                 ", order_status='" + order_status + '\'' +
                 ", order_total=" + order_total +
                 '}';
