@@ -2,7 +2,7 @@ package org.example.model;
 
 public class Order {
     private int order_id;
-    private String order_name;
+    private String title;
     private String order_email;
     private int order_product_id;
     private String order_status;
@@ -10,7 +10,7 @@ public class Order {
 
     public Order(int order_id, String order_name, String order_email, int order_product_id, String order_status, int order_total) {
         this.order_id = order_id;
-        this.order_name = order_name;
+        this.title = order_name;
         this.order_email = order_email;
         this.order_product_id = order_product_id;
         this.order_status = order_status;
@@ -26,11 +26,11 @@ public class Order {
     }
 
     public String getOrder_name() {
-        return order_name;
+        return title;
     }
 
-    public void setOrder_name(String order_name) {
-        this.order_name = order_name;
+    public void setOrder_name(String title) {
+        this.title = title;
     }
 
     public String getOrder_email() {
