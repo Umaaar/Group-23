@@ -69,7 +69,7 @@ public class Order {
     public String toString() {
         return "orders{" +
                 "order_id=" + order_id +
-                ", order_name='" + order_name + '\'' +
+                ", order_name='" + title + '\'' +
                 ", order_email='" + order_email + '\'' +
                 ", order_product_id=" + order_product_id +
                 ", order_status='" + order_status + '\'' +
