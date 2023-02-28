@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,9 +52,22 @@ public class LoginController {
         String sessionId = session.getId();
     }
     @GetMapping("/loginSuccess")
-    public void getLoginInfo(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response) throws IOException {
+    public void getLoginInfo(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model) throws IOException {
+
+        System.out.println(authentication.getUsername());
+        System.out.println(authentication.getEmail());
+        System.out.println(authentication.getFirstname());
+        System.out.println(authentication.getLastname());
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+
+            System.out.println(authentication.getUsername());
+            System.out.println(authentication.getEmail());
+            System.out.println(authentication.getFirstname());
+            System.out.println(authentication.getLastname());
+//            System.out.println(authentication.getEmail());
+            model.addAttribute("adminname",authentication.getFirstname());
             response.sendRedirect("/admin");
+
         } else {
             response.sendRedirect("/customer-dashboard");
         }
