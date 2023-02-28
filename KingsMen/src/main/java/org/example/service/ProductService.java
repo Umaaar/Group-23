@@ -4,8 +4,10 @@ package org.example.service;
 import org.example.model.Product;
 import org.example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,9 +39,24 @@ public class ProductService {
             return productRepository.findAllByCategory_Id(categoryId);
     }
 
- 
 
-        
+    public Integer getProductCount() {
+        return Math.toIntExact(productRepository.count());
+    }
+    public Integer getInStockProducts(){
+        List<Product> totalProducts = productRepository.findAll();
+        List<Product> inStockProducts = new ArrayList<>();
 
+        for (Product product : totalProducts) {
+            if (product.getStock() > 1) {
+                inStockProducts.add(product);
+            }
+        }
+        return inStockProducts.size();
+    }
 
+    public Integer getOutOfStockProducts(){
+        List<Product> outOfStockProducts = productRepository.findAllByStock(0);
+        return  outOfStockProducts.size();
+    }
 }
