@@ -180,15 +180,21 @@
                 <div class="col-md-3">
                     <div class="card card-body bg-primary text-white mb-3">
                         <label>Total Customers</label>
+                        <div class="icon-box">
+                            <i class="mdi mdi-account-multiple"></i>
+                        </div>
                         <h1 th:text="${total_customers}"> </h1>
                         <a th:href="@{admin/orders}" class="text-white">view</a>
                     </div>
                 </div>
     
                 <div class="col-md-3">
-                    <div class="card card-body bg-success text-white mb-3">
+                    <div class="card card-body bg-danger text-white mb-3">
                         <label>Total Categories</label>
                         <h1 th:text="${total_categories}"> </h1>
+                        <div class="icon-box">
+                            <i class="mdi mdi-barcode"></i>
+                        </div>
                         <a th:href="@{admin/categories}" class="text-white">view</a>
                     </div>
                 </div>
@@ -197,6 +203,9 @@
                     <div class="card card-body bg-warning text-white mb-3">
                         <label>Total Products</label>
                         <h1 th:text="${total_products}"> </h1>
+                        <div class="icon-box">
+                            <i class="mdi mdi-store"></i>
+                        </div>
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
@@ -204,7 +213,10 @@
                 <div class="col-md-3">
                     <div class="card card-body bg-info text-white mb-3">
                         <label>Total Orders</label>
-                        <h1 th:text="${total_orders}"> </h1>
+                        <div class="icon-box">
+                            <i class="mdi mdi-credit-card-multiple"></i>
+                        </div>
+                        <h1 > </h1>
                         <a th:href="@{admin/orders}" class="text-white">view</a>
                     </div>
                 </div>
@@ -218,24 +230,74 @@
                 <div class="col-md-3">
                     <div class="card card-body bg-primary text-white mb-3">
                         <label>Total Out of Stock Products</label>
-                        <h1 th:text="${total_inStock}"> </h1>
+                        <div class="icon-box">
+                            <i class="mdi mdi-store"></i>
+                        </div>
+                        <h1 > </h1>
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
     
                 <div class="col-md-3">
-                    <div class="card card-body bg-success text-white mb-3">
+                    <div class="card card-body bg-danger text-white mb-3">
                         <label>Total In Stock Products</label>
-                        <h1 th:text="${total_outStock}"> </h1>
+                        <div class="icon-box">
+                            <i class="mdi mdi-store"></i>
+                        </div>
+                        <h1 > </h1>
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
     
                 <div class="col-md-3">
                     <div class="card card-body bg-warning text-white mb-3">
-                        <label>Total Admin</label>
-                        <h1 th:text="${total_admin}"> </h1>
+                        <label>In Process Orders</label>
+                        <div class="icon-box">
+                            <i class="mdi mdi-credit-card-multiple"></i>
+                        </div>
+                        <h1 > </h1>
+                        <a th:href="@{admin/orders}" class="text-white">view</a>
+
                     
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card card-body bg-info text-white mb-3">
+                        <label>Completed Orders</label>
+                        <div class="icon-box">
+                            <i class="mdi mdi-credit-card-multiple"></i>
+                        </div>
+                        <h1 > </h1>
+                        <a th:href="@{admin/orders}" class="text-white">view</a>
+                    </div>
+                </div>
+    
+    
+               </div>
+               <hr>
+               <div class="row">
+    
+    
+                <div class="col-md-3">
+                    <div class="card card-body bg-primary text-white mb-3">
+                        <label>Awaiting Confirmation Orders</label>
+                        <div class="icon-box">
+                            <i class="mdi mdi-credit-card-multiple"></i>
+                        </div>
+                        <h1 > </h1>
+                        <a th:href="@{admin/orders}" class="text-white">view</a>
+                    </div>
+                </div>
+    
+                <div class="col-md-3">
+                    <div class="card card-body bg-danger text-white mb-3">
+                        <label>Total Admins</label>
+                        <div class="icon-box">
+                            <i class="mdi mdi-account-multiple"></i>
+                        </div>
+                        <h1 > </h1>
+                        <a th:href="@{/}" class="text-white">view</a>
                     </div>
                 </div>
     
