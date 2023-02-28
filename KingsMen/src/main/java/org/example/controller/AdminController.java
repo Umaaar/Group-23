@@ -39,11 +39,12 @@ public class AdminController {
    @GetMapping("/admin")
    public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model){
        System.out.println(customUserDetailService.getUserCount());
-
        model.addAttribute("adminname",authentication.getFirstname());
        model.addAttribute("total_customers",String.valueOf(customUserDetailService.getUserCount()));
+       model.addAttribute("total_catagories",String.valueOf(categoryService.getCatCount()));
        model.addAttribute("total_products",String.valueOf(productService.getProductCount()));
-       model.addAttribute("total_categories",String.valueOf(categoryService.getCategoryCount()));
+       model.addAttribute("total_in_stock_products",String.valueOf(productService.getInStockProducts()));
+       model.addAttribute("total_in_out_of_stock_products",String.valueOf(productService.getOutOfStockProducts()));
        
        return "/backend-views/admin-index";
    }

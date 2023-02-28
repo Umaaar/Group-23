@@ -12,18 +12,11 @@
 
      <link th:src="@{/css/style.css}" href="../../static/css/style.css" rel="stylesheet">
      <link rel="stylesheet" href="../../static/css/style.css">
-     <link rel="stylesheet" href="../../static/css/footer.css">
-     <link rel="stylesheet" th:href="@{/css/footer.css}"/>
-     <title>Document</title>
 </head>
 
 
-<body style="text-align: center;">
+<body>
     <div th:insert="/frontend-views/fragments :: navigation" ></div>
-
-    <!-- <script id="replace_with_navbar" src="../../static/js/navbar.js"></script>
-    <script  id="replace_with_navbar" th:href="@{/js/navbar.js}">
-    </script> -->
      <div class="About-us-content">
     <div class="textonhomepage">
         <div class="container">
@@ -39,7 +32,7 @@
     <br><br><br>
             <div class="image1">
                 <div>
-                    <img th:src="@{/Images/image1.png}" style="width:550px; height: 550px;">
+                    <img src="../../static/Images/image1.png" th:src="@{/Images/image1.png}">
              </div>
         </div>
         <br><br>
@@ -53,7 +46,7 @@
             <br><br><br><br><br><br><br><br><br><br><br>
             <div class="image2">
                 <div>
-                    <img th:src="@{/Images/image2.png}" style="width: 570px; height: 550px;">
+                    <img src="../../static/Images/image2.png"  th:src="@{/Images/image2.png}">
                 </div>
             </div>
             <br><br><br><br>
@@ -71,9 +64,9 @@
           
        <br> <br> <br> <br> <br> <br>  <div class="mission"> <h2>Our Mission:</h2></div>
             
-            <blockquote>
+            <p>
                 Our mission here at Kingsman smart wear is to become 100% eco-friendly by 2030. We recognizes the impact that the fashion industry has on the environment and we are determined to lead the way in creating a more sustainable future. Our goal is to not only reduce the carbon footprint of our products but to create a positive impact on the planet. To achieve this, we are focusing on sourcing our materials from environmentally responsible suppliers and incorporating eco-friendly production processes. We are also dedicated to reducing waste and conserving resources, and aim to use only certified organic and recycled materials in their suits. By 2030, we hope to become a leader in sustainable fashion, inspiring others in the industry to follow our example and work towards a greener future. We believe that by making eco-friendliness a top priority, we can not only protect the environment but create a better world for future generations. 
-            </blockquote>
+            </p>
             </div>
     </div>
             <div id="footercontainer">
@@ -82,7 +75,10 @@
 </div>
     </div>
         </div>
-               
+                </body>
+                <script id="replace_with_footer" src="../../static/js/footer.js"></script>
+                <script  id="replace_with_footer" th:href="@{/js/footer.js}">
+                </script>
      <footer>
         <div th:insert="/frontend-views/fragments :: footer" ></div>
      </footer>
