@@ -4,7 +4,6 @@ public class Order {
     private int order_id;
     private String title;
     private String cus_email;
-    private int order_product_id;
     private String order_status;
     private int order_total;
 
@@ -12,7 +11,6 @@ public class Order {
         this.order_id = order_id;
         this.title = order_name;
         this.cus_email = order_email;
-        this.order_product_id = order_product_id;
         this.order_status = order_status;
         this.order_total = order_total;
     }
@@ -39,14 +37,6 @@ public class Order {
 
     public void setOrder_email(String order_email) {
         this.cus_email = order_email;
-    }
-
-    public int getOrder_product_id() {
-        return order_product_id;
-    }
-
-    public void setOrder_product_id(int order_product_id) {
-        this.order_product_id = order_product_id;
     }
 
     public String getOrder_status() {
