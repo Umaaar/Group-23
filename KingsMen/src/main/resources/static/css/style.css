@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Raleway:ital,wght@1,200&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Raleway:ital,wght@1,200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-
+*/
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
 *{
-   /* font-family: 'Raleway', sans-serif; */
+   /* font-family: 'Raleway', sans-serif; 
     font-family: 'Inter', sans-serif;
     font-family: 'Titillium Web', sans-serif;
+    */
+    font-family: 'Abhaya Libre', serif;
 }
 
 /* Cart Page CSS */
@@ -85,7 +88,7 @@ td{
     padding: 0%;
 }
 .index{
-    background-image: url(../Images/suit.jpg);
+    background-image: url(../Images/suit2dark.jpg);
     background-size: cover;
     height:fit-content;
     /* background: radial-gradient(black, white); */
@@ -130,9 +133,10 @@ td{
 }
 
 .logo img {
-    width: 10vmax;
+
     /* filter: invert(100%); */
        margin-left: 2vmax;
+       width: 6vmax;
     
 }
 
