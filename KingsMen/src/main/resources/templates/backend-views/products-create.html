@@ -206,7 +206,7 @@
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel"
                             aria-labelledby="home-tab" tabindex="0">
-                           <input type="hidden" name="id" th:field="*{id}">
+                            <input type="hidden" name="id" th:field="*{id}">
                             <div class="mb-3">
                                 <label>Name</label>
                                 <input type="text" class="form-control" required th:field="*{name}" name="name" id="name" placeholder="Enter name">
@@ -214,7 +214,7 @@
 
                             <div class="mb-3">
                                 <label for="category">Select Category</label>
-                                <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+                                <select class="form-control" th:field="*{categoryId}" id="categoryId" name="categoryId">
                                     <option th:each="category :${categories}"
                                             th:value="${category.id}"
                                             th:text="${category.name}"

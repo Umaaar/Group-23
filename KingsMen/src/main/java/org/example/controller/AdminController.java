@@ -110,6 +110,7 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
                                  @RequestParam("imgName") String imgName) throws IOException{
  Product product = new Product();
   product.setId(productDTO.getId());
+    System.out.println(productDTO.getId());
   product.setName(productDTO.getName());
   product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
   product.setDescription(productDTO.getDescription());
