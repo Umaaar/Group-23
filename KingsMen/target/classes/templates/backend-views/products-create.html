@@ -1,0 +1,348 @@
+<!doctype html>
+<html html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+  <!-- Font Awesome Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" >
+
+  <title>KM Ecom</title>
+
+  <!-- Scripts -->
+  <link rel="stylesheet" th:href="@{/admin-assets/css/bootstrap.min.css}" href="/static/admin-assets/css/bootstrap.min.css">
+ 
+  <!-- plugins:css -->
+  <link rel="stylesheet" th:href="@{/admin-assets/vendors/mdi/css/materialdesignicons.min.css}" href="/static/admin-assets/vendors/mdi/css/materialdesignicons.min.css">
+
+  <link rel="stylesheet" th:href="@{/admin-assets/vendors/base/vendor.bundle.base.css}" href="/static/admin-assets/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" th:href="@{/admin-assets/cvendors/datatables.net-bs4/dataTables.bootstrap4.css}" href="/static/admin-assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" th:href="@{/admin-assets/css/style.css}" href="/static/admin-assets/css/style.css">
+  <!-- endinject -->
+ 
+</head>
+
+<body>
+<div class="container-scroller">
+    <!--Navigation bar-->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="navbar-brand-wrapper d-flex justify-content-center">
+          <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
+              <a class="navbar-brand brand-logo" href="#" th:href="@{/admin}">KM Ecom</a>
+              <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                  <span class="mdi mdi-sort-variant"></span>
+              </button>
+          </div>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+          <ul class="navbar-nav mr-lg-4 w-100">
+              <a href="#" th:href="@{/}" class="btn btn-sm btn-light">Visit Website</a>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right">
+  
+              <li class="nav-item nav-profile dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+  
+                      <span class="nav-profile-name"> ADMIN USERNAME </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+  
+  
+                    <a class="dropdown-item" th:href="@{/logout}">
+                        <i class="mdi mdi-logout text-primary"></i> LOG OUT 
+                    </a>
+                      <form id="logout-form" action="LOGOUT" method="POST" class="d-none">
+                        
+                      </form>
+                  </div>
+              </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+              data-toggle="offcanvas">
+              <span class="mdi mdi-menu"></span>
+          </button>
+      </div>
+  </nav>
+    <!--End Navigation bar-->
+  <div class="container-fluid page-body-wrapper">
+    <!-- Sidebar -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <ul class="nav">
+          <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/admin}">
+                  <i class="mdi mdi-home menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+              </a>
+          </li>
+          <!-- Customers -->
+  
+          <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/admin/customers}">
+                  <i class="mdi mdi-account-multiple menu-icon"></i>
+                  <span class="menu-title">Customers</span>
+              </a>
+          </li>
+  
+          <!-- Customer Queries -->
+          <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/admin/queries}">
+                  <i class="mdi mdi-account menu-icon"></i>
+                  <span class="menu-title">Customer Queries</span>
+              </a>
+          </li>
+  
+          <!-- Orders -->
+          <li class="nav-item">
+              <a class="nav-link" href="#" th:href="@{/admin/orders}">
+                  <i class="mdi mdi-credit-card-multiple menu-icon"></i>
+                  <span class="menu-title">Orders</span>
+              </a>
+          </li>
+  
+  
+          <!-- Categories -->
+          <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#categories" aria-expanded="false"
+                  aria-controls="categories">
+                  <i class="mdi mdi-barcode menu-icon"></i>
+                  <span class="menu-title">Categories</span>
+                  <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="categories">
+                  <ul class="nav flex-column ">
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/categories/create}">Add Category</a>
+                      </li>
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/categories}">View Categories</a></li>
+                  </ul>
+              </div>
+          </li>
+
+           <!-- Sizing -->
+           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#sizes" aria-expanded="false"
+                aria-controls="sizes">
+                <i class="mdi mdi-android-studio menu-icon"></i>
+            
+                <span class="menu-title">Sizing</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="sizes">
+                <ul class="nav flex-column ">
+                    <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/size/create}">Add Sizing</a>
+                    </li>
+                    <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/size}">View Sizing</a></li>
+                </ul>
+            </div>
+        </li>
+  
+  
+          <!-- Products -->
+          <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="collapse" href="#products" aria-expanded="false"
+                  aria-controls="products">
+                  <i class="mdi mdi-store menu-icon"></i>
+                  <span class="menu-title">Products</span>
+                  <i class="menu-arrow"></i>
+              </a>
+              <div class="collapse" id="products">
+                  <ul class="nav flex-column ">
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/products/create}">Add Product</a>
+                      </li>
+                      <li class="nav-item"> <a class="nav-link" href="#" th:href="@{/admin/products}">View Products</a></li>
+                  </ul>
+              </div>
+          </li>
+  
+  </nav>
+
+    <!-- End Sidebar -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="card">
+            <div class="card-header">
+                <h3> Create a new Product
+                    <a href="#" th:href="@{/admin/products}" class="btn btn-danger btn-sm text-white float-end">
+                        BACK
+                    </a>
+                </h3>
+            </div>
+            <div class="card-body">
+               
+                <form  th:action="@{/admin/products/create}" method="POST"  th:object="${productDTO}" enctype="multipart/form-data">
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#home-tab-pane" type="button" role="tab"
+                                aria-controls="home-tab-pane" aria-selected="true">
+                                Home
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="image-tab" data-bs-toggle="tab"
+                                data-bs-target="#image-tab-pane" type="button" role="tab"
+                                aria-controls="image-tab-pane" aria-selected="false">
+                                Product Images
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="inventory-tab" data-bs-toggle="tab"
+                                data-bs-target="#inventory-tab-pane" type="button" role="tab"
+                                aria-controls="inventory-tab-pane" aria-selected="false">
+                               Inventory Management System (IMS)
+                            </button>
+                        </li>
+
+        
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade border p-3 show active" id="home-tab-pane" role="tabpanel"
+                            aria-labelledby="home-tab" tabindex="0">
+                            <input type="hidden" name="id" th:field="*{id}">
+                            <div class="mb-3">
+                                <label>Name</label>
+                                <input type="text" class="form-control" required th:field="*{name}" name="name" id="name" placeholder="Enter name">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="category">Select Category</label>
+                                <select class="form-control" th:field="*{categoryId}" id="categoryId" name="categoryId">
+                                    <option th:each="category :${categories}"
+                                            th:value="${category.id}"
+                                            th:text="${category.name}"
+                                    >
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label>Price</label>
+                                <input type="number" class="form-control" required th:field="*{price}" name="price" id="price" placeholder="Enter price">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label>Product Description</label>
+                                <textarea class="form-control" rows="5" th:field="*{description}" name="description" id="description"></textarea>                           
+                           </div>
+
+                        </div>
+
+                        <div class="tab-pane fade border p-3" id="image-tab-pane" role="tabpanel"
+                            aria-labelledby="image-tab" tabindex="0">
+
+                            <div class="mb-3">
+                                <h5>Product Image</h5>
+            
+                                <div class="custom-file">
+                                    <input type="file"  class="custom-file-input" name="productImage" accept="image/jpeg, image/png"  id="productImage"/>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/images/productImage/' + productDTO.imageName}}" style="margin-top: 20px" alt=" ">
+                                </div>
+                                <input type="hidden" name="imgName" th:value="${productDTO.imageName}">
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade border p-3" id="inventory-tab-pane" role="tabpanel"
+                            aria-labelledby="inventory-tab" tabindex="0">
+                            
+
+                            <div class="mb-3">
+                                <label>Quantity</label>
+                                <input type="number" class="form-control" required th:field="*{stock}" name="stock" id="stock" placeholder="Enter quantity">
+                            </div>
+                            
+                           
+                        
+
+                            <div class="mb-3">
+                                <label for="size">Select Size</label>
+                                <select class="form-control" required th:field="*{size}" id="size" name="size">
+                                    <option value="sizes">--select a size--</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="7UK">7UK</option>
+                                    <option value="8UK">8UK</option>
+                                    <option value="9UK">9UK</option>
+                                    <option value="10UK">10UK</option>
+                                    <option value="11UK">11UK</option>
+                                    <option value="12UK">12UK</option>
+                                    <option value="13UK">13UK</option>
+                                    <option value="O/S">Onesize</option>
+                                </select>
+                            </div>
+
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        
+
+
+
+
+        <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- plugins:js -->
+<script th:src="@{/admin-assets/vendors/base/vendor.bundle.base.js}" src="/static/admin-assets/vendors/base/vendor.bundle.base.js"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<script  th:src="@{/admin-assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js}" src="/static/admin-assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+
+
+<script th:src="@{/admin-assets/js/off-canvas.js}" src="/static/admin-assets/js/off-canvas.js"></script>
+<script th:src="@{/admin-assets/js/hoverable-collapse.js}" src="/static/admin-assets/js/hoverable-collapse.js"></script>
+<script th:src="@{/admin-assets/js/template.js}" src="/static/admin-assets/js/template.js"></script>
+<!-- endinject -->
+<!-- Custom js for this page-->
+
+
+<script th:src="@{/admin-assets/js/jquery.dataTables.js}" src="/static/admin-assets/js/jquery.dataTables.js"></script>
+
+<script>
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#imgPreview').attr('src', e.target.result).width(100).height(100);
+            }
+            reader.readAsDataURL(input.files[0])
+        }
+    }
+    $('#productImage').change(function(){
+        readURL(this);
+    });
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+
+</body>
+
+</html>
