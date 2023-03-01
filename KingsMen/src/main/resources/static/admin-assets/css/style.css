@@ -7,6 +7,11 @@
     
   }
 
+.icon-box {
+  font-size: 45px;
+  color: #fff;
+}
+
   @-webkit-keyframes flash {
     0% {
       opacity: 1;

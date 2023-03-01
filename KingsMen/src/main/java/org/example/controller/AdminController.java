@@ -3,16 +3,19 @@ package org.example.controller;
 
 import org.example.dto.ProductDTO;
 import org.example.model.Category;
+import org.example.model.CustomUserDetail;
 import org.example.model.Product;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
 import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,11 +37,14 @@ public class AdminController {
     @Autowired
     CustomUserDetailService customUserDetailService;
    @GetMapping("/admin")
-   public String adminHome(Model model){
+   public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model){
        System.out.println(customUserDetailService.getUserCount());
+       model.addAttribute("adminname",authentication.getFirstname());
        model.addAttribute("total_customers",String.valueOf(customUserDetailService.getUserCount()));
+       model.addAttribute("total_catagories",String.valueOf(categoryService.getCatCount()));
        model.addAttribute("total_products",String.valueOf(productService.getProductCount()));
-       model.addAttribute("total_categories",String.valueOf(categoryService.getCategoryCount()));
+       model.addAttribute("total_in_stock_products",String.valueOf(productService.getInStockProducts()));
+       model.addAttribute("total_in_out_of_stock_products",String.valueOf(productService.getOutOfStockProducts()));
        
        return "/backend-views/admin-index";
    }

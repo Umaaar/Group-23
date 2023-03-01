@@ -9,8 +9,8 @@
 
 /* Cart Page CSS */
 .cart-padding{
-    padding: 2%;
-    text-align: center;
+    padding: 20px;
+    font-family: Sans serif roman;
 }
 #order-table{
     border-collapse: separate;
@@ -36,6 +36,7 @@ td{
 .cart-item{
     background-color: #F8F8F8;
 }
+
 .total-box{
     border: 2px solid grey;
     border-radius: 8px;
@@ -47,7 +48,7 @@ td{
     margin: 0 auto;
     width: 90%;
     padding: 5px;
-    background-color: #01014d;
+    background-color: #000080;
     border: transparent;
     border-radius: 8px;
     color: white;
@@ -75,7 +76,6 @@ td{
     color: red;
 }
 /* End of Cart Page CSS*/
-
 
 /* Index page */
 
