@@ -15,10 +15,6 @@ import java.util.Optional;
 public class CategoryService {
     @Autowired
     CatagoryRepository categoryRepository;
-
-    public Integer getCatCount(){
-        return Math.toIntExact(categoryRepository.count());
-    }
     public List<Category> getAllCategory(){
 
         return categoryRepository.findAll();

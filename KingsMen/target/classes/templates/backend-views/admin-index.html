@@ -49,15 +49,15 @@
   
               <li class="nav-item nav-profile dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-<!--                      "-->
-                      <span class="nav-profile-name"th:text="${adminname}" ><p ></p></span>
+  
+                      <span class="nav-profile-name"> ADMIN USERNAME </span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
   
   
-                    <a class="dropdown-item" th:href="@{/logout}">
-                        <i class="mdi mdi-logout text-primary"></i> LOG OUT 
-                    </a>
+                      <a class="dropdown-item" href="LOGOUT">
+                          <i class="mdi mdi-logout text-primary"></i> LOG OUT 
+                      </a>
                       <form id="logout-form" action="LOGOUT" method="POST" class="d-none">
                         
                       </form>
@@ -180,21 +180,15 @@
                 <div class="col-md-3">
                     <div class="card card-body bg-primary text-white mb-3">
                         <label>Total Customers</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-account-multiple"></i>
-                        </div>
                         <h1 th:text="${total_customers}"> </h1>
                         <a th:href="@{admin/orders}" class="text-white">view</a>
                     </div>
                 </div>
     
                 <div class="col-md-3">
-                    <div class="card card-body bg-danger text-white mb-3">
+                    <div class="card card-body bg-success text-white mb-3">
                         <label>Total Categories</label>
                         <h1 th:text="${total_categories}"> </h1>
-                        <div class="icon-box">
-                            <i class="mdi mdi-barcode"></i>
-                        </div>
                         <a th:href="@{admin/categories}" class="text-white">view</a>
                     </div>
                 </div>
@@ -203,9 +197,6 @@
                     <div class="card card-body bg-warning text-white mb-3">
                         <label>Total Products</label>
                         <h1 th:text="${total_products}"> </h1>
-                        <div class="icon-box">
-                            <i class="mdi mdi-store"></i>
-                        </div>
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
@@ -213,10 +204,7 @@
                 <div class="col-md-3">
                     <div class="card card-body bg-info text-white mb-3">
                         <label>Total Orders</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-credit-card-multiple"></i>
-                        </div>
-                        <h1 > </h1>
+                        <h1 th:text="${total_orders}"> </h1>
                         <a th:href="@{admin/orders}" class="text-white">view</a>
                     </div>
                 </div>
@@ -230,74 +218,24 @@
                 <div class="col-md-3">
                     <div class="card card-body bg-primary text-white mb-3">
                         <label>Total Out of Stock Products</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-store"></i>
-                        </div>
-                        <h1 > </h1>
+                        <h1 th:text="${total_inStock}"> </h1>
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
     
                 <div class="col-md-3">
-                    <div class="card card-body bg-danger text-white mb-3">
+                    <div class="card card-body bg-success text-white mb-3">
                         <label>Total In Stock Products</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-store"></i>
-                        </div>
-                        <h1 > </h1>
+                        <h1 th:text="${total_outStock}"> </h1>
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
     
                 <div class="col-md-3">
                     <div class="card card-body bg-warning text-white mb-3">
-                        <label>In Process Orders</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-credit-card-multiple"></i>
-                        </div>
-                        <h1 > </h1>
-                        <a th:href="@{admin/orders}" class="text-white">view</a>
-
+                        <label>Total Admin</label>
+                        <h1 th:text="${total_admin}"> </h1>
                     
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="card card-body bg-info text-white mb-3">
-                        <label>Completed Orders</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-credit-card-multiple"></i>
-                        </div>
-                        <h1 > </h1>
-                        <a th:href="@{admin/orders}" class="text-white">view</a>
-                    </div>
-                </div>
-    
-    
-               </div>
-               <hr>
-               <div class="row">
-    
-    
-                <div class="col-md-3">
-                    <div class="card card-body bg-primary text-white mb-3">
-                        <label>Awaiting Confirmation Orders</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-credit-card-multiple"></i>
-                        </div>
-                        <h1 > </h1>
-                        <a th:href="@{admin/orders}" class="text-white">view</a>
-                    </div>
-                </div>
-    
-                <div class="col-md-3">
-                    <div class="card card-body bg-danger text-white mb-3">
-                        <label>Total Admins</label>
-                        <div class="icon-box">
-                            <i class="mdi mdi-account-multiple"></i>
-                        </div>
-                        <h1 > </h1>
-                        <a th:href="@{/}" class="text-white">view</a>
                     </div>
                 </div>
     

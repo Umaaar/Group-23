@@ -55,9 +55,9 @@
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
   
   
-                    <a class="dropdown-item" th:href="@{/logout}">
-                        <i class="mdi mdi-logout text-primary"></i> LOG OUT 
-                    </a>
+                      <a class="dropdown-item" href="LOGOUT">
+                          <i class="mdi mdi-logout text-primary"></i> LOG OUT 
+                      </a>
                       <form id="logout-form" action="LOGOUT" method="POST" class="d-none">
                         
                       </form>
@@ -166,42 +166,7 @@
     <!-- End Sidebar -->
     <div class="main-panel">
       <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-12 ">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3> Orders
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordererd table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                    <th>View Details</th>                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                    <tr th:each="order, iStat : ${orders}">
-                                        <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="#">name</td>
-                                        <td th:text="#">email</td>
-                                        <td th:text="#">order status</td>
-                                        <td><a th:href="#" class="btn btn-primary btn-sm">View</a></td>
-                                    </tr>
-                                    
-                            </tbody>
-                        </table>
-    
-                    </div>
-                </div>
-            </div>
-        </div>
+       <!--@yield('content') --> 
         <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
       </div>
     </div>

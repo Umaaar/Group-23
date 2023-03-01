@@ -51,7 +51,7 @@
               <li class="nav-item nav-profile dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
   
-                      <span class="nav-profile-name"> ADMIN USERNAME </span>
+                      <span class="nav-profile-name" th:text="${}">  </span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
   
@@ -167,43 +167,7 @@
     <!-- End Sidebar -->
     <div class="main-panel">
       <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-12 ">
-
-                <div class="card">
-                    <div class="card-header">
-                        <h3> Customers
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordererd table-striped">
-                            <thead>
-                                <tr>
-                                    <th>User ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                    <tr th:each="customer : ${customers}">
-                                        <td th:text="#">1</td>
-                                        <td th:text="#">First Name</td>
-                                        <td th:text="#">Last Name</td>
-                                        <td th:text="#">Email</td>
-                                        <td th:text="#">Address</td>
-                                    </tr>
-                                    
-                            </tbody>
-                        </table>
-    
-                    </div>
-                </div>
-            </div>
-        </div>
+       <!--@yield('content') --> 
         <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
       </div>
     </div>
