@@ -92,10 +92,20 @@ public class AdminController {
 /* --------------------------------------------------- Product CRUD Mapping --------------------------------------------------------*/
 
 @GetMapping("/admin/products")
-public String products(Model model){
-   model.addAttribute("products", productService.getAllProduct());
-   return "/backend-views/products";
+public String products(Model model ,String keyword) {
+
+    if (keyword != null) {
+        System.out.println(keyword);
+        model.addAttribute("products", productService.findByKeyword(keyword));
+
+//        System.out.println(productService.findByKeyword(keyword));
+    } else {
+        model.addAttribute("products", productService.getAllProduct());
+
+    }
+    return "/backend-views/products";
 }
+
 
 @GetMapping("/admin/products/create")
 public String createProducts(Model model){

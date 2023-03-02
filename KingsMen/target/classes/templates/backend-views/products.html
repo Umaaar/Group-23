@@ -175,7 +175,13 @@
                                 Add Products
                             </a>
                         </h3>
+                        <form th:action="@{/admin/products}" method="get">
+
+                            <input type="search" name="keyword" id="txtSearch">
+                            <button type="submit">Search</button>
+                        </form>
                     </div>
+
                     <div class="card-body">
                         <table class="table table-bordererd table-striped">
                             <thead>

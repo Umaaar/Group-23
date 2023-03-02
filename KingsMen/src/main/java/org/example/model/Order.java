@@ -1,18 +1,20 @@
 package org.example.model;
 
+import java.util.List;
+
 public class Order {
     private int order_id;
     private String order_name;
     private String order_email;
-    private int order_product_id;
+    private List<Product> order_products;
     private String order_status;
     private int order_total;
 
-    public Order(int order_id, String order_name, String order_email, int order_product_id, String order_status, int order_total) {
+    public Order(int order_id, String order_name, String order_email, String order_status, int order_total) {
         this.order_id = order_id;
         this.order_name = order_name;
         this.order_email = order_email;
-        this.order_product_id = order_product_id;
+
         this.order_status = order_status;
         this.order_total = order_total;
     }
@@ -41,13 +43,8 @@ public class Order {
         this.order_email = order_email;
     }
 
-    public int getOrder_product_id() {
-        return order_product_id;
-    }
 
-    public void setOrder_product_id(int order_product_id) {
-        this.order_product_id = order_product_id;
-    }
+
 
     public String getOrder_status() {
         return order_status;
@@ -71,7 +68,6 @@ public class Order {
                 "order_id=" + order_id +
                 ", order_name='" + order_name + '\'' +
                 ", order_email='" + order_email + '\'' +
-                ", order_product_id=" + order_product_id +
                 ", order_status='" + order_status + '\'' +
                 ", order_total=" + order_total +
                 '}';

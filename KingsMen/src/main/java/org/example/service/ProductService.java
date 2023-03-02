@@ -70,6 +70,10 @@ public class ProductService {
         return  outOfStockProducts.size();
     }
 
+    public List<Product> findByKeyword(String keyword){
+        return productRepository.findByKeyword(keyword);
+    }
+
  
 
         
