@@ -8,7 +8,7 @@
 /* Cart Page CSS */
 .cart-padding{
     padding: 20px;
-    font-family: Sans serif roman;
+    text-align: center;
 }
 #order-table{
     border-collapse: separate;
@@ -46,7 +46,7 @@ td{
     margin: 0 auto;
     width: 90%;
     padding: 5px;
-    background-color: #000080;
+    background-color: #000;
     border: transparent;
     border-radius: 8px;
     color: white;
