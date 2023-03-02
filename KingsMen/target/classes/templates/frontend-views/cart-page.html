@@ -15,7 +15,7 @@
         <div th:insert="/frontend-views/fragments :: navigation" ></div>
     </script>
         <div class="cart-padding">
-            <h1>My Cart</h1>
+            <h2>My Cart</h2>
             <hr>
             <br>
             <br>
@@ -36,17 +36,7 @@
                             <td><img src="https://www.slaters.co.uk/media/catalog/product/cache/069f36cb500929f7239f8512ba884055/l/o/look_33_-_002036285011-bi-02.jpg"><label class="item-name">Slim Fit Blue Textured Jersey Blazer</label></td>
                             <td>£79</td>
                             <td><input type="button" value="-" class="quantity-btn" field="quantity"/>
-                                <input type="text" name="quantity" value='0' class="item-quantity"/>
-                                <input type="button" value="+" class="quantity-btn" field="quantity"/>
-                            </td>
-                            <td>£79</td>
-                            <td class="remove-btn"><strong>X</strong></td>
-                        </tr>
-                        <tr class="cart-item">
-                            <td><img src="https://www.slaters.co.uk/media/catalog/product/cache/069f36cb500929f7239f8512ba884055/l/o/look_33_-_002036285011-bi-02.jpg"><label class="item-name">Slim Fit Blue Textured Jersey Blazer</label></td>
-                            <td>£79</td>
-                            <td><input type="button" value="-" class="quantity-btn" field="quantity"/>
-                                <input type="text" name="quantity" value='0' class="item-quantity"/>
+                                <input type="text" name="quantity" value='1' class="item-quantity"/>
                                 <input type="button" value="+" class="quantity-btn" field="quantity"/>
                             </td>
                             <td>£79</td>
@@ -56,7 +46,7 @@
                     </table>
                 </div>
                 <div class="col-md-3 col-md-shadow-sm bg-white p-3" id="total-box">
-                    <h3 class="cart-total">Total: £_.__</h3>
+                    <h3 class="cart-total">Total: £79</h3>
                     <div class = "center">
                         <button class="pay-button ">Pay & Go</button>
                     </div>
