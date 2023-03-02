@@ -49,7 +49,7 @@ public class AdminController {
        model.addAttribute("total_products",String.valueOf(productService.getProductCount()));
        model.addAttribute("total_in_stock_products",String.valueOf(productService.getInStockProducts()));
        model.addAttribute("total_in_out_of_stock_products",String.valueOf(productService.getOutOfStockProducts()));
-       
+       model.addAttribute("total_orders",String.valueOf(orderService.getOrderCount()));
        return "/backend-views/admin-index";
    }
    
