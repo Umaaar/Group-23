@@ -58,7 +58,7 @@ public class AdminController {
    public String getCat(Model model){ 
     model.addAttribute("categories", categoryService.getAllCategory());
        System.out.println(categoryService.getAllCategory());
-    return "/backend-views/categories";
+    return "/backend-views/categories" ;
    }
 
     @GetMapping("/admin/categories/create")
