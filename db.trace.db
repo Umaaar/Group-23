@@ -134,3 +134,45 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 18 more
+2023-03-02 02:34:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ORDER[*] (ORDER_ID INTEGER NOT NULL, ORDER_EMAIL VARCHAR(255), ORDER_NAME VARCHAR(255), ORDER_STATUS VARCHAR(255), ORDER_TOTAL INTEGER NOT NULL, PRIMARY KEY (ORDER_ID))"; expected "identifier"; SQL statement:
+create table order (order_id integer not null, order_email varchar(255), order_name varchar(255), order_status varchar(255), order_total integer not null, primary key (order_id)) [42001-200]
+2023-03-02 02:35:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ORDER[*] (ID INTEGER NOT NULL, EMAIL VARCHAR(255), NAME VARCHAR(255), STATUS VARCHAR(255), TOTAL INTEGER NOT NULL, PRIMARY KEY (ID))"; expected "identifier"; SQL statement:
+create table order (id integer not null, email varchar(255), name varchar(255), status varchar(255), total integer not null, primary key (id)) [42001-200]
+2023-03-02 02:36:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ORDER[*] (ID INTEGER NOT NULL, EMAIL VARCHAR(255), NAME VARCHAR(255), STATUS VARCHAR(255), TOTAL INTEGER NOT NULL, PRIMARY KEY (ID))"; expected "identifier"; SQL statement:
+create table order (id integer not null, email varchar(255), name varchar(255), status varchar(255), total integer not null, primary key (id)) [42001-200]
+2023-03-02 02:38:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE ORDER[*] (ID INTEGER NOT NULL, EMAIL VARCHAR(255), NAME VARCHAR(255), STATUS VARCHAR(255), TOTAL BIGINT, PRIMARY KEY (ID))"; expected "identifier"; SQL statement:
+create table order (id integer not null, email varchar(255), name varchar(255), status varchar(255), total bigint, primary key (id)) [42001-200]
+2023-03-02 02:42:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'149.0' (ORDER_DETAILS: ""TOTAL"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:42:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'149.0' (ORDER_DETAILS: ""TOTAL"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:42:50 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'asdf' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:42:50 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'asdf' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:43:06 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:43:06 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:43:19 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:43:19 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:43:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
+2023-03-02 02:43:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (ORDER_DETAILS: ""STATUS"" INTEGER)"; SQL statement:
+INSERT INTO "PUBLIC"."ORDER_DETAILS"("ID","EMAIL","NAME","STATUS","TOTAL")VALUES(?,?,?,?,?) [22018-200]
