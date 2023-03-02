@@ -7,6 +7,7 @@ import org.example.model.CustomUserDetail;
 import org.example.model.Product;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
+import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,6 +37,9 @@ public class AdminController {
 
     @Autowired
     CustomUserDetailService customUserDetailService;
+
+    @Autowired
+    OrderService orderService;
    @GetMapping("/admin")
    public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model){
        System.out.println(customUserDetailService.getUserCount());
@@ -229,8 +233,27 @@ return "/backend-views/size-create";
 
 
     @GetMapping("/admin/orders")
-    public String adminOrders(){ return "/backend-views/admin-orders";
+    public String adminOrders(Model model ,String keyword){
+
+        if(keyword!=null){
+            model.addAttribute("orders",orderService.findByKeyword(keyword) );
+
+        }else{
+            model.addAttribute("orders",orderService.getAllOrders() );
+
+        }
+
+
+
+        return "/backend-views/admin-orders";
 }
+    @GetMapping("/admin/orders/delete/{id}")
+    public String removeOrder(@PathVariable int id){
+
+        orderService.removeProductById(id);
+        return "redirect:/admin/orders";
+    }
+
 
     @GetMapping("/admin/accounts")
     public String adminAccounts(){ return "/backend-views/admin-accounts";
