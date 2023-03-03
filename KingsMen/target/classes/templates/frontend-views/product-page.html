@@ -72,7 +72,7 @@
                 <b th:text="${product.name}"></b><br>
                 <span class="small text-muted" th:text="'£' + ${product.price}"></span>
               </p>
-              <button type="button" class="btn btn-submit-p btn-outline-secondary mx-auto d-block mt-3">Add to basket</button>
+             <a th:href="@{'/product/product-detail/' + ${product.id}}" class="btn btn-submit-p btn-outline-secondary mx-auto d-block mt-3"> View Details</a>
             </div>
           </div>
         </div>
