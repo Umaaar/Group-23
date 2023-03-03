@@ -20,7 +20,7 @@
     padding-right: 5px;
 }
 #order-table th {
-    width: 20%;
+    width: 16.66%;
     font-size: 140%;
     text-align: center;
 }
@@ -71,6 +71,11 @@ td{
     height:25px;
 }
 .remove-btn {
+    color: red;
+}
+
+.remove-btn a{
+    text-decoration: none;
     color: red;
 }
 /* End of Cart Page CSS*/

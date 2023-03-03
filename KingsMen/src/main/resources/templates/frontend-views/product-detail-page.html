@@ -43,7 +43,7 @@
               <h2 class="pt-3 font-weight-bold" th:text="${product.name}"></h2>
               <p class="pb-4 text-muted" th:text="'£' + ${product.price}"></p>
   
-                <form class="form">
+                <form class="form" th:href="@{'/addToCart/' + ${product.id}}" th:action="@{'/addToCart/' + ${product.id}}">
                     <select class="custom-select mb-3">
                       <option value="sizes">--select a size--</option>
                       <option value="S">S</option>
@@ -62,7 +62,7 @@
                     </select>
   
                     <select class="custom-select mb-3">
-                        <option selected>--select a quantity--</option>
+                        <option value="quantity">--select a quantity--</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -72,14 +72,11 @@
                         <option value="7">7</option>
                         <option value="7">8</option>
                         <option value="7">9</option>
-                      </select>
-  
-  
-                </form>
-  
-                <form action="" method="post"><input type="hidden"
-                  value="" name="id"><button type="submit"
-                  class="btn btn-submit-d btn-block btn-dark font-weight-light">Add to basket</button>            
+                    </select>
+                    </br>
+                    <button type="submit" class="btn btn-submit-d btn-block btn-dark font-weight-light">Add to basket</button>
+                  </form>
+                        
                   <h3 class="mt-5 mb-3">Details</h4>
             <span>
               <p class="my-4 font-weight-light" th:text="${product.description}"></p>
