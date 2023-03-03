@@ -1,8 +1,12 @@
 package org.example.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Data
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -10,7 +14,7 @@ public class OrderDetails {
     private Integer id;
     private String name;
     private String email;
-//    private List<Product> order_products;
+    private String order_products;
     private Integer status;
     private Long total;
 
@@ -52,5 +56,13 @@ public class OrderDetails {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public String getOrder_products() {
+        return order_products;
+    }
+
+    public void setOrder_products(String order_products) {
+        this.order_products = order_products;
     }
 }

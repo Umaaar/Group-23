@@ -1,9 +1,11 @@
 package org.example.controller;
 
 
+import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
+import org.example.model.OrderDetails;
 import org.example.model.Product;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
@@ -52,6 +54,8 @@ public class AdminController {
        model.addAttribute("total_orders",String.valueOf(orderService.getOrderCount()));
        return "/backend-views/admin-index";
    }
+
+
    
 /* ---------------------------------------------------Category CRUD Mapping ------------------------------------------------- */
    @GetMapping("/admin/categories")
@@ -253,6 +257,25 @@ return "/backend-views/size-create";
         orderService.removeProductById(id);
         return "redirect:/admin/orders";
     }
+    @GetMapping("/admin/orders/update/{id}")
+    public String updateOrderGet(@PathVariable Integer id, Model model) {
+        System.out.println("it worked");
+        OrderDetails order = orderService.getOrderByorder_id(id).get();
+        OrderDTO orderDTO = new OrderDTO();
+        orderDTO.setId(order.getId());
+        orderDTO.setOrder_products(order.getOrder_products());
+        orderDTO.setStatus(order.getStatus());
+        orderDTO.setEmail(order.getEmail());
+        orderDTO.setTotal(order.getTotal());
+        orderDTO.setName(order.getName());
+
+        model.addAttribute("orderDTO", orderDTO);
+
+
+        return "/backend-views/orders-update";
+    }
+
+
 
 
     @GetMapping("/admin/accounts")

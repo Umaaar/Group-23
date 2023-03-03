@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Entity
 @Data
+@Table(name="Product")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
