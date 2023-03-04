@@ -23,11 +23,10 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Product</th>
-                                <th scope="col" >Size</th>
-                                <th scope="col" >Price</th>
-                                <th scope="col" >Quantity</th>
-                                <th scope="col" >Total</th>
-                                <th scope="col" >Remove</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Remove</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,13 +34,8 @@
                                 <td th:text="${iterator.index+1}"></td>
                                 <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name}"></label></td>
                                 <td th:text = "${item.size}"></td>
+                                <td th:text="${item.stock}"></td>
                                 <td th:text="'£' + ${item.price}"></td>
-                                <td th:text="${quantity}">
-                                    <input type="button" value="-" class="quantity-btn minus" field="quantity"/>
-                                    <input type="number" name="quantity" th:value="${item.quantity}" class="item-quantity"/>
-                                    <input type="button" value="+" class="quantity-btn plus" field="quantity"/>
-                                </td>
-                                <td th:text="'£' + ${item.price * item.quantity}"></td>
                                 <td class="remove-btn"><strong><a th:href="@{'/cart/removeItem/' + ${iterator.index}}">X</a></strong></td>
                             </tr>
                         </tbody>

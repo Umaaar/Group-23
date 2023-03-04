@@ -38,7 +38,7 @@ public class CartController {
 
     @GetMapping("/checkout")
     public String checkout(Model model){
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantity).sum());
         return "checkout";
 
     }
@@ -47,7 +47,8 @@ public class CartController {
     public String dropdown(@PathVariable Long id, ProductDTO dropdown, Model model){
         Product item = productService.getProductById(id).get();
         item.setSize(dropdown.getSize());
-        item.setQuantity(dropdown.getQuantity());
+        item.setStock(dropdown.getStock());
+        item.setPrice(item.getPrice() * item.getStock());
         // model.addAttribute("quantity", item.setQuantity(dropdown.getQuantity()));
         GlobalData.cart.add(productService.getProductById(id).get());
         return "redirect:/cart";
