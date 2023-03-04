@@ -16,42 +16,47 @@
             <h2>My Cart</h2>
             <hr>
             <br>
+            <h4 th:text="'Items: ' + ${cartCount}"></h4>
             <br>
-            <div class = "row">
-                <div class="col-md-9">
-                    <table class="table table-hover" id="order-table">
+            <table class="table table-hover" id="order-table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Product</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-                                <th scope="col">Remove</th>
+                                <th scope="col" >Size</th>
+                                <th scope="col" >Price</th>
+                                <th scope="col" >Quantity</th>
+                                <th scope="col" >Total</th>
+                                <th scope="col" >Remove</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="cart-item" th:each="item,iterator : ${cart}">
                                 <td th:text="${iterator.index+1}"></td>
-                                <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name} + ',  Size: ' + ${item.size}"></label></td>
+                                <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name}"></label></td>
+                                <td th:text = "${item.size}"></td>
                                 <td th:text="'£' + ${item.price}"></td>
-                                <td th:text="${item.stock}">
-                                    <input type="button" value="-" class="quantity-btn" field="quantity"/>
-                                    <input type="text" name="quantity" value='1' class="item-quantity"/>
-                                    <input type="button" value="+" class="quantity-btn" field="quantity"/>
+                                <td>
+                                    <input type="button" value="-" class="quantity-btn minus" field="quantity"/>
+                                    <input type="number" name="quantity" th:value="${item.quantity}" class="item-quantity"/>
+                                    <input type="button" value="+" class="quantity-btn plus" field="quantity"/>
                                 </td>
-                                <td th:text="'£' + ${item.price}"></td>
+                                <td th:text="'£' + ${item.price * item.quantity}"></td>
                                 <td class="remove-btn"><strong><a th:href="@{'/cart/removeItem/' + ${iterator.index}}">X</a></strong></td>
                             </tr>
                         </tbody>
-                    </table>
-                </div>
-                <div class="col-md-3 col-md-shadow-sm bg-white p-3" id="total-box">
-                    <h3 class="cart-total" th:text="${total}"></h3>
-                    <div class = "center">
-                        <button class="pay-button ">Pay & Go</button>
+             </table>
+                    <div class="row">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4 shadow bg-white p-3" id="total-box">
+                            <h3 class="cart-total" th:text="'Total: £' + ${total}"></h3>
+                            <div class = "center">
+                                <button class="pay-button ">Pay & Go</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                
             </div>
         </div>
         <footer>
@@ -59,3 +64,4 @@
         </footer>
     </body>
 </html>
+

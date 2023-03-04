@@ -20,10 +20,11 @@
     padding-right: 5px;
 }
 #order-table th {
-    width: 16.66%;
+    width: 14.285%;
     font-size: 140%;
     text-align: center;
 }
+
 th{
     text-align: center;
     border: none;
