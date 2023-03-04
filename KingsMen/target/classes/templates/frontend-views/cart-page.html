@@ -36,7 +36,7 @@
                                 <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name}"></label></td>
                                 <td th:text = "${item.size}"></td>
                                 <td th:text="'£' + ${item.price}"></td>
-                                <td>
+                                <td th:text="${quantity}">
                                     <input type="button" value="-" class="quantity-btn minus" field="quantity"/>
                                     <input type="number" name="quantity" th:value="${item.quantity}" class="item-quantity"/>
                                     <input type="button" value="+" class="quantity-btn plus" field="quantity"/>

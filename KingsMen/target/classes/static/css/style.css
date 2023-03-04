@@ -363,6 +363,10 @@ p.about-us-content {
 /* End of Customer Dashboard css */
 
 /* Product page / Product detail page */
+.size-quantity{
+    padding: 2% 0%;
+}
+
 .btn-product {
     background-color: black;
     color: #ffffff;

@@ -48,7 +48,7 @@ public class CartController {
         Product item = productService.getProductById(id).get();
         item.setSize(dropdown.getSize());
         item.setQuantity(dropdown.getQuantity());
-        // model.addAttribute("quantity", dropdown.getQuantity());
+        // model.addAttribute("quantity", item.setQuantity(dropdown.getQuantity()));
         GlobalData.cart.add(productService.getProductById(id).get());
         return "redirect:/cart";
     }
