@@ -169,14 +169,14 @@
                 <div class="card">
                     <div class="card-header">
                         <h3> Update the Order
-                            <a href="#" th:href="@{/admin/products}" class="btn btn-danger btn-sm text-white float-end">
+                            <a href="#" th:href="@{/admin/orders}" class="btn btn-danger btn-sm text-white float-end">
                                 BACK
                             </a>
                         </h3>
                     </div>
                     <div class="card-body">
 
-                        <form  th:action="@{/admin/orders/update" method="POST"  th:object="${orderDTO}" enctype="multipart/form-data">
+                        <form  th:action="@{/admin/orders/update}" method="POST"  th:object="${orderDTO}" enctype="multipart/form-data">
 
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -210,12 +210,12 @@
 
                                     <div class="mb-3">
                                         <label>Email</label>
-                                        <input type="number" class="form-control" required th:field="*{email}" name="email" id="email" placeholder="Enter price">
+                                        <input type="text" class="form-control"  required th:field="*{email}" name="email" id="email" placeholder="Customer Email">
                                     </div>
 
                                     <div class="mb-3">
                                         <label>Order Total</label>
-                                        <input type="number" class="form-control" required th:field="*{price}" name="price" id="price" placeholder="Enter price">
+                                        <input type="number" class="form-control" disabled required th:field="*{total}" name="total" id="total" placeholder="Enter price">
                                     </div>
 
                                     <div class="mb-3">
@@ -236,15 +236,60 @@
 
                                     <div class="mb-3">
                                         <h5>Products Ordered</h5>
+                                        <div class="card-body">
+                                            <table class="table table-bordererd table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>SN</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Size</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Stock Availablity</th>
+                                                    <th>Update</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
 
-                                        <div class="custom-file">
-                                            <input type="file"  class="custom-file-input" name="productImage" accept="image/jpeg, image/png"  id="productImage"/>
+<!--                                                <tr th:each="product, iStat : ${products}">-->
+<!--                                                    <td th:text="${iStat.index + 1}">1</td>-->
+<!--                                                    <td th:text="${product.name}">name</td>-->
+<!--                                                    <td th:text="${product.category.name}">category</td>-->
+<!--                                                    <td th:text="${product.size}">size</td>-->
+<!--                                                    <td th:text="${product.price}">price</td>-->
+<!--                                                    <td th:text="${product.stock}">quantity</td>-->
+<!--                                                    <td th:if="${product.stock > 1}">-->
+<!--                                                        <label class="label-stock bg-success">In Stock</label>-->
+<!--                                                    </td>-->
+<!--                                                    <td th:if="${product.stock <= 1}">-->
+<!--                                                        <label class="label-stock bg-danger">Out of Stock</label>-->
+<!--                                                    </td>-->
+
+<!--                                                    <td>-->
+<!--                                                        <a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}"-->
+<!--                                                           class="btn btn-sm btn-success">Update</a>-->
+
+<!--                                                    </td>-->
+<!--                                                    <td>-->
+<!--                                                        <a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}"-->
+<!--                                                           onclick="return confirm('Are you sure, you want to delete this data?')"-->
+<!--                                                           class="btn btn-sm btn-danger">-->
+<!--                                                            Delete-->
+<!--                                                        </a>-->
+
+<!--                                                    </td>-->
+<!--                                                </tr>-->
+
+<!--                                                </tbody>-->
+<!--                                            </table>-->
 
                                         </div>
-                                        <div class="form-group">
-                                            <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{${'/images/productImage/' + productDTO.imageName}}" style="margin-top: 20px" alt=" ">
+
+                                        <div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
-                                        <input type="hidden" name="imgName" th:value="${productDTO.imageName}">
                                     </div>
                                 </div>
 
@@ -254,36 +299,34 @@
 
                                     <div class="mb-3">
                                         <label>Quantity</label>
-                                        <input type="number" class="form-control" required th:field="*{stock}" name="stock" id="stock" placeholder="Enter quantity">
+<!--                                        <input type="number" class="form-control" required th:field="*{stock}" name="stock" id="stock" placeholder="Enter quantity">-->
                                     </div>
 
 
 
 
-                                    <div class="mb-3">
-                                        <label for="size">Select Size</label>
-                                        <select class="form-control" required th:field="*{size}" id="size" name="size">
-                                            <option value="sizes">--select a size--</option>
-                                            <option value="S">S</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <option value="XXL">XXL</option>
-                                            <option value="7UK">7UK</option>
-                                            <option value="8UK">8UK</option>
-                                            <option value="9UK">9UK</option>
-                                            <option value="10UK">10UK</option>
-                                            <option value="11UK">11UK</option>
-                                            <option value="12UK">12UK</option>
-                                            <option value="13UK">13UK</option>
-                                            <option value="O/S">Onesize</option>
-                                        </select>
-                                    </div>
+<!--                                    <div class="mb-3">-->
+<!--                                        <label for="size">Select Size</label>-->
+<!--                                        <select class="form-control" required th:field="*{size}" id="size" name="size">-->
+<!--                                            <option value="sizes">&#45;&#45;select a size&#45;&#45;</option>-->
+<!--                                            <option value="S">S</option>-->
+<!--                                            <option value="M">M</option>-->
+<!--                                            <option value="L">L</option>-->
+<!--                                            <option value="XL">XL</option>-->
+<!--                                            <option value="XXL">XXL</option>-->
+<!--                                            <option value="7UK">7UK</option>-->
+<!--                                            <option value="8UK">8UK</option>-->
+<!--                                            <option value="9UK">9UK</option>-->
+<!--                                            <option value="10UK">10UK</option>-->
+<!--                                            <option value="11UK">11UK</option>-->
+<!--                                            <option value="12UK">12UK</option>-->
+<!--                                            <option value="13UK">13UK</option>-->
+<!--                                            <option value="O/S">Onesize</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
 
 
-                                    <div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
+
                                 </div>
                         </form>
 

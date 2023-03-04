@@ -263,7 +263,7 @@ return "/backend-views/size-create";
         OrderDetails order = orderService.getOrderByorder_id(id).get();
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
-        orderDTO.setOrder_products(order.getOrder_products());
+//        orderDTO.setOrder_products(order.getOrder_products());
         orderDTO.setStatus(order.getStatus());
         orderDTO.setEmail(order.getEmail());
         orderDTO.setTotal(order.getTotal());
