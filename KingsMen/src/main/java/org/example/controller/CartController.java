@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.Product;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
+import org.example.model.OrderItem;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
 import org.example.service.OrderService;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.example.dto.OrderDTO;
 
@@ -57,12 +60,25 @@ public class CartController {
         order.setId(orderDTO.getId());
         order.setEmail(orderDTO.getEmail());
         order.setName(orderDTO.getName());
-        order.setOrder_products(orderDTO.getOrder_products());
-        order.setStatus(orderDTO.getStatus());
-        order.setTotal(orderDTO.getTotal());
+        List<OrderItem> items = new ArrayList<>();
+        for (Product item : GlobalData.cart) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setId(item.getId());
+            orderItem.setName(item.getName());
+            orderItem.setSize(item.getSize());
+            orderItem.setQuantity(item.getQuantity());
+            orderItem.setStock(item.getStock()-item.getQuantity());
+            orderItem.setPrice(item.getPrice()); // Replace with the price of the product at the time of the order
+            items.add(orderItem);
+        }
+        String itemList = items.toString();
+        System.out.println(itemList);
+        order.setOrder_products(itemList);
+        order.setStatus(1);
+        Long total = (long) GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum();
+        order.setTotal(total);
         orderService.addOrder(order);
         GlobalData.cart.removeAll(GlobalData.cart);
-        
         return "redirect:/cart"; 
     }
 
