@@ -26,19 +26,27 @@ public class CartController {
     @GetMapping("/cart")
     public String cartGet(Model model){
         model.addAttribute("cartCount",GlobalData.cart.size());
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         model.addAttribute("cart",GlobalData.cart);
+        // Stock for each cart item
+        // for (Product p : GlobalData.cart) {
+        //     Long pId = p.getId();
+        //     int productStock = productService.getProductById(pId).get().getStock();
+        //     model.addAttribute("productStock", productStock);
+
+        // }
         return "/frontend-views/cart-page";
     }
     @GetMapping("/cart/removeItem/{index}")
-    public String cartItemRemove(@PathVariable int index){
+    public String cartItemRemove(@PathVariable int index, Model model){
         GlobalData.cart.remove(index);
+        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         return "redirect:/cart";
     }
 
     @GetMapping("/checkout")
     public String checkout(Model model){
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantity).sum());
+        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         return "checkout";
 
     }
@@ -46,10 +54,10 @@ public class CartController {
     @PostMapping("/addToCart/{id}")
     public String dropdown(@PathVariable Long id, ProductDTO dropdown, Model model){
         Product item = productService.getProductById(id).get();
+       
         item.setSize(dropdown.getSize());
         item.setStock(dropdown.getStock());
         item.setPrice(item.getPrice() * item.getStock());
-        // model.addAttribute("quantity", item.setQuantity(dropdown.getQuantity()));
         GlobalData.cart.add(productService.getProductById(id).get());
         return "redirect:/cart";
     }
