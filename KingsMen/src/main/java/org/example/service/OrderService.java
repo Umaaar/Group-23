@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.example.model.OrderDetails;
-import org.example.model.Product;
 import org.example.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +30,10 @@ public class OrderService {
 
     public List<OrderDetails> findByKeyword(String keyword){
         return orderRepository.findByKeyword(keyword);
+    }
+
+    public void addOrder(OrderDetails order) {
+        orderRepository.save(order);
     }
 
 }

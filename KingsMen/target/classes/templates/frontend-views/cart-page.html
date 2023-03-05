@@ -30,6 +30,8 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <!--Form to Save Order-->
+                        <form th:action="@{/checkout}" th:href="@{/checkout}" method="POST"  th:object="${orderDTO}">
                             <tr class="cart-item" th:each="item,iterator : ${cart}">
                                 <td th:text="${iterator.index+1}"></td>
                                 <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name}"></label></td>
@@ -44,13 +46,16 @@
                         <div class="col-md-8">
                         </div>
                         <div class="col-md-4 shadow bg-white p-3" id="total-box">
-                            <h3 class="cart-total" th:text="'Total: £' + ${total}"></h3>
+                            <h3 class="cart-total" th:text="'Total: £' + ${total}"><input type="number" name="total" th:value="${total}"></h3>
                             <div class = "center">
-                                <button class="pay-button ">Pay & Go</button>
+                                <input type="hidden" name="name" th:value="${name}">
+                                <input type="hidden" name="email" th:value="${email}">
+                                <button type="submit" class="pay-button">Pay & Go</button>
                             </div>
                         </div>
                     </div>
-                
+                </form>
+                <!--Form to Save Order-->
             </div>
         </div>
         <footer>
