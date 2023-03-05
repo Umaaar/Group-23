@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" >
 
   <title>KM Ecom</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
 
   <!-- Scripts -->
   <link rel="stylesheet" th:href="@{/admin-assets/css/bootstrap.min.css}" href="/static/admin-assets/css/bootstrap.min.css">
@@ -50,8 +51,8 @@
               <li class="nav-item nav-profile dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
   
-                      <span class="nav-profile-name"> ADMIN USERNAME </span>
-                  </a>
+                    <span class="nav-profile-name"th:text="${adminname}" ><p ></p></span>
+                </a>
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
   
   

@@ -59,14 +59,16 @@ public class AdminController {
    
 /* ---------------------------------------------------Category CRUD Mapping ------------------------------------------------- */
    @GetMapping("/admin/categories")
-   public String getCat(Model model){ 
+   public String getCat(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
+    model.addAttribute("adminname",authentication.getFirstname());
     model.addAttribute("categories", categoryService.getAllCategory());
        System.out.println(categoryService.getAllCategory());
     return "/backend-views/categories" ;
    }
 
     @GetMapping("/admin/categories/create")
-    public String postCreateCat(Model model){
+    public String postCreateCat(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
+        model.addAttribute("adminname",authentication.getFirstname());
         model.addAttribute("category", new Category());
      return "/backend-views/category-create";
     }
@@ -113,10 +115,16 @@ public String products(Model model ,String keyword) {
     }
     return "/backend-views/products";
 }
+public String productspage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
+    model.addAttribute("adminname",authentication.getFirstname());
+   model.addAttribute("products", productService.getAllProduct());
+   return "/backend-views/products";
+}
 
 
 @GetMapping("/admin/products/create")
-public String createProducts(Model model){
+public String createProducts(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
+    model.addAttribute("adminname",authentication.getFirstname());
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
    return "/backend-views/products-create";
@@ -246,9 +254,12 @@ return "/backend-views/size-create";
             model.addAttribute("orders",orderService.getAllOrders() );
 
         }
+    }
 
 
 
+    public String adminOrdersPage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
+        model.addAttribute("adminname",authentication.getFirstname());
         return "/backend-views/admin-orders";
 }
     @GetMapping("/admin/orders/delete/{id}")
@@ -279,18 +290,28 @@ return "/backend-views/size-create";
 
 
     @GetMapping("/admin/accounts")
-    public String adminAccounts(){ return "/backend-views/admin-accounts";
+    public String adminAccounts(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
+        model.addAttribute("adminname",authentication.getFirstname());
+        return "/backend-views/admin-accounts";
 }
 
     @GetMapping("/admin/accounts/add")
-    public String adminAddProduct(){ return "/backend-views/admin-addProduct";
+    public String adminAddProduct(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
+        model.addAttribute("adminname",authentication.getFirstname());
+
+         return "/backend-views/admin-addProduct";
 }
 
 @GetMapping("/admin/customers")
-public String adminCustomers(){ return "/backend-views/customers";
+public String adminCustomers(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
+    model.addAttribute("adminname",authentication.getFirstname());
+
+    return "/backend-views/customers";
 }
 
 @GetMapping("/admin/queries")
-public String adminQueries(){ return "/backend-views/customer-queries";
+public String adminQueries(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
+    model.addAttribute("adminname",authentication.getFirstname());
+    return "/backend-views/customer-queries";
 }
 }

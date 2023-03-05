@@ -1,16 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Raleway:ital,wght@1,200&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&display=swap');
 
 *{
-   /* font-family: 'Raleway', sans-serif; */
-    font-family: 'Inter', sans-serif;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Abhaya Libre', serif;
 }
 
 /* Cart Page CSS */
 .cart-padding{
     padding: 20px;
-    font-family: Sans serif roman;
+    text-align: center;
 }
 #order-table{
     border-collapse: separate;
@@ -22,10 +20,11 @@
     padding-right: 5px;
 }
 #order-table th {
-    width: 20%;
+    width: 16.66%;
     font-size: 140%;
     text-align: center;
 }
+
 th{
     text-align: center;
     border: none;
@@ -48,7 +47,7 @@ td{
     margin: 0 auto;
     width: 90%;
     padding: 5px;
-    background-color: #000080;
+    background-color: #000;
     border: transparent;
     border-radius: 8px;
     color: white;
@@ -75,6 +74,11 @@ td{
 .remove-btn {
     color: red;
 }
+
+.remove-btn a{
+    text-decoration: none;
+    color: red;
+}
 /* End of Cart Page CSS*/
 
 /* Index page */
@@ -85,9 +89,9 @@ td{
     padding: 0%;
 }
 .index{
-    background-image: url(../Images/suit.jpg);
+    background-image: url(../Images/suit2dark.jpg);
     background-size: cover;
-    height:fit-content;
+    background-position: center;
     /* background: radial-gradient(black, white); */
     color: white;
 }
@@ -101,6 +105,8 @@ td{
     justify-content: space-between;
     justify-items: center;
     background-color: white;
+    border-bottom: 4px solid black;
+
 
 
 }
@@ -130,7 +136,7 @@ td{
 }
 
 .logo img {
-    width: 10vmax;
+    width: 6vmax;
     /* filter: invert(100%); */
        margin-left: 2vmax;
     
@@ -357,6 +363,10 @@ p.about-us-content {
 /* End of Customer Dashboard css */
 
 /* Product page / Product detail page */
+.size-quantity{
+    padding: 2% 0%;
+}
+
 .btn-product {
     background-color: black;
     color: #ffffff;

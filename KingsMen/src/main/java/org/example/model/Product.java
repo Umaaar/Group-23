@@ -84,7 +84,12 @@ public class Product {
         this.imageName = imageName;
     }
 
-    public int getQuantity() {
+    public double getQuantityTimesPrice() {
+        double qty = (getPrice() * getStock());
+        return qty;
+    }
+
+    public int getQuantity(){
         return 0;
     }
 
