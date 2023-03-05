@@ -254,6 +254,7 @@ return "/backend-views/size-create";
             model.addAttribute("orders",orderService.getAllOrders() );
 
         }
+        return "/backend-views/admin-orders";
     }
 
 
