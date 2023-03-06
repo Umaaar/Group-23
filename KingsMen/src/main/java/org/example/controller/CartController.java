@@ -70,8 +70,9 @@ public class CartController {
             orderItem.setQuantity(item.getQuantity());
             orderItem.setStock(item.getStock()-item.getQuantity());
             orderItem.setPrice(item.getPrice()); // Replace with the price of the product at the time of the order
-            order.setOrder_products(sentence += orderItem.getId() + ", ");
-            System.out.println(sentence += orderItem.getId() + ", ");
+            String orderProducts = sentence += orderItem.getId() + ", ";
+            order.setOrder_products(orderProducts);
+            System.out.println(orderProducts);
             items.add(orderItem);
         };
         order.setStatus(1);
