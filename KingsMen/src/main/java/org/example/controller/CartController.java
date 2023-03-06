@@ -74,6 +74,7 @@ public class CartController {
             order.setOrder_products(orderProducts);
             System.out.println(orderProducts);
             items.add(orderItem);
+            productService.decreasingStock(orderItem.getId(), orderItem.getQuantity()); //decreasing stock
         };
         order.setStatus(1);
         Long total = (long) GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum();

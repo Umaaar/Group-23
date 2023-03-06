@@ -5,6 +5,7 @@ import org.example.model.Product;
 import org.example.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +75,10 @@ public class ProductService {
         return productRepository.findByKeyword(keyword);
     }
 
- 
+    @Transactional
+    public void decreasingStock(Long productId, int stock) {
+        productRepository.decreaseStock(productId, stock);
+    }
 
         
 

@@ -3,6 +3,7 @@ package org.example.repository;
 
 import org.example.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,4 +16,9 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
 
  @Query(value = "select * from PRODUCT e where e.name like %:keyword% or e.description like %:keyword%" ,nativeQuery = true)
  List<Product> findByKeyword(@Param("keyword") String keyword );
+
+@Modifying
+@Query("UPDATE Product p SET p.stock = p.stock - :stock WHERE p.id = :productId")
+int decreaseStock(@Param("productId") Long productId, @Param("stock") int stock);
+
 }
