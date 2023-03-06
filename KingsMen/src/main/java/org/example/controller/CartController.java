@@ -61,6 +61,7 @@ public class CartController {
         order.setEmail(orderDTO.getEmail());
         order.setName(orderDTO.getName());
         List<OrderItem> items = new ArrayList<>();
+        String sentence = "";
         for (Product item : GlobalData.cart) {
             OrderItem orderItem = new OrderItem();
             orderItem.setId(item.getId());
@@ -69,11 +70,10 @@ public class CartController {
             orderItem.setQuantity(item.getQuantity());
             orderItem.setStock(item.getStock()-item.getQuantity());
             orderItem.setPrice(item.getPrice()); // Replace with the price of the product at the time of the order
+            order.setOrder_products(sentence += orderItem.getId() + ", ");
+            System.out.println(sentence += orderItem.getId() + ", ");
             items.add(orderItem);
-        }
-        String itemList = items.toString();
-        System.out.println(itemList);
-        order.setOrder_products(itemList);
+        };
         order.setStatus(1);
         Long total = (long) GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum();
         order.setTotal(total);
