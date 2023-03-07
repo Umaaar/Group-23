@@ -464,3 +464,15 @@ p.about-us-content {
 
 
  /*End of Footer CSS */
+
+ /* Category nav css */
+
+ .sub-nav .navbar-nav .nav-item .nav-link {
+    color: white;
+    padding: 0.1rem 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  
+
+ /* End of category nav css */
