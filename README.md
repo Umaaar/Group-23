@@ -59,12 +59,13 @@ Once you have these installed, follow these steps:
 
 ## Contributors
 
-- Faran Zafar – 
-- Oscar Chukwuezi –
-- Laylatul Firdaus –
-- Duwa Khan – 
-- Sarah Rahimi – 
-- Badr Rif – 
-- Mohammad Saeed – 
-- Luc Sanders –  
+- Faran Zafar – [@farandead](https://github.com/farandead)
+- Oscar Chukwuezi – [@chasefya](https://github.com/chasefya)
+- Laylatul Firdaus – [@xLAYLATULx](https://github.com/xLAYLATULx)
+- Duwa Khan – [@dduwa](https://github.com/dduwa)
+- Sarah Rahimi – [@pazara1208](https://github.com/pazara1208) 
+- Badr Rif – [@RifiBadr](https://github.com/RifiBadr)
+- Mohammad Saeed - [@Umaaar](https://github.com/Umaaar)
+- Luc Sanders –  [Mexican-Toast](https://github.com/Mexican-Toast)
+- Mohammed Hafeez[@Hafeezzzz](https://github.com/Hafeezzzz)
 
