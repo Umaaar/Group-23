@@ -12,6 +12,8 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product,Long> {
  List<Product> findAllByCategory_Id(int id);
  List<Product> findAllByStock(int stock);
+ List<Product> findAllByOrderByPriceAsc();
+List<Product> findAllByOrderByPriceDesc();
 
 
  @Query(value = "select * from PRODUCT e where e.name like %:keyword% or e.description like %:keyword%" ,nativeQuery = true)

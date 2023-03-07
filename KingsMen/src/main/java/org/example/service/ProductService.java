@@ -39,7 +39,13 @@ public class ProductService {
             return productRepository.findAllByCategory_Id(categoryId);
     }
 
-
+    public List<Product> getProductsSortedByPriceAsc() {
+        return productRepository.findAllByOrderByPriceAsc();
+    }
+    
+    public List<Product> getProductsSortedByPriceDesc() {
+        return productRepository.findAllByOrderByPriceDesc();
+    }
 
 
     /*public int getInStockProductCount() {

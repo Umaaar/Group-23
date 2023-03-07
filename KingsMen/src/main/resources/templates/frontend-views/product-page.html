@@ -33,7 +33,7 @@
 </div>
 
 <!-- Breadcrumb -->
-<nav class="breadcrumb-container" aria-label="breadcrumb">
+<nav class="breadcrumb-container position-relative" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item font-weight-light">
       <a href="/" class="text-dark text-decoration-none">Home</a>
@@ -42,6 +42,15 @@
       <a href="/product" class="text-dark text-decoration-none">Products</a>
     </li>
   </ol>
+  <div class="sort-item float-end">
+    <button type="button" class="btn sort-button" data-toggle="dropdown">
+      Sort By
+    </button>
+    <div class="dropdown-menu dropdown-menu-sort">
+      <a class="dropdown-item" href="?sort=asc">Price: Low to High</a>
+      <a class="dropdown-item" href="?sort=desc">Price: High to Low</a>
+    </div>
+  </div>
 </nav>
 
 
