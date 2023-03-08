@@ -3,6 +3,8 @@ package org.example.model;
 //import jakarta.persistence.*;
 //import jakarta.persistence.GeneratedValue;
 import lombok.Data;
+
+
 import javax.persistence.*;
 @Entity
 @Data
@@ -15,11 +17,16 @@ public class Product {
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
+    private String size;
     private double price;
     private int stock;
     private String imageName;
     private String description;
-    private String size; 
+
+  
+
+   
+
     public Long getId() {
         return id;
     }
@@ -60,14 +67,16 @@ public class Product {
         this.price = price;
     }
 
-    public String getSize() {
-        return size;
-    }
-
     public void setSize(String size) {
         this.size = size;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+
+ 
     public String getDescription() {
         return description;
     }
@@ -95,4 +104,6 @@ public class Product {
 
     public void setQuantity(int quantity) {
     }
+
+   
 }

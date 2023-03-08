@@ -3,14 +3,17 @@ package org.example.controller;
 
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
+import org.example.dto.SizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
 import org.example.model.Product;
+import org.example.model.Size;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
+import org.example.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
+
 import javax.websocket.Session;
 
 @Controller
@@ -36,6 +40,9 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    SizeService sizeService;
 
     @Autowired
     CustomUserDetailService customUserDetailService;
@@ -142,8 +149,8 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
   product.setDescription(productDTO.getDescription());
   product.setPrice(productDTO.getPrice());
   product.setStock(productDTO.getStock());
-  product.setSize(productDTO.getSize());
-  String imageUUID;
+  //size
+    String imageUUID;
     if(!file.isEmpty()){
         imageUUID = file.getOriginalFilename();
         Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
@@ -167,8 +174,8 @@ productDTO.setName(product.getName());
 productDTO.setCategoryId(product.getCategory().getId());
 productDTO.setDescription(product.getDescription());
 productDTO.setPrice(product.getPrice());
+//size
 productDTO.setStock(product.getStock());
-productDTO.setSize(product.getSize());
 productDTO.setImageName(product.getImageName());
 
 model.addAttribute("productDTO", productDTO);
@@ -197,7 +204,7 @@ public String deleteProduct(@PathVariable long id){
 /* --------------------------------------------------- Size CRUD Mapping --------------------------------------------------------*/
 
 
-/*@GetMapping("/admin/size")
+@GetMapping("/admin/size")
 public String sizes(Model model){
    model.addAttribute("size", sizeService.getAllSizes());
    return "/backend-views/size";
@@ -205,40 +212,37 @@ public String sizes(Model model){
 
 @GetMapping("/admin/size/create")
 public String createSizeGet(Model model){
-   model.addAttribute("sizeDTO", new SizesDTO());
-   model.addAttribute("categories", categoryService.getAllCategory());
+    model.addAttribute("size", new Size());
    return "/backend-views/size-create";
 }
+
 @PostMapping("/admin/size/create")
-public String createSizePost(@ModelAttribute("sizeDTO") SizesDTO sizeDTO){
-   Sizes size = new Sizes();
-    size.setCategory(categoryService.getCategoryById(sizeDTO.getCategoryId()).get());
-    size.setSize(sizeDTO.getSize());
-    sizeService.addSize(size);
-    return "redirect:/admin/size";
+public String createSizePost(@ModelAttribute("size") Size size){
+    sizeService.saveSize(size);
+   return "redirect:/admin/size";
 }
+
 
 @GetMapping("/admin/size/delete/{id}")
 public String deleteSize(@PathVariable int id){
-    sizeService.removeSizeById(id);
+    sizeService.deleteSize(id);
     return "redirect:/admin/size";
 
 }
 
 @GetMapping("/admin/size/update/{id}")
-public String updateSizeGet(@PathVariable Long id, Model model){
-Sizes size = sizeService.getSizeById(id);
-SizesDTO sizeDTO = new SizesDTO();
-sizeDTO.setId(size.getId());
-sizeDTO.setCategoryId(size.getCategory().getId());
-sizeDTO.setSize(size.getSize());
-model.addAttribute("categories", categoryService.getAllCategory());
-model.addAttribute("sizeDTO", sizeDTO);
-return "/backend-views/size-create";
-
-    
+public String updateSizeGet(@PathVariable int id, Model model){
+    Optional<Size> size = sizeService.getSizeById(id);
+    if(size.isPresent()){
+        model.addAttribute("size", size.get());
+        return "/backend-views/size-create";
+    }else{
+        return "404";
+    }
 }
-*/
+
+
+
 
 
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/

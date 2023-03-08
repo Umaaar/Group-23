@@ -13,6 +13,7 @@ public class ProductDTO {
     private int stock;
     private String imageName;
     private String size;
+  
 
     
 
