@@ -57,32 +57,36 @@ public class CartController {
 
     @PostMapping("/checkout")
     public String createOrder(OrderDTO orderDTO, RedirectAttributes redirectAttributes)  throws IOException{
-        OrderDetails order = new OrderDetails();
-        order.setId(orderDTO.getId());
-        order.setEmail(orderDTO.getEmail());
-        order.setName(orderDTO.getName());
-        List<OrderItem> items = new ArrayList<>();
-        String sentence = "";
-        for (Product item : GlobalData.cart) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setId(item.getId());
-            orderItem.setName(item.getName());
-            orderItem.setSize(item.getSize());
-            orderItem.setQuantity(item.getStock());
-            orderItem.setStock(orderItem.getStock()-item.getStock());
-            orderItem.setPrice(item.getPrice()); // Replace with the price of the product at the time of the order
-            String orderProducts = sentence += "Product:" + orderItem.getId() + " Size:" + orderItem.getSize() + " Quantity:" + orderItem.getQuantity() + ", ";
-            order.setOrder_products(orderProducts);
-            System.out.println(orderProducts);
-            items.add(orderItem);
-            productService.decreasingStock(orderItem.getId(), orderItem.getQuantity()); //decreasing stock
+        if(GlobalData.cart.isEmpty()){
+            redirectAttributes.addFlashAttribute("errorMessage", "Cart is Empty");
+        }else{
+            OrderDetails order = new OrderDetails();
+            order.setId(orderDTO.getId());
+            order.setEmail(orderDTO.getEmail());
+            order.setName(orderDTO.getName());
+            List<OrderItem> items = new ArrayList<>();
+            String sentence = "";
+            for (Product item : GlobalData.cart) {
+                OrderItem orderItem = new OrderItem();
+                orderItem.setId(item.getId());
+                orderItem.setName(item.getName());
+                orderItem.setSize(item.getSize());
+                orderItem.setQuantity(item.getStock());
+                orderItem.setStock(orderItem.getStock()-item.getStock());
+                orderItem.setPrice(item.getPrice()); // Replace with the price of the product at the time of the order
+                String orderProducts = sentence += "Product:" + orderItem.getId() + " Size:" + orderItem.getSize() + " Quantity:" + orderItem.getQuantity() + ", ";
+                order.setOrder_products(orderProducts);
+                System.out.println(orderProducts);
+                items.add(orderItem);
+                productService.decreasingStock(orderItem.getId(), orderItem.getQuantity()); //decreasing stock
+            }
+            order.setStatus(1);
+            Long total = (long) GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum();
+            order.setTotal(total);
+            orderService.addOrder(order);
+            GlobalData.cart.removeAll(GlobalData.cart);
+            redirectAttributes.addFlashAttribute("successMessage", "Order Placed Successfully!");
         };
-        order.setStatus(1);
-        Long total = (long) GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum();
-        order.setTotal(total);
-        orderService.addOrder(order);
-        GlobalData.cart.removeAll(GlobalData.cart);
-        redirectAttributes.addFlashAttribute("successMessage", "Order Placed Successfully!");
         return "redirect:/cart"; 
     }
 
