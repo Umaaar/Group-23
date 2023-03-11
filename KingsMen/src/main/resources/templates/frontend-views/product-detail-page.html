@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <script th:src="@{/js/myScript.js}"></script>
   <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
 
   <title>Product Detail Page</title>
@@ -33,10 +34,7 @@
       </li>
     </ol>
   </nav>
-  
-  <!--Product Image -->
-  <section class="container">
-    <div class="alertMsg">
+    <div class="addToCartAlert ahidden" id="flash-message">
       <div th:if="${successMessage}">
           <div class="alert alert-success" th:text="${successMessage}"></div>
       </div>
@@ -44,6 +42,10 @@
           <div class="alert alert-danger" th:text="${errorMessage}"></div>
       </div>
   </div>
+  
+  <!--Product Image -->
+  <section class="container">
+    
     <div class="row mt-5">
         <div class="col-lg-5 col-md-10 col-12">
           <img th:src="@{/Images/productImage/{imageName}(imageName=${product.imageName})}" class="img-fluid" alt="Product Image">

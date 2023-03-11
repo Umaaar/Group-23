@@ -45,13 +45,6 @@ public class CartController {
         model.addAttribute("cart",GlobalData.cart);
         model.addAttribute("name",authentication.getFirstname());
         model.addAttribute("email",authentication.getEmail());
-        // Stock for each cart item
-        // for (Product p : GlobalData.cart) {
-        //     Long pId = p.getId();
-        //     int productStock = productService.getProductById(pId).get().getStock();
-        //     model.addAttribute("productStock", productStock);
-
-        // }
         return "/frontend-views/cart-page";
     }
 
