@@ -16,6 +16,8 @@
 
 <!--Insert Nav Bar-->
 <div th:insert="/frontend-views/fragments :: navigation" ></div>
+<div th:insert="/frontend-views/fragments :: navigation-category" ></div>
+
 
 <!--Header-->
 <div class="row">
@@ -30,21 +32,8 @@
     </div>
 </div>
 
-<!-- Button group -->
-<div class="d-flex justify-content-center">
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <a href="/product/1" class="btn btn-product btn-product-custom mx-3 rounded-pill text-decoration-none">Blazer</a>
-    <a href="/product/2" class="btn btn-product btn-product-custom mx-3 rounded-pill text-decoration-none">Shirt</a>
-    <a href="/product/3" class="btn btn-product btn-product-custom mx-3 rounded-pill text-decoration-none">Trouser</a>
-    <a href="/product/4" class="btn btn-product btn-product-custom mx-3 rounded-pill text-decoration-none">Shoes</a>
-    <a href="/product/5" class="btn btn-product btn-product-custom mx-3 rounded-pill text-decoration-none">Accessories</a>
-  </div>
-</div>
-
-
-
 <!-- Breadcrumb -->
-<nav class="breadcrumb-container" aria-label="breadcrumb">
+<nav class="breadcrumb-container position-relative" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item font-weight-light">
       <a href="/" class="text-dark text-decoration-none">Home</a>
@@ -53,6 +42,15 @@
       <a href="/product" class="text-dark text-decoration-none">Products</a>
     </li>
   </ol>
+  <div class="sort-item float-end">
+    <button type="button" class="btn sort-button" data-toggle="dropdown">
+      Sort By
+    </button>
+    <div class="dropdown-menu dropdown-menu-sort">
+      <a class="dropdown-item" href="?sort=asc">Price: Low to High</a>
+      <a class="dropdown-item" href="?sort=desc">Price: High to Low</a>
+    </div>
+  </div>
 </nav>
 
 

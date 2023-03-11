@@ -464,3 +464,30 @@ p.about-us-content {
 
 
  /*End of Footer CSS */
+
+ /* Category nav css */
+
+ .sub-nav .navbar-nav .nav-item .nav-link {
+    color: white;
+    padding: 0.1rem 1.5rem;
+    margin: 0 0.5rem;
+  }
+  
+  
+
+ /* End of category nav css */
+
+ /* Sort drop down css */
+
+  .sort-item {
+    margin-left: auto;
+    margin-right: 6rem;
+  }
+
+  .dropdown-menu-s {
+    border-top: none;
+    border-radius: 0;
+  }
+  
+
+ /* End of sort drop down css */
