@@ -3,7 +3,6 @@ package org.example.controller;
 
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
-import org.example.dto.SizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
@@ -224,14 +223,14 @@ public String createSizePost(@ModelAttribute("size") Size size){
 
 
 @GetMapping("/admin/size/delete/{id}")
-public String deleteSize(@PathVariable int id){
+public String deleteSize(@PathVariable Long id){
     sizeService.deleteSize(id);
     return "redirect:/admin/size";
 
 }
 
 @GetMapping("/admin/size/update/{id}")
-public String updateSizeGet(@PathVariable int id, Model model){
+public String updateSizeGet(@PathVariable Long id, Model model){
     Optional<Size> size = sizeService.getSizeById(id);
     if(size.isPresent()){
         model.addAttribute("size", size.get());
