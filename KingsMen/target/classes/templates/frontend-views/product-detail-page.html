@@ -36,6 +36,14 @@
   
   <!--Product Image -->
   <section class="container">
+    <div class="alertMsg">
+      <div th:if="${successMessage}">
+          <div class="alert alert-success" th:text="${successMessage}"></div>
+      </div>
+      <div th:if="${errorMessage}">
+          <div class="alert alert-danger" th:text="${errorMessage}"></div>
+      </div>
+  </div>
     <div class="row mt-5">
         <div class="col-lg-5 col-md-10 col-12">
           <img th:src="@{/Images/productImage/{imageName}(imageName=${product.imageName})}" class="img-fluid" alt="Product Image">

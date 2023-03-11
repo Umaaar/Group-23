@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class CartController {
     }
 
     @PostMapping("/checkout")
-    public String createOrder(OrderDTO orderDTO)  throws IOException{
+    public String createOrder(OrderDTO orderDTO, RedirectAttributes redirectAttributes)  throws IOException{
         OrderDetails order = new OrderDetails();
         order.setId(orderDTO.getId());
         order.setEmail(orderDTO.getEmail());
@@ -81,6 +82,7 @@ public class CartController {
         order.setTotal(total);
         orderService.addOrder(order);
         GlobalData.cart.removeAll(GlobalData.cart);
+        redirectAttributes.addFlashAttribute("successMessage", "Order Placed Successfully!");
         return "redirect:/cart"; 
     }
 
@@ -93,18 +95,23 @@ public class CartController {
 
     @GetMapping("/checkout")
     public String checkout(){
-        
         return "redirect:/cart";
     }
 
     @PostMapping("/addToCart/{id}")
-    public String dropdown(@PathVariable Long id, ProductDTO dropdown, Model model){
+    public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes){
         Product item = productService.getProductById(id).get();
-        item.setSize(dropdown.getSize());
-        item.setStock(dropdown.getStock());
-        item.setPrice(item.getPrice() * item.getStock());
-        GlobalData.cart.add(productService.getProductById(id).get());
-        return "redirect:/cart";
+        if(item.getStock() <= 0){
+            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out of Stock");
+        }else{
+            item.setSize(dropdown.getSize());
+            item.setStock(dropdown.getStock());
+            item.setPrice(item.getPrice() * item.getStock());
+            GlobalData.cart.add(productService.getProductById(id).get());
+            redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
+        }
+    
+        return "redirect:/product/product-detail/{id}";
     }
 
 }
