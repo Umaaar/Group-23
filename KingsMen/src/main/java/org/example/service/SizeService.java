@@ -17,8 +17,8 @@ SizeRepository sizeRepository;
 public List<Size> getAllSizes(){
     return sizeRepository.findAll();
 }
-public Optional<Size> getSizeById(Long id){
-    return sizeRepository.findById(id);
+public Optional<Size> getSizeById(Long long1){
+    return sizeRepository.findById(long1);
 }
 
 public void saveSize(Size size){
