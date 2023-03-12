@@ -54,10 +54,10 @@
               <h2 class="pt-3 font-weight-bold" th:text="${product.name}"></h2>
 
               <td th:if="${product.stock > 1}">
-                <label class="label-stock bg-success px-1">In Stock</label>
+                <label class="btn btn-secondary bg-success px-1">In Stock</label>
             </td>
             <td th:if="${product.stock <= 1}">
-                <label class="label-stock bg-danger px-1">Out of Stock</label>
+                <label class="btn btn-secondary bg-danger px-1">Out of Stock</label>
             </td>
               <p class="pb-4 text-muted" th:text="'£' + ${product.price}"></p>
   
@@ -93,29 +93,9 @@
               <p class="my-4 font-weight-light" th:text="${product.description}"></p>
             </span>
 
-            <h3 class="mt-5 mb-3">Reviews</h3>
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-
-        </div>
-  
+            <h3 class="mt-5 mb-3">Delivery</h3>
+            <span>
+              <p class="my-4 font-weight-light">Delivery is free on all orders over £50.00. Orders under £50.00 will be charged at £4.99. We aim to deliver your order within 3-5 working days. Please note that orders placed after 12pm on a Friday will not be processed until the following Monday. We do not deliver on weekends or bank holidays. We will send you an email to confirm your order has been dispatched. Please note that we are unable to deliver to PO Box addresses.</p>
   
   
   
