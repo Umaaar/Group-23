@@ -183,6 +183,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Sizing</th>
+                                    <th>Category</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -191,7 +192,9 @@
     
                                 <tr th:each="size, iStat : ${size}">
                                     <th scope="row" th:text="${iStat.index + 1}">1</th>
-                                    <td th:text="${size.name}">category</td>
+                                    <td th:text="${size.name}">name</td>
+                                    <td th:text="${size.category.name}">category</td>
+
                                 
                                     <td>
                                         <a href="#" th:href="@{/admin/size/update/{id}(id=${size.id})}"
