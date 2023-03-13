@@ -3,7 +3,6 @@ package org.example.controller;
 
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
-import org.example.dto.SizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
@@ -212,19 +211,14 @@ public String sizes(Model model){
 
 @GetMapping("/admin/size/create")
 public String createSizeGet(Model model){
-    model.addAttribute("sizeDTO", new SizeDTO());
-    model.addAttribute("categories", categoryService.getAllCategory());
-    return "/backend-views/size-create";
+    model.addAttribute("size", new Size());
+   return "/backend-views/size-create";
 }
 
 @PostMapping("/admin/size/create")
-public String createSizePost(@ModelAttribute("sizeDTO") SizeDTO sizeDTO){
-    Size size = new Size();
-    size.setId(sizeDTO.getId());
-    size.setName(sizeDTO.getName());
-    size.setCategory(categoryService.getCategoryById(sizeDTO.getCategoryId()).get());
+public String createSizePost(@ModelAttribute("size") Size size){
     sizeService.saveSize(size);
-    return "redirect:/admin/size";
+   return "redirect:/admin/size";
 }
 
 
@@ -237,14 +231,13 @@ public String deleteSize(@PathVariable Long id){
 
 @GetMapping("/admin/size/update/{id}")
 public String updateSizeGet(@PathVariable Long id, Model model){
-    Size size = sizeService.getSizeById(id).get();
-    SizeDTO sizeDTO = new SizeDTO();
-    sizeDTO.setId(size.getId());
-    sizeDTO.setName(size.getName());
-    sizeDTO.setCategoryId(size.getCategory().getId());
-    model.addAttribute("sizeDTO", sizeDTO);
-    model.addAttribute("categories", categoryService.getAllCategory());
-    return "/backend-views/size-create";
+    Optional<Size> size = sizeService.getSizeById(id);
+    if(size.isPresent()){
+        model.addAttribute("size", size.get());
+        return "/backend-views/size-create";
+    }else{
+        return "404";
+    }
 }
 
 

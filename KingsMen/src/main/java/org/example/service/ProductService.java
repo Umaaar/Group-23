@@ -2,9 +2,7 @@ package org.example.service;
 
 
 import org.example.model.Product;
-import org.example.model.ProductSize;
 import org.example.repository.ProductRepository;
-import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +17,6 @@ public class ProductService {
     
     @Autowired
     ProductRepository productRepository;
-
-    @Autowired
-    ProductSizeRepository productSizeRepository;
 
     public List<Product> getAllProduct() {
         return productRepository.findAll();
@@ -91,14 +86,7 @@ public class ProductService {
         productRepository.decreaseStock(productId, stock);
     }
 
-    public Product getProductWithSizes(Long productId) {
-        Product product = productRepository.findById(productId).orElse(null);
-        if (product != null) {
-            List<ProductSize> productSizes = productSizeRepository.findByProductId(productId);
-            product.setProductSizes(productSizes);
-        }
-        return product;
-    }   
+        
 
 
 }

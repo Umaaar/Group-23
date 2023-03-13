@@ -4,7 +4,6 @@ package org.example.model;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -20,8 +19,13 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Size> sizes = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER )
+    @JoinTable(
+            name = "category_size",
+            joinColumns = {@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "category_id")},
+            inverseJoinColumns = {@JoinColumn (name = "SIZE_ID", referencedColumnName = "ID")}
+    )
+    private List<Size> sizes;
 
 
 
@@ -49,14 +53,6 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Size> getSizes() {
-        return sizes;
-    }
-
-    public void setSizes(List<Size> sizes) {
-        this.sizes = sizes;
     }
 }
 

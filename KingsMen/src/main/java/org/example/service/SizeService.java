@@ -34,9 +34,4 @@ public void updateSize(Size size){
     sizeRepository.save(size);
 }
 
-public List<Size> getSizeByCategoryId(int categoryId){
-    return sizeRepository.findByCategoryId(categoryId);
-
-}
-
 }

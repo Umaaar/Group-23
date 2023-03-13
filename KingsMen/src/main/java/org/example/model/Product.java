@@ -4,8 +4,6 @@ package org.example.model;
 //import jakarta.persistence.GeneratedValue;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.*;
 @Entity
@@ -19,8 +17,8 @@ public class Product {
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductSize> productSizes = new ArrayList<>();    private double price;
+    private String size;
+    private double price;
     private int stock;
     private String imageName;
     private String description;
@@ -69,13 +67,14 @@ public class Product {
         this.price = price;
     }
 
-    public List<ProductSize> getProductSizes() {
-        return productSizes;
+    public void setSize(String size) {
+        this.size = size;
     }
 
-    public void setProductSizes(List<ProductSize> productSizes) {
-        this.productSizes = productSizes;
+    public String getSize() {
+        return size;
     }
+
 
  
     public String getDescription() {
