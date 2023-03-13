@@ -133,6 +133,7 @@ public String createProducts(@AuthenticationPrincipal CustomUserDetail authentic
     model.addAttribute("adminname",authentication.getFirstname());
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
+    model.addAttribute("sizes", sizeService.getAllSizes());
    return "/backend-views/products-create";
 
 }
@@ -144,11 +145,12 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
   product.setId(productDTO.getId());
     System.out.println(productDTO.getId());
   product.setName(productDTO.getName());
-  product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
+  Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
+  product.setCategory(category);
   product.setDescription(productDTO.getDescription());
   product.setPrice(productDTO.getPrice());
   product.setStock(productDTO.getStock());
-  //size
+  product.setSize(category.getSizes().get(0));
     String imageUUID;
     if(!file.isEmpty()){
         imageUUID = file.getOriginalFilename();
@@ -173,8 +175,9 @@ productDTO.setName(product.getName());
 productDTO.setCategoryId(product.getCategory().getId());
 productDTO.setDescription(product.getDescription());
 productDTO.setPrice(product.getPrice());
-//size
 productDTO.setStock(product.getStock());
+Category category = categoryService.getCategoryById(product.getCategory().getId()).get();
+productDTO.setSizeId(category.getSizes().get(0).getId());
 productDTO.setImageName(product.getImageName());
 
 model.addAttribute("productDTO", productDTO);

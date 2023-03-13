@@ -17,7 +17,9 @@ public class Product {
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-    private String size;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "size_id")
+    private Size size;
     private double price;
     private int stock;
     private String imageName;
@@ -67,15 +69,13 @@ public class Product {
         this.price = price;
     }
 
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public String getSize() {
+    public Size getSize() {
         return size;
     }
 
-
+    public void setSize(Size size) {
+        this.size = size;
+    }
  
     public String getDescription() {
         return description;
