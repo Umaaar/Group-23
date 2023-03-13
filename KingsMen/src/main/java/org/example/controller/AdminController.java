@@ -3,19 +3,16 @@ package org.example.controller;
 
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
-import org.example.dto.ProductSizeDTO;
 import org.example.dto.SizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
 import org.example.model.Product;
-import org.example.model.ProductSize;
 import org.example.model.Size;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
-import org.example.service.ProductSizeService;
 import org.example.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,14 +45,10 @@ public class AdminController {
     SizeService sizeService;
 
     @Autowired
-    ProductSizeService productSizeService;
-
-    @Autowired
     CustomUserDetailService customUserDetailService;
 
     @Autowired
     OrderService orderService;
-
    @GetMapping("/admin")
    public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model){
        System.out.println(customUserDetailService.getUserCount());
@@ -253,65 +246,12 @@ public String updateSizeGet(@PathVariable Long id, Model model){
     model.addAttribute("categories", categoryService.getAllCategory());
     return "/backend-views/size-create";
 }
+
+
+
+
+
 /* --------------------------------------------------- End of Size CRUD Mapping --------------------------------------------------------*/
-
-/* --------------------------------------------------- ProductSize CRUD Mapping --------------------------------------------------------*/
-
-@GetMapping("/admin/productsize")
-
-public String productsize(Model model){
-    model.addAttribute("productsize", productSizeService.findAll());
-    return "/backend-views/product-size";
-}   
-
-@GetMapping("/admin/productsize/create")
-public String createProductSizeGet(Model model){
-    model.addAttribute("productsizeDTO", new ProductSizeDTO());
-    model.addAttribute("products", productService.getAllProduct());
-    model.addAttribute("sizes", sizeService.getAllSizes());
-    return "/backend-views/product-size-create";
-}
-
-@PostMapping("/admin/productsize/create")
-public String createProductSizePost(@ModelAttribute("productsizeDTO") ProductSizeDTO productsizeDTO){
-    ProductSize productSize = new ProductSize();
-    productSize.setId(productsizeDTO.getId());
-    productSize.setProduct(productService.getProductById(productsizeDTO.getProductId()).get());
-    productSize.setSize(sizeService.getSizeById(productsizeDTO.getSizeId()).get());
-    productSize.setQuantity(productsizeDTO.getQuantity());
-    productSizeService.save(productSize);
-    return "redirect:/admin/productsize";
-}
-
-@GetMapping("/admin/productsize/delete/{id}")
-public String deleteProductSize(@PathVariable Long id){
-    productSizeService.deleteById(id);
-    return "redirect:/admin/productsize";
-}
-
-@GetMapping("/admin/productsize/update/{id}")
-public String updateProductSizeGet(@PathVariable Long id, Model model){
-    ProductSize productSize = productSizeService.findById(id);
-    ProductSizeDTO productSizeDTO = new ProductSizeDTO();
-    productSizeDTO.setId(productSize.getId());
-    productSizeDTO.setProductId(productSize.getProduct().getId());
-    productSizeDTO.setSizeId(productSize.getSize().getId());
-    productSizeDTO.setQuantity(productSize.getQuantity());
-    model.addAttribute("productsizeDTO", productSizeDTO);
-    model.addAttribute("products", productService.getAllProduct());
-    model.addAttribute("sizes", sizeService.getAllSizes());
-    return "/backend-views/product-size-create";
-}
-
-
-
-
-
-
-
-
-
-
 
 
     @GetMapping("/admin/orders")

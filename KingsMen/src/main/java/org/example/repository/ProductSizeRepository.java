@@ -8,6 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProductSizeRepository extends JpaRepository<ProductSize, Long> {
     List<ProductSize> findByProductId(Long productId);
     List<ProductSize> findBySizeId(Long sizeId);
-    List<ProductSize> getProductSizesByProductId(Long productId);
-    List<ProductSize> getProductSizesBySizeId(Long sizeId);
 }
