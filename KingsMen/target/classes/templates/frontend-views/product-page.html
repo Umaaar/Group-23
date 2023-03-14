@@ -32,6 +32,13 @@
     </div>
 </div>
 
+<div class="px-3 pb-3">
+  <form class="form-inline my-3 my-lg-0" action="/product">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search for product" aria-label="Search" name="keyword">
+    <button class="btn btn-submit-p btn-outline-secondary d-block mt-2" type="submit">Search</button>
+  </form>  
+</div>
+
 <!-- Breadcrumb -->
 <nav class="breadcrumb-container position-relative" aria-label="breadcrumb">
   <ol class="breadcrumb">
@@ -40,6 +47,7 @@
     </li>
     <li class="breadcrumb-item active font-weight-bold" aria-current="page">
       <a href="/product" class="text-dark text-decoration-none">Products</a>
+      <span th:if="${keyword}"> / Search: <span th:text="${keyword}"></span></span>
     </li>
   </ol>
   <div class="sort-item">
@@ -47,11 +55,13 @@
       Sort By
     </button>
     <div class="dropdown-menu dropdown-menu-sort">
-      <a class="dropdown-item" href="?sort=asc">Price: Low to High</a>
-      <a class="dropdown-item" href="?sort=desc">Price: High to Low</a>
+      <a class="dropdown-item" th:href="@{/product(sort='asc', keyword=${keyword})}" href="?sort=asc{{#if keyword}}&keyword={{keyword}}{{/if}}">Low to High</a>
+      <a class="dropdown-item" th:href="@{/product(sort='desc', keyword=${keyword})}" href="?sort=desc{{#if keyword}}&keyword={{keyword}}{{/if}}">High to Low</a>      
     </div>
   </div>
+  
 </nav>
+
 
 
 

@@ -27,20 +27,39 @@ public class ProductsController {
     @Autowired
     ProductService productService;
 
-
-      @GetMapping("/product")
-      public String getProductsPage(Model model,
-      @RequestParam(defaultValue = "asc") String sort) {
-        List<Product> products = productService.getAllProduct();
-        if (sort.equals("desc")) {
-            Collections.sort(products, Comparator.comparing(Product::getPrice).reversed());
+    @GetMapping("/product")
+public String getProductsPage(Model model,
+    @RequestParam(defaultValue = "asc") String sort,
+    @RequestParam(required = false) String keyword) {
+    List<Product> products;
+    if (keyword != null) {
+        products = productService.findByKeyword(keyword);
+        if (sort.equals("asc")) {
+            products.sort(Comparator.comparing(Product::getPrice).reversed());
         } else {
-            Collections.sort(products, Comparator.comparing(Product::getPrice));
+            products.sort(Comparator.comparing(Product::getPrice));
         }
-        model.addAttribute("products", products);
-        model.addAttribute("categories", catagoryService.getAllCategory());
-        return "/frontend-views/product-page";
-      }  
+    } else {
+        products = productService.getAllProduct();
+        if (sort.equals("desc")) {
+            products.sort(Comparator.comparing(Product::getPrice).reversed());
+        } else {
+            products.sort(Comparator.comparing(Product::getPrice));
+        }
+    }
+    model.addAttribute("products", products);
+    model.addAttribute("categories", catagoryService.getAllCategory());
+    boolean notFound = products.isEmpty() && keyword != null;
+    if (notFound) {
+        model.addAttribute("keyword", keyword);
+        return "frontend-views/product-not-found";
+    } else {
+        model.addAttribute("notFound", false);
+        return "frontend-views/product-page";
+    }
+}
+
+
 
       @GetMapping("/product/{categoryId}")
       public String getProductsByCategory(Model model, 
@@ -65,6 +84,22 @@ public class ProductsController {
           model.addAttribute("product", product.orElse(null));
           return "frontend-views/product-detail-page";
       }
+
+      @GetMapping("/product/search")
+      public String searchProducts(Model model, @RequestParam String q) {
+      List<Product> products = productService.findByKeyword(q);
+      model.addAttribute("products", products);
+      model.addAttribute("categories", catagoryService.getAllCategory());
+      return "/frontend-views/product-page";
+    }
+
+    @GetMapping("/product/not-found")
+    public String getProductNotFoundPage(Model model, @RequestParam String productName) {
+      model.addAttribute("productName", productName);
+      return "/frontend-views/product-not-found";
+}
+
+
 }
 
 

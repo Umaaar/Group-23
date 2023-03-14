@@ -76,10 +76,12 @@ public class ProductService {
         List<Product> outOfStockProducts = productRepository.findAllByStock(0);
         return  outOfStockProducts.size();
     }
-
-    public List<Product> findByKeyword(String keyword){
-        return productRepository.findByKeyword(keyword);
+    
+    public List<Product> findByKeyword(String keyword) {
+        return productRepository.findByNameIgnoreCaseContaining(keyword);
     }
+    
+    
 
     @Transactional
     public void decreasingStock(Long productId, int stock) {

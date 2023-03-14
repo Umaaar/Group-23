@@ -14,6 +14,8 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
  List<Product> findAllByStock(int stock);
  List<Product> findAllByOrderByPriceAsc();
 List<Product> findAllByOrderByPriceDesc();
+List<Product> findByNameIgnoreCaseContaining(String name);
+
 
 
  @Query(value = "select * from PRODUCT e where e.name like %:keyword% or e.description like %:keyword%" ,nativeQuery = true)
