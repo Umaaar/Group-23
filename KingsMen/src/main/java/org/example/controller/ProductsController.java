@@ -28,20 +28,20 @@ public class ProductsController {
     ProductService productService;
 
     @GetMapping("/product")
-public String getProductsPage(Model model,
+    public String getProductsPage(Model model,
     @RequestParam(defaultValue = "asc") String sort,
     @RequestParam(required = false) String keyword) {
     List<Product> products;
     if (keyword != null) {
         products = productService.findByKeyword(keyword);
-        if (sort.equals("asc")) {
+        if (sort.equals("desc")) {
             products.sort(Comparator.comparing(Product::getPrice).reversed());
         } else {
             products.sort(Comparator.comparing(Product::getPrice));
         }
     } else {
         products = productService.getAllProduct();
-        if (sort.equals("desc")) {
+        if (sort.equals("asc")) {
             products.sort(Comparator.comparing(Product::getPrice).reversed());
         } else {
             products.sort(Comparator.comparing(Product::getPrice));
@@ -64,7 +64,7 @@ public String getProductsPage(Model model,
       @GetMapping("/product/{categoryId}")
       public String getProductsByCategory(Model model, 
       @PathVariable("categoryId") int categoryId, 
-      @RequestParam(defaultValue = "asc") String sort) {
+      @RequestParam(defaultValue = "desc") String sort) {
         List<Product> products = productService.getProductsByCategoryId(categoryId);
         if (sort.equals("desc")) {
             Collections.sort(products, Comparator.comparing(Product::getPrice).reversed());
