@@ -187,6 +187,7 @@ product.setSizes(sizes);
 
 @GetMapping("/admin/products/update/{id}")
 public String updateProductGet(@PathVariable long id, Model model) {
+model.addAttribute("sizes", sizeService.getAllSizes());
 Product product = productService.getProductById(id).get();
 ProductDTO productDTO = new ProductDTO();
 productDTO.setId(product.getId());
