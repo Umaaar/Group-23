@@ -28,7 +28,7 @@ public class ProductsController {
     ProductService productService;
 
     @GetMapping("/product")
-    public String getProductsPage(Model model,
+public String getProductsPage(Model model,
     @RequestParam(defaultValue = "asc") String sort,
     @RequestParam(required = false) String keyword) {
     List<Product> products;
@@ -38,6 +38,16 @@ public class ProductsController {
             products.sort(Comparator.comparing(Product::getPrice).reversed());
         } else {
             products.sort(Comparator.comparing(Product::getPrice));
+        }
+        if (products.isEmpty()) {
+            List<Product> recommendedProducts = productService.getRandomProducts(4);
+            model.addAttribute("keyword", keyword); // add the keyword to the model
+            if (recommendedProducts.isEmpty()) {
+                model.addAttribute("products", Collections.emptyList());
+            } else {
+                model.addAttribute("products", recommendedProducts);
+            }
+            return "frontend-views/product-not-found";
         }
     } else {
         products = productService.getAllProduct();
@@ -49,15 +59,10 @@ public class ProductsController {
     }
     model.addAttribute("products", products);
     model.addAttribute("categories", catagoryService.getAllCategory());
-    boolean notFound = products.isEmpty() && keyword != null;
-    if (notFound) {
-        model.addAttribute("keyword", keyword);
-        return "frontend-views/product-not-found";
-    } else {
-        model.addAttribute("notFound", false);
-        return "frontend-views/product-page";
-    }
+
+    return "frontend-views/product-page";
 }
+
 
 
 
@@ -93,11 +98,20 @@ public class ProductsController {
       return "/frontend-views/product-page";
     }
 
+
     @GetMapping("/product/not-found")
     public String getProductNotFoundPage(Model model, @RequestParam String productName) {
-      model.addAttribute("productName", productName);
+      List<Product> recommendedProducts = productService.getRandomProducts(4);
+      model.addAttribute("keyword", productName);
+
+      if (recommendedProducts.isEmpty()) {
+          model.addAttribute("products", Collections.emptyList());
+      } else {
+          model.addAttribute("products", recommendedProducts);
+      }
       return "/frontend-views/product-not-found";
-}
+  }
+
 
 
 }
