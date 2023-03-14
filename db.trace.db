@@ -491,3 +491,18 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 78 more
+2023-03-14 17:27:20 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Kingsman''s beige flannel blazer pairs perfectly with the beige flannel trousers for the ultimate combination of style and comf... (331)"; SQL statement:
+insert into product (category_id, description, image_name, name, price, stock, id) values (?, ?, ?, ?, ?, ?, ?) [22001-200]
+2023-03-14 17:27:29 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Kingsman''s beige flannel blazer pairs perfectly with the beige flannel trousers for the ultimate combination of style and comf... (331)"; SQL statement:
+insert into product (category_id, description, image_name, name, price, stock, id) values (?, ?, ?, ?, ?, ?, ?) [22001-200]
+2023-03-14 17:29:35 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Featuring a concealed fastening, the Kingsman beige trousers exude a sense of refinement and elegance. The belt loops allow for... (279)"; SQL statement:
+insert into product (category_id, description, image_name, name, price, stock, id) values (?, ?, ?, ?, ?, ?, ?) [22001-200]
+2023-03-14 18:04:01 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Expertly cut to a tailored fit for a timeless silhouette, they feature a pale grey tweed fabric with contrasting buttons and a ... (302)"; SQL statement:
+insert into product (category_id, description, image_name, name, price, stock, id) values (?, ?, ?, ?, ?, ?, ?) [22001-200]
+2023-03-14 18:24:46 jdbc[33]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Featuring a concealed fastening, the Kingsman check trousers exude a sense of refinement and elegance. The belt loops allow for... (279)"; SQL statement:
+insert into product (category_id, description, image_name, name, price, stock, id) values (?, ?, ?, ?, ?, ?, ?) [22001-200]
