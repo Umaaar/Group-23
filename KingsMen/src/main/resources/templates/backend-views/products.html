@@ -204,7 +204,20 @@
                                         <td th:text="${iStat.index + 1}">1</td>
                                         <td th:text="${product.name}">name</td>
                                         <td th:text="${product.category.name}">category</td>
-                                        <td th:text="${product.size.name}">size</td>
+                                        <td th:each="size : ${sizeIds}" th:text="${product.size.name}">size</td>
+                                        <td>
+                                            <!-- <a href="#" th:href="@{/admin/products/sizing/{id}(id=${product.id})}"
+                                                class="btn btn-sm btn-dark">View Size Chart</a> -->
+                                                <select name="sizes" multiple>
+                                                    <th:block th:each="size : ${sizes}">
+                                                      <option th:value="${size.id}" th:text="${size.name}"></option>
+                                                    </th:block>
+                                                  </select>
+                                           
+                                        </td>                              
+                                        <!-- <select name="sizes" multiple="true">
+                                          <option th:each="size : ${sizeIds}" th:value="${size.id}" th:text="${size.name}"></option>
+                                        </select> -->
                                         <td th:text="${product.price}">price</td>
                                         <td th:text="${product.stock}">quantity</td>
                                         <td th:if="${product.stock > 1}">

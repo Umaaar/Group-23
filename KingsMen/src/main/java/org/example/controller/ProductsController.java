@@ -4,6 +4,7 @@ package org.example.controller;
 import org.example.model.Product;
 import org.example.service.CategoryService;
 import org.example.service.ProductService;
+import org.example.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class ProductsController {
 
     @Autowired
     ProductService productService;
+
+    @Autowired 
+    SizeService sizeService;
 
 
       @GetMapping("/product")
@@ -63,6 +67,7 @@ public class ProductsController {
       public String getProductDetailPage(Model model, @PathVariable("id") Long id) {
           Optional<Product> product = productService.getProductById(id);
           model.addAttribute("product", product.orElse(null));
+          model.addAttribute("sizes", sizeService.getAllSizes());
           return "frontend-views/product-detail-page";
       }
 }

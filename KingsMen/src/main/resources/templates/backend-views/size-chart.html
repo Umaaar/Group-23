@@ -161,95 +161,49 @@
               </div>
           </li>
   
-  </nav>
+      </ul>
+    </nav>
 
     <!-- End Sidebar -->
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="row">
             <div class="col-md-12 ">
-
                 <div class="card">
                     <div class="card-header">
-                        <h3> Products
-                            <a href="#" th:href="@{/admin/products/create}" class="btn btn-dark btn-sm text-white float-end">
-                                Add Products
-                            </a>
+                        <h3> View Sizing
+                            <a href="#" th:href="@{/admin/product}" class="btn btn-primary btn-sm text-white float-end">BACK</a>
                         </h3>
-                        <form th:action="@{/admin/products}" method="get">
-
-                            <input type="search" name="keyword" id="txtSearch">
-                            <button type="submit">Search</button>
-                        </form>
                     </div>
-
                     <div class="card-body">
                         <table class="table table-bordererd table-striped">
                             <thead>
                                 <tr>
-                                    <th>SN</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
+                                    <th>ID</th>
                                     <th>Size</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Stock Availablity</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
+                            
                                 </tr>
                             </thead>
                             <tbody>
 
-                                    <tr th:each="product, iStat : ${products}">
+                                    <tr th:each="size, iStat : ${sizes}">
                                         <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="${product.name}">name</td>
-                                        <td th:text="${product.category.name}">category</td>
-                                        <td th:each="size : ${sizeIds}" th:text="${product.size.name}">size</td>
-                                        <td>
-                                            <!-- <a href="#" th:href="@{/admin/products/sizing/{id}(id=${product.id})}"
-                                                class="btn btn-sm btn-dark">View Size Chart</a> -->
-                                                <select name="sizes" multiple>
-                                                    <th:block th:each="size : ${sizes}">
-                                                      <option th:value="${size.id}" th:text="${size.name}"></option>
-                                                    </th:block>
-                                                  </select>
-                                           
-                                        </td>                              
+                                        <td th:text="${sizes.name}">name</td>
+                                       
                                         <!-- <select name="sizes" multiple="true">
                                           <option th:each="size : ${sizeIds}" th:value="${size.id}" th:text="${size.name}"></option>
                                         </select> -->
-                                        <td th:text="${product.price}">price</td>
-                                        <td th:text="${product.stock}">quantity</td>
-                                        <td th:if="${product.stock > 1}">
-                                            <label class="label-stock bg-success">In Stock</label>
-                                        </td>
-                                        <td th:if="${product.stock <= 1}">
-                                            <label class="label-stock bg-danger">Out of Stock</label>
-                                        </td>
-                    
-                                        <td>
-                                            <a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}"
-                                                class="btn btn-sm btn-success">Update</a>
-                                           
-                                        </td>
-                                        <td>
-                                             <a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}"
-                                                onclick="return confirm('Are you sure, you want to delete this data?')"
-                                                class="btn btn-sm btn-danger">
-                                                Delete
-                                            </a>
-
-                                        </td>
+                                       
                                     </tr>
                                     
                             </tbody>
                         </table>
-    
                     </div>
-                </div>
-            </div>
-        </div>
+          </div>
+     </div>
 
+
+        <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
       </div>
     </div>
   </div>
@@ -275,6 +229,8 @@
 <script src="/static/admin-assets/js/data-table.js"></script>
 <script src="/static/admin-assets/js/dataTables.bootstrap4.js"></script>-->
 <script th:src="@{/admin-assets/js/jquery.dataTables.js}" src="/static/admin-assets/js/jquery.dataTables.js"></script>
+
+
 
 
 </body>

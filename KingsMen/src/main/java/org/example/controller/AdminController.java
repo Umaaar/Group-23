@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -117,6 +119,7 @@ public String products(Model model ,String keyword) {
 //        System.out.println(productService.findByKeyword(keyword));
     } else {
         model.addAttribute("products", productService.getAllProduct());
+        
 
     }
     return "/backend-views/products";
@@ -124,6 +127,8 @@ public String products(Model model ,String keyword) {
 public String productspage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
     model.addAttribute("adminname",authentication.getFirstname());
    model.addAttribute("products", productService.getAllProduct());
+   model.addAttribute("sizes", sizeService.getAllSizes());
+
    return "/backend-views/products";
 }
 
@@ -134,6 +139,7 @@ public String createProducts(@AuthenticationPrincipal CustomUserDetail authentic
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
     model.addAttribute("sizes", sizeService.getAllSizes());
+    
    return "/backend-views/products-create";
 
 }
@@ -150,7 +156,20 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
   product.setDescription(productDTO.getDescription());
   product.setPrice(productDTO.getPrice());
   product.setStock(productDTO.getStock());
-  product.setSize(category.getSizes().get(0));
+ // product.setSize(category.getSizes().get(0));
+//   List<Size> sizes = new ArrayList<>();
+// for (Long sizeId : productDTO.getSizeIds()) {
+//     Size size = category.getSizes().get(sizeId.intValue());
+//     sizes.add(size);
+// }
+// product.setSizes(sizes);
+List<Size> sizes = new ArrayList<>();
+for (Long sizeId : productDTO.getSizeIds()) {
+    Size size = sizeService.getSizeById(sizeId).get();
+    sizes.add(size);
+}
+product.setSizes(sizes);
+
     String imageUUID;
     if(!file.isEmpty()){
         imageUUID = file.getOriginalFilename();
@@ -176,8 +195,13 @@ productDTO.setCategoryId(product.getCategory().getId());
 productDTO.setDescription(product.getDescription());
 productDTO.setPrice(product.getPrice());
 productDTO.setStock(product.getStock());
-Category category = categoryService.getCategoryById(product.getCategory().getId()).get();
-productDTO.setSizeId(category.getSizes().get(0).getId());
+//Category category = categoryService.getCategoryById(product.getCategory().getId()).get();
+//productDTO.setSizeIds(category.getSizes().get(0).getId());
+List<Long> sizeIds = new ArrayList<>();
+for (Size size : product.getSizes()) {
+    sizeIds.add(size.getId());
+}
+productDTO.setSizeIds(sizeIds);
 productDTO.setImageName(product.getImageName());
 
 model.addAttribute("productDTO", productDTO);

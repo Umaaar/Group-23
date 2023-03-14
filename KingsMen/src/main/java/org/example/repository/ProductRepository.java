@@ -23,4 +23,6 @@ List<Product> findAllByOrderByPriceDesc();
 @Query("UPDATE Product p SET p.stock = p.stock - :stock WHERE p.id = :productId")
 int decreaseStock(@Param("productId") Long productId, @Param("stock") int stock);
 
+List<Product> findAllBySizes_IdIn(List<Long> sizeIds);
+
 }

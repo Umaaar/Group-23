@@ -1,5 +1,7 @@
 package org.example.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,7 +14,7 @@ public class ProductDTO {
     private int quantity;
     private int stock;
     private String imageName;
-    private long sizeId;  
+    private List<Long> sizeIds;  
 
     
 
