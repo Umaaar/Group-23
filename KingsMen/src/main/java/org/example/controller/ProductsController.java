@@ -29,7 +29,7 @@ public class ProductsController {
 
     @GetMapping("/product")
 public String getProductsPage(Model model,
-    @RequestParam(defaultValue = "asc") String sort,
+    @RequestParam(defaultValue = "desc") String sort,
     @RequestParam(required = false) String keyword) {
     List<Product> products;
     if (keyword != null) {
