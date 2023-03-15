@@ -24,9 +24,6 @@ public class Size {
     @NotEmpty
     private String name;
 
-    @ManyToMany(mappedBy = "sizes")
-    private List<Category> categories;
-
     public Long getId() {
         return id;
     }
@@ -42,7 +39,6 @@ public class Size {
     public Size(Size size) {
         this.id = size.getId();
         this.name = size.getName();
-        this.categories = size.getCategories();
 
     }
     public Size(){}

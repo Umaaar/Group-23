@@ -19,13 +19,7 @@ public class Category {
 
     private String name;
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER )
-    @JoinTable(
-            name = "category_size",
-            joinColumns = {@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "category_id")},
-            inverseJoinColumns = {@JoinColumn (name = "SIZE_ID", referencedColumnName = "ID")}
-    )
-    private List<Size> sizes;
+ 
 
 
 
