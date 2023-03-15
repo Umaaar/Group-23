@@ -506,3 +506,6 @@ insert into product (category_id, description, image_name, name, price, stock, i
 2023-03-14 18:24:46 jdbc[33]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Featuring a concealed fastening, the Kingsman check trousers exude a sense of refinement and elegance. The belt loops allow for... (279)"; SQL statement:
 insert into product (category_id, description, image_name, name, price, stock, id) values (?, ?, ?, ?, ?, ?, ?) [22001-200]
+2023-03-14 20:17:58 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'The Roller Bar loafer is crafted in French goatskin with brass roller bar hardware. The sole is crafted using a lightweight Bol... (280)"; SQL statement:
+update product set category_id=?, description=?, image_name=?, name=?, price=?, stock=? where id=? [22001-200]
