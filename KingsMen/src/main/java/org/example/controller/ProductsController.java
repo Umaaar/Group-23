@@ -32,19 +32,40 @@ public class ProductsController {
     SizeService sizeService;
 
 
-      @GetMapping("/product")
-      public String getProductsPage(Model model,
-      @RequestParam(defaultValue = "asc") String sort) {
-        List<Product> products = productService.getAllProduct();
+    @GetMapping("/product")
+public String getProductsPage(Model model,
+    @RequestParam(defaultValue = "desc") String sort,
+    @RequestParam(required = false) String keyword) {
+    List<Product> products;
+    if (keyword != null) {
+        products = productService.findByKeyword(keyword);
         if (sort.equals("desc")) {
-            Collections.sort(products, Comparator.comparing(Product::getPrice).reversed());
+            products.sort(Comparator.comparing(Product::getPrice).reversed());
         } else {
-            Collections.sort(products, Comparator.comparing(Product::getPrice));
+            products.sort(Comparator.comparing(Product::getPrice));
         }
-        model.addAttribute("products", products);
-        model.addAttribute("categories", catagoryService.getAllCategory());
-        return "/frontend-views/product-page";
-      }  
+        if (products.isEmpty()) {
+            List<Product> recommendedProducts = productService.getRandomProducts(4);
+            model.addAttribute("keyword", keyword); // add the keyword to the model
+            if (recommendedProducts.isEmpty()) {
+                model.addAttribute("products", Collections.emptyList());
+            } else {
+                model.addAttribute("products", recommendedProducts);
+            }
+            return "frontend-views/product-not-found";
+        }
+    } else {
+        products = productService.getAllProduct();
+        if (sort.equals("asc")) {
+            products.sort(Comparator.comparing(Product::getPrice).reversed());
+        } else {
+            products.sort(Comparator.comparing(Product::getPrice));
+        }
+    }
+    model.addAttribute("products", products);
+    model.addAttribute("categories", catagoryService.getAllCategory());
+    return "frontend-views/product-page";
+}
 
       @GetMapping("/product/{categoryId}")
       public String getProductsByCategory(Model model, 

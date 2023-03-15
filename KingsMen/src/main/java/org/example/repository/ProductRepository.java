@@ -25,4 +25,8 @@ int decreaseStock(@Param("productId") Long productId, @Param("stock") int stock)
 
 List<Product> findAllBySizes_IdIn(List<Long> sizeIds);
 
+@Query(value = "SELECT * FROM Product ORDER BY RAND() LIMIT 1", nativeQuery = true)
+Product findRandomProduct();
+
+
 }
