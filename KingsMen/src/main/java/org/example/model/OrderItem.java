@@ -6,7 +6,7 @@ public class OrderItem {
     private double price;
     private int quantity;
     private int stock;
-    private String size; 
+    private String size;
 
 
     public Long getId() {
@@ -49,11 +49,11 @@ public class OrderItem {
         this.price = price;
     }
 
-    public String getSize() {
+    public String getSizes() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSizes(String size) {
         this.size = size;
     }
 
