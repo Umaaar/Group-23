@@ -63,23 +63,10 @@
   
                 <form class="form" th:href="@{'/addToCart/' + ${product.id}}" th:action="@{'/addToCart/' + ${product.id}}" method="POST">
                   <div class = "size-quantity">
-                    <label>Size: </label>  
-                  <select class="product-dropdown" name="size" required>
-                        <option value="">--select a size--</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                        <option value="7UK">7UK</option>
-                        <option value="8UK">8UK</option>
-                        <option value="9UK">9UK</option>
-                        <option value="10UK">10UK</option>
-                        <option value="11UK">11UK</option>
-                        <option value="12UK">12UK</option>
-                        <option value="13UK">13UK</option>
-                        <option value="O/S">Onesize</option>
-                    </select>
+                    <label>Size:</label>
+                      <select class="product-dropdown"  name="size" id="size">
+                        <option th:each="size : ${product.category.sizes}" th:value="${size.id}" th:text="${size.name}"></option>
+                      </select>
                     <label>Quantity: </label>
                     <input type="number" class="product-dropdown" required name="stock" id="quantity" min="1" max="10">
                   </div>
@@ -110,3 +97,26 @@
 
 
 </html>
+
+<script>
+  // Add a listener to the category dropdown
+  document.getElementById('category').addEventListener('change', function() {
+    var categoryId = this.value;
+    var sizeDropdown = document.getElementById('size');
+    // Clear existing options
+    sizeDropdown.innerHTML = '';
+    // Get the available sizes for the selected category
+    var sizes = getSizesForCategory(categoryId);
+    // Add options for each size
+    sizes.forEach(function(size) {
+      var option = document.createElement('option');
+      option.value = size.id;
+      option.text = size.name;
+      sizeDropdown.appendChild(option);
+    });
+  });
+  
+  function getSizesForCategory(categoryId) {
+    // TODO: Implement this function to return the available sizes for the selected category
+  }
+  </script>

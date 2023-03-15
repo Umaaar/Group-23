@@ -182,7 +182,14 @@
                             <button type="submit">Search</button>
                         </form>
                     </div>
-
+                    
+                    <!-- <td th:each="size : ${sizeIds}" th:text="${product.size.name}">size</td> -->
+                    <!-- <a href="#" th:href="@{/admin/products/sizing/{id}(id=${product.id})}"
+                        class="btn btn-sm btn-dark">View Size Chart</a> -->
+                        
+                                           <!-- <select name="sizes" multiple="true">
+                                             <option th:each="size : ${sizeIds}" th:value="${size.id}" th:text="${size.name}"></option>
+                                           </select> -->
                     <div class="card-body">
                         <table class="table table-bordererd table-striped">
                             <thead>
@@ -204,7 +211,11 @@
                                         <td th:text="${iStat.index + 1}">1</td>
                                         <td th:text="${product.name}">name</td>
                                         <td th:text="${product.category.name}">category</td>
-                                        <td th:text="${product.size.name}">size</td>
+                                        <td>
+                                            <span th:each="size, iterStat : ${product.sizes}" th:text="${size.name}">
+                                                <span th:if="${!iterStat.last}">, </span>
+                                            </span>
+                                        </td>                                      
                                         <td th:text="${product.price}">price</td>
                                         <td th:text="${product.stock}">quantity</td>
                                         <td th:if="${product.stock > 1}">

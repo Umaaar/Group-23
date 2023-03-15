@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +37,10 @@ public class ProductService {
     
     public List<Product> getProductsByCategoryId(int categoryId) {
             return productRepository.findAllByCategory_Id(categoryId);
+    }
+
+    public List<Product> getProductsbySizeIds (List<Long> sizeIds) {
+        return productRepository.findAllBySizes_IdIn(sizeIds);
     }
 
     public List<Product> getProductsSortedByPriceAsc() {
@@ -77,24 +80,18 @@ public class ProductService {
         List<Product> outOfStockProducts = productRepository.findAllByStock(0);
         return  outOfStockProducts.size();
     }
-    
-    public List<Product> findByKeyword(String keyword) {
-        return productRepository.findByNameIgnoreCaseContaining(keyword);
+
+    public List<Product> findByKeyword(String keyword){
+        return productRepository.findByKeyword(keyword);
     }
-    
-    
 
     @Transactional
     public void decreasingStock(Long productId, int stock) {
         productRepository.decreaseStock(productId, stock);
     }
 
-    public List<Product> getRandomProducts(int count) {
-        List<Product> products = getAllProduct();
-        Collections.shuffle(products);
-        return products.subList(0, Math.min(count, products.size()));
-    }
-    
+
+
         
 
 

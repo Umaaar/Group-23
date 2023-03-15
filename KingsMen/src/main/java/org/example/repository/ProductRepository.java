@@ -14,8 +14,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
  List<Product> findAllByStock(int stock);
  List<Product> findAllByOrderByPriceAsc();
 List<Product> findAllByOrderByPriceDesc();
-List<Product> findByNameIgnoreCaseContaining(String name);
-
 
 
  @Query(value = "select * from PRODUCT e where e.name like %:keyword% or e.description like %:keyword%" ,nativeQuery = true)
@@ -25,8 +23,6 @@ List<Product> findByNameIgnoreCaseContaining(String name);
 @Query("UPDATE Product p SET p.stock = p.stock - :stock WHERE p.id = :productId")
 int decreaseStock(@Param("productId") Long productId, @Param("stock") int stock);
 
-@Query(value = "SELECT * FROM Product ORDER BY RAND() LIMIT 1", nativeQuery = true)
-Product findRandomProduct();
-
+List<Product> findAllBySizes_IdIn(List<Long> sizeIds);
 
 }

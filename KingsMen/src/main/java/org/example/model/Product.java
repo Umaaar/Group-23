@@ -4,6 +4,7 @@ package org.example.model;
 //import jakarta.persistence.GeneratedValue;
 import lombok.Data;
 
+import java.util.List;
 
 import javax.persistence.*;
 @Entity
@@ -17,9 +18,15 @@ public class Product {
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "size_id")
-    private Size size;
+    // @ManyToOne(fetch = FetchType.LAZY)
+    // @JoinColumn(name = "size_id")
+    // private Size size;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "product_size",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "size_id"))
+    private List<Size> sizes;
     private double price;
     private int stock;
     private String imageName;
@@ -69,12 +76,20 @@ public class Product {
         this.price = price;
     }
 
-    public Size getSize() {
-        return size;
+    // public Size getSize() {
+    //     return size;
+    // }
+
+    // public void setSize(Size size) {
+    //     this.size = size;
+    // }
+
+    public List<Size> getSizes() {
+        return sizes;
     }
 
-    public void setSize(Size size) {
-        this.size = size;
+    public void setSizes(List<Size> sizes) {
+        this.sizes = sizes;
     }
  
     public String getDescription() {
