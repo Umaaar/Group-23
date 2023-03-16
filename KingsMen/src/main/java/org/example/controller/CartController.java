@@ -65,7 +65,9 @@ public class CartController {
         Product item = productService.getProductById(id).get();
         List<Size> s = new ArrayList<>();
         if(item.getStock() <= 0){
-            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out of Stock");
+            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
+        }else if(dropdown.getStock() > item.getStock()){
+            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Max Quantity For This Item Is " + item.getStock());
         }else{
             for (Long sizeId : dropdown.getSizeIds()) {
                 Size size = sizeService.getSizeById(sizeId).get();
