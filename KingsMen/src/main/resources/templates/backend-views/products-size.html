@@ -172,8 +172,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3> Products
-                            <a href="#" th:href="@{/admin/products/create}" class="btn btn-dark btn-sm text-white float-end">
-                                Add Products
+                            <a href="#" th:href="@{/admin/products/productSize/create}" class="btn btn-dark btn-sm text-white float-end">
+                                Add Products Sizing
                             </a>
                         </h3>
                         <form th:action="@{/admin/products}" method="get">
@@ -195,10 +195,8 @@
                             <thead>
                                 <tr>
                                     <th>SN</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
+                                    <th>Product</th>
                                     <th>Size</th>
-                                    <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Stock Availablity</th>
                                     <th>Update</th>
@@ -207,23 +205,16 @@
                             </thead>
                             <tbody>
 
-                                    <tr th:each="product, iStat : ${products}">
+                                     <tr th:each="productSize, iStat : ${productSizes}">
                                         <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="${product.name}">name</td>
-                                        <td th:text="${product.category.name}">category</td>
-                                        <td>
-                                            <!-- <span th:each="size, iterStat : ${product.sizes}" th:text="${size.name}">
-                                                <span th:if="${!iterStat.last}">, </span>
-                                            </span> -->
-                                            <a href="#" th:href="@{/admin/products/productSize/{id}(id=${product.id})}"
-                                                class="btn btn-sm btn-dark">View Sizing</a>
-                                        </td>                                      
-                                        <td th:text="${product.price}">price</td>
-                                        <td th:text="${product.stock}">quantity</td>
-                                        <td th:if="${product.stock > 1}">
+                                        <td th:text="${productSize.product.name}">PRODUCT</td>
+                                        <td th:text="${productSize.size.name}">Size</td>
+                                        <td th:text="${productSize.quantity}">Quantity</td>
+                                        
+                                        <td th:if="${productSize.quantity > 1}">
                                             <label class="label-stock bg-success">In Stock</label>
                                         </td>
-                                        <td th:if="${product.stock <= 1}">
+                                        <td th:if="${productSize.quantity <= 1}">
                                             <label class="label-stock bg-danger">Out of Stock</label>
                                         </td>
                     
@@ -240,7 +231,7 @@
                                             </a>
 
                                         </td>
-                                    </tr>
+                                    </tr> 
                                     
                             </tbody>
                         </table>

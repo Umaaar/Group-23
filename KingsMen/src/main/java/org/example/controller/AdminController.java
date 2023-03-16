@@ -7,11 +7,15 @@ import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
 import org.example.model.Product;
+import org.example.model.ProductSize;
 import org.example.model.Size;
+import org.example.model.ProductSizeId;
+
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
+import org.example.service.ProductSizeService;
 import org.example.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -44,6 +48,9 @@ public class AdminController {
 
     @Autowired
     SizeService sizeService;
+
+    @Autowired
+    ProductSizeService productSizeService;
 
     @Autowired
     CustomUserDetailService customUserDetailService;
@@ -163,12 +170,14 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
 //     sizes.add(size);
 // }
 // product.setSizes(sizes);
-List<Size> sizes = new ArrayList<>();
-for (Long sizeId : productDTO.getSizeIds()) {
-    Size size = sizeService.getSizeById(sizeId).get();
+List<ProductSize> sizes = new ArrayList<>();
+for (Long sizeId : productDTO.getProductSizeIds()) {
+    ProductSize size = new ProductSize();
+    size.setSize(sizeService.getSizeById(sizeId).get());
+    size.setProduct(product);
     sizes.add(size);
 }
-product.setSizes(sizes);
+product.setProductSizes(sizes);
 
     String imageUUID;
     if(!file.isEmpty()){
@@ -199,10 +208,10 @@ productDTO.setStock(product.getStock());
 //Category category = categoryService.getCategoryById(product.getCategory().getId()).get();
 //productDTO.setSizeIds(category.getSizes().get(0).getId());
 List<Long> sizeIds = new ArrayList<>();
-for (Size size : product.getSizes()) {
-    sizeIds.add(size.getId());
+for (ProductSize size : product.getProductSizes()) {
+    sizeIds.add(size.getSize().getId());
 }
-productDTO.setSizeIds(sizeIds);
+productDTO.setProductSizeIds(sizeIds);
 productDTO.setImageName(product.getImageName());
 
 model.addAttribute("productDTO", productDTO);
@@ -216,6 +225,54 @@ public String deleteProduct(@PathVariable long id){
     productService.removeProductById(id);
     return "redirect:/admin/products";
 }
+
+@GetMapping("/admin/products/productSize/{id}")
+public String productSize(@PathVariable Long id, Model model) {
+    Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
+    List<ProductSize> productSizes = productSizeService.getProductSizesByProductId(id);
+    model.addAttribute("product", product);
+    model.addAttribute("sizes", sizeService.getAllSizes());
+    model.addAttribute("productSizes", productSizes);
+    return "/backend-views/products-size";
+}
+
+@GetMapping("/admin/products/productSize/create")
+public String createProductSizeGet(Model model) {
+    model.addAttribute("productSize", new ProductSize());
+    model.addAttribute("products", productService.getAllProduct());
+    model.addAttribute("sizes", sizeService.getAllSizes());
+    return "/backend-views/product-size-create";
+}
+
+@PostMapping("/admin/products/productSize/create")
+public String createProductSizePost(@ModelAttribute("productSize") ProductSize productSize) {
+    productSizeService.createProductSize(productSize.getProduct(), productSize.getSize(), productSize.getQuantity());
+    return "redirect:/admin/products";
+}
+
+@GetMapping("/admin/products/productSize/{productId}/{sizeId}")
+public String editProductSizeGet(@PathVariable Long productId, @PathVariable Long sizeId, Model model) {
+    ProductSizeId id = new ProductSizeId(productId, sizeId);
+    ProductSize productSize = productSizeService.getProductSizeById(id);
+    model.addAttribute("productSize", productSize);
+    model.addAttribute("products", productService.getAllProduct());
+    model.addAttribute("sizes", sizeService.getAllSizes());
+    return "/backend-views/products-size-edit";
+}
+
+@PostMapping("/admin/products/productSize/{productId}/{sizeId}")
+public String editProductSizePost(@ModelAttribute("productSize") ProductSize productSize) {
+    productSizeService.updateProductSize(productSize);
+    return "redirect:/admin/products";
+}
+
+@PostMapping("/admin/products/productSize/delete/{productId}/{sizeId}")
+public String deleteProductSize(@PathVariable Long productId, @PathVariable Long sizeId) {
+    ProductSizeId id = new ProductSizeId(productId, sizeId);
+    productSizeService.deleteProductSizeById(id);
+    return "redirect:/admin/products";
+}
+
 
 
 
@@ -267,6 +324,8 @@ public String updateSizeGet(@PathVariable Long id, Model model){
         return "404";
     }
 }
+
+
 
 
 
@@ -346,4 +405,10 @@ public String adminQueries(@AuthenticationPrincipal CustomUserDetail authenticat
     model.addAttribute("adminname",authentication.getFirstname());
     return "/backend-views/customer-queries";
 }
+
+
+
+
+
 }
+

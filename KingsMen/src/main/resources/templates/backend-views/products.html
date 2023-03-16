@@ -212,9 +212,11 @@
                                         <td th:text="${product.name}">name</td>
                                         <td th:text="${product.category.name}">category</td>
                                         <td>
-                                            <span th:each="size, iterStat : ${product.sizes}" th:text="${size.name}">
+                                            <!-- <span th:each="size, iterStat : ${product.sizes}" th:text="${size.name}">
                                                 <span th:if="${!iterStat.last}">, </span>
-                                            </span>
+                                            </span> -->
+                                            <a href="#" th:href="@{/admin/products/productSize/{id}(id=${product.id})}"
+                                                class="btn btn-sm btn-dark">View Sizing</a>
                                         </td>                                      
                                         <td th:text="${product.price}">price</td>
                                         <td th:text="${product.stock}">quantity</td>

@@ -40,8 +40,8 @@ public class ProductService {
             return productRepository.findAllByCategory_Id(categoryId);
     }
 
-    public List<Product> getProductsbySizeIds (List<Long> sizeIds) {
-        return productRepository.findAllBySizes_IdIn(sizeIds);
+    public List<Product> getProductsbyProductSizeIds (List<Long> sizeIds) {
+        return productRepository.findAllByProductSizes_IdIn(sizeIds);
     }
 
     public List<Product> getProductsSortedByPriceAsc() {
