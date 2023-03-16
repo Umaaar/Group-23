@@ -64,8 +64,8 @@
                 <form class="form" th:href="@{'/addToCart/' + ${product.id}}" th:action="@{'/addToCart/' + ${product.id}}" method="POST">
                   <div class = "size-quantity">
                     <label>Size:</label>
-                      <select class="product-dropdown"  name="sizeIds" id="sizeIds">
-                        <option th:each="size : ${product.productSizes}" th:value="${size.id}" th:text="${size.name}"></option>
+                      <select class="product-dropdown" name="size" id="size">
+                        <option th:each="productSize : ${product.productSizes}" th:value="${productSize.size.id}" th:text="${productSize.size.name}"></option>
                       </select>
                     <label>Quantity: </label>
                     <input type="number" class="product-dropdown" required name="stock" id="quantity" min="1" max="10">

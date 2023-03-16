@@ -78,6 +78,8 @@ public class Product {
 
     public void setProductSizes(List<ProductSize> productSizes) {
         this.productSizes = productSizes;
+        updateStockFromProductSizes();
+
     }
 
  
@@ -109,7 +111,15 @@ public class Product {
     public void setQuantity(int quantity) {
     }
 
-  
+    public void updateStockFromProductSizes() {
+        int totalQuantity = productSizes.stream()
+                .mapToInt(ProductSize::getQuantity)
+                .sum();
+        this.setStock(totalQuantity);
+    }
+
+    
+
 
    
 }

@@ -261,38 +261,15 @@
                                 <label>Quantity</label>
                                 <input type="number" class="form-control dropdown" required th:field="*{stock}" name="stock" id="stock" placeholder="Enter quantity" min="0" max="100">
                             </div>
-                            
-                           
                         
 
-                            <!-- <div class="mb-3">
-                                <label for="size">Select Size</label>
-                                <select class="form-control" required th:field="*{size}" id="size" name="size">
-                                    <option value="sizes">--select a size--</option>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                    <option value="7UK">7UK</option>
-                                    <option value="8UK">8UK</option>
-                                    <option value="9UK">9UK</option>
-                                    <option value="10UK">10UK</option>
-                                    <option value="11UK">11UK</option>
-                                    <option value="12UK">12UK</option>
-                                    <option value="13UK">13UK</option>
-                                    <option value="O/S">Onesize</option>
-                                </select>
-                            </div> -->
-
                             <div class="mb-3">
-                                <label for="size">Select Size</label>
-                                <select class="form-control" th:field="*{sizeIds}" id="sizeIds" name="sizeIds" multiple>
-                                    <option th:each="size :${sizes}"
-                                            th:value="${size.id}"
-                                            th:text="${size.name}"
-                                    >
-                                </select>
+                                 <!-- <label for="size">Size:</label>
+                            <select id="size" name="size.id" multiple>
+                                <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
+                            </select>  -->
+                            <!-- <a href="#" th:href="@{/admin/products/productSize/{id}(id=${product.id})}"
+                            class="btn btn-sm btn-dark">Edit Product Sizing</a> -->
                             </div>
 
 

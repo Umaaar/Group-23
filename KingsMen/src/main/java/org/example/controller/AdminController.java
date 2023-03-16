@@ -163,22 +163,6 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
   product.setDescription(productDTO.getDescription());
   product.setPrice(productDTO.getPrice());
   product.setStock(productDTO.getStock());
- // product.setSize(category.getSizes().get(0));
-//   List<Size> sizes = new ArrayList<>();
-// for (Long sizeId : productDTO.getSizeIds()) {
-//     Size size = category.getSizes().get(sizeId.intValue());
-//     sizes.add(size);
-// }
-// product.setSizes(sizes);
-List<ProductSize> sizes = new ArrayList<>();
-for (Long sizeId : productDTO.getProductSizeIds()) {
-    ProductSize size = new ProductSize();
-    size.setSize(sizeService.getSizeById(sizeId).get());
-    size.setProduct(product);
-    sizes.add(size);
-}
-product.setProductSizes(sizes);
-
     String imageUUID;
     if(!file.isEmpty()){
         imageUUID = file.getOriginalFilename();
@@ -205,13 +189,7 @@ productDTO.setCategoryId(product.getCategory().getId());
 productDTO.setDescription(product.getDescription());
 productDTO.setPrice(product.getPrice());
 productDTO.setStock(product.getStock());
-//Category category = categoryService.getCategoryById(product.getCategory().getId()).get();
-//productDTO.setSizeIds(category.getSizes().get(0).getId());
-List<Long> sizeIds = new ArrayList<>();
-for (ProductSize size : product.getProductSizes()) {
-    sizeIds.add(size.getSize().getId());
-}
-productDTO.setProductSizeIds(sizeIds);
+
 productDTO.setImageName(product.getImageName());
 
 model.addAttribute("productDTO", productDTO);

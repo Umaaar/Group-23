@@ -185,14 +185,15 @@
                             <label for="product">Product:</label>
                             <select id="product" name="product.id">
                                 <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
-                            </select><br><br>
+                            </select>
                             </div>
 
                             <div class="col-md-12 mb-3">
                             <label for="size">Size:</label>
-                            <select id="size" name="size.id">
+                            <select id="size" name="size.id" multiple>
                                 <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
-                            </select><br><br>
+                            </select>
+                            
                             </div>
                     
                             <div class="col-md-6 mb-3">
