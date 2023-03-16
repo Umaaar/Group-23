@@ -14,7 +14,7 @@ public class ProductDTO {
     private int quantity;
     private int stock;
     private String imageName;
-    private List<Long> sizeIds;  
+    private List<Long> productSizeIds;  
 
     
 

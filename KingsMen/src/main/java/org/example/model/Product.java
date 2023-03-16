@@ -1,7 +1,5 @@
 package org.example.model;
 
-//import jakarta.persistence.*;
-//import jakarta.persistence.GeneratedValue;
 import lombok.Data;
 
 import java.util.List;
@@ -18,15 +16,13 @@ public class Product {
     @ManyToOne(fetch =  FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "size_id")
-    // private Size size;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "product_size",
-        joinColumns = @JoinColumn(name = "product_id"),
-        inverseJoinColumns = @JoinColumn(name = "size_id"))
-    private List<Size> sizes;
+    
+    // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    // private List<Size> sizes;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductSize> productSizes;
+
     private double price;
     private int stock;
     private String imageName;
@@ -76,21 +72,14 @@ public class Product {
         this.price = price;
     }
 
-    // public Size getSize() {
-    //     return size;
-    // }
-
-    // public void setSize(Size size) {
-    //     this.size = size;
-    // }
-
-    public List<Size> getSizes() {
-        return sizes;
+    public List<ProductSize> getProductSizes() {
+        return productSizes;
     }
 
-    public void setSizes(List<Size> sizes) {
-        this.sizes = sizes;
+    public void setProductSizes(List<ProductSize> productSizes) {
+        this.productSizes = productSizes;
     }
+
  
     public String getDescription() {
         return description;
@@ -119,6 +108,8 @@ public class Product {
 
     public void setQuantity(int quantity) {
     }
+
+  
 
    
 }
