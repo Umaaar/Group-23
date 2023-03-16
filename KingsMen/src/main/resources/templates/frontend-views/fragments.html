@@ -35,13 +35,14 @@
 
       <ul>
         <li>
-          <a th:href="@{/login}"><i class="fa-solid fa-user"></i></a>
+          <a sec:authorize="isAnonymous()" th:href="@{/login}"><i class="fa-solid fa-user"></i></a>
+          <a sec:authorize="isAuthenticated()" th:href="@{/customer-dashboard}"><i class="fa-solid fa-user"></i></a>
         </li>
         <li>
           <a th:href="@{/cart}"><i class="fa-solid fa-bag-shopping"></i></a>
         </li>
         <li>
-          <a th:href="@{/logout}"><i class="fa-solid fa-sign-out"></i></a>
+          <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i class="fa-solid fa-sign-out"></i></a>
         </li>
       </ul>
     <!--
