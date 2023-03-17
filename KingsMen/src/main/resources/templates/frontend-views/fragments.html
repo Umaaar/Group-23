@@ -34,17 +34,27 @@
     <div class="sub-container-nav side-container" >
 
       <ul>
+        
         <li>
-          <a sec:authorize="isAnonymous()" th:href="@{/login}"><i class="fa-solid fa-user"></i></a>
           <a sec:authorize="isAuthenticated()" th:href="@{/customer-dashboard}"><i class="fa-solid fa-user"></i></a>
+          <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
+        </li>
+        <!-- <li>
+          <a sec:authorize="isAnonymous()" th:href="@{/register}">Register</a>
+
+        </li> -->
+        <li>
+          <a sec:authorize="isAuthenticated()" th:href="@{/wishlist}"><i class="fa-solid fa-heart"></i></a>
         </li>
         <li>
-          <a th:href="@{/cart}"><i class="fa-solid fa-bag-shopping"></i></a>
+          <a sec:authorize="isAuthenticated()" th:href="@{/cart}"><i class="fa-solid fa-bag-shopping"></i></a>
         </li>
         <li>
           <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i class="fa-solid fa-sign-out"></i></a>
         </li>
+
       </ul>
+    <!--
     <!--
       </ul>-->
      
