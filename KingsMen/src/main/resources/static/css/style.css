@@ -506,16 +506,3 @@ p.about-us-content {
   
 
  /* End of sort drop down css */
-
- /*Login CSS*/
- .fa-eye{
-    position: absolute;
-    top: 52.5%;
-    right: 5%;
-    cursor: pointer;
-    color: lightgray;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-  /*End of login css*/
