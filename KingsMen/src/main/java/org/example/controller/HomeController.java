@@ -25,6 +25,11 @@ public class HomeController {
         return "/frontend-views/customer-dashboard";
     }
 
+    @GetMapping("/orders")
+    public String Orders() {
+        return "/frontend-views/orders";
+    }
+
     @GetMapping("/contact-us")
     public String ContactPage() {
         return "/frontend-views/contact-details";
