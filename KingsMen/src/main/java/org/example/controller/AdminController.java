@@ -3,6 +3,7 @@ package org.example.controller;
 
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
+import org.example.dto.ProductSizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -161,6 +163,17 @@ public String createProductsPost(@ModelAttribute("productDTO") ProductDTO produc
   product.setDescription(productDTO.getDescription());
   product.setPrice(productDTO.getPrice());
   product.setStock(productDTO.getStock());
+  List<ProductSize> productSizes = new ArrayList<>();
+  for (ProductSizeDTO sizeDTO : productDTO.getProductSizes()) {
+      ProductSize productSize = new ProductSize();
+      productSize.setId(sizeDTO.getId());
+      productSize.setProduct(product);
+      Size size = sizeService.getSizeById(sizeDTO.getSizeId()).get();
+      productSize.setSize(size);
+      productSize.setQuantity(sizeDTO.getQuantity());
+      productSizes.add(productSize);
+  }
+  product.setProductSizes(productSizes);
     String imageUUID;
     if(!file.isEmpty()){
         imageUUID = file.getOriginalFilename();
@@ -187,6 +200,24 @@ productDTO.setCategoryId(product.getCategory().getId());
 productDTO.setDescription(product.getDescription());
 productDTO.setPrice(product.getPrice());
 productDTO.setStock(product.getStock());
+   // Retrieve the list of ProductSize objects for the specified product
+   List<ProductSize> productSizes = productSizeService.getProductSizesByProductId(id);
+
+   // Create a new list of ProductSizeDTO objects
+   List<ProductSizeDTO> productSizeDTOs = new ArrayList<>();
+   List<Long> productSizeIds = new ArrayList<>();
+   for (ProductSize productSize : productSizes) {
+       ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+       productSizeDTO.setId(productSize.getId());
+       productSizeDTO.setSizeId(productSize.getSize().getId());
+       productSizeDTO.setQuantity(productSize.getQuantity());
+       productSizeDTOs.add(productSizeDTO);
+       productSizeIds.add(productSize.getSize().getId());
+   }
+
+   // Set the productSizeIds and productSizes fields of the ProductDTO object
+   productDTO.setProductSizeIds(productSizeIds);
+   productDTO.setProductSizes(productSizeDTOs);
 
 productDTO.setImageName(product.getImageName());
 
