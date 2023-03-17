@@ -194,14 +194,7 @@
                                 Product Images
                             </button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="inventory-tab" data-bs-toggle="tab"
-                                data-bs-target="#inventory-tab-pane" type="button" role="tab"
-                                aria-controls="inventory-tab-pane" aria-selected="false">
-                               Inventory Management System (IMS)
-                            </button>
-                        </li>
-
+                
         
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -253,27 +246,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade border p-3" id="inventory-tab-pane" role="tabpanel"
-                            aria-labelledby="inventory-tab" tabindex="0">
-                            
-
-                            <div class="mb-3">
-                                <label>Quantity</label>
-                                <input type="number" class="form-control dropdown" required th:field="*{stock}" name="stock" id="stock" placeholder="Enter quantity" min="0" max="100">
-                            </div>
-                        
-
-                            <div class="mb-3">
-                                 <!-- <label for="size">Size:</label>
-                            <select id="size" name="size.id" multiple>
-                                <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
-                            </select>  -->
-                            
-                            </div>
-
-
-
-
+                    </div>
                         <div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

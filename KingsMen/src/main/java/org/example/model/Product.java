@@ -5,32 +5,29 @@ import lombok.Data;
 import java.util.List;
 
 import javax.persistence.*;
+
 @Entity
 @Data
 @Table(name="Product")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    @ManyToOne(fetch =  FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-    
-    // @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    // private List<Size> sizes;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductSize> productSizes;
 
     private double price;
+
     private int stock;
+
     private String imageName;
+
     private String description;
-
-  
-
-   
 
     public Long getId() {
         return id;
@@ -56,14 +53,6 @@ public class Product {
         this.category = category;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -72,23 +61,12 @@ public class Product {
         this.price = price;
     }
 
-    public List<ProductSize> getProductSizes() {
-        return productSizes;
+    public int getStock() {
+        return calculateStockFromProductSizes();
     }
 
-    public void setProductSizes(List<ProductSize> productSizes) {
-        this.productSizes = productSizes;
-        updateStockFromProductSizes();
-
-    }
-
- 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public String getImageName() {
@@ -99,27 +77,31 @@ public class Product {
         this.imageName = imageName;
     }
 
-    public double getQuantityTimesPrice() {
-        double qty = (getPrice() * getStock());
-        return qty;
+    public String getDescription() {
+        return description;
     }
 
-    public int getQuantity(){
-        return 0;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setQuantity(int quantity) {
-    }
-
-    public void updateStockFromProductSizes() {
+    private int calculateStockFromProductSizes() {
+        List<ProductSize> productSizes = this.getProductSizes();
+        
+        System.out.println("Product sizes: " + productSizes);
+        
         int totalQuantity = productSizes.stream()
                 .mapToInt(ProductSize::getQuantity)
                 .sum();
-        this.setStock(totalQuantity);
+        System.out.println("Total quantity: " + totalQuantity);
+        
+        return totalQuantity;
     }
 
-    
+    public List<ProductSize> getProductSizes() {
+        return this.productSizes;
+    }
 
-
-   
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductSize> productSizes;
 }

@@ -202,6 +202,10 @@ public String deleteProduct(@PathVariable long id){
     return "redirect:/admin/products";
 }
 
+
+
+
+
 @GetMapping("/admin/products/productSize/{id}")
 public String productSize(@PathVariable Long id, Model model) {
     Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
@@ -241,6 +245,7 @@ public String updateProductSizeGet(@PathVariable Long id, Model model) {
     model.addAttribute("sizes", sizeService.getAllSizes());
     return "/backend-views/product-size-create";
 }
+
 
 
 

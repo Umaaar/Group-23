@@ -106,7 +106,14 @@
                   <span class="menu-title">Orders</span>
               </a>
           </li>
-  
+
+           <!-- Inventory Management System -->
+           <li class="nav-item">
+            <a class="nav-link" href="#" th:href="@{/admin/products/productSize/{id}(id=${product.id})}">
+                <i class="mdi mdi-plus-box menu-icon"></i>
+                <span class="menu-title">IMS</span>
+            </a>
+        </li>
   
           <!-- Categories -->
           <li class="nav-item">
@@ -171,25 +178,19 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h3> Products
+                        <h3> Inventory Management System 
                             <a href="#" th:href="@{/admin/products/productSize/create}" class="btn btn-dark btn-sm text-white float-end">
                                 Add Products Sizing
                             </a>
                         </h3>
-                        <form th:action="@{/admin/products}" method="get">
+                       <!--<form th:action="@{/admin/products}" method="get">
 
                             <input type="search" name="keyword" id="txtSearch">
                             <button type="submit">Search</button>
-                        </form>
+                        </form>-->
                     </div>
                     
-                    <!-- <td th:each="size : ${sizeIds}" th:text="${product.size.name}">size</td> -->
-                    <!-- <a href="#" th:href="@{/admin/products/sizing/{id}(id=${product.id})}"
-                        class="btn btn-sm btn-dark">View Size Chart</a> -->
-                        
-                                           <!-- <select name="sizes" multiple="true">
-                                             <option th:each="size : ${sizeIds}" th:value="${size.id}" th:text="${size.name}"></option>
-                                           </select> -->
+               
                     <div class="card-body">
                         <table class="table table-bordererd table-striped">
                             <thead>
