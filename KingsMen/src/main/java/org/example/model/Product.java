@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name="Product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToOne(fetch =  FetchType.LAZY)

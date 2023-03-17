@@ -180,7 +180,7 @@
                     <div class="card-body">
                         <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSize}">
                             <div class="form-group row">
-
+                            <input type="hidden" name="id"  th:field="*{id}">
                             <div class="col-md-12 mb-3">
                             <label for="product">Product:</label>
                             <select id="product" name="product.id">
@@ -190,7 +190,7 @@
 
                             <div class="col-md-12 mb-3">
                             <label for="size">Size:</label>
-                            <select id="size" name="size.id" multiple>
+                            <select id="size" name="size.id" >
                                 <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
                             </select>
                             

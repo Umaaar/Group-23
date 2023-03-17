@@ -6,15 +6,14 @@ import javax.persistence.*;
 @Table(name = "product_size")
 public class ProductSize {
 
-    @EmbeddedId
-    private ProductSizeId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("productId")
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @MapsId("sizeId")
     private Size size;
 
     private int quantity;
@@ -22,21 +21,20 @@ public class ProductSize {
     public ProductSize() {
     }
 
-    public ProductSize(Product product, Size size, int quantity) {
+    public ProductSize(long id, Product product, Size size, int quantity) {
+        this.id = id;
         this.product = product;
         this.size = size;
         this.quantity = quantity;
-        this.id = new ProductSizeId(product.getId(), size.getId());
     }
 
-    public ProductSizeId getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(ProductSizeId id) {
+    public void setId(long id) {
         this.id = id;
     }
-
 
     public Product getProduct() {
         return product;

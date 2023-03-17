@@ -207,7 +207,7 @@
 
                                      <tr th:each="productSize, iStat : ${productSizes}">
                                         <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="${productSize.product.name}">PRODUCT</td>
+                                        <td th:text="${productSize.product.name}">Product</td>
                                         <td th:text="${productSize.size.name}">Size</td>
                                         <td th:text="${productSize.quantity}">Quantity</td>
                                         
@@ -219,12 +219,12 @@
                                         </td>
                     
                                         <td>
-                                            <a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}"
+                                            <a href="#" th:href="@{/admin/products/productSize/update/{id}(id=${productSize.id})}"
                                                 class="btn btn-sm btn-success">Update</a>
                                            
                                         </td>
                                         <td>
-                                             <a href="#" th:href="@{/admin/products/delete/{id}(id=${product.id})}"
+                                             <a href="#" th:href="@{/admin/products/productSize/delete/{id}(id=${productSize.id})}"
                                                 onclick="return confirm('Are you sure, you want to delete this data?')"
                                                 class="btn btn-sm btn-danger">
                                                 Delete

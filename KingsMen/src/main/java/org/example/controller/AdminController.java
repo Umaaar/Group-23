@@ -9,7 +9,6 @@ import org.example.model.OrderDetails;
 import org.example.model.Product;
 import org.example.model.ProductSize;
 import org.example.model.Size;
-import org.example.model.ProductSizeId;
 
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
@@ -29,7 +28,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -222,33 +220,26 @@ public String createProductSizeGet(Model model) {
     return "/backend-views/product-size-create";
 }
 
+
 @PostMapping("/admin/products/productSize/create")
 public String createProductSizePost(@ModelAttribute("productSize") ProductSize productSize) {
-    productSizeService.createProductSize(productSize.getProduct(), productSize.getSize(), productSize.getQuantity());
+    productSizeService.saveProductSize(productSize);
     return "redirect:/admin/products";
 }
 
-@GetMapping("/admin/products/productSize/{productId}/{sizeId}")
-public String editProductSizeGet(@PathVariable Long productId, @PathVariable Long sizeId, Model model) {
-    ProductSizeId id = new ProductSizeId(productId, sizeId);
-    ProductSize productSize = productSizeService.getProductSizeById(id);
+@GetMapping("/admin/products/productSize/delete/{id}")
+public String deleteProductSize(@PathVariable Long id) {
+    productSizeService.deleteProductSizeById(id);
+    return "redirect:/admin/products";
+}
+
+@GetMapping("/admin/products/productSize/update/{id}")
+public String updateProductSizeGet(@PathVariable Long id, Model model) {
+    ProductSize productSize = productSizeService.getProductSizeById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product size ID: " + id));
     model.addAttribute("productSize", productSize);
     model.addAttribute("products", productService.getAllProduct());
     model.addAttribute("sizes", sizeService.getAllSizes());
-    return "/backend-views/products-size-edit";
-}
-
-@PostMapping("/admin/products/productSize/{productId}/{sizeId}")
-public String editProductSizePost(@ModelAttribute("productSize") ProductSize productSize) {
-    productSizeService.updateProductSize(productSize);
-    return "redirect:/admin/products";
-}
-
-@PostMapping("/admin/products/productSize/delete/{productId}/{sizeId}")
-public String deleteProductSize(@PathVariable Long productId, @PathVariable Long sizeId) {
-    ProductSizeId id = new ProductSizeId(productId, sizeId);
-    productSizeService.deleteProductSizeById(id);
-    return "redirect:/admin/products";
+    return "/backend-views/product-size-create";
 }
 
 
