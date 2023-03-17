@@ -20,6 +20,8 @@ public class HomeController {
     public String dashboard(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response , Model model) {
         model.addAttribute("firstname",authentication.getFirstname());
         System.out.println(authentication.getFirstname());
+        model.addAttribute("lastname",authentication.getLastname());
+        System.out.println(authentication.getLastname());
         model.addAttribute("email",authentication.getEmail());
         System.out.println(authentication.getEmail());
         return "/frontend-views/customer-dashboard";
