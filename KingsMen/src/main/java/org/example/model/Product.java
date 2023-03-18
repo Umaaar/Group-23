@@ -65,6 +65,14 @@ public class Product {
         return calculateStockFromProductSizes();
     }
 
+    public int getQuantity(){
+        return stock;
+    }
+
+    public void setQuantity(int quantity){
+        stock = quantity;
+    }
+
     public void setStock(int stock) {
         this.stock = stock;
     }
@@ -100,6 +108,15 @@ public class Product {
 
     public List<ProductSize> getProductSizes() {
         return this.productSizes;
+    }
+
+    public void setProductSizes(List<ProductSize> productSizes){
+        productSizes = this.productSizes;
+    }
+
+    public double getQuantityTimesPrice() {
+        double qty = (getPrice() * getQuantity());
+        return qty;
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

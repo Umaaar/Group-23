@@ -64,11 +64,11 @@
                 <form class="form" th:href="@{'/addToCart/' + ${product.id}}" th:action="@{'/addToCart/' + ${product.id}}" method="POST">
                   <div class = "size-quantity">
                     <label>Size:</label>
-                      <select class="product-dropdown" name="size" id="size">
+                      <select class="product-dropdown" name="productSizeIds" id="productSizeIds">
                         <option th:each="productSize : ${product.productSizes}" th:value="${productSize.size.id}" th:text="${productSize.size.name}"></option>
                       </select>
                     <label>Quantity: </label>
-                    <input type="number" class="product-dropdown" required name="stock" id="quantity" min="1" max="10">
+                    <input type="number" class="product-dropdown" required name="stock" id="stock" min="1" max="10">
                   </div>
                   
                     </br>

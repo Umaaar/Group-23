@@ -11,6 +11,6 @@ public class OrderDTO {
     private String email;
     private String order_products;
     private Integer status;
-    private Long total;
+    private Double total;
 
 }

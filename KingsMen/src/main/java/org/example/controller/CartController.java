@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Product;
-import org.example.model.Size;
+import org.example.model.ProductSize;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
 import org.example.model.OrderItem;
@@ -9,7 +9,7 @@ import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
-import org.example.service.SizeService;
+import org.example.service.ProductSizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,7 @@ public class CartController {
     @Autowired
     OrderService orderService;
     @Autowired
-    SizeService sizeService;
+    ProductSizeService productSizeService;
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable Long id){
@@ -45,7 +45,7 @@ public class CartController {
     @GetMapping("/cart")
     public String cartGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
         model.addAttribute("cartCount",GlobalData.cart.size());
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
+        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
         model.addAttribute("cart",GlobalData.cart);
         model.addAttribute("name",authentication.getFirstname());
         model.addAttribute("email",authentication.getEmail());
@@ -63,19 +63,20 @@ public class CartController {
     @PostMapping("/addToCart/{id}")
     public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes){
         Product item = productService.getProductById(id).get();
-        List<Size> s = new ArrayList<>();
+        
         if(item.getStock() <= 0){
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
         }else if(dropdown.getStock() > item.getStock()){
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Max Quantity For This Item Is " + item.getStock());
         }else{
-            for (Long sizeId : dropdown.getSizeIds()) {
-                Size size = sizeService.getSizeById(sizeId).get();
+            List<ProductSize> s = new ArrayList<>();
+            for (Long ids : dropdown.getProductSizeIds()) {
+                ProductSize size = productSizeService.getProductSizeById(ids).get();
                 s.add(size);
             }
-            item.setSizes(s);
-            item.setStock(dropdown.getStock());
-            item.setPrice(item.getPrice() * item.getStock());
+            item.setProductSizes(s);
+            item.setQuantity(dropdown.getStock());
+            item.setPrice(item.getPrice() * item.getQuantity());
             GlobalData.cart.add(productService.getProductById(id).get());
             redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
         }
@@ -103,8 +104,8 @@ public class CartController {
                 orderItem.setId(item.getId());
                 orderItem.setName(item.getName());
                 String sizeName;
-                for(Size sizes : item.getSizes()){
-                    sizeName = sizes.getName();
+                for(ProductSize sizes : item.getProductSizes()){
+                    sizeName = sizes.getSize().getName();
                     orderItem.setSizes(sizeName);
                 }
                 orderItem.setQuantity(item.getStock());
@@ -117,7 +118,7 @@ public class CartController {
                 productService.decreasingStock(orderItem.getId(), orderItem.getQuantity()); //decreasing stock
             }
             order.setStatus(1);
-            Long total = (long) GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum();
+            Double total = GlobalData.cart.stream().mapToDouble(Product::getPrice).sum();
             order.setTotal(total);
             orderService.addOrder(order);
             GlobalData.cart.removeAll(GlobalData.cart);
