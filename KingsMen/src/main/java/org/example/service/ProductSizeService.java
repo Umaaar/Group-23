@@ -37,7 +37,7 @@ public List<ProductSize> getProductSizesByProductId(Long id) {
     return productSizeRepository.findAllByProductId(id);
 }
 
-public List<ProductSize> getProductSizesBySizeId(Long id) {
+public ProductSize getProductSizesBySizeId(Long id) {
     return productSizeRepository.findAllBySizeId(id);
     
 }

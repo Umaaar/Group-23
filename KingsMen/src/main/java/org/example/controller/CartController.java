@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.example.dto.OrderDTO;
@@ -69,12 +70,9 @@ public class CartController {
         }else if(dropdown.getStock() > item.getStock()){
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Max Quantity For This Item Is " + item.getStock());
         }else{
-            List<ProductSize> s = new ArrayList<>();
-            for (Long ids : dropdown.getProductSizeIds()) {
-                ProductSize size = productSizeService.getProductSizeById(ids).get();
-                s.add(size);
-            }
-            item.setProductSizes(s);
+            ProductSize selectedSize = productSizeService.getProductSizesBySizeId(dropdown.getSelectedSizeId());
+           item.setProductSizes(Collections.singletonList(selectedSize));
+            
             item.setQuantity(dropdown.getStock());
             item.setPrice(item.getPrice() * item.getQuantity());
             GlobalData.cart.add(productService.getProductById(id).get());

@@ -16,11 +16,13 @@ public class Product {
     private Long id;
 
     private String name;
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductSize> productSizes;
+    
     private double price;
 
     private int stock;
@@ -119,6 +121,4 @@ public class Product {
         return qty;
     }
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductSize> productSizes;
 }

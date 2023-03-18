@@ -1,6 +1,7 @@
 package org.example.controller;
 
 
+import org.example.dto.ProductDTO;
 import org.example.model.Product;
 import org.example.service.CategoryService;
 import org.example.service.ProductService;
@@ -94,6 +95,7 @@ public String getProductsPage(Model model,
           model.addAttribute("product", product.orElse(null));
           model.addAttribute("productSizes", productSizeService.getProductSizesByProductId(id));
           model.addAttribute("sizes", sizeService.getAllSizes());
+          model.addAttribute("productDTO", new ProductDTO());
 
           return "frontend-views/product-detail-page";
       }
