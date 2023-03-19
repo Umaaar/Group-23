@@ -16,6 +16,7 @@ import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.ProductSizeService;
 import org.example.service.SizeService;
+import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -55,6 +56,9 @@ public class AdminController {
 
     @Autowired
     OrderService orderService;
+
+   
+
    @GetMapping("/admin")
    public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model){
        System.out.println(customUserDetailService.getUserCount());
@@ -370,7 +374,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
 @GetMapping("/admin/customers")
 public String adminCustomers(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
     model.addAttribute("adminname",authentication.getFirstname());
-
+    model.addAttribute("customers",customUserDetailService.getAllUsers());
     return "/backend-views/customers";
 }
 
