@@ -52,7 +52,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSize}">
+                        <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSizeDTO}">
                             <div class="form-group row">
                             <input type="hidden" name="id"  th:field="*{id}">
                             <div class="col-md-12 mb-3">
