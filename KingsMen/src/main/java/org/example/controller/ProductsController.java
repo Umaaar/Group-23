@@ -92,8 +92,7 @@ public String getProductsPage(Model model,
       public String getProductDetailPage(Model model, @PathVariable("id") Long id) {
           Optional<Product> product = productService.getProductById(id);
           model.addAttribute("product", product.orElse(null));
-          model.addAttribute("productSizes", productSizeService.getProductSizesByProductId(id));
-          model.addAttribute("sizes", sizeService.getAllSizes());
+          model.addAttribute("sizes", productSizeService.getAllProductSizes());
 
           return "frontend-views/product-detail-page";
       }

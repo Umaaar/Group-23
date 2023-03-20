@@ -6,11 +6,11 @@ import lombok.Data;
 public class ProductDTO {
     private Long id;
     private String name;
-    private int categoryId;
-    private String description;
+    private String category;
     private double price;
-    private int quantity;
     private int stock;
     private String imageName;
-    private long productSizeId;
+    private String description;
+    private String size;
+    private int quantity;
 }
