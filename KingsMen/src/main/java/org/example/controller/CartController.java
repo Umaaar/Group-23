@@ -1,15 +1,12 @@
 package org.example.controller;
 
-import org.example.model.Product;
-import org.example.model.ProductSize;
-import org.example.model.CustomUserDetail;
-import org.example.model.OrderDetails;
-import org.example.model.OrderItem;
+import org.example.model.*;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.ProductSizeService;
+import org.example.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -36,6 +33,8 @@ public class CartController {
     @Autowired
     ProductSizeService productSizeService;
 
+    @Autowired
+    SizeService sizeService;
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable Long id){
         GlobalData.cart.add(productService.getProductById(id).get());
