@@ -22,8 +22,9 @@ public class Product {
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
    
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductSize> productSizes;
+   @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_size_id", referencedColumnName = "product_size_id")
+    private ProductSize productSizes;
 
     private double price;
 
@@ -57,14 +58,14 @@ public class Product {
         this.category = category;
     }
 
-    public List<ProductSize> getProductSizes() {
+    public ProductSize getProductSizes() {
         return productSizes;
     }
 
-    public void setProductSizes(List<ProductSize> productSizes) {
+    public void setProductSizes(ProductSize productSizes) {
         this.productSizes = productSizes;
     }
-    
+
     public double getPrice() {
         return price;
     }
@@ -74,8 +75,8 @@ public class Product {
     }
 
     public int getStock() {
-        return calculateStockFromProductSizes();
-    }
+        return stock;
+        }
 
     public int getQuantity(){
         return stock;
@@ -87,18 +88,7 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
-        List<ProductSize> productSizes = getProductSizes();
-        if (productSizes != null) {
-            int totalQuantity = calculateStockFromProductSizes();
-            if (totalQuantity != stock) {
-                // Adjust product sizes to match the new stock
-                double factor = (double) stock / totalQuantity;
-                for (ProductSize size : productSizes) {
-                    int newQuantity = (int) Math.round(size.getQuantity() * factor);
-                    size.setQuantity(newQuantity);
-                }
-            }
-        }
+        
     }
     
 
@@ -118,17 +108,7 @@ public class Product {
         this.description = description;
     }
 
-    private int calculateStockFromProductSizes() {
-        List<ProductSize> productSizes = this.getProductSizes();
-        
-        int totalQuantity = productSizes.stream()
-                .mapToInt(ProductSize::getQuantity)
-                .sum();
-        
-        return totalQuantity;
-    }
     
-
 
     public double getQuantityTimesPrice() {
         double qty = (getPrice() * getQuantity());

@@ -1,9 +1,5 @@
 package org.example.dto;
 
-import java.util.List;
-
-import org.example.model.ProductSize;
-
 import lombok.Data;
 
 @Data
@@ -16,6 +12,5 @@ public class ProductDTO {
     private int quantity;
     private int stock;
     private String imageName;
-    private List<ProductSize> productSizes;
-
+    private long productSizeId;
 }
