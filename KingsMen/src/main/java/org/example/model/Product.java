@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+
 @Entity
 @Data
 @Table(name="Product")
@@ -20,6 +21,9 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
+   
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductSize> productSizes;
 
     private double price;
 
@@ -53,6 +57,14 @@ public class Product {
         this.category = category;
     }
 
+    public List<ProductSize> getProductSizes() {
+        return productSizes;
+    }
+
+    public void setProductSizes(List<ProductSize> productSizes) {
+        this.productSizes = productSizes;
+    }
+    
     public double getPrice() {
         return price;
     }
@@ -75,7 +87,20 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+        List<ProductSize> productSizes = getProductSizes();
+        if (productSizes != null) {
+            int totalQuantity = calculateStockFromProductSizes();
+            if (totalQuantity != stock) {
+                // Adjust product sizes to match the new stock
+                double factor = (double) stock / totalQuantity;
+                for (ProductSize size : productSizes) {
+                    int newQuantity = (int) Math.round(size.getQuantity() * factor);
+                    size.setQuantity(newQuantity);
+                }
+            }
+        }
     }
+    
 
     public String getImageName() {
         return imageName;
@@ -96,29 +121,18 @@ public class Product {
     private int calculateStockFromProductSizes() {
         List<ProductSize> productSizes = this.getProductSizes();
         
-        System.out.println("Product sizes: " + productSizes);
-        
         int totalQuantity = productSizes.stream()
                 .mapToInt(ProductSize::getQuantity)
                 .sum();
-        System.out.println("Total quantity: " + totalQuantity);
         
         return totalQuantity;
     }
+    
 
-    public List<ProductSize> getProductSizes() {
-        return this.productSizes;
-    }
-
-    public void setProductSizes(List<ProductSize> productSizes){
-        productSizes = this.productSizes;
-    }
 
     public double getQuantityTimesPrice() {
         double qty = (getPrice() * getQuantity());
         return qty;
     }
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductSize> productSizes;
 }

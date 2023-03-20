@@ -52,22 +52,29 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSizeDTO}">
+                       <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSizes}">
                             <div class="form-group row">
                             <input type="hidden" name="id"  th:field="*{id}">
-                            <div class="col-md-12 mb-3">
-                            <label for="product">Product:</label>
-                            <select id="product" name="product.id">
-                                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
-                            </select>
-                            </div>
+                            
 
                             <div class="col-md-12 mb-3">
                             <label for="size">Size:</label>
-                            <select id="size" name="size.id" >
-                                <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
+                            <select id="size" name="size">
+                              <option value="small">S</option>
+                              <option value="medium">M</option>
+                              <option value="large">L</option>
+                              <option value="xlarge">XL</option>
+                              <option value="xxlarge">XXL</option>
+                              <option value="6">6UK</option>
+                              <option value="7">7UK</option>
+                              <option value="8">8UK</option>
+                              <option value="9">9UK</option>
+                              <option value="10">10UK</option>
+                              <option value="11">11UK</option>
+                              <option value="12">12UK</option>
+                              <option value="13">13UK</option>
+                              <option value="OS">ONESIZE</option>
                             </select>
-                            
                             </div>
                     
                             <div class="col-md-6 mb-3">

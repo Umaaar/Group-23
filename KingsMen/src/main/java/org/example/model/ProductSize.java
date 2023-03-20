@@ -2,53 +2,38 @@ package org.example.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "product_size")
-public class ProductSize {
+import lombok.Data;
 
+@Entity
+@Data
+@Table(name="Product_Size")
+public class ProductSize {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+    private Long id;
+    
+    private String size;
+    
+    private int quantity;
+    
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Size size;
-
-    private int quantity;
-
-    public ProductSize() {
-    }
-
-    public ProductSize(long id, Product product, Size size, int quantity) {
-        this.id = id;
-        this.product = product;
-        this.size = size;
-        this.quantity = quantity;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Size getSize() {
+    public String getSize() {
         return size;
     }
 
-    public void setSize(Size size) {
+    public void setSize(String size) {
         this.size = size;
     }
 
@@ -59,4 +44,14 @@ public class ProductSize {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+    
+    
 }

@@ -75,33 +75,24 @@
                             </thead>
                             <tbody>
 
-                                     <tr th:each="productSize, iStat : ${productSizes}">
-                                        <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="${productSize.product.name}">Product</td>
-                                        <td th:text="${productSize.size.name}">Size</td>
-                                        <td th:text="${productSize.quantity}">Quantity</td>
-                                        
-                                        <td th:if="${productSize.quantity > 1}">
-                                            <label class="label-stock bg-success">In Stock</label>
-                                        </td>
-                                        <td th:if="${productSize.quantity <= 1}">
-                                            <label class="label-stock bg-danger">Out of Stock</label>
-                                        </td>
-                    
-                                        <td>
-                                            <a href="#" th:href="@{/admin/products/productSize/update/{id}(id=${productSize.id})}"
-                                                class="btn btn-sm btn-success">+</a>
-                                           
-                                        </td>
-                                        <td>
-                                             <a href="#" th:href="@{/admin/products/productSize/delete/{id}(id=${productSize.id})}"
-                                                onclick="return confirm('Are you sure, you want to delete this data?')"
-                                                class="btn btn-sm btn-danger">
-                                                -
-                                            </a>
-
-                                        </td>
-                                    </tr> 
+                                <tr th:each="productSize, iStat : ${productSizes}">
+                                    <td th:text="${iStat.index + 1}">1</td>
+                                    <td th:text="${productSize.product.name}">Product</td>
+                                    <td th:text="${productSize.size}">Size</td>
+                                    <td th:text="${productSize.quantity}">Quantity</td>
+                                    <td th:if="${productSize.quantity > 1}">
+                                        <label class="label-stock bg-success">In Stock</label>
+                                    </td>
+                                    <td th:if="${productSize.quantity <= 1}">
+                                        <label class="label-stock bg-danger">Out of Stock</label>
+                                    </td>
+                                    <td>
+                                        <a href="#" th:href="@{/admin/products/productSize/update/{id}(id=${productSize.id})}" class="btn btn-sm btn-success">+</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" th:href="@{/admin/products/productSize/delete/{id}(id=${productSize.id})}" onclick="return confirm('Are you sure, you want to delete this data?')" class="btn btn-sm btn-danger">-</a>
+                                    </td>
+                                </tr>
                                     
                             </tbody>
                         

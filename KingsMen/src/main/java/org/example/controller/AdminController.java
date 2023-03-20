@@ -3,7 +3,6 @@ package org.example.controller;
 
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
-import org.example.dto.ProductSizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
@@ -218,33 +217,23 @@ public String productSize(@PathVariable Long id, Model model) {
     Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
     List<ProductSize> productSizes = productSizeService.getProductSizesByProductId(id);
     model.addAttribute("product", product);
-    model.addAttribute("sizes", sizeService.getAllSizes());
     model.addAttribute("productSizes", productSizes);
     return "/backend-views/products-size";
 }
 
 @GetMapping("/admin/products/productSize/create")
 public String createProductSizeGet(Model model) {
-    model.addAttribute("productSizeDTO", new ProductSizeDTO());
     model.addAttribute("products", productService.getAllProduct());
-    model.addAttribute("sizes", sizeService.getAllSizes());
+    model.addAttribute("productSizes", productSizeService.getAllProductSizes());
     return "/backend-views/product-size-create";
 }
 
-
 @PostMapping("/admin/products/productSize/create")
-public String createProductSizePost(@ModelAttribute("productSizeDTO") ProductSizeDTO productSizeDTO) {
-    ProductSize productSize = new ProductSize();
-    productSize.setId(productSizeDTO.getId());
-    Product product = productService.getProductById(productSizeDTO.getProductId()).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + productSizeDTO.getProductId()));
-    productSize.setProduct(product);
-    Size size = sizeService.getSizeById(productSizeDTO.getSizeId()).orElseThrow(() -> new IllegalArgumentException("Invalid size ID: " + productSizeDTO.getSizeId()));
-    productSize.setSize(size);
-    productSize.setQuantity(productSizeDTO.getQuantity());
+public String createProductSizePost(@ModelAttribute("productSize") ProductSize productSize){
     productSizeService.saveProductSize(productSize);
-
     return "redirect:/admin/products";
 }
+
 
 @GetMapping("/admin/products/productSize/delete/{id}")
 public String deleteProductSize(@PathVariable Long id) {
@@ -254,16 +243,15 @@ public String deleteProductSize(@PathVariable Long id) {
 
 @GetMapping("/admin/products/productSize/update/{id}")
 public String updateProductSizeGet(@PathVariable Long id, Model model) {
-    ProductSize productSize = productSizeService.getProductSizeById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product size ID: " + id));
-    ProductSizeDTO productSizeDTO = new ProductSizeDTO();
-    productSizeDTO.setId(productSize.getId());
-    productSizeDTO.setProductId(productSize.getProduct().getId());
-    productSizeDTO.setSizeId(productSize.getSize().getId());
-    productSizeDTO.setQuantity(productSize.getQuantity());
-    model.addAttribute("productSizeDTO", new ProductSizeDTO());
-    model.addAttribute("products", productService.getAllProduct());
-    model.addAttribute("sizes", sizeService.getAllSizes());
-    return "/backend-views/product-size-create";
+    Optional<ProductSize> productSize = productSizeService.getProductSizeById(id);  
+    if(productSize.isPresent()){
+        model.addAttribute("productSize", productSize.get());
+        model.addAttribute("product", productService.getAllProduct());
+        model.addAttribute("productSizes", productSizeService.getAllProductSizes());
+        return "/backend-views/product-size-create";
+    }else{
+        return "404";
+    }
 }
 
 

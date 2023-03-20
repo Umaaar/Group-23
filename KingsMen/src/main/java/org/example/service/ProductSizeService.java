@@ -6,9 +6,7 @@ import java.util.Optional;
 import org.example.model.ProductSize;
 import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +25,7 @@ public Optional<ProductSize> getProductSizeById(Long id) {
     return productSizeRepository.findById(id);
 }
 
+
 public List<ProductSize> getAllProductSizes() {
     return productSizeRepository.findAll();
 }
@@ -37,11 +36,8 @@ public void deleteProductSizeById(Long id) {
 }
 
 public List<ProductSize> getProductSizesByProductId(Long id) {
-    return productSizeRepository.findAllByProductId(id);
+    return productSizeRepository.findByProductId(id);
 }
 
-public List<ProductSize> getProductSizesBySizeId(Long id) {
-    return productSizeRepository.findAllBySizeId(id);
-    
-}
+
 }
