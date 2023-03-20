@@ -217,23 +217,25 @@ public String productSize(@PathVariable Long id, Model model) {
     Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + id));
     List<ProductSize> productSizes = productSizeService.getProductSizesByProductId(id);
     model.addAttribute("product", product);
+    model.addAttribute("sizes", sizeService.getAllSizes());
     model.addAttribute("productSizes", productSizes);
     return "/backend-views/products-size";
 }
 
 @GetMapping("/admin/products/productSize/create")
 public String createProductSizeGet(Model model) {
+    model.addAttribute("productSize", new ProductSize());
     model.addAttribute("products", productService.getAllProduct());
-    model.addAttribute("productSizes", productSizeService.getAllProductSizes());
+    model.addAttribute("sizes", sizeService.getAllSizes());
     return "/backend-views/product-size-create";
 }
 
+
 @PostMapping("/admin/products/productSize/create")
-public String createProductSizePost(@ModelAttribute("productSize") ProductSize productSize){
+public String createProductSizePost(@ModelAttribute("productSize") ProductSize productSize) {
     productSizeService.saveProductSize(productSize);
     return "redirect:/admin/products";
 }
-
 
 @GetMapping("/admin/products/productSize/delete/{id}")
 public String deleteProductSize(@PathVariable Long id) {
@@ -243,15 +245,11 @@ public String deleteProductSize(@PathVariable Long id) {
 
 @GetMapping("/admin/products/productSize/update/{id}")
 public String updateProductSizeGet(@PathVariable Long id, Model model) {
-    Optional<ProductSize> productSize = productSizeService.getProductSizeById(id);  
-    if(productSize.isPresent()){
-        model.addAttribute("productSize", productSize.get());
-        model.addAttribute("product", productService.getAllProduct());
-        model.addAttribute("productSizes", productSizeService.getAllProductSizes());
-        return "/backend-views/product-size-create";
-    }else{
-        return "404";
-    }
+    ProductSize productSize = productSizeService.getProductSizeById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product size ID: " + id));
+    model.addAttribute("productSize", productSize);
+    model.addAttribute("products", productService.getAllProduct());
+    model.addAttribute("sizes", sizeService.getAllSizes());
+    return "/backend-views/product-size-create";
 }
 
 

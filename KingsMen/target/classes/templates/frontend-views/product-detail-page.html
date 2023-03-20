@@ -65,7 +65,7 @@
                   <div class = "size-quantity">
                     <label>Size:</label>
                       <select class="product-dropdown" name="productSizeIds" id="productSizeIds">
-                        <option th:each="productSize : ${product.productSizes}" th:value="${productSize.size.id}" th:text="${productSize.size.name}"></option>
+                        <option th:each="productSize : ${product.productSizes}" th:value="${productSize.id}" th:text="${productSize.size}"></option>
                       </select>
                     <label>Quantity: </label>
                     <input type="number" class="product-dropdown" required name="stock" id="stock" min="1" max="10">
