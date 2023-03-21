@@ -506,3 +506,18 @@ p.about-us-content {
   
 
  /* End of sort drop down css */
+
+/* Wish List css */
+
+
+
+    .remove-btn {
+        cursor: pointer;
+      }
+      
+      .remove-btn i {
+        font-size: 1rem;
+        margin-right: 0.25rem;
+      }
+
+/* End of Wish List css */

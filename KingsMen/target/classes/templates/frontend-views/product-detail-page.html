@@ -71,10 +71,18 @@
                     <input type="number" class="product-dropdown" required name="stock" id="stock" min="1" max="10">
                   </div>
                   
-                    </br>
-                    <button type="submit" class="btn btn-submit-d btn-block btn-dark font-weight-light">Add to basket</button>
-                  </form>
+                </br>
+                <button type="submit" class="btn btn-submit-d btn-block btn-dark font-weight-light">Add to basket</button>
+              </form>
+              <form th:action="@{/addToWishList/{id}(id=${product.id})}" method="post">
+                <button type="submit" class="btn btn-submit-d btn-block btn-danger mt-4"><i class="fa fa-heart"></i></button>
+              </form>
 
+      
+              <div th:if="${successMessage}">
+                <p th:text="${successMessage}">Success Message</p>
+              </div>
+              
                   <h3 class="mt-5 mb-3">Details</h3>
             <span>
               <p class="my-4 font-weight-light" th:text="${product.description}"></p>

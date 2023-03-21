@@ -53,5 +53,9 @@ public class CustomUserDetail extends User implements UserDetails {
         return true;
     }
 
+    public User getUser() {
+        return this;
+    }
+
 
 }
