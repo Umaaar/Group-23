@@ -42,6 +42,11 @@ public class HomeController {
         return "/frontend-views/about-us";
     }
 
+    @GetMapping("/returns")
+    public String Returns() {
+        return "/frontend-views/returns";
+    }
+
   
 
 }
