@@ -45,7 +45,7 @@
                             <tr class="cart-item" th:each="item,iterator : ${cart}">
                                 <td th:text="${iterator.index+1}"></td>
                                 <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name}"></label></td>
-                                <td th:each="productSize : ${item.productSizes}" th:text = "${productSize}"></td>
+                                <td th:text = "${item.Size}"></td>
                                 <td th:text="${item.quantity}"></td>
                                 <td th:text="'£' + ${item.price}"></td>
                                 <td class="remove-btn"><strong><a th:href="@{'/cart/removeItem/' + ${iterator.index}}">X</a></strong></td>

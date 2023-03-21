@@ -50,6 +50,15 @@
 
                 <div class="card">
                     <div class="card-header">
+                        <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span th:text="${successMessage}"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        
+                        <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span th:text="${errorMessage}"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                         <h3> Inventory Management System 
                             <a href="#" th:href="@{/admin/products/productSize/create}" class="btn btn-dark btn-sm text-white float-end">
                                 Add Products Sizing
