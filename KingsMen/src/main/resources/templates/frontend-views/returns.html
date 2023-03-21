@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
 
-    <link rel="stylesheet" th:src="@{/css/contact.css}" href="../../static/css/contact.css">
     <link rel="stylesheet" th:src="@{/css/style.css}" href="../../static/css/style.css">
     <link rel="stylesheet" th:src="@{/css/icon.css}" href="../../static/css/icon.css">
     <title>returns and exchanges</title>
@@ -17,7 +16,8 @@
 <body>
     <div th:insert="/frontend-views/fragments :: navigation" ></div>
     <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
-    <p>We want you to be completely satisfied with your purchase from KingsMan. If for any reason you are not, we offer a hassle-free returns and exchange policy. Please read the information below to learn more about our policy.</p>
+    <main style="padding: 100px;"  style="margin: auto;" >
+        <p>We want you to be completely satisfied with your purchase from KingsMan. If for any reason you are not, we offer a hassle-free returns and exchange policy. Please read the information below to learn more about our policy.</p>
 
 		<h3 class="text-center font-weight-bold">Cancellations</h3>
 		<p>If you need to cancel an order, please call our customer service team at (020) 7604 5949 as soon as possible. Although we cannot guarantee we can cancel your order before it is dispatched, we will do our best to assist.</p>
@@ -38,7 +38,8 @@
 
 		<h3 class="text-center font-weight-bold">Return Terms & Conditions</h3>
 		<p>All returns, whether for exchange or refund, go through a strict quality-control assessment once they have arrived back at our warehouse. All goods must be returned in original condition, with all labels and security tags intact. Any items returned that have been worn or have had the tags removed, will be rejected. Rejected returns will either be postage back to you at your expense, or donated to charity after 14 days.</p>
-
+    
+    </main>
     
       <footer>
         <div th:insert="/frontend-views/fragments :: footer" ></div>
