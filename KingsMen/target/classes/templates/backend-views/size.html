@@ -28,6 +28,8 @@
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/admin-assets/css/style.css}" href="/static/admin-assets/css/style.css">
   <!-- endinject -->
+  <!-- DataTables CSS -->
+  <link href="https://cdn.datatables.net/v/ju/dt-1.13.4/b-2.3.6/datatables.min.css" rel="stylesheet"/>
  
 </head>
 
@@ -46,6 +48,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
+                      <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span th:text="${successMessage}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    
+                    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span th:text="${errorMessage}"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
                            <h3> Sizing
                                <a href="#" th:href="@{/admin/size/create}"
                                class="btn btn-primary btn-sm text-white float-end">
@@ -54,7 +65,7 @@
                             </h3>
                     </div>
                         <div class="card-body">
-                            <table class="table table-boarderd table-striped">
+                            <table class="table table-boarderd table-striped table-responsive" id="sizeTable">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -88,6 +99,18 @@
     </div>
   </div>
 </div>
+<!-- Add jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#sizeTable').DataTable({
+        pagination: true
+    });
+});
+</script>
 
 
 <!-- plugins:js -->

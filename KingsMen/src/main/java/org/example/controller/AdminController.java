@@ -19,6 +19,7 @@ import org.example.service.ProductSizeService;
 import org.example.service.SizeService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -324,10 +325,14 @@ public String createSizePost(@ModelAttribute("size") Size size){
 
 
 @GetMapping("/admin/size/delete/{id}")
-public String deleteSize(@PathVariable Long id){
-    sizeService.deleteSize(id);
+public String deleteSize(@PathVariable Long id, RedirectAttributes redirectAttributes){
+    try {
+        sizeService.deleteSize(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Size deleted successfully.");
+    } catch (DataIntegrityViolationException e) {
+        redirectAttributes.addFlashAttribute("errorMessage", "Cannot delete this size as it is associated with one or more products.");
+    }
     return "redirect:/admin/size";
-
 }
 
 @GetMapping("/admin/size/update/{id}")
