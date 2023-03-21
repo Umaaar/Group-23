@@ -45,44 +45,44 @@
         <div class="row">
             <div class="col-md-12 ">
                
-                <div class="card">
-                    <div class="card-header">
-                        <h3> Add Product Sizing
-                            <a href="#" th:href="@{/admin/products}" class="btn btn-primary btn-sm text-white float-end">BACK</a>
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSizeDTO}">
-                            <div class="form-group row">
-                            <input type="hidden" name="id"  th:field="*{id}">
-                            <div class="col-md-12 mb-3">
-                            <label for="product">Product:</label>
-                            <select id="product" name="product.id">
-                                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
-                            </select>
-                            </div>
-
-                            <div class="col-md-12 mb-3">
-                            <label for="size">Size:</label>
-                            <select id="size" name="size.id" >
-                                <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
-                            </select>
-                            
-                            </div>
-                    
-                            <div class="col-md-6 mb-3">
-                            <label>Quantity</label>
-                                <input type="number" class="form-control dropdown" required th:field="*{quantity}" name="quantity" id="quantity" placeholder="Enter quantity" min="0" max="100">
-                            </div>
-
-                                <div class="col-md-12 mb-3">
-                                    <button type="submit" class="btn btn-primary float-end">Save</button>
-                                </div>  
-                                    
-                            </div>
-                            </form>
-                    </div>
+              <div class="card">
+                <div class="card-header">
+                    <h3> Add Product Sizing
+                        <a href="#" th:href="@{/admin/products}" class="btn btn-primary btn-sm text-white float-end">BACK</a>
+                    </h3>
                 </div>
+                <div class="card-body">
+                    <form method="post" th:action="@{/admin/products/productSize/create}" th:object="${productSizeDTO}">
+                        <div class="form-group row">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="col-md-12 mb-3">
+                                <label for="product">Product:</label>
+                                <select id="product" th:field="*{productId}">
+                                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                                </select>
+                            </div>
+            
+                            <div class="col-md-12 mb-3">
+                                <label for="size">Size:</label>
+                                <select id="size" th:field="*{sizeId}">
+                                    <option th:each="size : ${sizes}" th:value="${size.id}" th:text="${size.name}"></option>
+                                </select>
+                            </div>
+            
+                            <div class="col-md-6 mb-3">
+                                <label>Quantity</label>
+                                <input type="number" class="form-control dropdown" required th:field="*{quantity}" placeholder="Enter quantity" min="0" max="100">
+                            </div>
+            
+                            <div class="col-md-12 mb-3">
+                                <button type="submit" class="btn btn-primary float-end">Save</button>
+                            </div>  
+                                                
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
             </div>
         </div>
 

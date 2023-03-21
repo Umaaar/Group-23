@@ -2085,3 +2085,9 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 18 more
+2023-03-20 23:00:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'Expertly cut to a tailored fit for a timeless silhouette, they feature a pale grey tweed fabric with contrasting buttons and a ... (302)"; SQL statement:
+insert into product (id, size, category_id, description, image_name, name, price, stock) values (null, ?, ?, ?, ?, ?, ?, ?) [22001-200]
+2023-03-20 23:55:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DESCRIPTION VARCHAR(255)": "'The Roller Bar loafer is crafted in French goatskin with brass roller bar hardware. The sole is crafted using a lightweight Bol... (280)"; SQL statement:
+insert into product (id, size, category_id, description, image_name, name, price, stock) values (null, ?, ?, ?, ?, ?, ?, ?) [22001-200]
