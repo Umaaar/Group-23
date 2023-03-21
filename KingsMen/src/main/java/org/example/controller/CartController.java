@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.*;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
+import org.example.service.OrderItemService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.ProductSizeService;
@@ -19,10 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.example.dto.OrderDTO;
-
-
 
 @Controller
 public class CartController {
@@ -32,39 +30,39 @@ public class CartController {
     OrderService orderService;
     @Autowired
     ProductSizeService productSizeService;
+    @Autowired
+    OrderItemService orderItemService;
 
     @Autowired
     SizeService sizeService;
+
     @GetMapping("/addToCart/{id}")
-    public String addToCart(@PathVariable Long id){
+    public String addToCart(@PathVariable Long id) {
         GlobalData.cart.add(productService.getProductById(id).get());
         return "redirect:/cart";
     }
 
     @GetMapping("/cart")
-    public String cartGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
-        model.addAttribute("cartCount",GlobalData.cart.size());
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
-        model.addAttribute("cart",GlobalData.cart);
+    public String cartGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model) {
+        model.addAttribute("cartCount", GlobalData.cart.size());
+        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+        model.addAttribute("cart", GlobalData.cart);
         model.addAttribute("name",authentication.getFirstname());
         model.addAttribute("email",authentication.getEmail());
         return "/frontend-views/cart-page";
     }
 
-    
     @GetMapping("/cart/removeItem/{index}")
-    public String cartItemRemove(@PathVariable int index, Model model){
+    public String cartItemRemove(@PathVariable int index, Model model) {
         GlobalData.cart.remove(index);
-        model.addAttribute("total",GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
+        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         return "redirect:/cart";
     }
 
     @PostMapping("/addToCart/{id}")
-    public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes ){
+    public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes) {
         Product item = productService.getProductById(id).get();
         Product newItem = new Product();
-
-
 
         newItem.setId(item.getId());
         System.out.println(item.getId());
@@ -76,40 +74,40 @@ public class CartController {
         newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
-        
-        if(item.getStock() <= 0){
+
+        if (item.getStock() <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
-        }else if(dropdown.getStock() > item.getStock()){
-            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Max Quantity For This Item Is " + item.getStock());
-        }else{
-            List<ProductSize> s = new ArrayList<>();
-//            System.out.println("this iis the id" + sizeID);
+        } else if (dropdown.getStock() > item.getStock()) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Sorry, Max Quantity For This Item Is " + item.getStock());
+        } else {
+            // List<ProductSize> s = new ArrayList<>();
+            // System.out.println("this iis the id" + sizeID);
             System.out.println(dropdown.getProductSizeIds());
             for (Long sizeids : dropdown.getProductSizeIds()) {
-                    System.out.println(sizeids);
-//                    if ( sizeids == dropdown.getProductSizeIds()){
-                        ProductSize size = productSizeService.getProductSizeById(sizeids).get();
+                System.out.println(sizeids);
+                // if ( sizeids == dropdown.getProductSizeIds()){
+                // ProductSize size = productSizeService.getProductSizeById(sizeids).get();
 
-                       System.out.println(sizeService.getSizeById(sizeids).get().getName());
-                        newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
+                System.out.println(sizeService.getSizeById(sizeids).get().getName());
+                newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
 
-//                    }
-//                    else{
-//                        sizeids++;
-//                    }
-
+                // }
+                // else{
+                // sizeids++;
+                // }
 
             }
-//            for (ProductSize index: s) {
-//
-//                System.out.println(index.getSize().getName());
-//
-//            }
+            // for (ProductSize index: s) {
+            //
+            // System.out.println(index.getSize().getName());
+            //
+            // }
             item.setQuantity(dropdown.getStock());
             item.setPrice(item.getPrice() * item.getQuantity());
-//            System.out.println(s.size());
+            // System.out.println(s.size());
             newItem.setQuantity(dropdown.getStock());
-            newItem.setPrice(item.getPrice() * item.getQuantity());
+            newItem.setPrice(item.getPrice());
 
             GlobalData.cart.add(newItem);
 
@@ -119,48 +117,37 @@ public class CartController {
     }
 
     @GetMapping("/checkout")
-    public String checkout(){
+    public String checkout() {
         return "redirect:/cart";
     }
 
     @PostMapping("/checkout")
-    public String createOrder(OrderDTO orderDTO, RedirectAttributes redirectAttributes)  throws IOException{
-        if(GlobalData.cart.isEmpty()){
+    public String createOrder(OrderDTO orderDTO, RedirectAttributes redirectAttributes) throws IOException {
+        if (GlobalData.cart.isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Cart is Empty");
-        }else{
-            OrderDetails order = new OrderDetails();
-            order.setId(orderDTO.getId());
-            order.setEmail(orderDTO.getEmail());
-            order.setName(orderDTO.getName());
-            List<OrderItem> items = new ArrayList<>();
-            String sentence = "";
-            for (Product item : GlobalData.cart) {
-                OrderItem orderItem = new OrderItem();
-                orderItem.setId(item.getId());
-                orderItem.setName(item.getName());
-                String sizeName;
-                for(ProductSize sizes : item.getProductSizes()){
-                    sizeName = sizes.getSize().getName();
-                    orderItem.setSizes(sizeName);
-                }
-                orderItem.setQuantity(item.getStock());
-                orderItem.setStock(orderItem.getStock()-item.getStock());
-                orderItem.setPrice(item.getPrice()); // Replace with the price of the product at the time of the order
-                String orderProducts = sentence += "Product:" + orderItem.getId() + " Size:" + orderItem.getSizes() + " Quantity:" + orderItem.getQuantity() + ", ";
-                order.setOrder_products(orderProducts);
-                System.out.println(orderProducts);
-                items.add(orderItem);
-                productService.decreasingStock(orderItem.getId(), orderItem.getQuantity()); //decreasing stock
-            }
-            order.setStatus(1);
+        } else {
+            OrderDetails newOrder = new OrderDetails();
+            newOrder.setEmail(orderDTO.getEmail());
+            newOrder.setName(orderDTO.getName());
             Double total = GlobalData.cart.stream().mapToDouble(Product::getPrice).sum();
-            order.setTotal(total);
-            orderService.addOrder(order);
+            newOrder.setTotal(total);
+            newOrder.setStatus(1);
+            orderService.addOrder(newOrder);
+            List<OrderItem> orderItems = new ArrayList<>();
+            for (Product item : GlobalData.cart) {
+                OrderItem newOrderItem = new OrderItem();
+                newOrderItem.setOrderID(newOrder.getId());
+                newOrderItem.setOrderDetails(newOrder);
+                newOrderItem.setProduct(item);
+                newOrderItem.setQuantity(item.getQuantity());
+                newOrderItem.setPrice(item.getPrice());
+                newOrderItem.setSize(item.getSize());
+                orderItemService.createOrderItem(newOrderItem);
+                orderItems.add(newOrderItem);
+            }
             GlobalData.cart.removeAll(GlobalData.cart);
             redirectAttributes.addFlashAttribute("successMessage", "Order Placed Successfully!");
-        };
-        return "redirect:/cart"; 
+        }
+        return "redirect:/cart";
     }
-
-
 }

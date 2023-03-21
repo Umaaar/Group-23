@@ -1,12 +1,32 @@
 package org.example.model;
 
+import javax.persistence.*;
+
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name="ORDER_ITEM")
 public class OrderItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
-    private String name;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ORDER_DETAILS_ID")
+    private OrderDetails orderDetails;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="PRODUCT_ID")
+    private Product product;
+    @Column(name = "PRICE")
     private double price;
+    @Column(name = "QUANTITY")
     private int quantity;
-    private int stock;
+    @Column(name = "SIZE")
     private String size;
+    @Column(name = "order_id")
+    private int orderID;
 
 
     public Long getId() {
@@ -17,12 +37,20 @@ public class OrderItem {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public OrderDetails getOrderDetails(){
+        return orderDetails;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrderDetails(OrderDetails orderDetails){
+        this.orderDetails = orderDetails;
+    }
+
+    public Product getProduct(){
+        return product;
+    }
+
+    public void setProduct(){
+        this.product = new Product();
     }
 
     public int getQuantity() {
@@ -31,14 +59,6 @@ public class OrderItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
     }
 
     public double getPrice() {
@@ -55,6 +75,14 @@ public class OrderItem {
 
     public void setSizes(String size) {
         this.size = size;
+    }
+
+    public int getOrderID(){
+        return orderID;
+    }
+
+    public void setOrderID(int orderID){
+        this.orderID = orderID;
     }
 
 }

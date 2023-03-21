@@ -131,4 +131,7 @@ public class Product {
     public void setSize(String size) {
         Size = size;
     }
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems;
 }

@@ -2,6 +2,8 @@ package org.example.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -66,4 +68,7 @@ public class OrderDetails {
     public void setOrder_products(String order_products) {
         this.order_products = order_products;
     }
+
+    @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<OrderItem> orderItems;
 }
