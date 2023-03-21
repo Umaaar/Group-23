@@ -47,8 +47,8 @@ public class CartController {
         model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
         model.addAttribute("cart", GlobalData.cart);
-        model.addAttribute("name",authentication.getFirstname());
-        model.addAttribute("email",authentication.getEmail());
+        model.addAttribute("name", authentication.getFirstname());
+        model.addAttribute("email", authentication.getEmail());
         return "/frontend-views/cart-page";
     }
 
@@ -63,54 +63,32 @@ public class CartController {
     public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes) {
         Product item = productService.getProductById(id).get();
         Product newItem = new Product();
-
         newItem.setId(item.getId());
         System.out.println(item.getId());
         newItem.setName(item.getName());
         Category category = item.getCategory();
-
         newItem.setCategory(category);
         newItem.setDescription(item.getDescription());
         newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
-
         if (item.getStock() <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
         } else if (dropdown.getStock() > item.getStock()) {
             redirectAttributes.addFlashAttribute("errorMessage",
                     "Sorry, Max Quantity For This Item Is " + item.getStock());
         } else {
-            // List<ProductSize> s = new ArrayList<>();
-            // System.out.println("this iis the id" + sizeID);
             System.out.println(dropdown.getProductSizeIds());
             for (Long sizeids : dropdown.getProductSizeIds()) {
                 System.out.println(sizeids);
-                // if ( sizeids == dropdown.getProductSizeIds()){
-                // ProductSize size = productSizeService.getProductSizeById(sizeids).get();
-
                 System.out.println(sizeService.getSizeById(sizeids).get().getName());
                 newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
-
-                // }
-                // else{
-                // sizeids++;
-                // }
-
             }
-            // for (ProductSize index: s) {
-            //
-            // System.out.println(index.getSize().getName());
-            //
-            // }
             item.setQuantity(dropdown.getStock());
             item.setPrice(item.getPrice() * item.getQuantity());
-            // System.out.println(s.size());
             newItem.setQuantity(dropdown.getStock());
             newItem.setPrice(item.getPrice());
-
             GlobalData.cart.add(newItem);
-
             redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
         }
         return "redirect:/product/product-detail/{id}";

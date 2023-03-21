@@ -6,18 +6,18 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="ORDER_ITEM")
+@Table(name = "ORDER_ITEM")
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ORDER_DETAILS_ID")
     private OrderDetails orderDetails;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="PRODUCT_ID")
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
     @Column(name = "PRICE")
     private double price;
@@ -28,7 +28,6 @@ public class OrderItem {
     @Column(name = "order_id")
     private int orderID;
 
-
     public Long getId() {
         return id;
     }
@@ -37,19 +36,19 @@ public class OrderItem {
         this.id = id;
     }
 
-    public OrderDetails getOrderDetails(){
+    public OrderDetails getOrderDetails() {
         return orderDetails;
     }
 
-    public void setOrderDetails(OrderDetails orderDetails){
+    public void setOrderDetails(OrderDetails orderDetails) {
         this.orderDetails = orderDetails;
     }
 
-    public Product getProduct(){
+    public Product getProduct() {
         return product;
     }
 
-    public void setProduct(){
+    public void setProduct() {
         this.product = new Product();
     }
 
@@ -77,11 +76,11 @@ public class OrderItem {
         this.size = size;
     }
 
-    public int getOrderID(){
+    public int getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID){
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 

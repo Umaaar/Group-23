@@ -1,76 +1,81 @@
 <!doctype html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <link rel="stylesheet" href="../../static/css/style.css">
-        <link rel="stylesheet" th:href="@{/css/style.css}"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
-        <title>My Cart</title>
-    </head>
-    <body>
-        <div th:insert="/frontend-views/fragments :: navigation" ></div>
-        <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-        <div class="cart-padding">
-            <h2>My Cart</h2>
-            <hr>
-            <br>
-            <div class="alertMsg">
-                <div th:if="${successMessage}">
-                    <div class="alert alert-success" th:text="${successMessage}"></div>
-                </div>
-                <div th:if="${errorMessage}">
-                    <div class="alert alert-danger" th:text="${errorMessage}"></div>
+<head>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
+    <title>My Cart</title>
+</head>
+
+<body>
+    <div th:insert="/frontend-views/fragments :: navigation"></div>
+    <div th:insert="/frontend-views/fragments :: navigation-category"></div>
+
+    <div class="cart-padding">
+        <h2>My Cart</h2>
+        <hr>
+        <br>
+        <div class="alertMsg">
+            <div th:if="${successMessage}">
+                <div class="alert alert-success" th:text="${successMessage}"></div>
+            </div>
+            <div th:if="${errorMessage}">
+                <div class="alert alert-danger" th:text="${errorMessage}"></div>
+            </div>
+        </div>
+        <h4 th:text="'Items: ' + ${cartCount}"></h4>
+        <br>
+        <table class="table table-hover" id="order-table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Form to Save Order-->
+                <form th:action="@{/checkout}" th:href="@{/checkout}" method="POST" th:object="${orderDTO}">
+                    <tr class="cart-item" th:each="item,iterator : ${cart}">
+                        <td th:text="${iterator.index+1}"></td>
+                        <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label
+                                class="item-name" th:text="${item.name}"></label></td>
+                        <td th:text="${item.Size}"></td>
+                        <td th:text="${item.quantity}"></td>
+                        <td th:text="'£' + ${item.price}"></td>
+                        <td class="remove-btn"><strong><a
+                                    th:href="@{'/cart/removeItem/' + ${iterator.index}}">X</a></strong></td>
+                    </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4 shadow bg-white p-3" id="total-box">
+                <h3 class="cart-total" th:text="'Total: £' + ${total}"><input type="number" name="total"
+                        th:value="${total}"></h3>
+                <div class="center">
+                    <input type="hidden" name="name" th:value="${name}">
+                    <input type="hidden" name="email" th:value="${email}">
+                    <button type="submit" class="pay-button">Pay & Go</button>
                 </div>
             </div>
-            <h4 th:text="'Items: ' + ${cartCount}"></h4>
-            <br>
-            <table class="table table-hover" id="order-table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <!--Form to Save Order-->
-                        <form th:action="@{/checkout}" th:href="@{/checkout}" method="POST"  th:object="${orderDTO}">
-                            <tr class="cart-item" th:each="item,iterator : ${cart}">
-                                <td th:text="${iterator.index+1}"></td>
-                                <td><img th:src="@{/Images/productImage/{imageName}(imageName=${item.imageName})}"><label class="item-name" th:text="${item.name}"></label></td>
-                                <td th:text = "${item.Size}"></td>
-                                <td th:text="${item.quantity}"></td>
-                                <td th:text="'£' + ${item.price}"></td>
-                                <td class="remove-btn"><strong><a th:href="@{'/cart/removeItem/' + ${iterator.index}}">X</a></strong></td>
-                            </tr>
-                        </tbody>
-             </table>
-                    <div class="row">
-                        <div class="col-md-8">
-                        </div>
-                        <div class="col-md-4 shadow bg-white p-3" id="total-box">
-                            <h3 class="cart-total" th:text="'Total: £' + ${total}"><input type="number" name="total" th:value="${total}"></h3>
-                            <div class = "center">
-                                <input type="hidden" name="name" th:value="${name}">
-                                <input type="hidden" name="email" th:value="${email}">
-                                <button type="submit" class="pay-button">Pay & Go</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!--Form to Save Order-->
         </div>
-        </
-        <footer>
-            <div th:insert="/frontend-views/fragments :: footer" ></div>
-        </footer>
-    </body>
-</html>
+        </form>
+        <!--Form to Save Order-->
+    </div>
+     <footer>
+    <div th:insert="/frontend-views/fragments :: footer"></div>
+    </footer>
+</body>
 
+</html>
