@@ -25,8 +25,6 @@ public class Product {
 
     private int stock;
 
-    private String Size;
-
     private String imageName;
 
     private String description;
@@ -123,12 +121,4 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductSize> productSizes;
-
-    public String getSize() {
-        return Size;
-    }
-
-    public void setSize(String size) {
-        Size = size;
-    }
 }

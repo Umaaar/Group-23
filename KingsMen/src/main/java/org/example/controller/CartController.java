@@ -1,12 +1,15 @@
 package org.example.controller;
 
-import org.example.model.*;
+import org.example.model.Product;
+import org.example.model.ProductSize;
+import org.example.model.CustomUserDetail;
+import org.example.model.OrderDetails;
+import org.example.model.OrderItem;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.ProductSizeService;
-import org.example.service.SizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -33,8 +36,6 @@ public class CartController {
     @Autowired
     ProductSizeService productSizeService;
 
-    @Autowired
-    SizeService sizeService;
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable Long id){
         GlobalData.cart.add(productService.getProductById(id).get());
@@ -60,22 +61,8 @@ public class CartController {
     }
 
     @PostMapping("/addToCart/{id}")
-    public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes ){
+    public String dropdown(@PathVariable Long id, ProductDTO dropdown, RedirectAttributes redirectAttributes){
         Product item = productService.getProductById(id).get();
-        Product newItem = new Product();
-
-
-
-        newItem.setId(item.getId());
-        System.out.println(item.getId());
-        newItem.setName(item.getName());
-        Category category = item.getCategory();
-
-        newItem.setCategory(category);
-        newItem.setDescription(item.getDescription());
-        newItem.setPrice(item.getPrice());
-        newItem.setStock(item.getStock());
-        newItem.setImageName(item.getImageName());
         
         if(item.getStock() <= 0){
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
@@ -83,36 +70,14 @@ public class CartController {
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Max Quantity For This Item Is " + item.getStock());
         }else{
             List<ProductSize> s = new ArrayList<>();
-//            System.out.println("this iis the id" + sizeID);
-            System.out.println(dropdown.getProductSizeIds());
-            for (Long sizeids : dropdown.getProductSizeIds()) {
-                    System.out.println(sizeids);
-//                    if ( sizeids == dropdown.getProductSizeIds()){
-                        ProductSize size = productSizeService.getProductSizeById(sizeids).get();
-
-                       System.out.println(sizeService.getSizeById(sizeids).get().getName());
-                        newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
-
-//                    }
-//                    else{
-//                        sizeids++;
-//                    }
-
-
+            for (Long ids : dropdown.getProductSizeIds()) {
+                ProductSize size = productSizeService.getProductSizeById(ids).get();
+                s.add(size);
             }
-//            for (ProductSize index: s) {
-//
-//                System.out.println(index.getSize().getName());
-//
-//            }
+            item.setProductSizes(s);
             item.setQuantity(dropdown.getStock());
             item.setPrice(item.getPrice() * item.getQuantity());
-//            System.out.println(s.size());
-            newItem.setQuantity(dropdown.getStock());
-            newItem.setPrice(item.getPrice() * item.getQuantity());
-
-            GlobalData.cart.add(newItem);
-
+            GlobalData.cart.add(productService.getProductById(id).get());
             redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
         }
         return "redirect:/product/product-detail/{id}";

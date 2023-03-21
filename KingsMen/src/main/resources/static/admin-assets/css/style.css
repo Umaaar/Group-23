@@ -12196,7 +12196,7 @@ code {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   -ms-box-shadow: none;
-  overflow-x: hidden;
+  overflow-x: scroll;
 }
 
 .card .card-body {

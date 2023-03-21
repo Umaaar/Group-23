@@ -19,13 +19,11 @@ import org.example.service.ProductSizeService;
 import org.example.service.SizeService;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -260,7 +258,7 @@ public String updateProductSizeGet(@PathVariable Long id, Model model) {
     productSizeDTO.setProductId(productSize.getProduct().getId());
     productSizeDTO.setSizeId(productSize.getSize().getId());
     productSizeDTO.setQuantity(productSize.getQuantity());
-    model.addAttribute("productSizeDTO", new ProductSizeDTO());
+    model.addAttribute("productSizeDTO", productSizeDTO);
     model.addAttribute("products", productService.getAllProduct());
     model.addAttribute("sizes", sizeService.getAllSizes());
     return "/backend-views/product-size-create";
@@ -302,14 +300,10 @@ public String createSizePost(@ModelAttribute("size") Size size){
 
 
 @GetMapping("/admin/size/delete/{id}")
-public String deleteSize(@PathVariable Long id, RedirectAttributes redirectAttributes){
-    try {
-        sizeService.deleteSize(id);
-        redirectAttributes.addFlashAttribute("successMessage", "Size deleted successfully.");
-    } catch (DataIntegrityViolationException e) {
-        redirectAttributes.addFlashAttribute("errorMessage", "Cannot delete this size as it is associated with one or more products.");
-    }
+public String deleteSize(@PathVariable Long id){
+    sizeService.deleteSize(id);
     return "redirect:/admin/size";
+
 }
 
 @GetMapping("/admin/size/update/{id}")
