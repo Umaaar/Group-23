@@ -18,6 +18,10 @@ public class OrderItemService {
         return orderItemRepository.findAll();
     }
 
+    public List<OrderItem> getAllOrderItemsByID( int Id){
+           return orderItemRepository.findByOrderID(Id);
+    }
+
     public Optional<OrderItem> getOrderItemById(Long id) {
         return orderItemRepository.findById(id);
     }

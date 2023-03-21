@@ -4,20 +4,9 @@ package org.example.controller;
 import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
 import org.example.dto.ProductSizeDTO;
-import org.example.model.Category;
-import org.example.model.CustomUserDetail;
-import org.example.model.OrderDetails;
-import org.example.model.Product;
-import org.example.model.ProductSize;
-import org.example.model.Size;
+import org.example.model.*;
 
-import org.example.service.CategoryService;
-import org.example.service.CustomUserDetailService;
-import org.example.service.OrderService;
-import org.example.service.ProductService;
-import org.example.service.ProductSizeService;
-import org.example.service.SizeService;
-import org.example.service.UserService;
+import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -59,6 +48,9 @@ public class AdminController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    OrderItemService orderItemService;
 
    
 
@@ -381,7 +373,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
         return "redirect:/admin/orders";
     }
     @GetMapping("/admin/orders/update/{id}")
-    public String updateOrderGet(@PathVariable Integer id, Model model) {
+    public String updateOrderGet(@PathVariable Integer id,  Model model) {
         System.out.println("it worked");
         OrderDetails order = orderService.getOrderByorder_id(id).get();
         OrderDTO orderDTO = new OrderDTO();
@@ -392,13 +384,23 @@ public String updateSizeGet(@PathVariable Long id, Model model){
         orderDTO.setTotal(order.getTotal());
         orderDTO.setName(order.getName());
 
-        model.addAttribute("orderDTO", orderDTO);
+        model.addAttribute("orderDTO", order);
+        List<OrderItem> orderItemList = orderItemService.getAllOrderItemsByID(order.getId());
+        model.addAttribute("productsOrdered", orderItemList);
+
+        System.out.println("this is the size of the list of the order item" +orderItemList.size());
+
 
 
         return "/backend-views/orders-update";
     }
+    @PostMapping("/admin/orders/update/{id}")
+    public String updateOrderPost(@PathVariable Integer id, Model model) {
 
 
+        return "/backend-views/orders-update";
+
+    }
 
 
     @GetMapping("/admin/accounts")
