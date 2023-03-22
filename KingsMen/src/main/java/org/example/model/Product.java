@@ -2,6 +2,7 @@ package org.example.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -109,7 +110,10 @@ public class Product {
     }
 
     public List<ProductSize> getProductSizes() {
-        return this.productSizes;
+        if (productSizes == null) {
+            productSizes = new ArrayList<>();
+        }
+        return productSizes;
     }
 
     public void setProductSizes(List<ProductSize> productSizes){

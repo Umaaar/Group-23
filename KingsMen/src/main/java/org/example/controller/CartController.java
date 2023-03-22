@@ -101,14 +101,13 @@ public class CartController {
 
     @PostMapping("/checkout")
     public String createOrder(OrderDTO orderDTO, RedirectAttributes redirectAttributes) throws IOException {
-        if (GlobalData.cart.isEmpty()) {
+        if (GlobalData.cart == null || GlobalData.cart.isEmpty()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Cart is Empty");
         } else {
             OrderDetails newOrder = new OrderDetails();
             newOrder.setEmail(orderDTO.getEmail());
             newOrder.setName(orderDTO.getName());
-            Double total = GlobalData.cart.stream().mapToDouble(Product::getPrice).sum();
-            newOrder.setTotal(total);
+            newOrder.setTotal(GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
             newOrder.setStatus(1);
             orderService.addOrder(newOrder);
             List<OrderItem> orderItems = new ArrayList<>();
@@ -121,6 +120,7 @@ public class CartController {
                 newOrderItem.setPrice(item.getPrice());
                 newOrderItem.setSize(item.getSize());
                 orderItemService.createOrderItem(newOrderItem);
+                //productSizeService.decreasingStock(newOrderItem.getProduct().getProductSizes().get(0).getId(), newOrderItem.getQuantity());
                 orderItems.add(newOrderItem);
             }
             GlobalData.cart.removeAll(GlobalData.cart);

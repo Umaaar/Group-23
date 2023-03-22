@@ -3,6 +3,8 @@ package org.example.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.example.model.ProductSize;
 import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,4 +46,9 @@ public List<ProductSize> getProductSizesBySizeId(Long id) {
     return productSizeRepository.findAllBySizeId(id);
     
 }
+
+// @Transactional
+// public void decreasingStock(Long productSizeId, int quantity) {
+//     productSizeRepository.decreaseStock(productSizeId, quantity);
+// }
 }

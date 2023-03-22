@@ -92,16 +92,13 @@ public class ProductService {
         return productRepository.findByKeyword(keyword);
     }
 
-    @Transactional
-    public void decreasingStock(Long productId, int stock) {
-        productRepository.decreaseStock(productId, stock);
-    }
-
     public List<Product> getRandomProducts(int count) {
         List<Product> products = getAllProduct();
         Collections.shuffle(products);
         return products.subList(0, Math.min(count, products.size()));
     }
+
+    
 
         
 
