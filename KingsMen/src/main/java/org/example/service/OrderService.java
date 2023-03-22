@@ -14,6 +14,9 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
+    public void saveOrder(OrderDetails orderDetails){
+        orderRepository.save(orderDetails);
+    }
     public List<OrderDetails> getAllOrders() {
         return orderRepository.findAll();
     }

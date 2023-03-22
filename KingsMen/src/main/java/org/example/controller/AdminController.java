@@ -384,7 +384,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
         orderDTO.setTotal(order.getTotal());
         orderDTO.setName(order.getName());
 
-        model.addAttribute("orderDTO", order);
+        model.addAttribute("orderDTO", orderDTO);
         List<OrderItem> orderItemList = orderItemService.getAllOrderItemsByID(order.getId());
         model.addAttribute("productsOrdered", orderItemList);
 
@@ -394,12 +394,23 @@ public String updateSizeGet(@PathVariable Long id, Model model){
 
         return "/backend-views/orders-update";
     }
-    @PostMapping("/admin/orders/update/{id}")
-    public String updateOrderPost(@PathVariable Integer id, Model model) {
+    @PostMapping("/admin/orders/create")
+    public String updateOrderGetRed(@ModelAttribute("orderDTO") OrderDTO orderDTO){
+
+       OrderDetails order = new OrderDetails();
+        System.out.println(orderDTO.getTotal());
+       order.setTotal(orderDTO.getTotal());
+       order.setOrderItems(orderDTO.getOrderItems());
+       order.setStatus(orderDTO.getStatus());
+       order.setEmail(orderDTO.getEmail());
+       order.setName(orderDTO.getName());
+       order.setId(orderDTO.getId());
+       order.setOrder_products(orderDTO.getOrder_products());
+
+        orderService.saveOrder(order);
 
 
-        return "/backend-views/orders-update";
-
+        return "redirect:/admin/orders";
     }
 
 
