@@ -3,8 +3,11 @@ package org.example.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.example.model.OrderItem;
 import org.example.repository.OrderItemRepository;
+import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,10 @@ public class OrderItemService {
 
     @Autowired
     OrderItemRepository orderItemRepository;
+
+    @Autowired
+    ProductSizeRepository productSizeRepository;
+
 
     public List<OrderItem> getAllOrderItems() {
         return orderItemRepository.findAll();
@@ -37,4 +44,9 @@ public class OrderItemService {
     public void deleteOrderItem(Long id) {
         orderItemRepository.deleteById(id);
     }
+
+//     @Transactional
+//     public void decreasingStock(Long productSizeId, int quantity) {
+//     productSizeRepository.decreaseStock(productSizeId, quantity);
+// }
 }

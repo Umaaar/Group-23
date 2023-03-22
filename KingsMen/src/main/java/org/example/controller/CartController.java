@@ -120,7 +120,7 @@ public class CartController {
                 newOrderItem.setPrice(item.getPrice());
                 newOrderItem.setSize(item.getSize());
                 orderItemService.createOrderItem(newOrderItem);
-                //productSizeService.decreasingStock(newOrderItem.getProduct().getProductSizes().get(0).getId(), newOrderItem.getQuantity());
+                // orderItemService.decreasingStock(newOrderItem.getProduct().getProductSizes().get(0).getId(), newOrderItem.getQuantity());
                 orderItems.add(newOrderItem);
             }
             GlobalData.cart.removeAll(GlobalData.cart);

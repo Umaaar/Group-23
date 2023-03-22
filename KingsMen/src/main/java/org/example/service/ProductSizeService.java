@@ -47,8 +47,5 @@ public List<ProductSize> getProductSizesBySizeId(Long id) {
     
 }
 
-// @Transactional
-// public void decreasingStock(Long productSizeId, int quantity) {
-//     productSizeRepository.decreaseStock(productSizeId, quantity);
-// }
+
 }
