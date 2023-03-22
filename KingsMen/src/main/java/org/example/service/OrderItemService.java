@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.example.model.OrderItem;
 import org.example.repository.OrderItemRepository;
+import org.example.repository.ProductRepository;
 import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class OrderItemService {
 
     @Autowired
     ProductSizeRepository productSizeRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
 
     public List<OrderItem> getAllOrderItems() {
@@ -49,4 +53,9 @@ public class OrderItemService {
 //     public void decreasingStock(Long productSizeId, int quantity) {
 //     productSizeRepository.decreaseStock(productSizeId, quantity);
 // }
+
+    @Transactional
+    public void decreasingStock(Long productId, int stock) {
+        productRepository.decreaseStock(productId, stock);
+    }
 }

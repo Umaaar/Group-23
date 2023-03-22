@@ -25,5 +25,9 @@ List<Product> findAllByProductSizes_IdIn(List<Long> sizeIds);
 @Query(value = "SELECT * FROM Product ORDER BY RAND() LIMIT 1", nativeQuery = true)
 Product findRandomProduct();
 
+@Modifying
+@Query("UPDATE Product p SET p.stock = p.stock - :stock WHERE p.id = :productId")
+int decreaseStock(@Param("productId") Long productId, @Param("stock") int stock);
+
 
 }
