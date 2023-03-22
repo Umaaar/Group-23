@@ -55,7 +55,7 @@ public class AdminController {
    
 
    @GetMapping("/admin")
-   public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response ,Model model){
+   public String adminHome(@AuthenticationPrincipal CustomUserDetail authentication ,Model model){
        System.out.println(customUserDetailService.getUserCount());
        model.addAttribute("adminname",authentication.getFirstname());
        model.addAttribute("total_customers",String.valueOf(customUserDetailService.getUserCount()));
@@ -71,16 +71,14 @@ public class AdminController {
    
 /* ---------------------------------------------------Category CRUD Mapping ------------------------------------------------- */
    @GetMapping("/admin/categories")
-   public String getCat(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
-    model.addAttribute("adminname",authentication.getFirstname());
+   public String getCat(Model model){ 
     model.addAttribute("categories", categoryService.getAllCategory());
        System.out.println(categoryService.getAllCategory());
     return "/backend-views/categories" ;
    }
 
     @GetMapping("/admin/categories/create")
-    public String postCreateCat(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
-        model.addAttribute("adminname",authentication.getFirstname());
+    public String postCreateCat(Model model){
         model.addAttribute("category", new Category());
      return "/backend-views/category-create";
     }
@@ -128,8 +126,7 @@ public String products(Model model ,String keyword) {
     }
     return "/backend-views/products";
 }
-public String productspage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
-    model.addAttribute("adminname",authentication.getFirstname());
+public String productspage(Model model){
    model.addAttribute("products", productService.getAllProduct());
    model.addAttribute("sizes", sizeService.getAllSizes());
 
@@ -138,8 +135,7 @@ public String productspage(@AuthenticationPrincipal CustomUserDetail authenticat
 
 
 @GetMapping("/admin/products/create")
-public String createProducts(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
-    model.addAttribute("adminname",authentication.getFirstname());
+public String createProducts( Model model){
    model.addAttribute("productDTO", new ProductDTO());
    model.addAttribute("categories", categoryService.getAllCategory());
     model.addAttribute("sizes", sizeService.getAllSizes());
@@ -362,7 +358,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
 
 
 
-    public String adminOrdersPage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
+    public String adminOrdersPage(@AuthenticationPrincipal CustomUserDetail authentication,Model model){ 
         model.addAttribute("adminname",authentication.getFirstname());
         return "/backend-views/admin-orders";
 }
