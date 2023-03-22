@@ -380,7 +380,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
         orderDTO.setTotal(order.getTotal());
         orderDTO.setName(order.getName());
 
-        model.addAttribute("orderDTO", order);
+        model.addAttribute("orderDTO", orderDTO);
         List<OrderItem> orderItemList = orderItemService.getAllOrderItemsByID(order.getId());
         model.addAttribute("productsOrdered", orderItemList);
 
