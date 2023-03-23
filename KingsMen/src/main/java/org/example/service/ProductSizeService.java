@@ -8,9 +8,7 @@ import javax.transaction.Transactional;
 import org.example.model.ProductSize;
 import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -45,6 +43,11 @@ public List<ProductSize> getProductSizesByProductId(Long id) {
 public List<ProductSize> getProductSizesBySizeId(Long id) {
     return productSizeRepository.findAllBySizeId(id);
     
+}
+
+@Transactional
+public void decreasingStock(Long productSizeId, int quantity) {
+    productSizeRepository.decreaseStock(productSizeId, quantity);
 }
 
 

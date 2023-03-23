@@ -49,13 +49,13 @@ public class OrderItemService {
         orderItemRepository.deleteById(id);
     }
 
-//     @Transactional
-//     public void decreasingStock(Long productSizeId, int quantity) {
-//     productSizeRepository.decreaseStock(productSizeId, quantity);
-// }
-
     @Transactional
-    public void decreasingStock(Long productId, int stock) {
-        productRepository.decreaseStock(productId, stock);
-    }
+    public void decreasingStock(Long productSizeId, int quantity) {
+    productSizeRepository.decreaseStock(productSizeId, quantity);
+}
+
+    // @Transactional
+    // public void decreasingStock(Long productId, int stock) {
+    //     productRepository.decreaseStock(productId, stock);
+    // }
 }

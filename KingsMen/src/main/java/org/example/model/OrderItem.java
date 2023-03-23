@@ -19,6 +19,9 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "product_size_id")
+    private ProductSize productSize;
     @Column(name = "PRICE")
     private double price;
     @Column(name = "QUANTITY")
@@ -68,12 +71,12 @@ public class OrderItem {
         this.price = price;
     }
 
-    public String getSizes() {
-        return size;
+    public ProductSize getProductSize() {
+        return productSize;
     }
 
-    public void setSizes(String size) {
-        this.size = size;
+    public void setProductSize(ProductSize productSize) {
+        this.productSize = productSize;
     }
 
     public int getOrderID() {
@@ -82,6 +85,14 @@ public class OrderItem {
 
     public void setOrderID(int orderID) {
         this.orderID = orderID;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 
 }
