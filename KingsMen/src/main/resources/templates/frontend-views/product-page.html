@@ -68,18 +68,25 @@
         <!-- Product loop -->
         <div class="col-lg-3 col-md-6 col-12 mb-4" th:each="product : ${products}">
           <div class="card" style="border: 0;">
-            <div class="card-body text-center border-0">
-                <a th:href="@{'/product/product-detail/' + ${product.id}}">  
-                <img class="card-img-top mx-auto d-block img-fluid" th:src="@{/Images/productImage/{imageName}(imageName=${product.imageName})}" alt="Product Image" style="width: 300px; height: 400px">
-              </a>
+            <div class="container">
+              <div class="card-body text-center border-0 position-relative">
+                <a th:href="@{'/product/product-detail/' + ${product.id}}">
+                  <img class="card-img-top mx-auto d-block img-fluid" th:src="@{/Images/productImage/{imageName}(imageName=${product.imageName})}" alt="Product Image" style="width: 300px; height: 400px">
+                  <form th:action="@{/addToWishList/{id}(id=${product.id})}" method="post" class="position-absolute top-0 end-0">
+                    <button type="submit" class="btn btn-transparent"><i class="fa fa-heart text-danger pt-4 mx-3"></i></button>
+                  </form>
+                </a>
+            </div>
+            
               <p class="mt-3">
                 <b th:text="${product.name}"></b><br>
                 <span class="small text-muted" th:text="'£' + ${product.price}"></span>
               </p>
-             <a th:href="@{'/product/product-detail/' + ${product.id}}" class="btn btn-submit-p btn-outline-secondary mx-auto d-block mt-3"> View Details</a>
+              <a th:href="@{'/product/product-detail/' + ${product.id}}" class="btn btn-submit-p btn-outline-secondary mx-auto d-block mt-3"> View Details</a>
             </div>
-          </div>
+          </div>            
         </div>
+        
         
       </div>
     </div>
