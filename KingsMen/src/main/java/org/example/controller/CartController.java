@@ -72,9 +72,9 @@ public class CartController {
         newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
-        if (item.getStock() <= 0) {
+        if (item.getProductSizes().getQuantity() <= 0) {
             redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
-        } else if (dropdown.getStock() > item.getStock()) {
+        } else if (dropdown.getProductSizeIds().getQuantity() > item.getStock()) {
             redirectAttributes.addFlashAttribute("errorMessage",
                     "Sorry, Max Quantity For This Item Is " + item.getStock());
         } else {

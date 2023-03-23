@@ -16,6 +16,7 @@ public class ProductSize {
     @ManyToOne(fetch = FetchType.LAZY)
     private Size size;
 
+    @Column(name="quantity")
     private int quantity;
 
     public ProductSize() {
