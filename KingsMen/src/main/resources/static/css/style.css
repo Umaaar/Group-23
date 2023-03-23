@@ -6,88 +6,19 @@
 }
 
 /* Cart Page CSS */
-.cart-padding{
-    padding: 20px;
-    text-align: center;
-}
 .ahidden {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease-out, visibility 0.8s ease-out;
   }
   
-  .avisible {
+.avisible {
     opacity: 1;
     visibility: visible;
   }
-#order-table{
-    border-collapse: separate;
-    border-spacing: 0 5px;
-}
-#order-table img {
-    width: 20%;
-    float: left;
-    padding-right: 5px;
-}
-#order-table th {
-    width: 16.66%;
-    font-size: 140%;
-    text-align: center;
-}
 
-th{
-    text-align: center;
-    border: none;
-}
-td{
-    text-align: center;
-}
-.cart-item{
-    background-color: #F8F8F8;
-}
-
-.total-box{
-    border: 2px solid grey;
-    border-radius: 8px;
-}
-.cart-total{
-    margin-bottom: 10%;
-}
-.pay-button{
-    margin: 0 auto;
-    width: 90%;
-    padding: 5px;
-    background-color: #000;
-    border: transparent;
-    border-radius: 8px;
-    color: white;
-    display: block;
-}
-.center {
-    margin: 0 auto;
-}
-.item-name{
-    float: right;
-    width: 80%;
-}
-.item-quantity {
-    width: 40px;
-    height: 25px;
-    text-align: center;
-}
-.quantity-btn {
-    background-color: transparent;
-    border: none;
-    width:25px;
-    height:25px;
-}
-.remove-btn {
-    color: red;
-}
-
-.remove-btn a{
-    text-decoration: none;
-    color: red;
+.cart-page img{
+    width: 65px;
 }
 /* End of Cart Page CSS*/
 

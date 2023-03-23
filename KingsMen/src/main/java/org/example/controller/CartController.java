@@ -45,7 +45,7 @@ public class CartController {
     @GetMapping("/cart")
     public String cartGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model) {
         model.addAttribute("cartCount", GlobalData.cart.size());
-        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+        model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         model.addAttribute("cart", GlobalData.cart);
         model.addAttribute("name", authentication.getFirstname());
         model.addAttribute("email", authentication.getEmail());
