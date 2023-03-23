@@ -72,24 +72,24 @@ public class CartController {
         newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
-        if (item.getProductSizes().getQuantity() <= 0) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
-        } else if (dropdown.getProductSizeIds().getQuantity() > item.getStock()) {
-            redirectAttributes.addFlashAttribute("errorMessage",
-                    "Sorry, Max Quantity For This Item Is " + item.getStock());
-        } else {
-            System.out.println(dropdown.getProductSizeIds());
-            for (Long sizeids : dropdown.getProductSizeIds()) {
-                System.out.println(sizeids);
-                System.out.println(sizeService.getSizeById(sizeids).get().getName());
-                newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
-            }
+        for (Long sizeids : dropdown.getProductSizeIds()) {
+            System.out.println(sizeids);
+            System.out.println(sizeService.getSizeById(sizeids).get().getName());
+            newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
             item.setQuantity(dropdown.getStock());
             item.setPrice(item.getPrice() * item.getQuantity());
             newItem.setQuantity(dropdown.getStock());
             newItem.setPrice(item.getPrice());
-            GlobalData.cart.add(newItem);
-            redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
+            ProductSize productSize = productSizeService.getProductSizeById(sizeids).get();
+            if (productSize.getQuantity() <= 0 || item.getStock() <= 0) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
+            } else if (dropdown.getStock() > productSize.getQuantity()) {
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Sorry, Max Quantity For This Item Is " + productSize.getQuantity());
+            } else {
+                GlobalData.cart.add(newItem);
+                redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
+            }
         }
         return "redirect:/product/product-detail/{id}";
     }
