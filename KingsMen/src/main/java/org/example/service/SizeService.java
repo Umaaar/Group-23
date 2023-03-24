@@ -8,6 +8,8 @@ import org.example.repository.SizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class SizeService {
 
@@ -20,7 +22,9 @@ public List<Size> getAllSizes(){
 public Optional<Size> getSizeById(Long id){
     return sizeRepository.findById(id);
 }
-
+    public Optional<Size> getSizeByName(String Name){
+        return Optional.ofNullable(sizeRepository.findByName(Name).orElseThrow(() -> new EntityNotFoundException("Size not found")));
+    }
 public void saveSize(Size size){
     sizeRepository.save(size);  
 
