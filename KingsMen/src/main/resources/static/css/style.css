@@ -305,7 +305,14 @@ p.about-us-content {
 /* End of Customer Dashboard css */
 
 /* Orders css */
-.orders-CenterAlign {
+.orders-TitleAlign {
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+  margin-top: 2.5%;
+}
+
+.orders-TableAlign {
   padding: 5px;
   margin: auto;
   text-align: center;
