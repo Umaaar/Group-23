@@ -149,57 +149,44 @@ public String createProducts( @AuthenticationPrincipal CustomUserDetail authenti
 }
 
 @PostMapping("/admin/products/create")
-public String createProductsPost(@ModelAttribute("productDTO") ProductDTO productDTO,
-                                 @RequestParam("productImage") MultipartFile file,
-                                 @RequestParam("imgName") String imgName) throws IOException{
+public String createOrUpdateProduct(@ModelAttribute ProductDTO productDTO,
+@RequestParam("productImage") MultipartFile file,
+@RequestParam("imgName") String imgName) throws IOException {
+Product product;
+if (productDTO.getId() != null) {
+// Update an existing product
+Optional<Product> optionalProduct = productService.getProductById(productDTO.getId());
+if (optionalProduct.isPresent()) {
+product = optionalProduct.get();
+} else {
+// Handle product not found error
+return "redirect:/admin/products?error=productNotFound";
+}
+} else {
+// Create a new product
+product = new Product();
+}// Update product fields
+product.setName(productDTO.getName());
+Category category = categoryService.getCategoryById(productDTO.getCategoryId()).orElse(null);
+product.setCategory(category);
+product.setDescription(productDTO.getDescription());
+product.setPrice(productDTO.getPrice());
 
-    // If the productDTO object has an ID set, then it's an existing product that needs to be updated
-    if(productDTO.getId() != null) {
-        // Get the existing product by its ID
-        Optional<Product> optionalProduct = productService.getProductById(productDTO.getId());
-        if (optionalProduct.isPresent()) {
-            // Update the existing product with the new data
-            Product product = optionalProduct.get();
-            product.setName(productDTO.getName());
-            Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
-            product.setCategory(category);
-            product.setDescription(productDTO.getDescription());
-            product.setPrice(productDTO.getPrice());
-            product.setStock(productDTO.getStock());
-            String imageUUID;
-            if(!file.isEmpty()){
-                imageUUID = file.getOriginalFilename();
-                Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
-                Files.write(fileNameAndPath, file.getBytes());
-            }else{
-                imageUUID = imgName;
-            }
-            product.setImageName(imageUUID);
-            productService.addProduct(product);
-        }
-    } else {
-        // If the productDTO object doesn't have an ID set, then it's a new product that needs to be created
-        Product product = new Product();
-        product.setName(productDTO.getName());
-        Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
-        product.setCategory(category);
-        product.setDescription(productDTO.getDescription());
-        product.setPrice(productDTO.getPrice());
-        product.setStock(productDTO.getStock());
-        String imageUUID;
-        if(!file.isEmpty()){
-            imageUUID = file.getOriginalFilename();
-            Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
-            Files.write(fileNameAndPath, file.getBytes());
-        }else{
-            imageUUID = imgName;
-        }
-        product.setImageName(imageUUID);
-        productService.addProduct(product);
-    }
+// Handle image upload
+if (!file.isEmpty()) {
+    String imageUUID = file.getOriginalFilename();
+    Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
+    Files.write(fileNameAndPath, file.getBytes());
+    product.setImageName(imageUUID);
+} else if (imgName != null) {
+    product.setImageName(imgName);
+}
 
-    return "redirect:/admin/products";
-}  
+// Save product to database
+productService.addProduct(product);
+
+return "redirect:/admin/products";
+}
 
 
 @GetMapping("/admin/products/update/{id}")
