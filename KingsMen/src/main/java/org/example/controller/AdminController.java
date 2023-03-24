@@ -147,33 +147,60 @@ public String createProducts( @AuthenticationPrincipal CustomUserDetail authenti
    return "/backend-views/products-create";
 
 }
+
 @PostMapping("/admin/products/create")
 public String createProductsPost(@ModelAttribute("productDTO") ProductDTO productDTO,
                                  @RequestParam("productImage") MultipartFile file,
                                  @RequestParam("imgName") String imgName) throws IOException{
- Product product = new Product();
-  product.setId(productDTO.getId());
-    System.out.println(productDTO.getId());
-  product.setName(productDTO.getName());
-  Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
-  product.setCategory(category);
-  product.setDescription(productDTO.getDescription());
-  product.setPrice(productDTO.getPrice());
-  product.setStock(productDTO.getStock());
-    String imageUUID;
-    if(!file.isEmpty()){
-        imageUUID = file.getOriginalFilename();
-        Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
-        Files.write(fileNameAndPath, file.getBytes());
-    }else{
-        imageUUID = imgName;
+
+    // If the productDTO object has an ID set, then it's an existing product that needs to be updated
+    if(productDTO.getId() != null) {
+        // Get the existing product by its ID
+        Optional<Product> optionalProduct = productService.getProductById(productDTO.getId());
+        if (optionalProduct.isPresent()) {
+            // Update the existing product with the new data
+            Product product = optionalProduct.get();
+            product.setName(productDTO.getName());
+            Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
+            product.setCategory(category);
+            product.setDescription(productDTO.getDescription());
+            product.setPrice(productDTO.getPrice());
+            product.setStock(productDTO.getStock());
+            String imageUUID;
+            if(!file.isEmpty()){
+                imageUUID = file.getOriginalFilename();
+                Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
+                Files.write(fileNameAndPath, file.getBytes());
+            }else{
+                imageUUID = imgName;
+            }
+            product.setImageName(imageUUID);
+            productService.addProduct(product);
+        }
+    } else {
+        // If the productDTO object doesn't have an ID set, then it's a new product that needs to be created
+        Product product = new Product();
+        product.setName(productDTO.getName());
+        Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
+        product.setCategory(category);
+        product.setDescription(productDTO.getDescription());
+        product.setPrice(productDTO.getPrice());
+        product.setStock(productDTO.getStock());
+        String imageUUID;
+        if(!file.isEmpty()){
+            imageUUID = file.getOriginalFilename();
+            Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
+            Files.write(fileNameAndPath, file.getBytes());
+        }else{
+            imageUUID = imgName;
+        }
+        product.setImageName(imageUUID);
+        productService.addProduct(product);
     }
-    product.setImageName(imageUUID);
-    productService.addProduct(product);
-    
+
     return "redirect:/admin/products";
-                                 
-} 
+}  
+
 
 @GetMapping("/admin/products/update/{id}")
 public String updateProductGet(@PathVariable long id, Model model) {
