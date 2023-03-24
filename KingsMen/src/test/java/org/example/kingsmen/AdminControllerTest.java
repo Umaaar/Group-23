@@ -82,7 +82,7 @@ public class AdminControllerTest {
         when(customUserDetailService.getUserCount()).thenReturn((int)10L);
         
         // Execute
-        String viewName = adminController.adminHome(customUserDetail, model);
+        String viewName = adminController.adminHome(customUserDetail, null, model);
         
         // Verify
         assertEquals("/backend-views/admin-index", viewName);
@@ -103,7 +103,7 @@ public class AdminControllerTest {
         Model model = new ExtendedModelMap();
 
         // Call the method under test
-        String viewName = adminController.getCat(model);
+        String viewName = adminController.getCat(customUserDetail, model);
 
         // Verify the results
         assertEquals("/backend-views/categories", viewName);
@@ -116,7 +116,7 @@ public class AdminControllerTest {
         Model model = new ExtendedModelMap();
 
         // Call the method under test
-        String viewName = adminController.postCreateCat(model);
+        String viewName = adminController.postCreateCat(customUserDetail, model);
 
         // Verify the results
         assertEquals("/backend-views/category-create", viewName);
@@ -211,7 +211,7 @@ public class AdminControllerTest {
         given(sizeService.getAllSizes()).willReturn(sizes);
 
         // when
-        String viewName = adminController.productspage(model);
+        String viewName = adminController.productspage(customUserDetail, model);
 
         // then
         verify(model).addAttribute(eq("products"), eq(products));
@@ -230,7 +230,7 @@ public class AdminControllerTest {
         given(sizeService.getAllSizes()).willReturn(sizes);
 
         // when
-        String viewName = adminController.createProducts(model);
+        String viewName = adminController.createProducts(customUserDetail, model);
 
         // then
         verify(model).addAttribute(eq("productDTO"), any(ProductDTO.class));
