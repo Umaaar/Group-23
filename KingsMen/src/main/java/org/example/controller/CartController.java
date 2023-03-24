@@ -119,8 +119,14 @@ public class CartController {
                 newOrderItem.setQuantity(item.getQuantity());
                 newOrderItem.setPrice(item.getPrice());
                 newOrderItem.setSize(item.getSize());
+                System.out.println( sizeService.getSizeByName(item.getSize()).get().getId());
+                System.out.println();
+                System.out.println("This is the quantity of the product selected:" +item.getName()+":" +productSizeService.decreaseQuanityForProductSizeObj(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId()).get().getQuantity());;
                 orderItemService.createOrderItem(newOrderItem);
                 orderItemService.decreasingStock(newOrderItem.getProduct().getId(), newOrderItem.getQuantity()); //decreasing stock
+                productSizeService.decreasingStock(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId(),newOrderItem.getQuantity());
+                productSizeService.decreaseQuanityForProductSizeObj(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId()).get().getQuantity();;
+
                 orderItems.add(newOrderItem);
             }
             GlobalData.cart.removeAll(GlobalData.cart);

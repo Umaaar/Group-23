@@ -18,5 +18,9 @@ public interface ProductSizeRepository extends JpaRepository<ProductSize, Long> 
     // @Modifying
     // @Query("UPDATE PRODUCT_SIZE p SET p.QUANTITY = p.QUANTITY - :quantity WHERE p.ID = :productsizeid")
     // int decreaseStock(@Param("productsizeid") Long productSizeId, @Param("quantity") int quantity);
+
+    @Modifying
+    @Query("UPDATE ProductSize ps SET ps.quantity = ps.quantity - :quantity WHERE ps.product.id = :productId AND ps.size.id = :sizeId")
+    int decreaseQuantity(@Param("productId") Long productId, @Param("sizeId") Long sizeId, @Param("quantity") int quantity);
     
 }

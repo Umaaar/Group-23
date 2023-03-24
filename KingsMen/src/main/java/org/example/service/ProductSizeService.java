@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -49,6 +52,17 @@ public List<ProductSize> getProductSizesBySizeId(Long id) {
 
     public Optional<ProductSize> decreaseQuanityForProductSizeObj(Long productID, Long sizeID){
         return productSizeRepository.findByProductIdAndSizeId(productID,sizeID);
+    }
+
+//    @Modifying
+//    @Query("UPDATE Product p SET p.stock = p.stock - :stock WHERE p.id = :productId")
+//    int decreaseStock(@Param("productId") Long productId, @Param("stock") int stock) {
+//        return 0;
+//    }
+
+    @Transactional
+    public void decreasingStock(Long productId, Long size, int quanitity) {
+        productSizeRepository.decreaseQuantity(productId, size,quanitity);
     }
 
 
