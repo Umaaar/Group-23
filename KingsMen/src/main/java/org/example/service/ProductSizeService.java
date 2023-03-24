@@ -47,5 +47,9 @@ public List<ProductSize> getProductSizesBySizeId(Long id) {
     
 }
 
+    public Optional<ProductSize> decreaseQuanityForProductSizeObj(Long productID, Long sizeID){
+        return productSizeRepository.findByProductIdAndSizeId(productID,sizeID);
+    }
+
 
 }
