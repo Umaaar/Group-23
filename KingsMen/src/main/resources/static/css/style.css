@@ -304,6 +304,14 @@ p.about-us-content {
 }*/
 /* End of Customer Dashboard css */
 
+/* Orders css */
+.orders-CenterAlign {
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+}
+/* End of Orders css */
+
 /* Product page / Product detail page */
 .size-quantity{
     padding: 2% 0%;
