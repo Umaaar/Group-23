@@ -271,36 +271,36 @@ p.about-us-content {
 
 /* Customer Dashboard css */
 .custdash-OuterDiv {
-    padding: 5px;
-    margin: auto;
-    text-align: center;
-    margin-top: 5%;
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+  margin-top: 5%;
 }
 
 .custdash-InnerDiv {
-    padding: 5px;
-    padding-bottom: 10px;
-    border-style: solid;
-    margin: 2% 40% 2% 40%;
+  padding: 5px;
+  padding-bottom: 10px;
+  border-style: solid;
+  margin: 2% 40% 2% 40%;
 }
 
 .custdash-button {
-    border-radius: 10px;
-    padding: 5px;
-    color: white;
-    background-color: black;
-    transition: background 0.5s ease-in-out;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+  background-color: black;
+  transition: background 0.5s ease-in-out;
 }
 
 .custdash-button:hover {
-    background: red;
+  background: red;
 }
 
 /*.custdash-p {
-    border-radius: 10px;
-    background-color: black;
-    color: white;
-    margin: 5px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  margin: 5px;
 }*/
 /* End of Customer Dashboard css */
 
@@ -312,10 +312,11 @@ p.about-us-content {
   margin-top: 2.5%;
 }
 
-.orders-TableAlign {
+.orders-Table {
   padding: 5px;
   margin: auto;
   text-align: center;
+  border-style: groove;
 }
 /* End of Orders css */
 
