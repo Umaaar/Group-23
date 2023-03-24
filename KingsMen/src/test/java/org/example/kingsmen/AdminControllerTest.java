@@ -22,6 +22,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 
 import org.example.controller.AdminController;
+import org.example.dto.OrderDTO;
 import org.example.dto.ProductDTO;
 import org.example.dto.ProductSizeDTO;
 import org.example.model.Category;
@@ -43,6 +44,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -80,6 +82,7 @@ public class AdminControllerTest {
     
     @Mock
     private Category category;
+
     
     @Mock
     private Model model;
@@ -565,8 +568,80 @@ public void testCreateProductSizePost_failure() {
         Mockito.verify(redirectAttributes).addFlashAttribute(eq("errorMessage"), anyString());
     }
 
-
 /* End of ProductSize Crud Tests */
+
+/* Start of Size Crud Tests */
+@Test
+    public void testSizes() {
+        List<Size> sizes = Arrays.asList(new Size());
+        Mockito.when(sizeService.getAllSizes()).thenReturn(sizes);
+        String result = adminController.sizes(model);
+        assertEquals("/backend-views/size", result);
+        Mockito.verify(model).addAttribute("size", sizes);
+    }
+
+    @Test
+    public void testCreateSizeGet() {
+        String result = adminController.createSizeGet(model);
+        assertEquals("/backend-views/size-create", result);
+        Mockito.verify(model).addAttribute("size", new Size());
+    }
+
+    @Test
+    public void testCreateSizePost() {
+        Size size = new Size();
+        String result = adminController.createSizePost(size);
+        assertEquals("redirect:/admin/size", result);
+        Mockito.verify(sizeService).saveSize(size);
+    }
+
+    @Test
+    public void testDeleteSize() {
+        Long id = 1L;
+        String result = adminController.deleteSize(id, redirectAttributes);
+        assertEquals("redirect:/admin/size", result);
+        Mockito.verify(sizeService).deleteSize(id);
+        Mockito.verify(redirectAttributes).addFlashAttribute("successMessage", "Size deleted successfully.");
+    }
+
+    @Test
+    public void testDeleteSizeWithException() {
+        Long id = 1L;
+        DataIntegrityViolationException exception = new DataIntegrityViolationException("test");
+        Mockito.doThrow(exception).when(sizeService).deleteSize(id);
+        String result = adminController.deleteSize(id, redirectAttributes);
+        assertEquals("redirect:/admin/size", result);
+        Mockito.verify(sizeService).deleteSize(id);
+        Mockito.verify(redirectAttributes).addFlashAttribute("errorMessage", "Cannot delete this size as it is associated with one or more products.");
+    }
+
+    @Test
+    public void testUpdateSizeGet() {
+        Long id = 1L;
+        Optional<Size> size = Optional.of(new Size());
+        Mockito.when(sizeService.getSizeById(id)).thenReturn(size);
+        String result = adminController.updateSizeGet(id, model);
+        assertEquals("/backend-views/size-create", result);
+        Mockito.verify(model).addAttribute("size", size.get());
+    }
+
+    @Test
+    public void testUpdateSizeGetWithException() {
+        Long id = 1L;
+        Optional<Size> size = Optional.empty();
+        Mockito.when(sizeService.getSizeById(id)).thenReturn(size);
+        String result = adminController.updateSizeGet(id, model);
+        assertEquals("404", result);
+        Mockito.verifyZeroInteractions(model);
+    }
+
+/* End of Size Crud Tests */
+
+/* Start of Order Crud Tests*/
+
+
+/* End of Order Crud Tests*/
+
 
 }
 
