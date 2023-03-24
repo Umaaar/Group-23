@@ -73,22 +73,25 @@ public class CartController {
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
         for (Long sizeids : dropdown.getProductSizeIds()) {
-            System.out.println(sizeids);
-            System.out.println(sizeService.getSizeById(sizeids).get().getName());
+            //System.out.println(sizeids);
+            //System.out.println(sizeService.getSizeById(sizeids).get().getName());
             newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
-            item.setQuantity(dropdown.getStock());
-            item.setPrice(item.getPrice() * item.getQuantity());
-            newItem.setQuantity(dropdown.getStock());
-            newItem.setPrice(item.getPrice());
             ProductSize productSize = productSizeService.getProductSizeById(sizeids).get();
-            if (productSize.getQuantity() <= 0 || item.getStock() <= 0) {
+            int zero = 0;
+            if (productSize.getQuantity() <= zero || item.getStock() <= zero) {
+                System.out.print("Sorry but " + productSize.getQuantity() + " is the quantity");
                 redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
-            } else if (dropdown.getStock() > productSize.getQuantity()) {
+            } else if (dropdown.getStock() > productSize.getQuantity() || dropdown.getStock() > productSize.getQuantity()) {
+                System.out.print("Sorry but " + productSize.getQuantity() + " is the quantity");
                 redirectAttributes.addFlashAttribute("errorMessage",
                         "Sorry, Max Quantity For This Item Is " + productSize.getQuantity());
             } else {
+                item.setQuantity(dropdown.getStock());
+            item.setPrice(item.getPrice() * item.getQuantity());
+            newItem.setPrice(item.getPrice());
                 GlobalData.cart.add(newItem);
                 redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
+
             }
         }
         return "redirect:/product/product-detail/{id}";
