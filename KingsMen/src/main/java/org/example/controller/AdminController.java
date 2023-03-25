@@ -21,8 +21,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 import javax.websocket.Session;
@@ -447,5 +450,41 @@ public String adminIMS(@AuthenticationPrincipal CustomUserDetail authentication,
 
     return "backend-views/products-size";
 }
+    //Chart Controller
+    @GetMapping("/barChart")
+    public String getAllCategories(Model model) {
+
+        List<String> productNames = productService.getAllProduct()
+                .stream()
+                .sorted(Comparator.comparing(Product::getPrice).reversed())
+                .limit(5)
+                .map(Product::getName)
+                .collect(Collectors.toList());
+
+        for (String item: productNames
+             ) {
+            System.out.println(item);
+
+
+        }
+
+        List<Double> productPrices = productService.getAllProduct()
+                .stream()
+                .sorted(Comparator.comparing(Product::getPrice).reversed())
+                .limit(5)
+                .map(Product::getPrice)
+                .collect(Collectors.toList());
+
+
+
+        model.addAttribute("name", productNames);
+        model.addAttribute("prices", productPrices);
+        return "backend-views/testBarChart";
+
+    }
 }
+
+
+
+
 
