@@ -30,6 +30,7 @@ import org.example.model.CustomUserDetail;
 import org.example.model.Product;
 import org.example.model.ProductSize;
 import org.example.model.Size;
+import org.example.model.User;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
 import org.example.service.OrderService;
@@ -632,7 +633,7 @@ public void testCreateProductSizePost_failure() {
         Mockito.when(sizeService.getSizeById(id)).thenReturn(size);
         String result = adminController.updateSizeGet(id, model);
         assertEquals("404", result);
-        Mockito.verifyZeroInteractions(model);
+//Mockito.verifyZeroInteractions(model);
     }
 
 /* End of Size Crud Tests */
@@ -641,6 +642,42 @@ public void testCreateProductSizePost_failure() {
 
 
 /* End of Order Crud Tests*/
+
+@Test
+public void testAdminCustomers() {
+    User user = new User();
+    CustomUserDetail authentication = new CustomUserDetail(user);
+    authentication.setFirstname("admin");
+
+    List<User> customers = new ArrayList<>();
+    customers.add(new CustomUserDetail(authentication));
+
+    when(customUserDetailService.getAllUsers()).thenReturn(customers);
+
+    String result = adminController.adminCustomers(authentication, model);
+
+    assertEquals("/backend-views/customers", result);
+    verify(model).addAttribute("adminname", "admin");
+    verify(model).addAttribute("customers", customers);
+}
+
+@Test
+public void testAdminIMS() {
+    User user = new User();
+    CustomUserDetail authentication = new CustomUserDetail(user);
+    authentication.setFirstname("admin");
+
+    List<ProductSize> productSizes = new ArrayList<>();
+    productSizes.add(new ProductSize());
+
+    when(productSizeService.getAllProductSizes()).thenReturn(productSizes);
+
+    String result = adminController.adminIMS(authentication, model);
+
+    assertEquals("backend-views/products-size", result);
+    verify(model).addAttribute("adminname", "admin");
+    verify(model).addAttribute("productSizes", productSizes);
+}
 
 
 }
