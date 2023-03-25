@@ -7,7 +7,13 @@
   content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
-
+    <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
   <!-- Font Awesome Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" >
@@ -28,6 +34,12 @@
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/admin-assets/css/style.css}" href="/static/admin-assets/css/style.css">
   <!-- endinject -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
  
 </head>
 
@@ -51,6 +63,113 @@
                 <p class="mb-md-0">Your analytics dashboard.</p>
                 <hr>
                </div>
+                <div class="row">
+                    <div class="container">
+
+
+                        <div id="container"
+                             style="width: 36vmax; height: 32vmax; margin: 3vmax 3vmax"></div>
+                    </div>
+                    <script th:inline="javascript">
+
+    $(function(){
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Orders Data'
+        },
+        subtitle: {
+            text: 'Details'
+        },
+        xAxis: {
+            categories: ['In Process', 'Awaiting Confirmation', 'Awaiting Confirmation'],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max:50,
+            title: {
+                text: 'Numbers'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Orders Type',
+            data: [[${prices}]]
+        }]
+      });
+    });
+</script>
+                    <div class="container">
+
+
+                        <div id="container1"
+                             style="width: 36vmax; height: 32vmax; margin: 3vmax 3vmax"></div>
+                    </div>
+                    <script th:inline="javascript">
+
+
+
+    $(function(){
+    Highcharts.chart('container1', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Product Data'
+        },
+        subtitle: {
+            text: 'Details'
+        },
+        xAxis: {
+            categories: [[${name}]],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            max:40,
+            title: {
+                text: 'Numbers'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Categories',
+            data: [[${catProducts}]]
+        }]
+      });
+    });
+</script>
+
+                </div>
                <div class="row">
                 <!--Total Orders-->
                 <div class="col-md-3">

@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface OrderRepository extends JpaRepository<OrderDetails,Integer> {
 
+    List<OrderDetails> getAllOrdersBystatus(Integer status);
+
     @Query(value = "select * from ORDER_DETAILS e where e.email like %:keyword% or e.name like %:keyword%" ,nativeQuery = true)
     List<OrderDetails> findByKeyword(@Param("keyword") String keyword );
     

@@ -31,6 +31,9 @@ public class OrderService {
         return Math.toIntExact(orderRepository.count());
     }
 
+    public List<OrderDetails> getOrderByStatus(int status){
+        return orderRepository.getAllOrdersBystatus(status);
+    }
     public List<OrderDetails> findByKeyword(String keyword){
         return orderRepository.findByKeyword(keyword);
     }

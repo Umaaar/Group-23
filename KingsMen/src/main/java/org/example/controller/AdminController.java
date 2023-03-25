@@ -21,10 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -67,6 +64,57 @@ public class AdminController {
        model.addAttribute("total_in_stock_products",String.valueOf(productService.getInStockProducts()));
        model.addAttribute("total_in_out_of_stock_products",String.valueOf(productService.getOutOfStockProducts()));
        model.addAttribute("total_orders",String.valueOf(orderService.getOrderCount()));
+       List<Integer> orders_numbers = new ArrayList<>();
+       Integer inProcessOrders = orderService.getOrderByStatus(1).size();
+       System.out.println(inProcessOrders);
+       Integer awaitingConfirmationOrders = orderService.getOrderByStatus(2).size();
+       System.out.println(awaitingConfirmationOrders);
+       Integer completedOrders = orderService.getOrderByStatus(3).size();
+       System.out.println(completedOrders);
+       orders_numbers.add(inProcessOrders);
+       orders_numbers.add(awaitingConfirmationOrders);
+       orders_numbers.add(completedOrders);
+
+       List<String> productNames = productService.getAllProduct()
+               .stream()
+               .sorted(Comparator.comparing(Product::getPrice).reversed())
+               .limit(5)
+               .map(Product::getName)
+               .collect(Collectors.toList());
+
+       for (String item: productNames
+       ) {
+           System.out.println(item);
+       }
+
+       List<Double> productPrices = productService.getAllProduct()
+               .stream()
+               .sorted(Comparator.comparing(Product::getPrice).reversed())
+               .limit(5)
+               .map(Product::getPrice)
+               .collect(Collectors.toList());
+
+       List<Integer> categoryIds = categoryService.getAllCategory()
+               .stream()
+               .map(Category::getId)
+               .collect(Collectors.toList());
+
+       List<String> categoryNames = categoryService.getAllCategory()
+               .stream()
+               .map(Category::getName)
+               .collect(Collectors.toList());
+
+       List<Integer> productsForEachCategory = new ArrayList<>();
+
+       for (int categoryId: categoryIds) {
+           Integer productNumber  = productService.getProductsByCategoryId(categoryId).size();
+           productsForEachCategory.add(productNumber);
+       }
+
+
+       model.addAttribute("name",categoryNames);
+       model.addAttribute("catProducts",productsForEachCategory);
+       model.addAttribute("prices", orders_numbers);
        return "/backend-views/admin-index";
    }
 
@@ -453,6 +501,16 @@ public String adminIMS(@AuthenticationPrincipal CustomUserDetail authentication,
     //Chart Controller
     @GetMapping("/barChart")
     public String getAllCategories(Model model) {
+        List<Integer> orders_numbers = new ArrayList<>();
+        Integer inProcessOrders = orderService.getOrderByStatus(1).size();
+        System.out.println(inProcessOrders);
+        Integer awaitingConfirmationOrders = orderService.getOrderByStatus(2).size();
+        System.out.println(awaitingConfirmationOrders);
+        Integer completedOrders = orderService.getOrderByStatus(3).size();
+        System.out.println(completedOrders);
+        orders_numbers.add(inProcessOrders);
+        orders_numbers.add(awaitingConfirmationOrders);
+        orders_numbers.add(completedOrders);
 
         List<String> productNames = productService.getAllProduct()
                 .stream()
@@ -464,8 +522,6 @@ public String adminIMS(@AuthenticationPrincipal CustomUserDetail authentication,
         for (String item: productNames
              ) {
             System.out.println(item);
-
-
         }
 
         List<Double> productPrices = productService.getAllProduct()
@@ -478,11 +534,46 @@ public String adminIMS(@AuthenticationPrincipal CustomUserDetail authentication,
 
 
         model.addAttribute("name", productNames);
-        model.addAttribute("prices", productPrices);
-        return "backend-views/testBarChart";
+        model.addAttribute("prices", orders_numbers);
+        return "backend-views/order_bar_graph";
 
     }
-}
+
+    @GetMapping("/barChart/category")
+    public String getCategoryGraph(Model model) {
+        List<Integer> categoryIds = categoryService.getAllCategory()
+                .stream()
+                .map(Category::getId)
+                .collect(Collectors.toList());
+
+        List<String> categoryNames = categoryService.getAllCategory()
+                .stream()
+                .map(Category::getName)
+                .collect(Collectors.toList());
+
+        List<Integer> productsForEachCategory = new ArrayList<>();
+
+        for (int categoryId: categoryIds) {
+            Integer productNumber  = productService.getProductsByCategoryId(categoryId).size();
+            productsForEachCategory.add(productNumber);
+        }
+
+        for (int product: productsForEachCategory) {
+            System.out.println(product);
+
+        }
+
+
+
+        model.addAttribute("name",categoryNames);
+        model.addAttribute("prices",productsForEachCategory);
+
+
+        return "backend-views/category_bar_graph";
+    }
+
+    }
+
 
 
 
