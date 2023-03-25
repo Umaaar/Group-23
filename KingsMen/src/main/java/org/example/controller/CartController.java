@@ -86,7 +86,7 @@ public class CartController {
                         "Sorry, Size " + psp.getSize().getName() + " Is Out Of Stock");
             } else if (dropdown.getStock() > psp.getQuantity()) {
                 redirectAttributes.addFlashAttribute("errorMessage",
-                        "Sorry, Only " + psp.getQuantity() + " Items Left In This Size");
+                        "Sorry, Only " + psp.getQuantity() + " Items Left In Size " + psp.getSize().getName());
             } else {
                 System.out.println(dropdown.getProductSizeIds());
                 System.out.println(sizeids);
