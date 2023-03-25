@@ -199,32 +199,44 @@ public String createProducts( @AuthenticationPrincipal CustomUserDetail authenti
 
 }
 @PostMapping("/admin/products/create")
-public String createProductsPost(@ModelAttribute("productDTO") ProductDTO productDTO,
-                                 @RequestParam("productImage") MultipartFile file,
-                                 @RequestParam("imgName") String imgName) throws IOException{
- Product product = new Product();
-  product.setId(productDTO.getId());
-    System.out.println(productDTO.getId());
-  product.setName(productDTO.getName());
-  Category category = categoryService.getCategoryById(productDTO.getCategoryId()).get();
-  product.setCategory(category);
-  product.setDescription(productDTO.getDescription());
-  product.setPrice(productDTO.getPrice());
-  product.setStock(productDTO.getStock());
-    String imageUUID;
-    if(!file.isEmpty()){
-        imageUUID = file.getOriginalFilename();
-        Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
-        Files.write(fileNameAndPath, file.getBytes());
-    }else{
-        imageUUID = imgName;
-    }
+public String createOrUpdateProduct(@ModelAttribute ProductDTO productDTO,
+@RequestParam("productImage") MultipartFile file,
+@RequestParam("imgName") String imgName) throws IOException {
+Product product;
+if (productDTO.getId() != null) {
+// Update an existing product
+Optional<Product> optionalProduct = productService.getProductById(productDTO.getId());
+if (optionalProduct.isPresent()) {
+product = optionalProduct.get();
+} else {
+// Handle product not found error
+return "redirect:/admin/products?error=productNotFound";
+}
+} else {
+// Create a new product
+product = new Product();
+}// Update product fields
+product.setName(productDTO.getName());
+Category category = categoryService.getCategoryById(productDTO.getCategoryId()).orElse(null);
+product.setCategory(category);
+product.setDescription(productDTO.getDescription());
+product.setPrice(productDTO.getPrice());
+
+// Handle image upload
+if (!file.isEmpty()) {
+    String imageUUID = file.getOriginalFilename();
+    Path fileNameAndPath = Paths.get(uploadDirectory, imageUUID);
+    Files.write(fileNameAndPath, file.getBytes());
     product.setImageName(imageUUID);
-    productService.addProduct(product);
-    
-    return "redirect:/admin/products";
-                                 
-} 
+} else if (imgName != null) {
+    product.setImageName(imgName);
+}
+
+// Save product to database
+productService.addProduct(product);
+
+return "redirect:/admin/products";
+}
 
 @GetMapping("/admin/products/update/{id}")
 public String updateProductGet(@PathVariable long id, Model model) {
@@ -331,17 +343,6 @@ public String createProductSizePost(@ModelAttribute("productSizeDTO") ProductSiz
     return "redirect:/admin/ims";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 /* --------------------------------------------------- End of Product CRUD Mapping ------------------------------------------------- */
 
