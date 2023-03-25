@@ -65,5 +65,9 @@ public List<ProductSize> getProductSizesBySizeId(Long id) {
         productSizeRepository.decreaseQuantity(productId, size,quanitity);
     }
 
+    public Long getProductSizeIdbySizeIdAndProductId(Long sizeId, Long productId){
+        return productSizeRepository.findByProductIdAndSizeId(productId, sizeId).get().getId();
+    }
+
 
 }

@@ -72,24 +72,36 @@ public class CartController {
         newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
-        if (item.getStock() <= 0) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Out Of Stock");
-        } else if (dropdown.getStock() > item.getStock()) {
-            redirectAttributes.addFlashAttribute("errorMessage",
-                    "Sorry, Max Quantity For This Item Is " + item.getStock());
-        } else {
-            System.out.println(dropdown.getProductSizeIds());
-            for (Long sizeids : dropdown.getProductSizeIds()) {
+        item.setQuantity(dropdown.getStock());
+        item.setPrice(item.getPrice() * item.getQuantity());
+        newItem.setQuantity(dropdown.getStock());
+        newItem.setPrice(item.getPrice());
+        for (Long sizeids : dropdown.getProductSizeIds()) {
+            Long psId = productSizeService.getProductSizeIdbySizeIdAndProductId(sizeids, item.getId());
+            ProductSize psp = productSizeService.getProductSizeById(psId).get();
+            if (item.getStock() <= 0) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Sorry, Item Is Out Of Stock");
+            } else if (psp.getQuantity() <= 0) {
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Sorry, Size " + psp.getSize().getName() + " Is Out Of Stock");
+            } else if (dropdown.getStock() > psp.getQuantity()) {
+                redirectAttributes.addFlashAttribute("errorMessage",
+                        "Sorry, Only " + psp.getQuantity() + " Items Left In This Size");
+            } else {
+                System.out.println(dropdown.getProductSizeIds());
                 System.out.println(sizeids);
                 System.out.println(sizeService.getSizeById(sizeids).get().getName());
                 newItem.setSize(sizeService.getSizeById(sizeids).get().getName());
+                for (Product cartItem : GlobalData.cart) {
+                    if (cartItem.getId().equals(newItem.getId()) && cartItem.getSize().equals(newItem.getSize())) {
+                        redirectAttributes.addFlashAttribute("errorMessage",
+                                "Sorry, Item Of This Size Is Already In Your Cart");
+                        return "redirect:/product/product-detail/{id}";
+                    }
+                }
+                GlobalData.cart.add(newItem);
+                redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
             }
-            item.setQuantity(dropdown.getStock());
-            item.setPrice(item.getPrice() * item.getQuantity());
-            newItem.setQuantity(dropdown.getStock());
-            newItem.setPrice(item.getPrice());
-            GlobalData.cart.add(newItem);
-            redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
         }
         return "redirect:/product/product-detail/{id}";
     }
@@ -119,13 +131,13 @@ public class CartController {
                 newOrderItem.setQuantity(item.getQuantity());
                 newOrderItem.setPrice(item.getPrice());
                 newOrderItem.setSize(item.getSize());
-                System.out.println( sizeService.getSizeByName(item.getSize()).get().getId());
+                System.out.println(sizeService.getSizeByName(item.getSize()).get().getId());
                 System.out.println();
-                System.out.println("This is the quantity of the product selected:" +item.getName()+":" +productSizeService.decreaseQuanityForProductSizeObj(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId()).get().getQuantity());;
+                System.out.println("This is the quantity of the product selected:" + item.getName() + ":" + productSizeService.decreaseQuanityForProductSizeObj(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId()).get().getQuantity());
                 orderItemService.createOrderItem(newOrderItem);
-                orderItemService.decreasingStock(newOrderItem.getProduct().getId(), newOrderItem.getQuantity()); //decreasing stock
-                productSizeService.decreasingStock(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId(),newOrderItem.getQuantity());
-                productSizeService.decreaseQuanityForProductSizeObj(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId()).get().getQuantity();;
+                //orderItemService.decreasingStock(newOrderItem.getProduct().getId(), newOrderItem.getQuantity()); // decreasing stock
+                productSizeService.decreasingStock(item.getId(), sizeService.getSizeByName(item.getSize()).get().getId(), newOrderItem.getQuantity());
+                productSizeService.decreaseQuanityForProductSizeObj(item.getId(),sizeService.getSizeByName(item.getSize()).get().getId()).get().getQuantity();
                 orderItems.add(newOrderItem);
             }
             GlobalData.cart.removeAll(GlobalData.cart);
