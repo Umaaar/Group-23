@@ -17,12 +17,13 @@ public class HomeController {
     }
 
     @GetMapping("/customer-dashboard")
-    public String dashboard(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response , Model model) {
-        model.addAttribute("firstname",authentication.getFirstname());
+    public String dashboard(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response,
+            Model model) {
+        model.addAttribute("firstname", authentication.getFirstname());
         System.out.println(authentication.getFirstname());
-        model.addAttribute("lastname",authentication.getLastname());
+        model.addAttribute("lastname", authentication.getLastname());
         System.out.println(authentication.getLastname());
-        model.addAttribute("email",authentication.getEmail());
+        model.addAttribute("email", authentication.getEmail());
         System.out.println(authentication.getEmail());
         return "/frontend-views/customer-dashboard";
     }
@@ -42,11 +43,14 @@ public class HomeController {
         return "/frontend-views/about-us";
     }
 
+    @GetMapping("/faq")
+    public String Faq() {
+        return "/frontend-views/faq";
+    }
+
     @GetMapping("/returns")
     public String Returns() {
         return "/frontend-views/returns";
     }
-
-  
 
 }
