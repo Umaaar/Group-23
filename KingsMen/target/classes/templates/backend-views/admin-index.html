@@ -34,13 +34,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/admin-assets/css/style.css}" href="/static/admin-assets/css/style.css">
   <!-- endinject -->
-    <!-- <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
-
-    <!-- Optional theme -->
-    <!-- <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
-  -->
+    <link rel="shortcut icon" th:href="@{/admin-assets/images/favicon.png}" href="/static/admin-assets/images/favicon.png" />
 </head>
 
 <body>
@@ -63,10 +57,10 @@
                 <p class="mb-md-0">Your analytics dashboard.</p>
                 <hr>
                </div>
-               <div class="row">
-         <div class="col-md-12">   
+         <div class="row-md-6">   
             <div class="card">
-                <div class="card-body bg-dark">
+                <div class="card-body">
+                <h4 class="card-title">Product Data</h4>
                 <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 </div>
             </div>  
@@ -77,17 +71,20 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Total Order Status'
+                    text: 'Orders Data'
+                },
+                subtitle: {
+                    text: 'Details'
                 },
                 xAxis: {
-                    categories: ['In Process', 'Awaiting Confirmation', 'Completed'],
+                    categories: ['In Process', 'Awaiting Confirmation', 'Awaiting Confirmation'],
                     crosshair: true
                 },
                 yAxis: {
                     min: 0,
                     max:50,
                     title: {
-                        text: 'Number of Orders'
+                        text: 'Numbers'
                     }
                 },
                 tooltip: {
@@ -105,7 +102,7 @@
                     }
                 },
                 series: [{
-                    name: 'Order Status',
+                    name: 'Orders Type',
                     data: [[${prices}]]
                 }]
             });
@@ -113,10 +110,10 @@
         </script>
         </div> 
         <hr>
-        <div class="col-md-12">     
+        <div class="row-md-6">     
             <div class="card">
-                <div class="card-body bg-dark">
-                
+                <div class="card-body">
+                <h4 class="card-title">Order Data</h4>
                 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 </div>
             </div> 
@@ -127,7 +124,10 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Total Products Per Category'
+                    text: 'Product Data'
+                },
+                subtitle: {
+                    text: 'Details'
                 },
                 xAxis: {
                     categories: [[${name}]],
@@ -137,7 +137,7 @@
                     min: 0,
                     max:40,
                     title: {
-                        text: 'Number of Products'
+                        text: 'Numbers'
                     }
                 },
                 tooltip: {
@@ -162,7 +162,6 @@
             });
         </script>
         </div>
-                </div>
         <hr>
                <div class="row">
                 <!--Total Orders-->
