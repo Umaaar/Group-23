@@ -775,8 +775,10 @@ p.about-us-content {
     }
 
     .wrapper img{
-    width: 1501px;
-    height: 490px;
+    /* width: 1501px; */
+    /* height: 50%; */
+    /* position: absolute;
+    display: block; */
     }
 
     .wrapper h1{
@@ -786,7 +788,7 @@ p.about-us-content {
 
     .accordian{
         margin: 60px auto;
-        width: 1000px;
+        /* width: 1000em; */
         padding-top: 500px;
         position: relative;
     }
@@ -811,7 +813,7 @@ p.about-us-content {
         cursor: pointer;
     }
 
-    label::before{
+    .accordian label::before{
         content: '+';
         margin-right: 10px;
         font-size: 24px;
