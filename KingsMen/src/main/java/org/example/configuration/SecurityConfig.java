@@ -26,12 +26,12 @@ SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/", "/product/**", "/h2-console/**" ,"/login-assets/**","/cart/**","/register","/contact-us/**","/about-us/**").permitAll()
+                .antMatchers("/", "/product/**", "/h2-console/**" ,"/login-assets/**","/cart/**","/register","/contact-us/**","/about-us/**","/faq/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/customer-dashboard/**").hasRole("USER")
                 .antMatchers("/wishlist/**").hasRole("USER")
-                .anyRequest()
-                .authenticated()
+                .anyRequest().authenticated()
+
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -54,6 +54,7 @@ SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable();
 //        remove when using actual database
         http.headers().frameOptions().disable();
+
     }
 
     @Bean
