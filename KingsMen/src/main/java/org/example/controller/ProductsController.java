@@ -94,6 +94,7 @@ public String getProductsPage(Model model,
           model.addAttribute("product", product.orElse(null));
           model.addAttribute("productSizes", productSizeService.getProductSizesByProductId(id));
           model.addAttribute("sizes", sizeService.getAllSizes());
+          model.addAttribute("categories", catagoryService.getAllCategory());
 
           return "frontend-views/product-detail-page";
       }

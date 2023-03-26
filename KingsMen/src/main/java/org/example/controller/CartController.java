@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.*;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
+import org.example.service.CategoryService;
 import org.example.service.OrderItemService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
@@ -36,6 +37,9 @@ public class CartController {
     @Autowired
     SizeService sizeService;
 
+    @Autowired
+    CategoryService catagoryService;
+
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable Long id) {
         GlobalData.cart.add(productService.getProductById(id).get());
@@ -49,6 +53,8 @@ public class CartController {
         model.addAttribute("cart", GlobalData.cart);
         model.addAttribute("name", authentication.getFirstname());
         model.addAttribute("email", authentication.getEmail());
+        model.addAttribute("categories", catagoryService.getAllCategory());
+
         return "/frontend-views/cart-page";
     }
 
