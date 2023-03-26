@@ -54,23 +54,25 @@
                         <table class="table table-bordererd table-striped table-responsive">
                             <thead>
                                 <tr>
+                                    <th>Sr. No.</th>
                                     <th>Name</th>
                                     <th>Enquiry Type</th>
                                     <th>Email</th>
-                                    <th>Order ID (if applicable)</th>
                                     <th>Message</th>
+                                    <th>Order ID</th>
                                     
                                 </tr>
                             </thead>
                             <tbody>
 
-                                    <tr th:each="enquiry, iStat : ${enquiries}">
-                                        <td th:text="${iStat.index + 1}">name</td>
-                                        <td th:text="${enquiries.type}">enquiry type</td>
-                                        <td th:text="${enquiries.email}">email</td>
-                                        <td th:text="${enquiries.orderId}">order id</td>
-                                        <td th:text="${enquiries.message}">message</td>
-                                    </tr>
+                                <tr th:each="query, iStat : ${queries}">
+                                    <td th:text="${iStat.index + 1}">1</td>
+                                    <td th:text="${query.name}">name</td>
+                                    <td th:text="${query.enquiry}">enquiry</td>
+                                    <td th:text="${query.email}">email</td>
+                                    <td th:text="${query.message}">message</td>
+                                    <td  th:text="${query.order_id}">order_id</td>
+                                </tr>
                                     
                             </tbody>
                         </table>

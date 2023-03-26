@@ -1990,7 +1990,7 @@ color: #fff;
 border-color: #373b3e;
 }
 
-.table-responsive {
+/* .table-responsive {
 overflow-x: auto;
 -webkit-overflow-scrolling: touch;
 }
@@ -2028,7 +2028,7 @@ overflow-x: auto;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-}
+} */
 
 .form-label {
 margin-bottom: 0.5rem;
@@ -4605,7 +4605,7 @@ color: rgba(255, 255, 255, 0.55);
 color: #fff;
 }
 
-.card {
+/* .card {
 position: relative;
 display: flex;
 flex-direction: column;
@@ -4784,7 +4784,7 @@ margin-bottom: 0.75rem;
 .card-group > .card:not(:first-child) .card-footer {
   border-bottom-left-radius: 0;
 }
-}
+} */
 
 .accordion-button {
 position: relative;
@@ -13968,7 +13968,7 @@ right: 1.75rem;
 }
 
 
-.rtl .tab-content .tab-pane .scroll-wrapper::-webkit-scrollbar,
+/* .rtl .tab-content .tab-pane .scroll-wrapper::-webkit-scrollbar,
 .rtl .sidebar-fixed .nav::-webkit-scrollbar,
 .rtl .table-responsive::-webkit-scrollbar {
 width: 0.5em;
@@ -13987,6 +13987,6 @@ width: 0.5em;
 .rtl .table-responsive::-webkit-scrollbar-thumb {
 background-color: darkgrey;
 outline: 1px solid slategrey;
-}
+} */
 
 /*# sourceMappingURL=maps/style.css.map */

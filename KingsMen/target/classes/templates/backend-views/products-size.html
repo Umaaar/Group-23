@@ -49,7 +49,7 @@
             <div class="col-md-12 ">
 
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-black text-white pt-3">
                         <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
                             <span th:text="${successMessage}"></span>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -60,7 +60,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <h3> Inventory Management System 
-                            <a href="#" th:href="@{/admin/products/productSize/create}" class="btn btn-dark btn-sm text-white float-end">
+                            <a href="#" th:href="@{/admin/products/productSize/create}" class="btn btn-light btn-sm float-end">
                                 Add Products Sizing
                             </a>
                          
@@ -70,52 +70,40 @@
                     
                
                     <div class="card-body">
-                        <table class="table table-bordererd table-striped table-responsive" id="productSizesTable">
-                            <thead>
-                                <tr>
-                                    <th>SN</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
-                                    <th>Qty.</th>
-                                    <th>Stock</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                     <tr th:each="productSize, iStat : ${productSizes}">
+                        <div class="table-responsive" style="overflow-x: auto;">
+                            <table class="table table-bordered table-striped" id="productSizesTable">
+                                <thead class="bg-black text-white">
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Product</th>
+                                        <th>Size</th>
+                                        <th>Qty.</th>
+                                        <th>Stock</th>
+                                        <th>Update</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="productSize, iStat : ${productSizes}">
                                         <td th:text="${iStat.index + 1}">1</td>
                                         <td th:text="${productSize.product.name}">Product</td>
                                         <td th:text="${productSize.size.name}">Size</td>
                                         <td th:text="${productSize.quantity}">Quantity</td>
-                                        
-                                        <td th:if="${productSize.quantity > 1}">
-                                            <label class="label-stock bg-success">In Stock</label>
-                                        </td>
-                                        <td th:if="${productSize.quantity <= 1}">
-                                            <label class="label-stock bg-danger">Out of Stock</label>
-                                        </td>
-                    
                                         <td>
-                                            <a href="#" th:href="@{/admin/products/productSize/update/{id}(id=${productSize.id})}"
-                                                class="btn btn-sm btn-success">+</a>
-                                           
+                                            <label th:if="${productSize.quantity > 5}" class="label-stock bg-success">In Stock</label>
+                                            <label th:if="${productSize.quantity <= 0}" class="label-stock bg-danger">Out of Stock</label>
+                                            <label th:if="${productSize.quantity > 0 && productSize.quantity <= 5}" class="label-stock bg-warning">Low Stock</label>
                                         </td>
                                         <td>
-                                             <a href="#" th:href="@{/admin/products/productSize/delete/{id}(id=${productSize.id})}"
-                                                onclick="return confirm('Are you sure, you want to delete this data?')"
-                                                class="btn btn-sm btn-danger">
-                                                -
-                                            </a>
-
+                                            <a href="#" th:href="@{/admin/products/productSize/update/{id}(id=${productSize.id})}" class="btn btn-sm btn-success">+</a>
+                                        </td>
+                                        <td>
+                                            <a href="#" th:href="@{/admin/products/productSize/delete/{id}(id=${productSize.id})}" onclick="return confirm('Are you sure, you want to delete this data?')" class="btn btn-sm btn-danger">-</a>
                                         </td>
                                     </tr> 
-                                    
-                            </tbody>
-                        
-                        </table>
-    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
