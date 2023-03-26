@@ -60,7 +60,6 @@
          <div class="row-md-6">   
             <div class="card">
                 <div class="card-body">
-                <h4 class="card-title">Product Data</h4>
                 <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 </div>
             </div>  
@@ -71,10 +70,10 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Orders Data'
+                    text: 'Orders'
                 },
                 subtitle: {
-                    text: 'Details'
+                    text: ''
                 },
                 xAxis: {
                     categories: ['In Process', 'Awaiting Confirmation', 'Awaiting Confirmation'],
@@ -84,7 +83,7 @@
                     min: 0,
                     max:50,
                     title: {
-                        text: 'Numbers'
+                        text: 'Total Number Of Orders Per Status'
                     }
                 },
                 tooltip: {
@@ -113,7 +112,6 @@
         <div class="row-md-6">     
             <div class="card">
                 <div class="card-body">
-                <h4 class="card-title">Order Data</h4>
                 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 </div>
             </div> 
@@ -124,10 +122,7 @@
                     type: 'column'
                 },
                 title: {
-                    text: 'Product Data'
-                },
-                subtitle: {
-                    text: 'Details'
+                    text: 'Products Per Category'
                 },
                 xAxis: {
                     categories: [[${name}]],
@@ -137,7 +132,7 @@
                     min: 0,
                     max:40,
                     title: {
-                        text: 'Numbers'
+                        text: 'Number of Products'
                     }
                 },
                 tooltip: {
