@@ -4,6 +4,7 @@ import org.example.model.CustomUserDetail;
 import org.example.model.Role;
 import org.example.model.User;
 import org.example.repository.UserRepository;
+import org.example.service.CategoryService;
 import org.example.repository.ProductRepository;
 import org.example.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +39,19 @@ public class LoginController {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    CategoryService catagoryService;
+
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/login";
     }
 
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/register";
     }
 

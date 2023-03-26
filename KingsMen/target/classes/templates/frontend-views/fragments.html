@@ -46,31 +46,20 @@
         </ul>
     </nav>
 </div>
-
- <div class="sub-nav" id="navigation" th:fragment="navigation-category">
+<!-- Category navigation -->
+<div class="sub-nav" id="navigation" th:fragment="navigation-category">
   <nav class="navbar navbar-expand-md navbar-dark bg-black sub-nav">
     <div class="container">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-          <a href="/product/1" class="nav-link">Blazer</a>
-        </li>
-        <li class="nav-item">
-          <a href="/product/2" class="nav-link">Shirts</a>
-        <li class="nav-item">
-          <a href="/product/3" class="nav-link">Trousers</a>
-        </li>
-        <li class="nav-item">
-          <a href="/product/4" class="nav-link">Shoes</a>
-        </li>
-        <li class="nav-item">
-          <a href="/product/5" class="nav-link">Accessories</a>
+        <li class="nav-item" th:each="category : ${categories}">
+          <a th:href="@{/product/{categoryId}(categoryId=${category.id})}" class="nav-link" th:text="${category.name}"></a>
         </li>
       </ul>
     </div>
   </nav>
+</div>
   
   
-</div> 
 
 
 <footer class ="footer" id="footer" th:fragment="footer">

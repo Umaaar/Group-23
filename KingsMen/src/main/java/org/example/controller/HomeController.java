@@ -1,6 +1,9 @@
 package org.example.controller;
 
 import org.example.model.CustomUserDetail;
+import org.example.repository.CatagoryRepository;
+import org.example.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HomeController {
 
+    @Autowired
+    CategoryService catagoryService;
+
     @GetMapping("/")
-    public String homePage() {
+    public String homePage(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/index";
     }
 
@@ -25,31 +32,37 @@ public class HomeController {
         System.out.println(authentication.getLastname());
         model.addAttribute("email", authentication.getEmail());
         System.out.println(authentication.getEmail());
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/customer-dashboard";
     }
 
     @GetMapping("/orders")
-    public String Orders() {
+    public String Orders(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/orders";
     }
 
     @GetMapping("/contact-us")
-    public String ContactPage() {
+    public String ContactPage(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/contact-details";
     }
 
     @GetMapping("/about-us")
-    public String AboutPage() {
+    public String AboutPage(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/about-us";
     }
 
     @GetMapping("/faq")
-    public String Faq() {
+    public String Faq(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/faq";
     }
 
     @GetMapping("/returns")
-    public String Returns() {
+    public String Returns(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/returns";
     }
 
