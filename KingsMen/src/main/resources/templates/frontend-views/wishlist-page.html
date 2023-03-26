@@ -35,6 +35,18 @@
          </header>
        </div>
 
+       <nav class="breadcrumb-container position-relative" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item font-weight-light">
+            <a href="/" class="text-dark text-decoration-none">Home</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="breadcrumb-item font-weight-light">
+            <a th:href="@{/customer-dashboard}" class="text-dark text-decoration-none">Dashboard</a>
+          </li>
+        </ol>
+      </nav>
+      
+
        <div th:if="${not #lists.isEmpty(wishList)}" class="py-2 album">
          <div class="py-2 album">
              <div class="container-fluid">
