@@ -9,6 +9,7 @@ import org.example.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -37,20 +39,21 @@ public class LoginController {
     RoleRepository roleRepository;
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "/frontend-views/login";
     }
 
-   
 
     @GetMapping("/register")
-    public String register(){
+    public String register() {
         return "/frontend-views/register";
     }
+
     @GetMapping(path = "/foo")
     public void foo(HttpSession session) {
         String sessionId = session.getId();
     }
+
     @GetMapping("/loginSuccess")
     public void getLoginInfo(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response) throws IOException {
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
@@ -60,23 +63,34 @@ public class LoginController {
             response.sendRedirect("/customer-dashboard");
         }
     }
-    @PostMapping("/register")
-    public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException {
-        String password = user.getPassword();
-        System.out.println(password);
-        System.out.println(user.getFirstname());
-        System.out.println(user.getLastname());
-        System.out.println(user.getPassword());
-        System.out.println(user.getEmail());
 
-        System.out.println(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setPassword(bCryptPasswordEncoder.encode(password));
-        List<Role> roles = new ArrayList<>();
-        roles.add(roleRepository.findById(2).get());
-        user.setRoles(roles);
-        userRepository.save(user);
-        request.login(user.getEmail(),password);
-        return "redirect:/";
+    @PostMapping("/register")
+    public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request, RedirectAttributes redirectAttributes) throws ServletException {
+        try {
+            String password = user.getPassword();
+            System.out.println(password);
+            System.out.println(user.getFirstname());
+            System.out.println(user.getLastname());
+            System.out.println(user.getPassword());
+            System.out.println(user.getEmail());
+
+            System.out.println(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setPassword(bCryptPasswordEncoder.encode(password));
+            List<Role> roles = new ArrayList<>();
+            roles.add(roleRepository.findById(2).get());
+            user.setRoles(roles);
+            userRepository.save(user);
+            request.login(user.getEmail(), password);
+            redirectAttributes.addFlashAttribute("successMessage", "You have successfully been registered as a User");
+            return "redirect:/";
+
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "This email already exists in the Database");
+            return "redirect:/register";
+        }
+
+
+
     }
 
 }
