@@ -17,9 +17,10 @@
                     </button>
                 </div>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-                <ul class="navbar-nav mr-lg-4 w-100">
-                  <a href="#" th:href="@{/}" class="btn btn-sm btn-light">Visit Website</a>          </ul>
+            <div class="navbar-menu-wrapper d-flex align-items-center ">
+                <ul class="navbar-nav mr-lg-4 ">
+                  <a href="#" th:href="@{/}" class="btn btn-sm btn-light">Visit Website</a>          
+                </ul>
                 <ul class="navbar-nav navbar-nav-right">
         
                     <li class="nav-item nav-profile dropdown">
@@ -27,8 +28,6 @@
                             <span class="nav-profile-name"th:text="${adminname}" ><p></p></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-        
-        
                           <a class="dropdown-item" th:href="@{/logout}">
                               <i class="mdi mdi-logout menu-icon text-dark"></i> LOG OUT 
                           </a>
@@ -36,7 +35,7 @@
                         </div>
                     </li>
                 </ul>
-                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                <button class="navbar-toggler navbar-toggler-right " type="button"
                     data-toggle="offcanvas">
                     <span class="mdi mdi-menu"></span>
                 </button>

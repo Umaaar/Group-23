@@ -1,7 +1,12 @@
-import javax.persistence.*;
-import java.time.LocalDateTime;
 package org.example.model;
 
+import javax.persistence.*;
+
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+@Data
 @Entity
 @Table(name = "Contact")
 public class Contact {
@@ -9,20 +14,79 @@ public class Contact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+
     private String name;
 
-    @Column(name = "enquiry", nullable = false)
+   
     private String enquiry;
 
-    @Column(name = "orderID")
-    private String  order;
+ 
+    private String email;
 
-    @Column(name = "message")
+   
+    private String  order_id;
+
+
     private String message;
 
-    @Column(name = "created_at")
+   
     private LocalDateTime createdAt;
 
-    // Getters and setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEnquiry() {
+        return enquiry;
+    }
+
+    public void setEnquiry(String enquiry) {
+        this.enquiry = enquiry;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
 }

@@ -288,7 +288,13 @@
     </div>
   </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
 
 <!-- plugins:js -->
 <script th:src="@{/admin-assets/vendors/base/vendor.bundle.base.js}" src="/static/admin-assets/vendors/base/vendor.bundle.base.js"></script>

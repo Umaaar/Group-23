@@ -62,6 +62,21 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `contact_name` int(11) NOT NULL,
+  `contact_enquiry` text NOT NULL,
+  `contact_email` text NOT NULL,
+  `contact_order` int(11) NOT NULL,
+  `contact_message` text NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 

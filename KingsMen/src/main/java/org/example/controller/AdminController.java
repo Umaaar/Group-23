@@ -52,6 +52,9 @@ public class AdminController {
     @Autowired
     OrderItemService orderItemService;
 
+    @Autowired
+    ContactService contactService;
+
    
 
    @GetMapping("/admin")
@@ -489,6 +492,7 @@ public String adminCustomers(@AuthenticationPrincipal CustomUserDetail authentic
 @GetMapping("/admin/queries")
 public String adminQueries(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
     model.addAttribute("adminname",authentication.getFirstname());
+    model.addAttribute("queries",contactService.findAll());
     return "/backend-views/customer-queries";
 }
 
