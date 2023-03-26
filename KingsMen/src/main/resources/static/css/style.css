@@ -768,22 +768,29 @@ p.about-us-content {
   .wrapper{
     height: 493.5px;
     position: absolute;
-    width: 99%;
+    width: 97%;
     display: block;
     margin: 10px;
-    border: 2px solid black;
     }
 
     .wrapper img{
-    /* width: 1501px; */
-    /* height: 50%; */
-    /* position: absolute;
-    display: block; */
+    width: 97vmax;
+    height: 100%;
+    position: absolute;
+    display: block;
+    border: 2px solid black;
+    z-index: -1;
     }
 
+    @media only screen and (max-width: 750px) {
+      .wrapper img{
+          width:95vmin
+      }
+  }
+
     .wrapper h1{
-    padding-left: 710px;
-    margin-top: 10px;
+    padding-left: 350px;
+    margin-top: 250px;
     }
 
     .accordian{
@@ -791,11 +798,15 @@ p.about-us-content {
         /* width: 1000em; */
         padding-top: 500px;
         position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 
     .accordian li{
         list-style: none;
-        width: 100%;
+        width: 70%;
         margin: 20px;
         padding: 10px;
         border-radius: 8px;
@@ -820,7 +831,7 @@ p.about-us-content {
         font-weight: 600;
     }
 
-    input[type="radio"]{
+    .accordian input[type="radio"]{
         display: none;
     }
 
@@ -841,4 +852,5 @@ p.about-us-content {
     .accordian input[type="radio"]:checked + label::before{
         content:'-';
     }
+
     
