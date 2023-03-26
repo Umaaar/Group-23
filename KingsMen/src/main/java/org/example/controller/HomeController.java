@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Contact;
 import org.example.model.CustomUserDetail;
+import org.example.service.CategoryService;
 import org.example.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,8 +22,12 @@ public class HomeController {
     @Autowired
     ContactService contactService;
 
+    @Autowired
+    CategoryService catagoryService;
+
     @GetMapping("/")
-    public String homePage() {
+    public String homePage(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/index";
     }
 
@@ -35,17 +40,20 @@ public class HomeController {
         System.out.println(authentication.getLastname());
         model.addAttribute("email", authentication.getEmail());
         System.out.println(authentication.getEmail());
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/customer-dashboard";
     }
 
     @GetMapping("/orders")
-    public String Orders() {
+    public String Orders(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/orders";
     }
 
     @GetMapping("/contact-us")
     public String ContactPage(Model model) {
         model.addAttribute("contact", new Contact());
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/contact-details";
     }
 
@@ -63,17 +71,19 @@ public class HomeController {
     
 
     @GetMapping("/about-us")
-    public String AboutPage() {
+    public String AboutPage(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/about-us";
     }
 
     @GetMapping("/faq")
-    public String Faq() {
+    public String Faq(Model model) {
         return "/frontend-views/faq";
     }
 
     @GetMapping("/returns")
-    public String Returns() {
+    public String Returns(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/returns";
     }
 

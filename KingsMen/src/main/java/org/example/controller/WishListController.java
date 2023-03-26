@@ -3,7 +3,8 @@ package org.example.controller;
  import org.example.model.CustomUserDetail;
  import org.example.model.Product;
  import org.example.model.WishList;
- import org.example.service.ProductService;
+import org.example.service.CategoryService;
+import org.example.service.ProductService;
  import org.example.service.WishListService;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +22,9 @@ package org.example.controller;
 
      @Autowired
      private ProductService productService;
+
+     @Autowired
+     CategoryService catagoryService;
 
      @Autowired
      private WishListService wishListService;
@@ -62,6 +66,8 @@ package org.example.controller;
          model.addAttribute("name", authentication.getFirstname());
          model.addAttribute("email", authentication.getEmail());
          model.addAttribute("wishList", wishList);
+         model.addAttribute("categories", catagoryService.getAllCategory());
+
 
          return "/frontend-views/wishlist-page";
      }
