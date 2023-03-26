@@ -15,10 +15,8 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
  List<Product> findAllByOrderByPriceAsc();
 List<Product> findAllByOrderByPriceDesc();
 
-
- @Query(value = "select * from PRODUCT e where e.name like %:keyword% or e.description like %:keyword%" ,nativeQuery = true)
- List<Product> findByKeyword(@Param("keyword") String keyword );
- 
+@Query(value = "select * from PRODUCT e where lower(e.name) like lower(concat('%', :keyword, '%'))", nativeQuery = true)
+List<Product> findByKeyword(@Param("keyword") String keyword);
 
 List<Product> findAllByProductSizes_IdIn(List<Long> sizeIds);
 
