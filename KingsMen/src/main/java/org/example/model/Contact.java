@@ -29,8 +29,13 @@ public class Contact {
 
     private String message;
 
-   
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
 
     public Long getId() {
