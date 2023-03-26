@@ -20,7 +20,7 @@ This project is about creating an eCommerce website for our menswear company Kin
 - CSS
 - JS
 - HTML
-
+- Highcharts
 ## Installation / Configuration
 
 To run the Kingsmen website locally, you'll need to have the following installed on your machine:
