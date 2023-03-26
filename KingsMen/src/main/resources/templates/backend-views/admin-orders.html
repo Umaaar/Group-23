@@ -28,6 +28,8 @@
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/admin-assets/css/style.css}" href="/static/admin-assets/css/style.css">
   <!-- endinject -->
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/v/ju/dt-1.13.4/b-2.3.6/datatables.min.css" rel="stylesheet"/>
  
 </head>
 
@@ -46,7 +48,7 @@
             <div class="col-md-12 ">
 
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-black text-white">
                         <h3> Orders
                         </h3>
                         <form th:action="@{/admin/orders}" method="get">
@@ -56,8 +58,8 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordererd table-striped">
-                            <thead>
+                        <table class="table table-bordererd table-striped " id="ordersTable">
+                            <thead class="bg-black text-white">
                                 <tr>
                                     <th>Order ID</th>
                                     <th>Name</th>
@@ -90,7 +92,7 @@
                                                 Delete
                                             </a>
                                         </td>
-                                        <td><a th:href="@{/admin/orders/update/{id}(id=${order.id})}" class="btn btn-primary btn-sm">View</a></td>
+                                        <td><a th:href="@{/admin/orders/update/{id}(id=${order.id})}" class="btn btn-dark btn-sm">View</a></td>
 
                                     </tr>
                                     
@@ -107,6 +109,18 @@
   </div>
 </div>
 
+<!-- Add jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#ordersTable').DataTable({
+        pagination: true
+    });
+});
+</script>
 
 <!-- plugins:js -->
 <script th:src="@{/admin-assets/vendors/base/vendor.bundle.base.js}" src="/static/admin-assets/vendors/base/vendor.bundle.base.js"></script>

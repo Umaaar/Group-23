@@ -48,23 +48,24 @@
         <div class="row">
             <div class="col-md-12">
                 
-                <div class="card">
-                    <div class="card-header">
+                <div class="card" >
+                    <div class="card-header bg-black text-white pt-3">
                         <h3> Products
-                            <a href="#" th:href="@{/admin/products/create}" class="btn btn-dark btn-sm text-white float-end">
+                            <a href="#" th:href="@{/admin/products/create}" class="btn btn-light btn-sm float-end">
                                 Add Products
                             </a>
                         </h3>
-                        <form th:action="@{/admin/products}" method="get">
+                        <!-- <form th:action="@{/admin/products}" method="get">
 
                             <input type="search" name="keyword" id="txtSearch">
                             <button type="submit">Search</button>
-                        </form>
+                        </form> -->
                     </div>
                    
                     <div class="card-body">
-                        <table class="table table-bordererd table-striped table-responsive" id="productTable">
-                            <thead>
+                        <div class="table-responsive" style="overflow-x: auto;">
+                        <table class="table table-bordererd table-striped" id="productTable">
+                            <thead class="bg-black text-white">
                                 <tr>
                                     <th>SN</th>
                                     <th>Name</th>
@@ -90,13 +91,12 @@
                                         <td th:text="${product.price}">price</td>
                                         <td th:text="${product.stock}">quantity</td>
 
-                                        <td th:if="${product.stock > 1}">
-                                            <label class="label-stock bg-success">In Stock</label>
+                                        <td>
+                                            <label th:if="${product.stock > 5}" class="label-stock bg-success">In Stock</label>
+                                            <label th:if="${product.stock <= 0}" class="label-stock bg-danger">Out of Stock</label>
+                                            <label th:if="${product.stock > 0 && product.stock <= 5}" class="label-stock bg-warning">Low Stock</label>
                                         </td>
-                                        <td th:if="${product.stock <= 1}">
-                                            <label class="label-stock bg-danger">Out of Stock</label>
-                                        </td>
-                    
+
                                         <td>
                                             <a href="#" th:href="@{/admin/products/update/{id}(id=${product.id})}"
                                                 class="btn btn-sm btn-success">+</a>
@@ -114,6 +114,7 @@
                                     
                             </tbody>
                         </table>
+                        </div>
     
                     </div>
                 </div>

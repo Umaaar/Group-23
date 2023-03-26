@@ -28,6 +28,8 @@
   <!-- inject:css -->
   <link rel="stylesheet" th:href="@{/admin-assets/css/style.css}" href="/static/admin-assets/css/style.css">
   <!-- endinject -->
+   <!-- DataTables CSS -->
+   <link href="https://cdn.datatables.net/v/ju/dt-1.13.4/b-2.3.6/datatables.min.css" rel="stylesheet"/>
  
 </head>
 
@@ -46,46 +48,61 @@
             <div class="col-md-12 ">
 
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-black text-white">
                         <h3> Customer Queries
                         </h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordererd table-striped table-responsive">
-                            <thead>
+                      <div class="table-responsive" style="overflow-x: auto;">
+                        <table class="table table-bordererd table-striped" id="queryTable">
+                            <thead class="bg-black text-white"
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Sr. No.</th>
+                                    <th>Name</th>
                                     <th>Enquiry Type</th>
                                     <th>Email</th>
-                                    <th>Order ID (if applicable)</th>
                                     <th>Message</th>
+                                    <th>Order ID</th>
+                                    <th>Created At</th>
                                     
                                 </tr>
                             </thead>
                             <tbody>
 
-                                    <tr th:each="enquiry, iStat : ${enquiries}">
-                                        <td th:text="${iStat.index + 1}">1</td>
-                                        <td th:text="${enquiries.type}">enquiry type</td>
-                                        <td th:text="${enquiries.email}">email</td>
-                                        <td th:text="${enquiries.orderId}">order id</td>
-                                        <td th:text="${enquiries.message}">message</td>
-                                    </tr>
+                                <tr th:each="query, iStat : ${queries}">
+                                  <th scope="row" th:text="${iStat.index + 1}">1</th>                                    <td th:text="${query.name}">name</td>
+                                    <td th:text="${query.enquiry}">enquiry</td>
+                                    <td th:text="${query.email}">email</td>
+                                    <td th:text="${query.message}">message</td>
+                                    <td th:text="${query.order_id}">order_id</td>
+                                    <td th:text="${query.createdAt}">created_at</td> 
+                                </tr>
                                     
                             </tbody>
                         </table>
+                      </div>
     
                     </div>
                 </div>
             </div>
         </div>
 
-        <script id="replace_with_content" th:src="@{/admin-assets/js/script.js}" src="/static/admin-assets/js/script.js"></script>
       </div>
     </div>
   </div>
 </div>
+<!-- Add jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<!-- DataTables JavaScript -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#queryTable').DataTable({
+        pagination: true
+    });
+});
+</script>
 
 <!-- plugins:js -->
 <script th:src="@{/admin-assets/vendors/base/vendor.bundle.base.js}" src="/static/admin-assets/vendors/base/vendor.bundle.base.js"></script>
