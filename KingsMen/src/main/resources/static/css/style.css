@@ -288,6 +288,7 @@ p.about-us-content {
   margin: auto;
   text-align: center;
   margin-top: 5%;
+  word-wrap: break-word;
 }
 
 .custdash-InnerDiv {
