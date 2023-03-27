@@ -5,6 +5,8 @@ import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
 import org.example.service.CategoryService;
 import org.example.service.ContactService;
+import org.example.service.CustomUserDetailService;
+import org.example.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,6 +27,12 @@ public class HomeController {
 
     @Autowired
     CategoryService catagoryService;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    CustomUserDetailService auth;
 
     @GetMapping("/")
     public String homePage(Model model) {
@@ -47,15 +55,17 @@ public class HomeController {
 
     @GetMapping("/orders")
     public String Orders(@AuthenticationPrincipal OrderDetails order, HttpServletResponse response, Model model) {
-        model.addAttribute("orderID", order.getId());
-        System.out.println(order.getId());
-        model.addAttribute("productName", order.getOrder_products());
-        System.out.println(order.getOrder_products());
-        model.addAttribute("total", order.getTotal());
-        System.out.println(order.getTotal());
-        model.addAttribute("status", order.getStatus());
-        System.out.println(order.getStatus());
-        model.addAttribute("categories", catagoryService.getAllCategory());
+        model.addAttribute("orders", orderService.getAllOrders());
+      
+        // model.addAttribute("orderID", order.getId());
+        // System.out.println(order.getId());
+        // model.addAttribute("productName", order.getOrder_products());
+        // System.out.println(order.getOrder_products());
+        // model.addAttribute("total", order.getTotal());
+        // System.out.println(order.getTotal());
+        // model.addAttribute("status", order.getStatus());
+        // System.out.println(order.getStatus());
+        // model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/orders";
     }
 

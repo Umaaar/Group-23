@@ -17,23 +17,26 @@
         <div class="orders-TitleAlign">
             <h1>Your Orders</h1>
             <div> <!--Orders table-->
-                <table class="orders-Table">
-                    <thead> <!--Headers of columns-->
-                        <th scope="col">Order ID</th>
-                        <th scope="col">Product Name</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Status</th>
-                    </thead>
-                    <tbody> <!--Regular rows and cells-->
-                        <tr>
-                            <td><span th:text="${orderID}"></span></td>
-                            <td><span th:text="${productName}"></span></td>
-                            <td><span th:text="${total}"></span></td>
-                            <td><span th:text="${status}"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> <!--Orders table-->
+                <div> <!--Orders table-->
+                    <table class="orders-Table">
+                        <thead> <!--Headers of columns-->
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Status</th>
+                        </thead>
+                        <tbody> <!--Regular rows and cells-->
+                            <tr th:each="order, iStat : ${orders}">
+                                <td th:text="${iStat.index + 1}">1</td>
+                                <td><span th:text="${order.name}"></span></td>
+                                <td><span th:text="${order.email}"></span></td>
+                                <td><span th:text="${order.status}"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div> 
         </div>
 
         <footer>
