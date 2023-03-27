@@ -8,6 +8,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- DataTables CSS -->
+  <link href="https://cdn.datatables.net/v/ju/dt-1.13.4/b-2.3.6/datatables.min.css" rel="stylesheet"/>
         <title>Orders</title>
     </head>
     <body>
@@ -18,12 +20,17 @@
             <h1>Your Orders</h1>
             <div> <!--Orders table-->
                 <div> <!--Orders table-->
-                    <table class="orders-Table">
-                        <thead> <!--Headers of columns-->
+                    <div class="card">
+                    <div class="card-body">
+                    <table class="table table-bordererd table-striped p-5" id="orderTable">
+                        <thead class="bg-black text-white"> <!--Headers of columns-->
                             <th scope="col">Order ID</th>
                             <th scope="col">Product Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Order Total</th>
+                            <th scope="col">View Details</th>
+
                         </thead>
                         <tbody> <!--Regular rows and cells-->
                             <tr th:each="order, iStat : ${orders}">
@@ -31,9 +38,15 @@
                                 <td><span th:text="${order.name}"></span></td>
                                 <td><span th:text="${order.email}"></span></td>
                                 <td><span th:text="${order.status}"></span></td>
+                                <td><span th:text="${order.total}"></span></td>
+                                <td><a th:href="@{/orders/{id}(id=${order.id})}">
+                                    <button class="btn btn-dark">View Details</button>
+                                </a></td>
                             </tr>
                         </tbody>
                     </table>
+                    </div>
+                </div>
                 </div>
                 
             </div> 
@@ -43,5 +56,17 @@
                 <div th:insert="/frontend-views/fragments :: footer" ></div>
 
         </footer>
+<!-- Add jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#orderTable').DataTable({
+        pagination: true
+    });
+});
+</script>
     </body>
 </html>
