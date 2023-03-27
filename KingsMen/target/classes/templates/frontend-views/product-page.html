@@ -67,7 +67,7 @@
                 <a th:href="@{'/product/product-detail/' + ${product.id}}">
                   <img class="card-img-top mx-auto d-block img-fluid" th:src="@{/Images/productImage/{imageName}(imageName=${product.imageName})}" alt="Product Image" style="width: 300px; height: 400px">
                   <form th:action="@{/addToWishList/{id}(id=${product.id})}" method="post" class="position-absolute top-0 end-0">
-                    <button type="submit" class="btn btn-transparent"><i class="fa fa-heart text-danger pt-4 mx-3"></i></button>
+                    <button type="submit" class="btn btn-transparent"><i class="fa-solid fa-heart fa-bounce text-danger pt-4 mx-3"></i></button>
                   </form>
                 </a>
             </div>
