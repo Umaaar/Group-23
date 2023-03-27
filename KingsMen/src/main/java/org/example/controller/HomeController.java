@@ -54,8 +54,9 @@ public class HomeController {
     }
 
     @GetMapping("/orders")
-    public String Orders(@AuthenticationPrincipal OrderDetails order, HttpServletResponse response, Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
+    public String Orders(@AuthenticationPrincipal OrderDetails order, @AuthenticationPrincipal CustomUserDetail authentication, 
+            HttpServletResponse response, Model model) {
+        model.addAttribute("orders", orderService.findByKeyword(authentication.getFirstname()));
       
         // model.addAttribute("orderID", order.getId());
         // System.out.println(order.getId());
