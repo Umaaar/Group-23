@@ -47,6 +47,10 @@
                
               <div class="card">
                 <div class="card-header">
+                  <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span th:text="${errorMessage}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                     <h3> Add Product Sizing
                         <a href="#" th:href="@{/admin/products}" class="btn btn-primary btn-sm text-white float-end">BACK</a>
                     </h3>

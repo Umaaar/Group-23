@@ -306,7 +306,17 @@ public String createProductSizePost(@ModelAttribute("productSizeDTO") ProductSiz
         Product product = productService.getProductById(productSizeDTO.getProductId()).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + productSizeDTO.getProductId()));
         productSize.setProduct(product);
         Size size = sizeService.getSizeById(productSizeDTO.getSizeId()).orElseThrow(() -> new IllegalArgumentException("Invalid size ID: " + productSizeDTO.getSizeId()));
-        productSize.setSize(size);
+        
+        try {
+            if (productService.hasProductSize(productSizeDTO.getProductId(), productSizeDTO.getSizeId())) {
+                throw new IllegalArgumentException("Size " + size.getName() + " is already assigned to product " + product.getName());
+            }
+            productSize.setSize(size);
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/admin/products/productSize/create";
+        }
+        
         productSize.setQuantity(productSizeDTO.getQuantity());
         productSizeService.saveProductSize(productSize);
         redirectAttributes.addFlashAttribute("successMessage", "Product size added successfully.");
@@ -316,6 +326,7 @@ public String createProductSizePost(@ModelAttribute("productSizeDTO") ProductSiz
         return "redirect:/admin/products/productSize/create";
     }
 }
+
 
 @GetMapping("/admin/products/productSize/delete/{id}")
     public String deleteProductSize(@PathVariable Long id, RedirectAttributes redirectAttributes) {

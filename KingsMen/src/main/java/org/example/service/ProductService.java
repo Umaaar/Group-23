@@ -3,6 +3,7 @@ package org.example.service;
 
 import org.example.model.Product;
 import org.example.repository.ProductRepository;
+import org.example.repository.ProductSizeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,9 @@ public class ProductService {
     
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    ProductSizeRepository productSizeRepository;
 
     public List<Product> getAllProduct() {
         return productRepository.findAll();
@@ -59,15 +63,6 @@ public class ProductService {
     }
 
 
-    /*public int getInStockProductCount() {
-        return (int) productRepository.countByInStock(true);
-    }
-
-    public int getOutOfStockProductCount() {
-        return (int) productRepository.countByInStock(false);
-    }
-    */
-
     public Integer getProductCount() {
         return Math.toIntExact(productRepository.count());
     }
@@ -97,6 +92,11 @@ public class ProductService {
         Collections.shuffle(products);
         return products.subList(0, Math.min(count, products.size()));
     }
+
+    public boolean hasProductSize(Long productId, Long sizeId) {
+        return productSizeRepository.findByProductIdAndSizeId(productId, sizeId).isPresent();
+    }
+    
 
     
 
