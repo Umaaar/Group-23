@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Contact;
 import org.example.model.CustomUserDetail;
+import org.example.model.OrderDetails;
 import org.example.service.CategoryService;
 import org.example.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,15 @@ public class HomeController {
     }
 
     @GetMapping("/orders")
-    public String Orders(Model model) {
+    public String Orders(@AuthenticationPrincipal OrderDetails order, HttpServletResponse response, Model model) {
+        model.addAttribute("orderID", order.getId());
+        System.out.println(order.getId());
+        model.addAttribute("productName", order.getOrder_products());
+        System.out.println(order.getOrder_products());
+        model.addAttribute("total", order.getTotal());
+        System.out.println(order.getTotal());
+        model.addAttribute("status", order.getStatus());
+        System.out.println(order.getStatus());
         model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/orders";
     }
