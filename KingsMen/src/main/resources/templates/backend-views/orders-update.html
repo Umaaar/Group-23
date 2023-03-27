@@ -128,7 +128,7 @@
 
                                                 <tr th:each="OrderedProducts, iStat : ${productsOrdered}">
                                                     <td th:text="${iStat.index + 1}">1</td>
-                                                    <td>name</td>
+                                                    <td th:text="${OrderedProducts.product.name}">name</td>
                                                     <td th:text="${OrderedProducts.quantity}"></td>
                                                     <td th:text="${OrderedProducts.price}">size</td>
                                                     <td th:text="${OrderedProducts.size}">price</td>
