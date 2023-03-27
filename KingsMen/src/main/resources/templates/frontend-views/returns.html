@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3%22%3E" >
 <head>
+    <title> About </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="icon" type="image/png" sizes="32x32" href="/../favicon-32x32.png" th:href="@{/Images/favicon-32x32.png}">
-
-    <link rel="stylesheet" th:src="@{/css/style.css}" href="../../static/css/style.css">
-    <link rel="stylesheet" th:src="@{/css/icon.css}" href="../../static/css/icon.css">
-    <title>returns and exchanges</title>
-    
 </head>
+
+
 <body>
     <div th:insert="/frontend-views/fragments :: navigation" ></div>
     <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
@@ -40,11 +42,11 @@
 		<p>All returns, whether for exchange or refund, go through a strict quality-control assessment once they have arrived back at our warehouse. All goods must be returned in original condition, with all labels and security tags intact. Any items returned that have been worn or have had the tags removed, will be rejected. Rejected returns will either be postage back to you at your expense, or donated to charity after 14 days.</p>
     
     </main>
-    
-      <footer>
-        <div th:insert="/frontend-views/fragments :: footer" ></div>
-      </footer>
 
-  
-</body>
+   
+     <footer>
+        <div th:insert="/frontend-views/fragments :: footer" ></div>
+     </footer>
+               
+    </body>
 </html>
