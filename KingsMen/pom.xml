@@ -87,7 +87,12 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-<!--        <dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--        <dependency>-->
 <!--            <groupId>com.paytm</groupId>-->
 <!--            <artifactId>miniapp-sdk-client</artifactId>-->
 <!--            <version>1.0.2-SNAPSHOT</version>-->
