@@ -36,7 +36,7 @@
 </div>
 
 <!-- Breadcrumb -->
-<nav class="breadcrumb-container position-relative" aria-label="breadcrumb">
+<nav class="breadcrumb-container" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item font-weight-light">
       <a href="/" class="text-dark text-decoration-none">Home</a>
@@ -45,15 +45,22 @@
       <a href="/product" class="text-dark text-decoration-none">Products</a>
       <span th:if="${keyword}"> / Search: <span th:text="${keyword}"></span></span>
     </li>
+
   </ol>
-      <div class="dropdown">
-          <button class="dropbtn nav-link mt-4"><p class="font-weight-bold">Sort by:</p></button>
-          <div class="dropdown-content">
-            <a class="dropdown-item" th:href="@{/product(sort='asc', keyword=${keyword})}" href="?sort=asc{{#if keyword}}&keyword={{keyword}}{{/if}}">Low to High</a>
-            <a class="dropdown-item" th:href="@{/product(sort='desc', keyword=${keyword})}" href="?sort=desc{{#if keyword}}&keyword={{keyword}}{{/if}}">High to Low</a>    
-          </div>
-      </div>
+  <ol class="breadcrumb">
+  <li class="nav-item">
+  <div class="dropdown">
+    <button class="dropbtn nav-link mt-3"><p class="font-weight-bold">Sort by:</p></button>
+    <div class="dropdown-content">
+      <a class="dropdown-item" th:href="@{/product(sort='asc', keyword=${keyword})}" href="?sort=asc{{#if keyword}}&keyword={{keyword}}{{/if}}">Low to High</a>
+      <a class="dropdown-item" th:href="@{/product(sort='desc', keyword=${keyword})}" href="?sort=desc{{#if keyword}}&keyword={{keyword}}{{/if}}">High to Low</a>    
+    </div>
+  </div>
+  <li>
+  </ol>
 </nav>
+
+
 
 
   <div class="py-2 album">
