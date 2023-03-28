@@ -70,7 +70,7 @@ public class HomeController {
         // System.out.println(order.getTotal());
         // model.addAttribute("status", order.getStatus());
         // System.out.println(order.getStatus());
-        // model.addAttribute("categories", catagoryService.getAllCategory());
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/orders";
     }
 
@@ -102,6 +102,7 @@ public class HomeController {
 
     @GetMapping("/faq")
     public String Faq(Model model) {
+        model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/faq";
     }
 
