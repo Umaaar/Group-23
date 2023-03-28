@@ -17,19 +17,27 @@
         <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
 
         <div class="orders-TitleAlign">
-            <h1>Your Orders</h1>
+            <h1>Order Details</h1>
             <div> <!--Orders table-->
                 <div> <!--Orders table-->
                     <div class="card">
                     <div class="card-body">
-                    <table class="table table-bordererd table-striped p-5" id="orderTable">
+                    <table class="table table-bordererd table-striped p-5" id="itemTable">
                         <thead class="bg-black text-white"> <!--Headers of columns-->
-                            <th scope="col"></th>
-
+                            <th scope="col">ID</th>
+                            <th scope="col">OrderID</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Size</th>
                         </thead>
                         <tbody> <!--Regular rows and cells-->
-                            <tr th:each="order, iStat : ${orders}">
-                                <td></td>
+                            <tr th:each="item, iStat : ${orderItems}">
+                                <td th:text="${iStat.index + 1}">1</td>
+                                <td><span th:text="${item.product.name}"></span></td>
+                                <td><span th:text="${item.price}"></span></td>
+                                <td><span th:text="${item.quatity}"></span></td>
+                                <td><span th:text="${item.size}"></span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -51,7 +59,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.4/datatables.min.js"></script>
 <script>
 $(document).ready(function() {
-    $('#orderTable').DataTable({
+    $('#itemTable').DataTable({
         pagination: true
     });
 });

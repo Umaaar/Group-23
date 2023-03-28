@@ -74,6 +74,15 @@ public class HomeController {
         return "/frontend-views/orders";
     }
 
+    @GetMapping("/orders/details/{id}")
+    public String getOrderItems(@PathVariable int id, Model model, @AuthenticationPrincipal CustomUserDetail authentication) {
+        OrderDetails order = orderService.getOrderByorder_id(id).get();
+        List<OrderItem> orderItems = orderItemService.getAllOrderItemsByID(order.getId());
+        model.addAttribute("orderItems", orderItems);
+
+        return "/frontend-views/order-details";
+    }
+
     @GetMapping("/contact-us")
     public String ContactPage(Model model) {
         model.addAttribute("contact", new Contact());
