@@ -3,7 +3,6 @@ package org.example.controller;
 import org.example.model.*;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
-import org.example.service.CategoryService;
 import org.example.service.OrderItemService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
@@ -35,9 +34,6 @@ public class CartController {
     OrderItemService orderItemService;
 
     @Autowired
-    CategoryService catagoryService;
-
-    @Autowired
     SizeService sizeService;
 
     @GetMapping("/addToCart/{id}")
@@ -58,8 +54,6 @@ public class CartController {
         
         model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         model.addAttribute("cart", GlobalData.cart);
-        model.addAttribute("categories", catagoryService.getAllCategory());
-
         
         return "/frontend-views/cart-page";
     }

@@ -3,21 +3,16 @@ package org.example.kingsmen;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.example.controller.CartController;
-import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
 import org.example.model.CustomUserDetail;
 import org.example.model.Product;
-import org.example.model.ProductSize;
-import org.example.model.Size;
 import org.example.model.User;
 import org.example.service.OrderItemService;
 import org.example.service.OrderService;
@@ -28,7 +23,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 public class CartControllerTest {
 
