@@ -440,6 +440,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
     }
     @GetMapping("/admin/orders/update/{id}")
     public String updateOrderGet(@PathVariable Integer id,  Model model) {
+
         System.out.println("it worked");
         OrderDetails order = orderService.getOrderByorder_id(id).get();
         OrderDTO orderDTO = new OrderDTO();
