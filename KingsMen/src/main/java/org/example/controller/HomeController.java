@@ -6,6 +6,7 @@ import org.example.model.OrderDetails;
 import org.example.service.CategoryService;
 import org.example.service.ContactService;
 import org.example.service.CustomUserDetailService;
+import org.example.service.OrderItemService;
 import org.example.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,6 +31,9 @@ public class HomeController {
 
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    OrderItemService orderItemService;
 
     @Autowired
     CustomUserDetailService auth;
