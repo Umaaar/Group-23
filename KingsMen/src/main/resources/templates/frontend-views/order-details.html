@@ -31,6 +31,7 @@
                             <tr>
                             <th>SN</th>
                             <th>Name</th>
+                            <th>Product Image</th>
                             <th>Quantity</th>
                             <th>Price</th>
                             <th>Size</th>
@@ -40,6 +41,7 @@
                             <tr th:each="item, iStat : ${orderItems}">
                                 <td th:text="${iStat.index + 1}">1</td>
                                 <td><span th:text="${item.product.name}"></span></td>
+                                <td><img th:src="@{/Images/productImage/} + ${item.product.imageName}" width="50px" height="50px"></td>
                                 <td><span th:text="${item.quantity}"></span></td>
                                 <td><span th:text="${item.price}"></span></td>
                                 <td><span th:text="${item.size}"></span></td>
