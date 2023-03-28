@@ -26,8 +26,9 @@
       <li class="breadcrumb-item font-weight-light">
         <a href="/" class="text-dark text-decoration-none">Home</a>
       </li>
-      <li class="breadcrumb-item font-weight-light">
-        <a href="/Products" class="text-dark text-decoration-none">Product</a>
+      <li class="breadcrumb-item font-weight-bold" aria-current="page">
+        <a href="/product" class="text-dark text-decoration-none">Products</a>
+        <span th:if="${keyword}"> / Search: <span th:text="${keyword}"></span></span>
       </li>
       <li th:if="${product}" class="breadcrumb-item font-weight-light"><a th:href="@{'/product/' + ${product.category.id}}" th:text="${product.category.name}" class="text-secondary text-decoration-none"></a></li>
       <li th:if="${product}" class="breadcrumb-item active font-weight-bold" aria-current="page" th:text="${product.name}" ></li>
