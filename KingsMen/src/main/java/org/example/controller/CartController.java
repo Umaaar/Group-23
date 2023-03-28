@@ -3,7 +3,6 @@ package org.example.controller;
 import org.example.model.*;
 import org.example.dto.ProductDTO;
 import org.example.global.GlobalData;
-import org.example.service.CategoryService;
 import org.example.service.OrderItemService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
@@ -37,9 +36,6 @@ public class CartController {
     @Autowired
     SizeService sizeService;
 
-    @Autowired
-    CategoryService catagoryService;
-
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable Long id) {
         GlobalData.cart.add(productService.getProductById(id).get());
@@ -49,12 +45,16 @@ public class CartController {
     @GetMapping("/cart")
     public String cartGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model) {
         model.addAttribute("cartCount", GlobalData.cart.size());
+        System.out.println("cartCount: " + GlobalData.cart.size());
+        
+        if (authentication != null) {
+            model.addAttribute("name", authentication.getFirstname());
+            model.addAttribute("email", authentication.getEmail());
+        }
+        
         model.addAttribute("total", GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
         model.addAttribute("cart", GlobalData.cart);
-        model.addAttribute("name", authentication.getFirstname());
-        model.addAttribute("email", authentication.getEmail());
-        model.addAttribute("categories", catagoryService.getAllCategory());
-
+        
         return "/frontend-views/cart-page";
     }
 
@@ -150,5 +150,25 @@ public class CartController {
             redirectAttributes.addFlashAttribute("successMessage", "Order Placed Successfully!");
         }
         return "redirect:/cart";
+    }
+
+    public void setProductService(ProductService productService2) {
+        this.productService = productService2;
+    }
+
+    public void setOrderService(OrderService orderService2) {
+        this.orderService = orderService2;
+    }
+
+    public void setProductSizeService(ProductSizeService productSizeService2) {
+        this.productSizeService = productSizeService2;
+    }
+
+    public void setOrderItemService(OrderItemService orderItemService2) {
+        this.orderItemService = orderItemService2;
+    }
+
+    public void setSizeService(SizeService sizeService2) {
+        this.sizeService = sizeService2;
     }
 }
