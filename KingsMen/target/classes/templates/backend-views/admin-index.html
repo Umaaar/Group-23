@@ -97,7 +97,9 @@
                 plotOptions: {
                     column: {
                         pointPadding: 0.2,
-                        borderWidth: 0
+                        borderWidth: 0,
+                        colorByPoint: true,
+                        colors: ['#ef8830', '#f6b7c9', '#5271ff']
                     }
                 },
                 series: [{
@@ -146,7 +148,9 @@
                 plotOptions: {
                     column: {
                         pointPadding: 0.2,
-                        borderWidth: 0
+                        borderWidth: 0,
+                        colorByPoint: true,
+                        colors: ['#ef8830', '#f6b7c9', '#5271ff','#a0fa5e','#ec1802']
                     }
                 },
                 series: [{
@@ -210,7 +214,7 @@
                <div class="row">
     
     
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card card-body bg-danger text-white mb-3">
                         <label>Total Out of Stock Products</label>
                         <div class="icon-box">
@@ -220,8 +224,19 @@
                         <a th:href="@{admin/products}" class="text-white">view</a>
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="card card-body bg-warning text-white mb-3">
+                        <label>Total Low In Stock Products</label>
+                        <div class="icon-box">
+                            <i class="fa-solid fa-arrow-down fa-beat fa-xl" style="color: #ffffff;"></i>
+                        </div>
+                        <h1 th:text="${total_low_stock_products}" > </h1>
+                        <a th:href="@{admin/products}" class="text-white">view</a>
+                    </div>
+                </div>
     
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card card-body bg-success text-white mb-3">
                         <label>Total In Stock Products</label>
                         <div class="icon-box">

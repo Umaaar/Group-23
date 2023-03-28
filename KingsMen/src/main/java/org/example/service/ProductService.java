@@ -71,11 +71,23 @@ public class ProductService {
         List<Product> inStockProducts = new ArrayList<>();
 
         for (Product product : totalProducts) {
-            if (product.getStock() > 1) {
+            if (product.getStock() > 5) {
                 inStockProducts.add(product);
             }
         }
         return inStockProducts.size();
+    }
+
+    public Integer getLowStockProducts(){
+        List<Product> totalProducts = productRepository.findAll();
+        List<Product> lowStockProducts = new ArrayList<>();
+
+        for (Product product : totalProducts) {
+            if (product.getStock() > 0 && product.getStock() <= 5) {
+                lowStockProducts.add(product);
+            }
+        }
+        return lowStockProducts.size();
     }
 
     public Integer getOutOfStockProducts(){

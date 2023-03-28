@@ -65,6 +65,7 @@ public class AdminController {
        model.addAttribute("total_catagories",String.valueOf(categoryService.getCatCount()));
        model.addAttribute("total_products",String.valueOf(productService.getProductCount()));
        model.addAttribute("total_in_stock_products",String.valueOf(productService.getInStockProducts()));
+       model.addAttribute("total_low_stock_products", String.valueOf(productService.getLowStockProducts()));
        model.addAttribute("total_in_out_of_stock_products",String.valueOf(productService.getOutOfStockProducts()));
        model.addAttribute("total_orders",String.valueOf(orderService.getOrderCount()));
        List<Integer> orders_numbers = new ArrayList<>();
@@ -154,7 +155,8 @@ public class AdminController {
     }
 
     @GetMapping("/admin/categories/update/{id}")
-    public String editCategory(@PathVariable int id, Model model){
+    public String editCategory(@PathVariable int id, Model model, @AuthenticationPrincipal CustomUserDetail authentication){
+        model.addAttribute("adminname",authentication.getFirstname());
         Optional<Category> category = categoryService.getCategoryById(id);
         if(category.isPresent()){
             model.addAttribute("category", category.get());
@@ -167,21 +169,23 @@ public class AdminController {
 
 /* --------------------------------------------------- Product CRUD Mapping --------------------------------------------------------*/
 
-@GetMapping("/admin/products")
-public String products(Model model ,String keyword) {
+// @GetMapping("/admin/products")
+// public String products(Model model ,String keyword) {
 
-    if (keyword != null) {
-        System.out.println(keyword);
-        model.addAttribute("products", productService.findByKeyword(keyword));
+//     if (keyword != null) {
+//         System.out.println(keyword);
+//         model.addAttribute("products", productService.findByKeyword(keyword));
 
-//        System.out.println(productService.findByKeyword(keyword));
-    } else {
-        model.addAttribute("products", productService.getAllProduct());
+// //        System.out.println(productService.findByKeyword(keyword));
+//     } else {
+//         model.addAttribute("products", productService.getAllProduct());
         
 
-    }
-    return "/backend-views/products";
-}
+//     }
+//     return "/backend-views/products";
+// }
+
+@GetMapping("/admin/products")
 public String productspage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
     model.addAttribute("adminname",authentication.getFirstname());
    model.addAttribute("products", productService.getAllProduct());
@@ -242,7 +246,8 @@ return "redirect:/admin/products";
 }
 
 @GetMapping("/admin/products/update/{id}")
-public String updateProductGet(@PathVariable long id, Model model) {
+public String updateProductGet(@PathVariable long id, Model model, @AuthenticationPrincipal CustomUserDetail authentication) {
+    model.addAttribute("adminname",authentication.getFirstname());
 model.addAttribute("sizes", sizeService.getAllSizes());
 Product product = productService.getProductById(id).get();
 ProductDTO productDTO = new ProductDTO();
@@ -364,13 +369,15 @@ public String createProductSizePost(@ModelAttribute("productSizeDTO") ProductSiz
 
 
 @GetMapping("/admin/size")
-public String sizes(Model model){
+public String sizes(Model model,@AuthenticationPrincipal CustomUserDetail authentication ){
+    model.addAttribute("adminname", authentication.getFirstname());
    model.addAttribute("size", sizeService.getAllSizes());
    return "/backend-views/size";
 }
 
 @GetMapping("/admin/size/create")
-public String createSizeGet(Model model){
+public String createSizeGet(Model model, @AuthenticationPrincipal CustomUserDetail authentication){
+    model.addAttribute("adminname", authentication.getFirstname());
     model.addAttribute("size", new Size());
    return "/backend-views/size-create";
 }
@@ -414,7 +421,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
 
 
     @GetMapping("/admin/orders")
-    public String adminOrders(Model model ,String keyword){
+    public String adminOrders(Model model ,String keyword,@AuthenticationPrincipal CustomUserDetail authentication){
 
         if(keyword!=null){
             model.addAttribute("orders",orderService.findByKeyword(keyword) );
@@ -423,15 +430,13 @@ public String updateSizeGet(@PathVariable Long id, Model model){
             model.addAttribute("orders",orderService.getAllOrders() );
 
         }
+        model.addAttribute("adminname",authentication.getFirstname());
         return "/backend-views/admin-orders";
     }
 
 
 
-    public String adminOrdersPage(@AuthenticationPrincipal CustomUserDetail authentication,Model model){ 
-        model.addAttribute("adminname",authentication.getFirstname());
-        return "/backend-views/admin-orders";
-}
+   
     @GetMapping("/admin/orders/delete/{id}")
     public String removeOrder(@PathVariable int id){
 
@@ -439,7 +444,8 @@ public String updateSizeGet(@PathVariable Long id, Model model){
         return "redirect:/admin/orders";
     }
     @GetMapping("/admin/orders/update/{id}")
-    public String updateOrderGet(@PathVariable Integer id,  Model model) {
+    public String updateOrderGet(@PathVariable Integer id,  Model model, @AuthenticationPrincipal CustomUserDetail authentication) {
+        model.addAttribute("adminname", authentication.getFirstname());
 
         System.out.println("it worked");
         OrderDetails order = orderService.getOrderByorder_id(id).get();
