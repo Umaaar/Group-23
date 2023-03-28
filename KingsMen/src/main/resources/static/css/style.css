@@ -902,23 +902,3 @@ p.about-us-content {
     transition-duration: 0.4s;
   }
 
-  .contact-btn:after {
-    content: "";
-    background: #3c413c;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px!important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
-  }
-  
-  .contact-btn:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-  }
-
