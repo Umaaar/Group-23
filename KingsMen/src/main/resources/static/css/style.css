@@ -854,4 +854,71 @@ p.about-us-content {
         content:'-';
     }
 
-    
+          /* returns page */
+
+  .wrapper{
+    height: 493.5px;
+    position: absolute;
+    width: 97%;
+    display: block;
+    margin: 10px;
+    }
+
+    .wrapper img{
+    width: 97vmax;
+    height: 100%;
+    position: absolute;
+    display: block;
+    border: 2px solid black;
+    z-index: -1;
+    }
+
+    @media only screen and (max-width: 750px) {
+      .wrapper img{
+          width:95vmin
+      }
+  }
+  .centered {
+    position: absolute;
+    font-size: 70px;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .contact-btn{
+    padding: 7px 37px;
+    text-align: left;
+    margin-left: 300px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    border-radius: 7px;
+    border: black;
+    transform: translateY(4px);
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+  }
+
+  .contact-btn:after {
+    content: "";
+    background: #3c413c;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  
+  .contact-btn:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+
