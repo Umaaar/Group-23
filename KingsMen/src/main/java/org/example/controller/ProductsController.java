@@ -37,7 +37,7 @@ public class ProductsController {
 
 
     @GetMapping("/product")
-public String getProductsPage(Model model,
+    public String getProductsPage(Model model,
     @RequestParam(defaultValue = "desc") String sort,
     @RequestParam(required = false) String keyword) {
     List<Product> products;
@@ -53,8 +53,11 @@ public String getProductsPage(Model model,
             model.addAttribute("keyword", keyword); // add the keyword to the model
             if (recommendedProducts.isEmpty()) {
                 model.addAttribute("products", Collections.emptyList());
+                model.addAttribute("categories", catagoryService.getAllCategory());
+
             } else {
                 model.addAttribute("products", recommendedProducts);
+                model.addAttribute("categories", catagoryService.getAllCategory());
             }
             return "frontend-views/product-not-found";
         }
