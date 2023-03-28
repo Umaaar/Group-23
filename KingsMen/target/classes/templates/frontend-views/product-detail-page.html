@@ -78,9 +78,6 @@
               <form th:action="@{/addToWishList/{id}(id=${product.id})}" method="post">
                 <button type="submit" class="btn btn-submit-d btn-block btn-danger mx-1"><i class="fa-solid fa-heart fa-bounce"></i></button>
               </form>
-              <div th:if="${successMessage}">
-                <p th:text="${successMessage}">Success Message</p>
-              </div>
               </div>
                   <h3 class="mt-5 mb-3">Details</h3>
             <span>
