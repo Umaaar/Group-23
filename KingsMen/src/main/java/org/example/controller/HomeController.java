@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.model.Contact;
 import org.example.model.CustomUserDetail;
 import org.example.model.OrderDetails;
+import org.example.model.OrderItem;
 import org.example.service.CategoryService;
 import org.example.service.ContactService;
 import org.example.service.CustomUserDetailService;
@@ -15,8 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -57,28 +62,20 @@ public class HomeController {
         return "/frontend-views/customer-dashboard";
     }
 
-    @GetMapping("/orders")
+    @GetMapping("/customer-dashboard/orders")
     public String Orders(@AuthenticationPrincipal OrderDetails order, @AuthenticationPrincipal CustomUserDetail authentication, 
             HttpServletResponse response, Model model) {
         model.addAttribute("orders", orderService.findByKeyword(authentication.getFirstname()));
-      
-        // model.addAttribute("orderID", order.getId());
-        // System.out.println(order.getId());
-        // model.addAttribute("productName", order.getOrder_products());
-        // System.out.println(order.getOrder_products());
-        // model.addAttribute("total", order.getTotal());
-        // System.out.println(order.getTotal());
-        // model.addAttribute("status", order.getStatus());
-        // System.out.println(order.getStatus());
         model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/orders";
     }
 
-    @GetMapping("/orders/details/{id}")
-    public String getOrderItems(@PathVariable int id, Model model, @AuthenticationPrincipal CustomUserDetail authentication) {
+    @GetMapping("/customer-dashboard/orders/details/{id}")
+    public String getOrderItems(@PathVariable Integer id, Model model, @AuthenticationPrincipal CustomUserDetail authentication) {
         OrderDetails order = orderService.getOrderByorder_id(id).get();
         List<OrderItem> orderItems = orderItemService.getAllOrderItemsByID(order.getId());
         model.addAttribute("orderItems", orderItems);
+        model.addAttribute("categories", catagoryService.getAllCategory());
 
         return "/frontend-views/order-details";
     }

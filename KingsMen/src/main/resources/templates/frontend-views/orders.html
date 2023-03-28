@@ -17,20 +17,25 @@
         <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
 
         <div class="orders-TitleAlign">
-            <h1>Your Orders</h1>
+            <h1>Your Orders
+                <a href="#" th:href="@{/customer-dashboard}" class="btn btn-danger btn-sm text-white float-md-end">
+                    BACK
+                </a>
+            </h1>
             <div> <!--Orders table-->
                 <div> <!--Orders table-->
                     <div class="card">
                     <div class="card-body">
                     <table class="table table-bordererd table-striped p-5" id="orderTable">
-                        <thead class="bg-black text-white"> <!--Headers of columns-->
+                        <thead class="bg-black text-white">
+                            <tr> <!--Headers of columns-->
                             <th scope="col">Order ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Status</th>
                             <th scope="col">Order Total</th>
                             <th scope="col">View Details</th>
-
+                        </tr>
                         </thead>
                         <tbody> <!--Regular rows and cells-->
                             <tr th:each="order, iStat : ${orders}">
@@ -39,8 +44,8 @@
                                 <td><span th:text="${order.email}"></span></td>
                                 <td><span th:text="${order.status}"></span></td>
                                 <td><span th:text="${order.total}"></span></td>
-                                <td><a th:href="@{/orders/{id}(id=${order.id})}">
-                                    <button class="btn btn-dark">View Details</button>
+                                <td><a th:href="@{/customer-dashboard/orders/details/{id}(id=${order.id})}"   class="btn btn-sm btn-dark">View Details</a>
+                                    
                                 </a></td>
                             </tr>
                         </tbody>

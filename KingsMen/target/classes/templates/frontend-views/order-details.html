@@ -17,26 +17,31 @@
         <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
 
         <div class="orders-TitleAlign">
-            <h1>Order Details</h1>
+            <h1>Order Details
+                <a href="#" th:href="@{/customer-dashboard/orders}" class="btn btn-danger btn-sm text-white float-end">
+                    BACK
+                </a>
+            </h1>
             <div> <!--Orders table-->
                 <div> <!--Orders table-->
                     <div class="card">
                     <div class="card-body">
                     <table class="table table-bordererd table-striped p-5" id="itemTable">
                         <thead class="bg-black text-white"> <!--Headers of columns-->
-                            <th scope="col">ID</th>
-                            <th scope="col">OrderID</th>
-                            <th scope="col">Product</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Size</th>
+                            <tr>
+                            <th>SN</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Size</th>
+                            </tr>
                         </thead>
                         <tbody> <!--Regular rows and cells-->
                             <tr th:each="item, iStat : ${orderItems}">
                                 <td th:text="${iStat.index + 1}">1</td>
                                 <td><span th:text="${item.product.name}"></span></td>
+                                <td><span th:text="${item.quantity}"></span></td>
                                 <td><span th:text="${item.price}"></span></td>
-                                <td><span th:text="${item.quatity}"></span></td>
                                 <td><span th:text="${item.size}"></span></td>
                             </tr>
                         </tbody>
