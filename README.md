@@ -14,6 +14,7 @@ This project is about creating an eCommerce website for our menswear company Kin
 - Spring Security
 - Spring Data
 - Maven
+- JUnit
 
 ### Frontend
 - Bootstrap
