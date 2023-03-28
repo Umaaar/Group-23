@@ -4,17 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -27,12 +31,15 @@ import org.example.dto.ProductDTO;
 import org.example.dto.ProductSizeDTO;
 import org.example.model.Category;
 import org.example.model.CustomUserDetail;
+import org.example.model.OrderDetails;
+import org.example.model.OrderItem;
 import org.example.model.Product;
 import org.example.model.ProductSize;
 import org.example.model.Size;
 import org.example.model.User;
 import org.example.service.CategoryService;
 import org.example.service.CustomUserDetailService;
+import org.example.service.OrderItemService;
 import org.example.service.OrderService;
 import org.example.service.ProductService;
 import org.example.service.ProductSizeService;
@@ -74,6 +81,10 @@ public class AdminControllerTest {
     
     @Mock
     private OrderService orderService;
+
+
+    @Mock
+    private OrderItemService orderItemService;
     
     @InjectMocks
     private AdminController adminController;
@@ -123,9 +134,91 @@ public class AdminControllerTest {
         verify(model).addAttribute(eq("total_catagories"), anyString());
         verify(model).addAttribute(eq("total_products"), anyString());
         verify(model).addAttribute(eq("total_in_stock_products"), anyString());
+        verify(model).addAttribute(eq("total_low_stock_products"), anyString());
         verify(model).addAttribute(eq("total_in_out_of_stock_products"), anyString());
         verify(model).addAttribute(eq("total_orders"), anyString());
     }
+
+    @Test
+    public void testAdminHome() throws Exception {
+        // Mock data
+        int userCount = 10;
+        int catCount = 5;
+        int productCount = 15;
+        int inStockProducts = 8;
+        int lowStockProducts = 2;
+        int outOfStockProducts = 5;
+        int orderCount = 3;
+        List<Integer> ordersNumbers = Arrays.asList(1, 1, 1);
+        List<String> productNames = Arrays.asList("product1", "product2", "product3", "product4", "product5");
+        List<Double> productPrices = Arrays.asList(10.0, 9.0, 8.0, 7.0, 6.0);
+        List<Integer> categoryIds = Arrays.asList(1, 2, 3, 4, 5);
+        List<String> categoryNames = Arrays.asList("category1", "category2", "category3", "category4", "category5");
+        List<Integer> productsForEachCategory = Arrays.asList(2, 1, 3, 4, 5);
+
+        // Mock service calls
+        when(customUserDetailService.getUserCount()).thenReturn(userCount);
+        when(categoryService.getCatCount()).thenReturn(catCount);
+        when(productService.getProductCount()).thenReturn(productCount);
+        when(productService.getInStockProducts()).thenReturn(inStockProducts);
+        when(productService.getLowStockProducts()).thenReturn(lowStockProducts);
+        when(productService.getOutOfStockProducts()).thenReturn(outOfStockProducts);
+        when(orderService.getOrderCount()).thenReturn(orderCount);
+        when(orderService.getOrderByStatus(1)).thenReturn(Collections.emptyList());
+        when(orderService.getOrderByStatus(2)).thenReturn(Collections.emptyList());
+        when(orderService.getOrderByStatus(3)).thenReturn(Collections.emptyList());
+        when(productService.getAllProduct()).thenReturn(Arrays.asList(
+                new Product(),
+                new Product(),
+                new Product(),
+                new Product(),
+                new Product()
+        ));
+        when(categoryService.getAllCategory()).thenReturn(Arrays.asList(
+                new Category(),
+                new Category(),
+                new Category(),
+                new Category(),
+                new Category()
+        ));
+        when(productService.getProductsByCategoryId(anyInt())).thenReturn(Collections.emptyList());
+        when(customUserDetail.getFirstname()).thenReturn("admin");
+
+        // Call the controller method
+        String result = adminController.adminHome(customUserDetail, response, model);
+
+        // Verify model attributes
+        verify(model).addAttribute("adminname", "admin");
+        verify(model).addAttribute("total_customers", "10");
+        verify(model).addAttribute("total_catagories", "5");
+        verify(model).addAttribute("total_products", "15");
+        verify(model).addAttribute("total_in_stock_products", "8");
+        verify(model).addAttribute("total_low_stock_products", "2");
+        verify(model).addAttribute("total_in_out_of_stock_products", "5");
+        verify(model).addAttribute("total_orders", "3");
+        verify(model).addAttribute("name", categoryNames);
+        verify(model).addAttribute("catProducts", productsForEachCategory);
+        verify(model).addAttribute("prices", ordersNumbers);
+        verify(model).addAttribute("productNames", productNames);
+        verify(model).addAttribute("productPrices", productPrices);
+         // Verify service method calls
+    verify(customUserDetailService).getUserCount();
+    verify(categoryService).getCatCount();
+    verify(productService).getProductCount();
+    verify(productService).getInStockProducts();
+    verify(productService).getLowStockProducts();
+    verify(productService).getOutOfStockProducts();
+    verify(orderService).getOrderCount();
+    verify(orderService).getOrderByStatus(1);
+    verify(orderService).getOrderByStatus(2);
+    verify(orderService).getOrderByStatus(3);
+    verify(productService, times(2)).getAllProduct();
+    verify(categoryService).getAllCategory();
+    verify(productService, times(categoryIds.size())).getProductsByCategoryId(anyInt());
+
+    // Verify the returned view name
+    assertEquals("/backend-views/admin-index", result);
+}
     
     /* Category Crud Junit Tests */
     @Test
@@ -193,7 +286,7 @@ public class AdminControllerTest {
         Model model = new ExtendedModelMap();
 
         // Call the method under test
-        String viewName = adminController.editCategory(categoryId, model);
+        String viewName = adminController.editCategory(categoryId, model, customUserDetail);
 
         // Verify the results
         assertEquals("/backend-views/category-create", viewName);
@@ -202,37 +295,6 @@ public class AdminControllerTest {
     /* End of Category Crud Tests */
 
     /* Product Crud Junit Tests */
-
-    @Test
-    public void testProducts() {
-        // given
-        String keyword = "test";
-        List<Product> products = new ArrayList<>();
-        products.add(new Product());
-        given(productService.findByKeyword(keyword)).willReturn(products);
-
-        // when
-        String viewName = adminController.products(model, keyword);
-
-        // then
-        verify(model).addAttribute(eq("products"), eq(products));
-        assertEquals("/backend-views/products", viewName);
-    }
-
-    @Test
-    public void testProducts_noKeyword() {
-        // given
-        List<Product> products = new ArrayList<>();
-        products.add(new Product());
-        given(productService.getAllProduct()).willReturn(products);
-
-        // when
-        String viewName = adminController.products(model, null);
-
-        // then
-        verify(model).addAttribute(eq("products"), eq(products));
-        assertEquals("/backend-views/products", viewName);
-    }
 
     @Test
     public void testProductspage() {
@@ -245,7 +307,7 @@ public class AdminControllerTest {
         given(sizeService.getAllSizes()).willReturn(sizes);
 
         // when
-        String viewName = adminController.productspage(customUserDetail, model);
+        String viewName = adminController.productspage(model, customUserDetail);
 
         // then
         verify(model).addAttribute(eq("products"), eq(products));
@@ -376,7 +438,7 @@ public void testUpdateProductGet_productFound() throws Exception {
     when(productService.getProductById(productId)).thenReturn(Optional.of(product));
     when(categoryService.getAllCategory()).thenReturn(Arrays.asList(new Category()));
 
-    String result = adminController.updateProductGet(productId, model);
+    String result = adminController.updateProductGet(productId, model, customUserDetail);
 
     assertEquals("/backend-views/products-create", result);
     verify(model, times(1)).addAttribute(eq("sizes"), anyList());
@@ -393,7 +455,7 @@ public void testUpdateProductGet_productNotFound() throws Exception {
     when(productService.getProductById(productId)).thenReturn(Optional.empty());
 
     assertThrows(NoSuchElementException.class, () -> {
-        adminController.updateProductGet(productId, model);
+        adminController.updateProductGet(productId, model, customUserDetail);
     });
 
     verify(productService, times(1)).getProductById(productId);
@@ -576,14 +638,14 @@ public void testCreateProductSizePost_failure() {
     public void testSizes() {
         List<Size> sizes = Arrays.asList(new Size());
         Mockito.when(sizeService.getAllSizes()).thenReturn(sizes);
-        String result = adminController.sizes(model);
+        String result = adminController.sizes(model, customUserDetail);
         assertEquals("/backend-views/size", result);
         Mockito.verify(model).addAttribute("size", sizes);
     }
 
     @Test
     public void testCreateSizeGet() {
-        String result = adminController.createSizeGet(model);
+        String result = adminController.createSizeGet(model, customUserDetail);
         assertEquals("/backend-views/size-create", result);
         Mockito.verify(model).addAttribute("size", new Size());
     }
@@ -639,22 +701,118 @@ public void testCreateProductSizePost_failure() {
 /* End of Size Crud Tests */
 
 /* Start of Order Crud Tests*/
+@Test
+public void testAdminOrdersWithKeyword() {
+    // Given
+    String keyword = "test";
+    List<OrderDetails> orders = new ArrayList<>();
+    orders.add(new OrderDetails());
+    when(orderService.findByKeyword(keyword)).thenReturn(orders);
+    
+    // When
+    String viewName = adminController.adminOrders(model, keyword, customUserDetail);
+    
+    // Then
+    verify(orderService).findByKeyword(keyword);
+    verify(model).addAttribute("orders", orders);
+    assertEquals("/backend-views/admin-orders", viewName);
+}
 
+@Test
+public void testAdminOrdersWithoutKeyword() {
+    // Given
+    List<OrderDetails> orders = new ArrayList<>();
+    orders.add(new OrderDetails());
+    when(orderService.getAllOrders()).thenReturn(orders);
+    
+    // When
+    String viewName = adminController.adminOrders(model, null, customUserDetail);
+    
+    // Then
+    verify(orderService).getAllOrders();
+    verify(model).addAttribute("orders", orders);
+    assertEquals("/backend-views/admin-orders", viewName);
+}
+
+@Test
+public void testRemoveOrder() {
+    // Given
+    int id = 1;
+    
+    // When
+    String viewName = adminController.removeOrder(id);
+    
+    // Then
+    verify(orderService).removeProductById(id);
+    assertEquals("redirect:/admin/orders", viewName);
+}
+
+@Test
+public void testUpdateOrderGet() {
+    // Given
+    int id = 1;
+    OrderDetails order = new OrderDetails();
+    order.setId(id);
+    Optional<OrderDetails> optionalOrder = Optional.of(order);
+    OrderItem orderItem = new OrderItem();
+    List<OrderItem> orderItemList = new ArrayList<>();
+    orderItemList.add(orderItem);
+    when(orderService.getOrderByorder_id(id)).thenReturn(optionalOrder);
+    when(orderItemService.getAllOrderItemsByID(id)).thenReturn(orderItemList);
+    Model model = mock(Model.class);
+    CustomUserDetail customUserDetail = mock(CustomUserDetail.class);
+    
+    // When
+    String viewName = adminController.updateOrderGet(id, model, customUserDetail);
+    
+    // Then
+    verify(model).addAttribute("adminname", customUserDetail.getFirstname());
+    verify(model).addAttribute(eq("orderDTO"), any(OrderDTO.class));
+    verify(model).addAttribute("productsOrdered", orderItemList);
+    assertEquals("/backend-views/orders-update", viewName);
+}
+
+@Test
+public void testUpdateOrderGetRed() {
+    // Given
+    OrderDTO orderDTO = new OrderDTO();
+    orderDTO.setId(1);
+    orderDTO.setName("test");
+    orderDTO.setEmail("test@test.com");
+    orderDTO.setStatus(1);
+    orderDTO.setTotal(100.0);
+    List<OrderItem> orderItems = new ArrayList<>();
+    orderDTO.setOrderItems(orderItems);
+    OrderDetails order = new OrderDetails();
+    doAnswer(invocation -> {
+        OrderDetails savedOrder = invocation.getArgument(0);
+        savedOrder.setId(1);
+        savedOrder.setStatus(2);
+        return null;
+    }).when(orderService).saveOrder(any(OrderDetails.class));
+        
+    // When
+    String viewName = adminController.updateOrderGetRed(orderDTO);
+    
+    // Then
+    verify(orderService).saveOrder(any(OrderDetails.class));
+    assertEquals("redirect:/admin/orders", viewName);
+}
 
 /* End of Order Crud Tests*/
 
 @Test
 public void testAdminCustomers() {
     User user = new User();
-    CustomUserDetail authentication = new CustomUserDetail(user);
-    authentication.setFirstname("admin");
+    CustomUserDetail customUserDetail = new CustomUserDetail(user);
+    customUserDetail.setFirstname("admin");
 
     List<User> customers = new ArrayList<>();
-    customers.add(new CustomUserDetail(authentication));
+    customers.add(new CustomUserDetail(customUserDetail));
 
     when(customUserDetailService.getAllUsers()).thenReturn(customers);
 
-    String result = adminController.adminCustomers(authentication, model);
+    String result = adminController.adminCustomers(customUserDetail, model);
 
     assertEquals("/backend-views/customers", result);
     verify(model).addAttribute("adminname", "admin");
@@ -664,15 +822,15 @@ public void testAdminCustomers() {
 @Test
 public void testAdminIMS() {
     User user = new User();
-    CustomUserDetail authentication = new CustomUserDetail(user);
-    authentication.setFirstname("admin");
+    CustomUserDetail customUserDetail = new CustomUserDetail(user);
+    customUserDetail.setFirstname("admin");
 
     List<ProductSize> productSizes = new ArrayList<>();
     productSizes.add(new ProductSize());
 
     when(productSizeService.getAllProductSizes()).thenReturn(productSizes);
 
-    String result = adminController.adminIMS(authentication, model);
+    String result = adminController.adminIMS(customUserDetail, model);
 
     assertEquals("backend-views/products-size", result);
     verify(model).addAttribute("adminname", "admin");

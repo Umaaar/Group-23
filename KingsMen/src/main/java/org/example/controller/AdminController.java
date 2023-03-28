@@ -186,8 +186,8 @@ public class AdminController {
 // }
 
 @GetMapping("/admin/products")
-public String productspage(@AuthenticationPrincipal CustomUserDetail authentication, Model model){
-    model.addAttribute("adminname",authentication.getFirstname());
+public String productspage(@AuthenticationPrincipal Model model, CustomUserDetail customUserDetail){
+    model.addAttribute("adminname", customUserDetail.getFirstname());
    model.addAttribute("products", productService.getAllProduct());
    model.addAttribute("sizes", sizeService.getAllSizes());
 
