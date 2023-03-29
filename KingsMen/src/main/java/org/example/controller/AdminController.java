@@ -373,18 +373,9 @@ public String updateProductSizePost(@ModelAttribute("productSizeDTO") ProductSiz
         Product product = productService.getProductById(productSizeDTO.getProductId()).orElseThrow(() -> new IllegalArgumentException("Invalid product ID: " + productSizeDTO.getProductId()));
         Size size = sizeService.getSizeById(productSizeDTO.getSizeId()).orElseThrow(() -> new IllegalArgumentException("Invalid size ID: " + productSizeDTO.getSizeId()));
         
-        try {
-            if (productService.hasProductSize(productSizeDTO.getProductId(), productSizeDTO.getSizeId())) {
-                throw new IllegalArgumentException("Size " + size.getName() + " is already assigned to product " + product.getName());
-            }
             
-            productSize.setProduct(product);
-            productSize.setSize(size);
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/admin/products/productSize/update/" + productSizeDTO.getId();
-        }
-        
+        productSize.setProduct(product);
+        productSize.setSize(size);
         productSize.setQuantity(productSizeDTO.getQuantity());
         productSizeService.saveProductSize(productSize);
         redirectAttributes.addFlashAttribute("successMessage", "Product size updated successfully.");
