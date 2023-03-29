@@ -100,12 +100,12 @@ public class CartController {
                 for (Product cartItem : GlobalData.cart) {
                     if (cartItem.getId().equals(newItem.getId()) && cartItem.getSize().equals(newItem.getSize())) {
                         redirectAttributes.addFlashAttribute("errorMessage",
-                                "Sorry, Item Of This Size Is Already In Your Cart");
+                                "Sorry, Item Of This Size Is Already In Your Basket");
                         return "redirect:/product/product-detail/{id}";
                     }
                 }
                 GlobalData.cart.add(newItem);
-                redirectAttributes.addFlashAttribute("successMessage", "Item Added To Cart!");
+                redirectAttributes.addFlashAttribute("successMessage", "Item Added To Basket!");
             }
         }
         return "redirect:/product/product-detail/{id}";
@@ -119,7 +119,7 @@ public class CartController {
     @PostMapping("/checkout")
     public String createOrder(OrderDTO orderDTO, RedirectAttributes redirectAttributes) throws IOException {
         if (GlobalData.cart == null || GlobalData.cart.isEmpty()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Cart is Empty");
+            redirectAttributes.addFlashAttribute("errorMessage", "Basket is Empty");
         } else {
             OrderDetails newOrder = new OrderDetails();
             newOrder.setEmail(orderDTO.getEmail());
