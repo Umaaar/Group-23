@@ -117,9 +117,6 @@ public class HomeController {
         model.addAttribute("categories", catagoryService.getAllCategory());
         return "/frontend-views/returns";
     }
-
-    public String dashboard(CustomUserDetailService customUserDetailService, HttpServletResponse response) {
-        return null;
-    }
+    
 
 }
