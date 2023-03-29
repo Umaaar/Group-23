@@ -38,11 +38,17 @@ public class ProductsController {
 
     @GetMapping("/product")
     public String getProductsPage(Model model,
-    @RequestParam(defaultValue = "desc") String sort,
-    @RequestParam(required = false) String keyword) {
-    List<Product> products;
-    if (keyword != null) {
-        products = productService.findByKeyword(keyword);
+            @RequestParam(defaultValue = "desc") String sort,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Integer categoryId) {
+        List<Product> products;
+        if (categoryId != null) {
+            products = productService.getProductsByCategoryId(categoryId);
+        } else if (keyword != null) {
+            products = productService.findByKeyword(keyword);
+        } else {
+            products = productService.getAllProduct();
+        }
         if (sort.equals("desc")) {
             products.sort(Comparator.comparing(Product::getPrice).reversed());
         } else {
@@ -54,25 +60,22 @@ public class ProductsController {
             if (recommendedProducts.isEmpty()) {
                 model.addAttribute("products", Collections.emptyList());
                 model.addAttribute("categories", catagoryService.getAllCategory());
-
+    
             } else {
                 model.addAttribute("products", recommendedProducts);
                 model.addAttribute("categories", catagoryService.getAllCategory());
             }
             return "frontend-views/product-not-found";
         }
-    } else {
-        products = productService.getAllProduct();
-        if (sort.equals("asc")) {
-            products.sort(Comparator.comparing(Product::getPrice).reversed());
-        } else {
-            products.sort(Comparator.comparing(Product::getPrice));
-        }
+        model.addAttribute("products", products);
+        model.addAttribute("categories", catagoryService.getAllCategory());
+        model.addAttribute("categoryId", categoryId);
+        model.addAttribute("keyword", keyword); // add the keyword to the model
+        return "frontend-views/product-page";
     }
-    model.addAttribute("products", products);
-    model.addAttribute("categories", catagoryService.getAllCategory());
-    return "frontend-views/product-page";
-}
+    
+    
+
 
       @GetMapping("/product/{categoryId}")
       public String getProductsByCategory(Model model, 
