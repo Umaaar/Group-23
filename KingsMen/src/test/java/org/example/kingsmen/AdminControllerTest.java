@@ -592,44 +592,121 @@ public void testCreateProductSizePost_failure() {
     }
     
     @Test
-    public void testUpdateProductSizeGet_success() throws Exception {
-        Long id = 1L;
-        ProductSize productSize = new ProductSize();
-        Product product = new Product();
-        Size size = new Size();
-        product.setId(1L);
-        size.setId(1L);
-        productSize.setId(id);
-        productSize.setProduct(product);
-        productSize.setSize(size);
-        productSize.setQuantity(10);
-        ProductSizeDTO productSizeDTO = new ProductSizeDTO();
-        productSizeDTO.setId(id);
-        productSizeDTO.setProductId(product.getId());
-        productSizeDTO.setSizeId(size.getId());
-        productSizeDTO.setQuantity(productSize.getQuantity());
-        List<Product> products = Arrays.asList(product);
-        List<Size> sizes = Arrays.asList(size);
-        Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.of(productSize));
-        Mockito.when(productService.getAllProduct()).thenReturn(products);
-        Mockito.when(sizeService.getAllSizes()).thenReturn(sizes);
-        String expectedViewName = "/backend-views/product-size-create";
-        String result = adminController.updateProductSizeGet(id, model, redirectAttributes);
-        assertEquals(expectedViewName, result);
-        Mockito.verify(model).addAttribute(eq("productSizeDTO"), any(ProductSizeDTO.class));
-        Mockito.verify(model).addAttribute(eq("products"), eq(products));
-        Mockito.verify(model).addAttribute(eq("sizes"), eq(sizes));
-    }
-    
-    @Test
-    public void testUpdateProductSizeGet_exception() throws Exception {
-        Long id = 1L;
-        Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.empty());
-        String expectedRedirectUrl = "redirect:/admin/ims";
-        String result = adminController.updateProductSizeGet(id, model, redirectAttributes);
-        assertEquals(expectedRedirectUrl, result);
-        Mockito.verify(redirectAttributes).addFlashAttribute(eq("errorMessage"), anyString());
-    }
+public void testUpdateProductSizeGet_success() throws Exception {
+    Long id = 1L;
+    ProductSize productSize = new ProductSize();
+    Product product = new Product();
+    Size size = new Size();
+    product.setId(1L);
+    size.setId(1L);
+    productSize.setId(id);
+    productSize.setProduct(product);
+    productSize.setSize(size);
+    productSize.setQuantity(10);
+    ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+    productSizeDTO.setId(id);
+    productSizeDTO.setProductId(product.getId());
+    productSizeDTO.setSizeId(size.getId());
+    productSizeDTO.setQuantity(productSize.getQuantity());
+    List<Product> products = Arrays.asList(product);
+    List<Size> sizes = Arrays.asList(size);
+    Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.of(productSize));
+    Mockito.when(productService.getAllProduct()).thenReturn(products);
+    Mockito.when(sizeService.getAllSizes()).thenReturn(sizes);
+    String expectedViewName = "/backend-views/product-size-update";
+    String result = adminController.updateProductSizeGet(id, model, redirectAttributes);
+    assertEquals(expectedViewName, result);
+    Mockito.verify(model).addAttribute(eq("productSizeDTO"), any(ProductSizeDTO.class));
+    Mockito.verify(model).addAttribute(eq("products"), eq(products));
+    Mockito.verify(model).addAttribute(eq("sizes"), eq(sizes));
+}
+
+@Test
+public void testUpdateProductSizeGet_exception() throws Exception {
+    Long id = 1L;
+    Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.empty());
+    String expectedRedirectUrl = "redirect:/admin/ims";
+    String result = adminController.updateProductSizeGet(id, model, redirectAttributes);
+    assertEquals(expectedRedirectUrl, result);
+    Mockito.verify(redirectAttributes).addFlashAttribute(eq("errorMessage"), anyString());
+}
+
+@Test
+public void testUpdateProductSizePost_success() throws Exception {
+    Long id = 1L;
+    ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+    productSizeDTO.setId(id);
+    productSizeDTO.setProductId(1L);
+    productSizeDTO.setSizeId(1L);
+    productSizeDTO.setQuantity(10);
+    Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.of(new ProductSize()));
+    Mockito.when(productService.getProductById(productSizeDTO.getProductId())).thenReturn(Optional.of(new Product()));
+    Mockito.when(sizeService.getSizeById(productSizeDTO.getSizeId())).thenReturn(Optional.of(new Size()));
+    String expectedRedirectUrl = "redirect:/admin/ims";
+    String expectedSuccessMessage = "Product size updated successfully.";
+    String result = adminController.updateProductSizePost(productSizeDTO, redirectAttributes);
+    assertEquals(expectedRedirectUrl, result);
+    Mockito.verify(productSizeService).saveProductSize(any(ProductSize.class));
+    Mockito.verify(redirectAttributes).addFlashAttribute(eq("successMessage"), eq(expectedSuccessMessage));
+}
+
+@Test
+public void testUpdateProductSizePost_invalidProductSizeId() throws Exception {
+    Long id = 1L;
+    ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+    productSizeDTO.setId(id);
+    productSizeDTO.setProductId(1L);
+    productSizeDTO.setSizeId(1L);
+    productSizeDTO.setQuantity(10);
+    Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.empty());
+    String expectedRedirectUrl = "redirect:/admin/ims";
+    String expectedErrorMessage = "Could not update product size.";
+    String result = adminController.updateProductSizePost(productSizeDTO, redirectAttributes);
+    assertEquals(expectedRedirectUrl, result);
+    Mockito.verify(productSizeService, Mockito.never()).saveProductSize(any(ProductSize.class));
+    Mockito.verify(redirectAttributes).addFlashAttribute("errorMessage", expectedErrorMessage);
+}
+
+public void testUpdateProductSizePost_invalidProductId() throws Exception {
+Long id = 1L;
+Long invalidProductId = 2L;
+ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+productSizeDTO.setId(id);
+productSizeDTO.setProductId(invalidProductId);
+productSizeDTO.setSizeId(1L);
+productSizeDTO.setQuantity(10);
+ProductSize productSize = new ProductSize();
+productSize.setId(id);
+Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.of(productSize));
+Mockito.when(productService.getProductById(invalidProductId)).thenReturn(Optional.empty());
+String expectedRedirectUrl = "redirect:/admin/products/productSize/update/" + id;
+String expectedErrorMessage = "Invalid product ID: " + invalidProductId;
+String result = adminController.updateProductSizePost(productSizeDTO, redirectAttributes);
+assertEquals(expectedRedirectUrl, result);
+Mockito.verify(productSizeService, Mockito.never()).saveProductSize(any(ProductSize.class));
+Mockito.verify(redirectAttributes).addFlashAttribute("errorMessage", expectedErrorMessage);
+}
+
+public void testUpdateProductSizePost_invalidSizeId() throws Exception {
+Long id = 1L;
+Long invalidSizeId = 2L;
+ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+productSizeDTO.setId(id);
+productSizeDTO.setProductId(1L);
+productSizeDTO.setSizeId(invalidSizeId);
+productSizeDTO.setQuantity(10);
+ProductSize productSize = new ProductSize();
+productSize.setId(id);
+Mockito.when(productSizeService.getProductSizeById(id)).thenReturn(Optional.of(productSize));
+Mockito.when(productService.getProductById(productSizeDTO.getProductId())).thenReturn(Optional.of(new Product()));
+Mockito.when(sizeService.getSizeById(invalidSizeId)).thenReturn(Optional.empty());
+String expectedRedirectUrl = "redirect:/admin/products/productSize/update/" + id;
+String expectedErrorMessage = "Invalid size ID: " + invalidSizeId;
+String result = adminController.updateProductSizePost(productSizeDTO, redirectAttributes);
+assertEquals(expectedRedirectUrl, result);
+Mockito.verify(productSizeService, Mockito.never()).saveProductSize(any(ProductSize.class));
+Mockito.verify(redirectAttributes).addFlashAttribute("errorMessage", expectedErrorMessage);
+}
 
 /* End of ProductSize Crud Tests */
 
@@ -653,7 +730,7 @@ public void testCreateProductSizePost_failure() {
     @Test
     public void testCreateSizePost() {
         Size size = new Size();
-        String result = adminController.createSizePost(size);
+        String result = adminController.createSizePost(size, model);
         assertEquals("redirect:/admin/size", result);
         Mockito.verify(sizeService).saveSize(size);
     }
