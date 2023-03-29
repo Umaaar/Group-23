@@ -75,7 +75,6 @@ public class CartController {
         Category category = item.getCategory();
         newItem.setCategory(category);
         newItem.setDescription(item.getDescription());
-        newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImageName(item.getImageName());
         item.setQuantity(dropdown.getStock());
@@ -125,7 +124,7 @@ public class CartController {
             OrderDetails newOrder = new OrderDetails();
             newOrder.setEmail(orderDTO.getEmail());
             newOrder.setName(orderDTO.getName());
-            newOrder.setTotal(GlobalData.cart.stream().mapToDouble(Product::getPrice).sum());
+            newOrder.setTotal(GlobalData.cart.stream().mapToDouble(Product::getQuantityTimesPrice).sum());
             newOrder.setStatus(1);
             orderService.addOrder(newOrder);
             List<OrderItem> orderItems = new ArrayList<>();
@@ -135,7 +134,7 @@ public class CartController {
                 newOrderItem.setOrderDetails(newOrder);
                 newOrderItem.setProduct(item);
                 newOrderItem.setQuantity(item.getQuantity());
-                newOrderItem.setPrice(item.getPrice());
+                newOrderItem.setPrice(item.getPrice() * item.getQuantity());
                 newOrderItem.setSize(item.getSize());
                 System.out.println(sizeService.getSizeByName(item.getSize()).get().getId());
                 System.out.println();
