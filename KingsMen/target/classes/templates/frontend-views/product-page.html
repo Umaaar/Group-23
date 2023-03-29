@@ -48,17 +48,17 @@
 
   </ol>
   <ol class="breadcrumb justify-content-start">
-  <li class="nav-item">
-    <div class="dropdown">
-      <button class="dropbtn nav-link mt-3"><p class="font-weight-bold">Sort by:</p></button>
-      <div class="dropdown-content">
-        <a class="dropdown-item" th:href="@{/product/{categoryID}(categoryID=${categoryID}, sort='asc', keyword=${keyword})}">Low to High</a>
-        <a class="dropdown-item" th:href="@{/product/{categoryID}(categoryID=${categoryID}, sort='desc', keyword=${keyword})}">High to Low</a>
-      </div>
-    </div>
-    
-  <li>
+    <li class="nav-item">
+      <div class="dropdown">
+        <button class="dropbtn nav-link mt-3"><p class="font-weight-bold">Sort by:</p></button>
+        <div class="dropdown-content">
+          <a class="dropdown-item" th:href="@{/product/{categoryId}(categoryId=${categoryId}, sort='asc')}">Low to High</a>
+          <a class="dropdown-item" th:href="@{/product/{categoryId}(categoryId=${categoryId}, sort='desc')}">High to Low</a>
+        </div>
+      </div>    
+    <li>
   </ol>
+  
 </nav>
 
 
