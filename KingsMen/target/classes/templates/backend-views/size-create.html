@@ -46,6 +46,11 @@
             <div class="col-md-12 ">
                 <div class="card bg-dark text-white">
                     <div class="card-header bg-light text-dark">
+                          
+                    <div th:if="${errorMessage}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <span th:text="${errorMessage}"></span>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
                         <h3> Add/Update Sizing
                             <a href="#" th:href="@{/admin/size}" class="btn btn-danger btn-sm text-white float-end">BACK</a>
                         </h3>
