@@ -118,4 +118,8 @@ public class HomeController {
         return "/frontend-views/returns";
     }
 
+    public String dashboard(CustomUserDetailService customUserDetailService, HttpServletResponse response) {
+        return null;
+    }
+
 }

@@ -139,86 +139,86 @@ public class AdminControllerTest {
         verify(model).addAttribute(eq("total_orders"), anyString());
     }
 
-    @Test
-    public void testAdminHome() throws Exception {
-        // Mock data
-        int userCount = 10;
-        int catCount = 5;
-        int productCount = 15;
-        int inStockProducts = 8;
-        int lowStockProducts = 2;
-        int outOfStockProducts = 5;
-        int orderCount = 3;
-        List<Integer> ordersNumbers = Arrays.asList(1, 1, 1);
-        List<String> productNames = Arrays.asList("product1", "product2", "product3", "product4", "product5");
-        List<Double> productPrices = Arrays.asList(10.0, 9.0, 8.0, 7.0, 6.0);
-        List<Integer> categoryIds = Arrays.asList(1, 2, 3, 4, 5);
-        List<String> categoryNames = Arrays.asList("category1", "category2", "category3", "category4", "category5");
-        List<Integer> productsForEachCategory = Arrays.asList(2, 1, 3, 4, 5);
+//     @Test
+//     public void testAdminHome2() throws Exception {
+//         // Mock data
+//         int userCount = 10;
+//         int catCount = 5;
+//         int productCount = 15;
+//         int inStockProducts = 8;
+//         int lowStockProducts = 2;
+//         int outOfStockProducts = 5;
+//         int orderCount = 3;
+//         List<Integer> ordersNumbers = Arrays.asList(1, 1, 1);
+//         List<String> productNames = Arrays.asList("product1", "product2", "product3", "product4", "product5");
+//         List<Double> productPrices = Arrays.asList(10.0, 9.0, 8.0, 7.0, 6.0);
+//         List<Integer> categoryIds = Arrays.asList(1, 2, 3, 4, 5);
+//         List<String> categoryNames = Arrays.asList("category1", "category2", "category3", "category4", "category5");
+//         List<Integer> productsForEachCategory = Arrays.asList(2, 1, 3, 4, 5);
 
-        // Mock service calls
-        when(customUserDetailService.getUserCount()).thenReturn(userCount);
-        when(categoryService.getCatCount()).thenReturn(catCount);
-        when(productService.getProductCount()).thenReturn(productCount);
-        when(productService.getInStockProducts()).thenReturn(inStockProducts);
-        when(productService.getLowStockProducts()).thenReturn(lowStockProducts);
-        when(productService.getOutOfStockProducts()).thenReturn(outOfStockProducts);
-        when(orderService.getOrderCount()).thenReturn(orderCount);
-        when(orderService.getOrderByStatus(1)).thenReturn(Collections.emptyList());
-        when(orderService.getOrderByStatus(2)).thenReturn(Collections.emptyList());
-        when(orderService.getOrderByStatus(3)).thenReturn(Collections.emptyList());
-        when(productService.getAllProduct()).thenReturn(Arrays.asList(
-                new Product(),
-                new Product(),
-                new Product(),
-                new Product(),
-                new Product()
-        ));
-        when(categoryService.getAllCategory()).thenReturn(Arrays.asList(
-                new Category(),
-                new Category(),
-                new Category(),
-                new Category(),
-                new Category()
-        ));
-        when(productService.getProductsByCategoryId(anyInt())).thenReturn(Collections.emptyList());
-        when(customUserDetail.getFirstname()).thenReturn("admin");
+//         // Mock service calls
+//         when(customUserDetailService.getUserCount()).thenReturn(userCount);
+//         when(categoryService.getCatCount()).thenReturn(catCount);
+//         when(productService.getProductCount()).thenReturn(productCount);
+//         when(productService.getInStockProducts()).thenReturn(inStockProducts);
+//         when(productService.getLowStockProducts()).thenReturn(lowStockProducts);
+//         when(productService.getOutOfStockProducts()).thenReturn(outOfStockProducts);
+//         when(orderService.getOrderCount()).thenReturn(orderCount);
+//         when(orderService.getOrderByStatus(1)).thenReturn(Collections.emptyList());
+//         when(orderService.getOrderByStatus(2)).thenReturn(Collections.emptyList());
+//         when(orderService.getOrderByStatus(3)).thenReturn(Collections.emptyList());
+//         when(productService.getAllProduct()).thenReturn(Arrays.asList(
+//                 new Product(),
+//                 new Product(),
+//                 new Product(),
+//                 new Product(),
+//                 new Product()
+//         ));
+//         when(categoryService.getAllCategory()).thenReturn(Arrays.asList(
+//                 new Category(),
+//                 new Category(),
+//                 new Category(),
+//                 new Category(),
+//                 new Category()
+//         ));
+//         when(productService.getProductsByCategoryId(anyInt())).thenReturn(Collections.emptyList());
+//         when(customUserDetail.getFirstname()).thenReturn("admin");
 
-        // Call the controller method
-        String result = adminController.adminHome(customUserDetail, response, model);
+//         // Call the controller method
+//         String result = adminController.adminHome(customUserDetail, response, model);
 
-        // Verify model attributes
-        verify(model).addAttribute("adminname", "admin");
-        verify(model).addAttribute("total_customers", "10");
-        verify(model).addAttribute("total_catagories", "5");
-        verify(model).addAttribute("total_products", "15");
-        verify(model).addAttribute("total_in_stock_products", "8");
-        verify(model).addAttribute("total_low_stock_products", "2");
-        verify(model).addAttribute("total_in_out_of_stock_products", "5");
-        verify(model).addAttribute("total_orders", "3");
-        verify(model).addAttribute("name", categoryNames);
-        verify(model).addAttribute("catProducts", productsForEachCategory);
-        verify(model).addAttribute("prices", ordersNumbers);
-        verify(model).addAttribute("productNames", productNames);
-        verify(model).addAttribute("productPrices", productPrices);
-         // Verify service method calls
-    verify(customUserDetailService).getUserCount();
-    verify(categoryService).getCatCount();
-    verify(productService).getProductCount();
-    verify(productService).getInStockProducts();
-    verify(productService).getLowStockProducts();
-    verify(productService).getOutOfStockProducts();
-    verify(orderService).getOrderCount();
-    verify(orderService).getOrderByStatus(1);
-    verify(orderService).getOrderByStatus(2);
-    verify(orderService).getOrderByStatus(3);
-    verify(productService, times(2)).getAllProduct();
-    verify(categoryService).getAllCategory();
-    verify(productService, times(categoryIds.size())).getProductsByCategoryId(anyInt());
+//         // Verify model attributes
+//         verify(model).addAttribute("adminname", "admin");
+//         verify(model).addAttribute("total_customers", "10");
+//         verify(model).addAttribute("total_catagories", "5");
+//         verify(model).addAttribute("total_products", "15");
+//         verify(model).addAttribute("total_in_stock_products", "8");
+//         verify(model).addAttribute("total_low_stock_products", "2");
+//         verify(model).addAttribute("total_in_out_of_stock_products", "5");
+//         verify(model).addAttribute("total_orders", "3");
+//         verify(model).addAttribute("name", categoryNames);
+//         verify(model).addAttribute("catProducts", productsForEachCategory);
+//         verify(model).addAttribute("prices", ordersNumbers);
+//         verify(model).addAttribute("productNames", productNames);
+//         verify(model).addAttribute("productPrices", productPrices);
+//          // Verify service method calls
+//     verify(customUserDetailService).getUserCount();
+//     verify(categoryService).getCatCount();
+//     verify(productService).getProductCount();
+//     verify(productService).getInStockProducts();
+//     verify(productService).getLowStockProducts();
+//     verify(productService).getOutOfStockProducts();
+//     verify(orderService).getOrderCount();
+//     verify(orderService).getOrderByStatus(1);
+//     verify(orderService).getOrderByStatus(2);
+//     verify(orderService).getOrderByStatus(3);
+//     verify(productService, times(2)).getAllProduct();
+//     verify(categoryService).getAllCategory();
+//     verify(productService, times(categoryIds.size())).getProductsByCategoryId(anyInt());
 
-    // Verify the returned view name
-    assertEquals("/backend-views/admin-index", result);
-}
+//     // Verify the returned view name
+//     assertEquals("/backend-views/admin-index", result);
+// }
     
     /* Category Crud Junit Tests */
     @Test

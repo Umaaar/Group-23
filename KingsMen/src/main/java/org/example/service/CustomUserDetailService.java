@@ -17,6 +17,8 @@ import java.util.Optional;
 public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+
+
     public Integer getUserCount(){
         return Math.toIntExact(userRepository.count());
     }
@@ -30,6 +32,11 @@ public class CustomUserDetailService implements UserDetailsService {
   public List<User> getAllUsers() {
     return userRepository.findAll();
   }
+public User getAuthenticatedUser() {
+
+    return userRepository.findUserByEmail(this.getAuthenticatedUser().getEmail()).get();
+    
+}
 
 
 
