@@ -8,6 +8,7 @@ import org.example.service.ProductService;
  import org.example.service.WishListService;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.security.core.annotation.AuthenticationPrincipal;
+ import org.springframework.security.core.authority.SimpleGrantedAuthority;
  import org.springframework.stereotype.Controller;
  import org.springframework.ui.Model;
  import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import org.example.service.ProductService;
  import org.springframework.web.bind.annotation.PostMapping;
  import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+ import javax.servlet.http.HttpServletResponse;
+ import java.io.IOException;
  import java.util.List;
 
  @Controller
@@ -60,7 +63,8 @@ import org.example.service.ProductService;
 
 
      @GetMapping("/wishlist")
-     public String wishlistGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model) {
+     public String wishlistGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model, HttpServletResponse response) throws IOException {
+
          List<WishList> wishList = wishListService.readWishList(authentication.getUser().getId());
 
          model.addAttribute("name", authentication.getFirstname());
@@ -70,6 +74,17 @@ import org.example.service.ProductService;
 
 
          return "/frontend-views/wishlist-page";
+     }
+
+     @GetMapping("/wishlistRedirect")
+     public void wishlistRedirect(@AuthenticationPrincipal CustomUserDetail authentication,HttpServletResponse response) throws IOException {
+         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+             response.sendRedirect("/admin");
+
+
+         } else {
+             response.sendRedirect("/wishlist");
+         }
      }
 
      @PostMapping("/wishlist/removeItem/{id}")
