@@ -13,34 +13,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
-
 <body>
     <div th:insert="/frontend-views/fragments :: navigation" ></div>
     <div th:insert="/frontend-views/fragments :: navigation-category" ></div>
-    <div class="col-md-8 mx-auto pt-3" >
-        <p>We want you to be completely satisfied with your purchase from KingsMan. If for any reason you are not, we offer a hassle-free returns and exchange policy. Please read the information below to learn more about our policy.</p>
 
-		<h3 class="text-center font-weight-bold">Cancellations</h3>
-		<p>If you need to cancel an order, please call our customer service team at (020) 7604 5949 as soon as possible. Although we cannot guarantee we can cancel your order before it is dispatched, we will do our best to assist.</p>
+    <div class="wrapper">
+        <img src="../../static/Images/img7.jpg" th:src="@{/Images/img7.jpg}">
+        <div class="centered">Returns & Exchanges</div>
+    </div>
 
-		<h3 class="text-center font-weight-bold">Exchanges</h3>
-		<p>We offer free exchanges up to 28 days after your order has been delivered. To initiate an exchange, please click the button below and follow the instructions.</p>
-		
-
-		<h3 class="text-center font-weight-bold">Returns</h3>
-		<p>We offer 2 options when it comes to returning an item for a refund. We can either refund your order to your original payment method, or we can issue a refund to store credit.</p>
-
-		<h4 class="text-center font-weight-bold">Refund to your original payment method</h4>
-		<p>Eligible for returns booked up to 21 days after your order has been delivered at a cost of £3.95, deducted from your refund. Pre-paid UPS postage label generated at point of booking your return.</p>
-
-		<h4 class="text-center font-weight-bold">Refund to store credit</h4>
-		<p>Eligible for returns booked up to 28 days after your order has been delivered, free of charge using a prepaid UPS label generated at point of booking your return. Credit expires after 6 months of issue.</p>
-
-
-		<h3 class="text-center font-weight-bold">Return Terms & Conditions</h3>
-		<p>All returns, whether for exchange or refund, go through a strict quality-control assessment once they have arrived back at our warehouse. All goods must be returned in original condition, with all labels and security tags intact. Any items returned that have been worn or have had the tags removed, will be rejected. Rejected returns will either be postage back to you at your expense, or donated to charity after 14 days.</p>
+    <div class="accordian">
+        <div class="col-md-8 mx-auto pt-3" >
     
+            <p>We want you to be completely satisfied with your purchase from KingsMan. If for any reason you are not, we offer a hassle-free returns and exchange policy. Please read the information below to learn more about our policy.</p>
+    
+            <h3 class="text-center font-weight-bold">Cancellations</h3>
+            <p>If you need to cancel an order, please call our customer service team at (020) 7604 5949 as soon as possible. Although we cannot guarantee we can cancel your order before it is dispatched, we will do our best to assist.</p>
+    
+            <h3 class="text-center font-weight-bold">Exchanges</h3>
+            <p>We offer free exchanges up to 28 days after your order has been delivered. To initiate an exchange, please click the button below and follow the instructions.</p>
+            
+    
+            <h3 class="text-center font-weight-bold">Returns</h3>
+            <p>We offer 2 options when it comes to returning an item for a refund. We can either refund your order to your original payment method, or we can issue a refund to store credit.</p>
+    
+            <h5 class="font-weight-bold">Refund to your original payment method:</h4>
+            <p>Eligible for returns booked up to 21 days after your order has been delivered at a cost of £3.95, deducted from your refund. Pre-paid UPS postage label generated at point of booking your return.</p>
+    
+            <h5 class="font-weight-bold">Refund to store credit:</h4>
+            <p>Eligible for returns booked up to 28 days after your order has been delivered, free of charge using a prepaid UPS label generated at point of booking your return. Credit expires after 6 months of issue.</p>
+    
+            <h3 class="text-center font-weight-bold">Return Terms & Conditions</h3>
+            <p>All returns, whether for exchange or refund, go through a strict quality-control assessment once they have arrived back at our warehouse. All goods must be returned in original condition, with all labels and security tags intact. Any items returned that have been worn or have had the tags removed, will be rejected. Rejected returns will either be postage back to you at your expense, or donated to charity after 14 days.</p>
+            <p> </p>
+
+            <div class="retuns-container">
+                <span class="text">If you have any further questions or issues, please do not hesitate to get in touch:</span>
+                <a th:href="@{/contact-us}">
+                    <button class="contact-btn">Contact Us</button>
+                </a>
+
+            </div>
+
+
+            
+    
+        </div>
+    
+
     </div>
 
    
