@@ -3,6 +3,8 @@ package org.example.service;
 
 import org.example.model.User;
 import org.example.model.CustomUserDetail;
+import org.example.model.Role;
+import org.example.repository.RoleRepository;
 import org.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
 
     public Integer getUserCount(){
@@ -36,6 +41,12 @@ public User getAuthenticatedUser() {
 
     return userRepository.findUserByEmail(this.getAuthenticatedUser().getEmail()).get();
     
+}
+
+
+public List<User> getUsersByRole(int i) {
+    Role role = roleRepository.findById(i).get();
+    return userRepository.findUsersByRoles(role);
 }
 
 

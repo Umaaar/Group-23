@@ -531,7 +531,7 @@ public String updateSizeGet(@PathVariable Long id, Model model){
 @GetMapping("/admin/customers")
 public String adminCustomers(@AuthenticationPrincipal CustomUserDetail authentication, Model model){ 
     model.addAttribute("adminname",authentication.getFirstname());
-    model.addAttribute("customers",customUserDetailService.getAllUsers());
+    model.addAttribute("customers",customUserDetailService.getUsersByRole(2));
     return "/backend-views/customers";
 }
 

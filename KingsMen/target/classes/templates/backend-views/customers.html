@@ -54,29 +54,27 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordererd table-striped" id="customerTable">
-                            <thead class="bg-black text-white">
-                                <tr>
-                                    <th>User ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                    <tr th:each="customer,iStat:${customers}">
-                                      <th scope="row" th:text="${iStat.index + 1}">1</th>
-                                      <td th:text="${customer.firstname}">First Name</td>
-                                        <td th:text="${customer.lastname}">Last Name</td>
-                                        <td th:text="${customer.email}">Email</td>
-                                        <td th:text="${customer.address}">Address</td>
-                                    </tr>
-                                    
-                            </tbody>
-                        </table>
+                      <table class="table table-bordererd table-striped" id="customerTable">
+                        <thead class="bg-black text-white">
+                          <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr th:each="customer, iStat: ${customers}">
+                            <th scope="row" th:text="${iStat.index + 1}">1</th>
+                            <td th:text="${customer.firstname}">First Name</td>
+                            <td th:text="${customer.lastname}">Last Name</td>
+                            <td th:text="${customer.email}">Email</td>
+                            <td th:text="${customer.address}">Address</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
     
                     </div>
                 </div>
