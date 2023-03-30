@@ -87,8 +87,9 @@
 ////        verify(response).sendRedirect("/customer-dashboard");
 ////    }
 ////}
-package org.example.controller;
+package org.example.kingsmen;
 
+import org.example.controller.LoginController;
 import org.example.model.Role;
 import org.example.model.User;
 import org.example.repository.RoleRepository;

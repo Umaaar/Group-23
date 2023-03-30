@@ -67,6 +67,6 @@ public class OrderDetails {
         this.order_products = order_products;
     }
 
-    @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL, orphanRemoval = true)
-        private List<OrderItem> orderItems;
+    @OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 }
