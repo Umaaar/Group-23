@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>fragments</title>
@@ -33,12 +33,12 @@
               <div class="dropdown dropdowns">
                 <button class="dropbtn nav-link dropdown-toggle"><i class="fa-solid fa-user"></i> </button>
                 <div class="dropdown-content">
-                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/customer-dashboard}"><i class="fa-solid fa-user"></i></a>
+                    <a  sec:authorize="hasRole('ROLE_USER') "th:href="@{/customer-dashboard}"><i class="fa-solid fa-user"></i></a>
                     <a sec:authorize="isAnonymous()" th:href="@{/login}">Login</a>
                     <a sec:authorize="isAnonymous()" th:href="@{/register}">Register</a>
-                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/wishlist}"><i class="fa-solid fa-heart"></i></a>
+                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/wishlistRedirect}"><i class="fa-solid fa-heart"></i></a>
                     <a sec:authorize="isAuthenticated()" th:href="@{/cart}"><i class="fa-solid fa-bag-shopping"></i></a>
-                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}"><i class="fa-solid fa-user"></i></a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}"><i class="fa-solid fa-gear"></i></a>
                     <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><i class="fa-solid fa-sign-out"></i></a>
                 </div>
             </div>

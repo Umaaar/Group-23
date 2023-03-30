@@ -31,7 +31,6 @@ SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/customer-dashboard/**").hasRole("USER")
                 .antMatchers("/wishlist/**").hasRole("USER")
                 .anyRequest().authenticated()
-
                 .and()
                 .formLogin()
                 .loginPage("/login")
