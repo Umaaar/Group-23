@@ -64,28 +64,25 @@ import org.example.service.ProductService;
 
      @GetMapping("/wishlist")
      public String wishlistGet(@AuthenticationPrincipal CustomUserDetail authentication, Model model, HttpServletResponse response) throws IOException {
-
-         List<WishList> wishList = wishListService.readWishList(authentication.getUser().getId());
-
-         model.addAttribute("name", authentication.getFirstname());
-         model.addAttribute("email", authentication.getEmail());
-         model.addAttribute("wishList", wishList);
-         model.addAttribute("categories", catagoryService.getAllCategory());
-
-
-         return "/frontend-views/wishlist-page";
-     }
-
-     @GetMapping("/wishlistRedirect")
-     public void wishlistRedirect(@AuthenticationPrincipal CustomUserDetail authentication,HttpServletResponse response) throws IOException {
          if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-             response.sendRedirect("/admin");
 
+             return "redirect:/admin";
 
          } else {
-             response.sendRedirect("/wishlist");
+             List<WishList> wishList = wishListService.readWishList(authentication.getUser().getId());
+
+             model.addAttribute("name", authentication.getFirstname());
+             model.addAttribute("email", authentication.getEmail());
+             model.addAttribute("wishList", wishList);
+             model.addAttribute("categories", catagoryService.getAllCategory());
+
+
+             return "/frontend-views/wishlist-page";
          }
+
      }
+
+
 
      @PostMapping("/wishlist/removeItem/{id}")
      public String wishlistItemRemove(@PathVariable Long id, @AuthenticationPrincipal CustomUserDetail authentication, RedirectAttributes redirectAttributes) {

@@ -1,9 +1,6 @@
 package org.example.controller;
 
-import org.example.model.Contact;
-import org.example.model.CustomUserDetail;
-import org.example.model.OrderDetails;
-import org.example.model.OrderItem;
+import org.example.model.*;
 import org.example.service.CategoryService;
 import org.example.service.ContactService;
 import org.example.service.CustomUserDetailService;
@@ -12,6 +9,7 @@ import org.example.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,14 +50,23 @@ public class HomeController {
     @GetMapping("/customer-dashboard")
     public String dashboard(@AuthenticationPrincipal CustomUserDetail authentication, HttpServletResponse response,
             Model model) {
-        model.addAttribute("firstname", authentication.getFirstname());
-        System.out.println(authentication.getFirstname());
-        model.addAttribute("lastname", authentication.getLastname());
-        System.out.println(authentication.getLastname());
-        model.addAttribute("email", authentication.getEmail());
-        System.out.println(authentication.getEmail());
-        model.addAttribute("categories", catagoryService.getAllCategory());
-        return "/frontend-views/customer-dashboard";
+        if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+
+            return "redirect:/admin";
+
+        } else {
+
+            model.addAttribute("firstname", authentication.getFirstname());
+            System.out.println(authentication.getFirstname());
+            model.addAttribute("lastname", authentication.getLastname());
+            System.out.println(authentication.getLastname());
+            model.addAttribute("email", authentication.getEmail());
+            System.out.println(authentication.getEmail());
+            model.addAttribute("categories", catagoryService.getAllCategory());
+
+            return "/frontend-views/customer-dashboard";
+        }
+
     }
 
     @GetMapping("/customer-dashboard/orders")
