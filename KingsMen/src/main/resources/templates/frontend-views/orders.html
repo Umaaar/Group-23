@@ -42,8 +42,13 @@
                                 <td th:text="${iStat.index + 1}">1</td>
                                 <td><span th:text="${order.name}"></span></td>
                                 <td><span th:text="${order.email}"></span></td>
-                                <td><span th:text="${order.status}"></span></td>
-                                <td><span th:text="${order.total}"></span></td>
+                                <td th:if="${order.status == 1}">
+                                    <label class="label-stock bg-primary">In Process</label>
+                                </td><td th:if="${order.status == 2}">
+                                    <label class="label-stock bg-warning">Awaiting Confirmation</label>
+                                </td><td th:if="${order.status == 3}">
+                                    <label class="label-stock bg-success">Completed</label>
+                                </td>                                <td><span th:text="${order.total}"></span></td>
                                 <td><a th:href="@{/customer-dashboard/orders/details/{id}(id=${order.id})}"   class="btn btn-sm btn-dark">View Details</a>
                                     
                                 </a></td>
