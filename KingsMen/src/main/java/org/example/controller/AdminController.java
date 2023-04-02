@@ -408,14 +408,15 @@ public String createSizeGet(Model model, @AuthenticationPrincipal CustomUserDeta
 
 @PostMapping("/admin/size/create")
 public String createSizePost(@ModelAttribute("size") Size size, Model model){
-try {
-sizeService.saveSize(size);
-return "redirect:/admin/size";
-} catch (DataIntegrityViolationException e) {
-model.addAttribute("errorMessage", "Size name already exists");
-return "/backend-views/size-create";
+    try {
+        sizeService.saveSize(size);
+        return "redirect:/admin/size";
+    } catch (DataIntegrityViolationException e) {
+        model.addAttribute("errorMessage", "Size name already exists");
+        return "/backend-views/size-create";
+    }
 }
-}
+
 
 @GetMapping("/admin/size/delete/{id}")
 public String deleteSize(@PathVariable Long id, RedirectAttributes redirectAttributes){

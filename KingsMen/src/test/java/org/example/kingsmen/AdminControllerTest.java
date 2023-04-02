@@ -10,6 +10,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -646,15 +647,33 @@ Mockito.verify(redirectAttributes).addFlashAttribute("errorMessage", expectedErr
         assertEquals("/backend-views/size-create", result);
         Mockito.verify(model).addAttribute("size", new Size());
     }
-
+ 
     @Test
     public void testCreateSizePost() {
         Size size = new Size();
+        size.setName("Test Size");
+        
+        doNothing().when(sizeService).saveSize(size);
+        
         String result = adminController.createSizePost(size, model);
+        
+        verify(sizeService, times(1)).saveSize(size);
         assertEquals("redirect:/admin/size", result);
-        Mockito.verify(sizeService).saveSize(size);
     }
-
+    
+    @Test
+    public void testCreateSizePostWithDuplicateName() {
+        Size size = new Size();
+        size.setName("Test Size");
+        
+        doThrow(new DataIntegrityViolationException("")).when(sizeService).saveSize(size);
+        
+        String result = adminController.createSizePost(size, model);
+        
+        verify(sizeService, times(1)).saveSize(size);
+        verify(model, times(1)).addAttribute(eq("errorMessage"), anyString());
+        assertEquals("/backend-views/size-create", result);
+    }
     @Test
     public void testDeleteSize() {
         Long id = 1L;
